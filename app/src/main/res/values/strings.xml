@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Beerhoven</string>
+
+    <!-- Navigation menu. -->
+    <string name="menu_news">Новости магазина</string>
+    <string name="menu_store">Магазин</string>
+    <string name="menu_order">Мои заказы</string>
+    <string name="menu_map">Карта</string>
+    <string name="menu_cart">Корзина заказа</string>
 </resources>
