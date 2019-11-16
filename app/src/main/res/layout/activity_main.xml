@@ -20,6 +20,7 @@
         android:background="@drawable/nav_drawer_side_round"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme"
+        app:headerLayout="@layout/nav_header_main"
         app:itemIconTint="@color/colorMainWhite"
         app:itemTextColor="@color/colorMainYellow"
         app:menu="@menu/activity_main_drawer" />

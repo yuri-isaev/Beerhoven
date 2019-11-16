@@ -2,6 +2,7 @@
     <string name="app_name">Beerhoven</string>
 
     <!-- Navigation menu. -->
+    <string name="menu_user_name">Имя пользователя</string>
     <string name="menu_news">Новости магазина</string>
     <string name="menu_store">Магазин</string>
     <string name="menu_order">Мои заказы</string>

@@ -2,5 +2,15 @@
 <resources>
     <dimen name="size_1">1dp</dimen>
     <dimen name="size_3">3dp</dimen>
+    <dimen name="size_5">5dp</dimen>
+    <dimen name="size_8">8dp</dimen>
+    <dimen name="size_10">10dp</dimen>
+    <dimen name="size_16">16dp</dimen>
+    <dimen name="size_24">24dp</dimen>
+    <dimen name="size_25">25dp</dimen>
     <dimen name="size_32">32dp</dimen>
+    <dimen name="size_83">83dp</dimen>
+    <dimen name="size_98">98dp</dimen>
+    <dimen name="size_176">176dp</dimen>
+    <dimen name="size_379">379dp</dimen>
 </resources>
