@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/size_8"
         android:text="@string/menu_user_name"
+        android:theme="@style/AppTheme"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorMainYellow"
         android:textSize="@dimen/size_25"

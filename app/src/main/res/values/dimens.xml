@@ -13,4 +13,6 @@
     <dimen name="size_98">98dp</dimen>
     <dimen name="size_176">176dp</dimen>
     <dimen name="size_379">379dp</dimen>
+
+    <dimen name="text_20">20sp</dimen>
 </resources>
