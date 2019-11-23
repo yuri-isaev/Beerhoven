@@ -7,21 +7,21 @@ import android.text.style.TypefaceSpan;
 
 public class CustomTypeFaceSpan extends TypefaceSpan {
 
-   private final Typeface newType;
+   private final Typeface mNewType;
 
    public CustomTypeFaceSpan(String family, Typeface type) {
       super(family);
-      newType = type;
+      mNewType = type;
    }
 
    @Override
    public void updateDrawState(TextPaint ds) {
-      applyCustomTypeFace(ds, newType);
+      applyCustomTypeFace(ds, mNewType);
    }
 
    @Override
    public void updateMeasureState(TextPaint paint) {
-      applyCustomTypeFace(paint, newType);
+      applyCustomTypeFace(paint, mNewType);
    }
 
    private static void applyCustomTypeFace(Paint paint, Typeface tf) {
