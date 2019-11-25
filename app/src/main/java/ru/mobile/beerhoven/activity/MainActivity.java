@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
    private void applyFontToMenuItem(MenuItem mi) {
       Typeface font = ResourcesCompat.getFont(this, R.font.catorze27_style_1);
-      SpannableString mNewTitle = new SpannableString(mi.getTitle());
-      mNewTitle.setSpan(new CustomTypeFaceSpan("", font), 0, mNewTitle.length(),
+      SpannableString newTitle = new SpannableString(mi.getTitle());
+      newTitle.setSpan(new CustomTypeFaceSpan("", font), 0, newTitle.length(),
           Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-      mi.setTitle(mNewTitle);
+      mi.setTitle(newTitle);
    }
 }

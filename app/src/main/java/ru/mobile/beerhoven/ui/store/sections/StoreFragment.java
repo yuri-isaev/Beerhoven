@@ -31,6 +31,7 @@ public class StoreFragment extends Fragment {
       super.onActivityCreated(savedInstanceState);
 
       mTabLayout.setupWithViewPager(mViewPager);
+      setUpViewPager(mViewPager);
 
       mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
          @Override
@@ -42,5 +43,10 @@ public class StoreFragment extends Fragment {
          @Override
          public void onTabReselected(TabLayout.Tab tab) {}
       });
+   }
+
+   private void setUpViewPager(ViewPager viewPager) {
+      SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
+      viewPager.setAdapter(adapter);
    }
 }
