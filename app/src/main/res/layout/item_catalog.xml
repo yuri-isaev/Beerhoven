@@ -46,11 +46,11 @@
                     tools:layout_editor_absoluteY="0dp">
 
                     <TextView
-                        android:id="@+id/item_name"
+                        android:id="@+id/item_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style_1"
-                        android:text="@string/item_name"
+                        android:text="@string/item_title"
                         android:textColor="@color/colorMainBlack"
                         android:textSize="@dimen/text_25"
                         android:textStyle="bold"

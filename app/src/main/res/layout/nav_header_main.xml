@@ -35,7 +35,7 @@
         android:theme="@style/AppTheme"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorMainYellow"
-        android:textSize="@dimen/size_25"
+        android:textSize="@dimen/text_22"
         android:visibility="visible"
         tools:ignore="SpUsage" />
 </LinearLayout>

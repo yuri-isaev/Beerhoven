@@ -5,7 +5,7 @@
     android:id="@+id/container_catalog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMainGrey"
+    android:background="@color/colorMainBlack"
     android:theme="@style/Theme.MaterialComponents"
     tools:context=".ui.store.catalog.CatalogFragment">
 
@@ -13,6 +13,7 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/size_50"
         tools:itemCount="3"
         tools:listitem="@layout/item_catalog" />
 </FrameLayout>
