@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.ui.store.catalog.CatalogFragment;
 
 public class StoreFragment extends Fragment {
 
@@ -47,6 +48,7 @@ public class StoreFragment extends Fragment {
 
    private void setUpViewPager(ViewPager viewPager) {
       SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
+      adapter.addFragment(new CatalogFragment(), "Каталог");
       viewPager.setAdapter(adapter);
    }
 }
