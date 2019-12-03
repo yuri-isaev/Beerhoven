@@ -1,6 +1,6 @@
 package ru.mobile.beerhoven.ui.store.catalog;
 
-import androidx.lifecycle.LiveData;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -10,16 +10,16 @@ import ru.mobile.beerhoven.models.Item;
 
 public class CatalogViewModel extends ViewModel {
 
-   private MutableLiveData<List<Item>> mCatalogList;
+   private MutableLiveData mCatalogList;
+   private CatalogRepository mCatalogRepository;
 
-   public void initList() {
-      if (mCatalogList != null) {
-         return;
-      }
-      mCatalogList = CatalogRepository.getInstance().getList();
+   public CatalogViewModel(@NonNull CatalogRepository repo) {
+      this.mCatalogRepository = repo;
+      this.mCatalogList = new MutableLiveData();
    }
 
-   public LiveData<List<Item>> getCatalogList() {
+   public MutableLiveData<List<Item>> getCatalogList() {
+      mCatalogList = CatalogRepository.getInstance().getList();
       return mCatalogList;
    }
 }
