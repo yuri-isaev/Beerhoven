@@ -5,9 +5,10 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.mobile.beerhoven.interfaces.CrudRepository;
 import ru.mobile.beerhoven.models.Item;
 
-public class CatalogRepository {
+public class CatalogRepository implements CrudRepository<Item> {
 
    private static CatalogRepository sInstance;
    private static List<Item> mDataList = new ArrayList<>();
@@ -23,6 +24,7 @@ public class CatalogRepository {
       return sInstance;
    }
 
+   @Override
    public MutableLiveData<List<Item>> getList() {
       if (mDataList.size() == 0) {
          loadList();

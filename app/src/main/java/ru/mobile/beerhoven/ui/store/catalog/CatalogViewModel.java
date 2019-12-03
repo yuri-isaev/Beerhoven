@@ -6,15 +6,16 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import ru.mobile.beerhoven.interfaces.CrudRepository;
 import ru.mobile.beerhoven.models.Item;
 
 public class CatalogViewModel extends ViewModel {
 
    private MutableLiveData mCatalogList;
-   private CatalogRepository mCatalogRepository;
+   private final CrudRepository<Item> mRepo;
 
-   public CatalogViewModel(@NonNull CatalogRepository repo) {
-      this.mCatalogRepository = repo;
+   public CatalogViewModel(@NonNull CrudRepository<Item> repo) {
+      this.mRepo = repo;
       this.mCatalogList = new MutableLiveData();
    }
 
