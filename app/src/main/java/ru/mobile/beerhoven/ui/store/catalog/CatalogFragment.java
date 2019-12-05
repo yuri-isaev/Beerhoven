@@ -16,7 +16,7 @@ public class CatalogFragment extends Fragment {
    private RecyclerView mRecyclerView;
    private CatalogAdapter mCatalogAdapter;
    private CatalogViewModel mCatalogViewModel;
-   private CatalogRepository CatalogRepository;
+   private CatalogRepository mCatalogRepository;
 
    public CatalogFragment() {}
 
@@ -26,7 +26,7 @@ public class CatalogFragment extends Fragment {
       View view = inflater.inflate(R.layout.fragment_catalog, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view);
 
-      mCatalogViewModel = new CatalogViewModel(CatalogRepository);
+      mCatalogViewModel = new CatalogViewModel(mCatalogRepository);
       mCatalogViewModel.getCatalogList().observe(getViewLifecycleOwner(), list -> mCatalogAdapter.notifyDataSetChanged());
 
       initRecyclerView();
