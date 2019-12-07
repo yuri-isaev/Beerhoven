@@ -1,5 +1,7 @@
 <resources>
+    <string name="app">Приложениe</string>
     <string name="app_name">Beerhoven</string>
+    <string name="app_about">для заказа и доставки еды</string>
 
     <!-- Navigation menu. -->
     <string name="menu_user_name">Имя пользователя</string>

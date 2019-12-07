@@ -18,8 +18,6 @@ public class CatalogFragment extends Fragment {
    private CatalogViewModel mCatalogViewModel;
    private CatalogRepository mCatalogRepository;
 
-   public CatalogFragment() {}
-
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
 

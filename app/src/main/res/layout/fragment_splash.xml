@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack"
+    android:theme="@style/AppTheme"
+    tools:context="ru.mobile.beerhoven.activity.SplashActivity">
+
+    <ImageView
+        android:id="@+id/image_logo"
+        android:layout_width="@dimen/size_243"
+        android:layout_height="@dimen/size_243"
+        android:layout_marginTop="@dimen/size_124"
+        android:background="@drawable/shape_et_reg_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/text_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_44"
+        android:fontFamily="@font/catorze27_style_1"
+        android:text="@string/app"
+        android:textColor="@color/colorMainYellow"
+        android:textSize="@dimen/text_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_logo"
+        tools:ignore="UnusedAttribute" />
+
+    <TextView
+        android:id="@+id/text_about_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:fontFamily="@font/catorze27_style_1"
+        android:text="@string/app_about"
+        android:textColor="@color/colorMainYellow"
+        android:textSize="@dimen/text_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_logo"
+        tools:ignore="MissingConstraints,UnusedAttribute" />
+</androidx.constraintlayout.widget.ConstraintLayout>
