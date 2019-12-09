@@ -11,8 +11,10 @@
     <dimen name="size_24">24dp</dimen>
     <dimen name="size_25">25dp</dimen>
     <dimen name="size_32">32dp</dimen>
+    <dimen name="size_40">40dp</dimen>
     <dimen name="size_44">44dp</dimen>
     <dimen name="size_50">50dp</dimen>
+    <dimen name="size_62">62dp</dimen>
     <dimen name="size_83">83dp</dimen>
     <dimen name="size_98">98dp</dimen>
     <dimen name="size_124">124dp</dimen>

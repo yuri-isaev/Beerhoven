@@ -51,4 +51,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_logo"
         tools:ignore="MissingConstraints,UnusedAttribute" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_logo"
+        android:layout_width="@dimen/size_60"
+        android:layout_height="@dimen/size_40"
+        android:theme="?android:attr/progressBarStyleHorizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_about_logo"
+        app:layout_constraintVertical_bias="0.856" />
 </androidx.constraintlayout.widget.ConstraintLayout>
