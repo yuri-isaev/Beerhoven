@@ -3,6 +3,13 @@
     <string name="app_name">Beerhoven</string>
     <string name="app_about">для заказа и доставки еды</string>
 
+    <!-- Registration. -->
+    <string name="registration">Для полноценного использования приложения необходимо пройти регистрацию</string>
+    <string name="reg">Регистрация</string>
+    <string name="reg_name">Ваше Имя</string>
+    <string name="req_email">Email</string>
+    <string name="reg_phone_number">Номер телефона</string>
+
     <!-- Navigation menu. -->
     <string name="menu_user_name">Имя пользователя</string>
     <string name="menu_news">Новости магазина</string>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack"
+    android:theme="@style/AppTheme"
+    tools:context="ru.mobile.beerhoven.activity.SplashActivity">
+
+    <LinearLayout
+        android:layout_width="@dimen/size_359"
+        android:layout_height="@dimen/size_494"
+        android:layout_margin="@dimen/size_20"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142"
+        tools:ignore="MissingConstraints,RtlHardcoded">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_24"
+            android:layout_marginTop="@dimen/size_35"
+            android:layout_marginRight="@dimen/size_24"
+            android:fontFamily="@font/catorze27_style_1"
+            android:text="@string/registration"
+            android:textColor="@color/colorMainYellow"
+            android:textSize="@dimen/text_18" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reg_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_14"
+            android:layout_marginRight="@dimen/size_16"
+            android:hint="@string/reg_name"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_53"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:text=""
+                android:textColor="@color/colorMainWhite"
+                android:textColorHint="@color/colorWhite" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/req_email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_14"
+            android:layout_marginRight="@dimen/size_16"
+            android:hint="@string/req_email"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_53"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                android:text=""
+                android:textColor="@color/colorMainWhite" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reg_phone_number"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_14"
+            android:layout_marginRight="@dimen/size_16"
+            android:hint="@string/reg_phone_number"
+            tools:ignore="MissingConstraints">
+
+            <br.com.sapereaude.maskedEditText.MaskedEditText
+                android:id="@+id/number"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_53"
+                android:digits="+() 1234567890-"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="phone"
+                android:maxLength="@dimen/size_17"
+                android:text=""
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_14"
+                app:mask="+7 ### ### ####"
+                tools:ignore="MissingPrefix" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/reg_btn"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_50"
+            android:layout_marginLeft="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_25"
+            android:layout_marginRight="@dimen/size_16"
+            android:background="@drawable/btn_selector"
+            android:text="@string/reg"
+            android:textColor="@color/colorMainBlack" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

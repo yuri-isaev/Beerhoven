@@ -40,6 +40,9 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.google.android.material:material:1.2.0'
 
+    // Maska for phone number.
+    implementation 'ru.egslava:MaskedEditText:1.0.5'
+
     // Test libraries.
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:3.1.0'
