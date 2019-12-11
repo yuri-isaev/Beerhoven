@@ -43,6 +43,9 @@ dependencies {
     // Maska for phone number.
     implementation 'ru.egslava:MaskedEditText:1.0.5'
 
+    //Custom Toast
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
+
     // Test libraries.
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:3.1.0'

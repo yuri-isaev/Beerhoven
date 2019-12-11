@@ -21,7 +21,6 @@ import ru.mobile.beerhoven.activity.MainActivity;
 public class SplashFragment extends Fragment {
 
    private static final long SPLASH_DISPLAY_LENGTH = 4000;
-   private FirebaseAuth mAuth;
 
    @Nullable
    @Override
@@ -33,10 +32,9 @@ public class SplashFragment extends Fragment {
    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
 
-      mAuth = FirebaseAuth.getInstance();
-
       new Handler().postDelayed(() -> {
-         FirebaseUser currentUser = mAuth.getCurrentUser();
+
+         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
          if (currentUser != null) {
             Toast.makeText(getActivity(), "User not null", Toast.LENGTH_LONG).show();
