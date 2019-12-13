@@ -10,6 +10,9 @@
     <string name="req_email">Email</string>
     <string name="reg_phone_number">Номер телефона</string>
 
+    <!-- Authentication. -->
+    <string name="auth_input_code_confirm">Дождитесь подтверждения</string>
+
     <!-- Navigation menu. -->
     <string name="menu_user_name">Имя пользователя</string>
     <string name="menu_news">Новости магазина</string>

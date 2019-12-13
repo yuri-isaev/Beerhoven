@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorMainBlack"
+    tools:context="ru.mobile.beerhoven.authentication.SplashFragment">
+
+    <LinearLayout
+        android:id="@+id/layout_auth"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size_170"
+        android:layout_margin="@dimen/size_20"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142"
+        tools:ignore="MissingConstraints,RtlHardcoded">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_100"
+            android:layout_marginTop="@dimen/size_2"
+            android:fontFamily="@font/tt_bluescreens_round_bold"
+            android:gravity="center_horizontal"
+            android:text="@string/auth_input_code_confirm"
+            android:textColor="@color/colorMainYellow"
+            android:textSize="@dimen/text_50" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_auth"
+        android:layout_width="@dimen/size_60"
+        android:layout_height="@dimen/size_40"
+        android:layout_marginBottom="@dimen/size_36"
+        android:theme="?android:attr/progressBarStyleHorizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_auth"
+        app:layout_constraintVertical_bias="0.971"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>
