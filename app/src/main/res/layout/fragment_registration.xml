@@ -52,7 +52,7 @@
                 android:inputType="textPersonName"
                 android:text=""
                 android:textColor="@color/colorMainWhite"
-                android:textColorHint="@color/colorWhite" />
+                android:textColorHint="@color/colorMainYellow" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -90,12 +90,12 @@
             <br.com.sapereaude.maskedEditText.MaskedEditText
                 android:id="@+id/number"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_53"
+                android:layout_height="wrap_content"
                 android:digits="+() 1234567890-"
                 android:imeOptions="actionDone"
                 android:importantForAutofill="no"
                 android:inputType="phone"
-                android:maxLength="@dimen/size_17"
+                android:maxLength="17"
                 android:text=""
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_14"

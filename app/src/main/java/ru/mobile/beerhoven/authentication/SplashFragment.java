@@ -11,16 +11,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Objects;
 
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.activity.MainActivity;
 
 public class SplashFragment extends Fragment {
 
-   private static final long SPLASH_DISPLAY_LENGTH = 4000;
+   private static final short SPLASH_DISPLAY_LENGTH = 4000;
 
    @Nullable
    @Override
@@ -43,6 +46,10 @@ public class SplashFragment extends Fragment {
             requireActivity().finish();
          } else {
             Toast.makeText(getActivity(), "User null", Toast.LENGTH_LONG).show();
+
+            if ((Objects.requireNonNull(Navigation.findNavController(view).getCurrentDestination()).getId()) == R.id.nav_splash) {
+               Navigation.findNavController(view).navigate(R.id.action_nav_splash_to_nav_reg);
+            }
          }
       }, SPLASH_DISPLAY_LENGTH);
    }

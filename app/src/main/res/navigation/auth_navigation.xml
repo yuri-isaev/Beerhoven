@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_navigation"
+    app:startDestination="@id/nav_splash">
+
+    <fragment
+        android:id="@+id/nav_splash"
+        android:name="ru.mobile.beerhoven.authentication.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/activity_splash">
+        <action
+            android:id="@+id/action_nav_splash_to_nav_reg"
+            app:destination="@id/nav_reg" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_reg"
+        android:name="ru.mobile.beerhoven.authentication.RegistrationFragment"
+        android:label="RegFragment"
+        tools:layout="@layout/fragment_registration">
+        <action
+            android:id="@+id/action_nav_reg_to_nav_auth"
+            app:destination="@id/nav_auth" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_auth"
+        android:name="ru.mobile.beerhoven.authentication.AuthenticationFragment"
+        android:label="AuthFragment"
+        tools:layout="@layout/fragment_auth">
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="default" />
+        <argument
+            android:name="phone"
+            app:argType="string"
+            android:defaultValue="default" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue="default" />
+        <action
+            android:id="@+id/action_nav_auth_to_nav_reg"
+            app:destination="@id/nav_reg" />
+    </fragment>
+    <activity
+        android:id="@+id/splashActivity"
+        android:name="ru.mobile.beerhoven.activity.SplashActivity"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" />
+</navigation>

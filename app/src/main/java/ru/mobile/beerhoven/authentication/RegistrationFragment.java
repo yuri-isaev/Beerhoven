@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -37,6 +39,10 @@ public class RegistrationFragment extends Fragment {
          String name = regName.getEditText().getText().toString();
          String email = regEmail.getEditText().getText().toString();
          String phoneNo = regPhoneNo.getEditText().getText().toString();
+
+         NavDirections action = RegistrationFragmentDirections.actionNavRegToNavAuth()
+             .setName(name).setPhone(phoneNo).setEmail(email);
+         Navigation.findNavController(v).navigate(action);
       });
 
       return view;

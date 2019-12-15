@@ -1,7 +1,9 @@
 package ru.mobile.beerhoven.authentication;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,16 +20,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
 import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.activity.MainActivity;
+import ru.mobile.beerhoven.configs.Constants;
+import ru.mobile.beerhoven.models.User;
 
 public class AuthenticationFragment extends Fragment {
 
    private FirebaseAuth mAuth;
+   private String name;
+   private String email;
+   private String phoneNo;
 
    @Override
    public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +44,17 @@ public class AuthenticationFragment extends Fragment {
       if (getActivity() != null) {
          assert getArguments() != null;
          mAuth = FirebaseAuth.getInstance();
+         AuthenticationFragmentArgs args = AuthenticationFragmentArgs.fromBundle(getArguments());
+         name = args.getName();
+         email = args.getEmail();
+         phoneNo = args.getPhone();
+
+         SharedPreferences mPrefs = getActivity().getSharedPreferences(Constants.SHARED_PREF, Context.MODE_PRIVATE);
+         SharedPreferences.Editor edit = mPrefs.edit();
+         edit.putString(Constants.CURRENT_USER_NAME, name);
+         edit.apply();
+
+         sendVerificationCodeToUser(phoneNo);
       }
    }
 
@@ -80,6 +100,10 @@ public class AuthenticationFragment extends Fragment {
          } else {
             Toasty.error(requireActivity(), "Проверка подлинности не удалась", Toast.LENGTH_LONG).show();
          }
+         // Writing a value to the database via the model.
+         User model = new User(name, email, phoneNo);
+         final DatabaseReference driverInfoRef = FirebaseDatabase.getInstance().getReference(Constants.ADMIN);
+         driverInfoRef.child((FirebaseAuth.getInstance().getCurrentUser()).getUid()).setValue(model);
       });
    }
 }
