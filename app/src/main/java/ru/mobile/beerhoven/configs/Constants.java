@@ -7,4 +7,5 @@ public class Constants {
 
     // For state DataBase.
     public static final String ADMIN = "ADMIN";
+    public static final String NODE_CART = "CART LIST";
 }

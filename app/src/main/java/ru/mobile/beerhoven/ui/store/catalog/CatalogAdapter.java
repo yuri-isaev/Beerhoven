@@ -1,6 +1,7 @@
 package ru.mobile.beerhoven.ui.store.catalog;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.interfaces.InteractionListener;
 import ru.mobile.beerhoven.models.Item;
 
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ItemHolder> {
