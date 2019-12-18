@@ -85,5 +85,23 @@ public class CatalogRepository implements CrudRepository<Item> {
       mCartListRefer.child(Constants.NODE_CART).child(UID)
           .child(Objects.requireNonNull(id.get("catalog_id"))).setValue(post);
    }
+
+   // DELETE
+   public MutableLiveData<String> deleteCatalogItem() {
+      if (data == null) deleteItem();
+      mValue.setValue(data);
+      return mValue;
+   }
+   private void deleteItem() {
+      HashMap<String, String> pid = HashMapRepository.pushMap;
+
+      mCartListRefer
+          .child(Constants.NODE_ITEMS)
+          .child(Objects.requireNonNull(pid.get("item_id")))
+          .removeValue();
+      FirebaseStorage.getInstance()
+          .getReferenceFromUrl(Objects.requireNonNull(pid.get("image")))
+          .delete();
+   }
 }
 

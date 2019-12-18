@@ -27,4 +27,9 @@ public class CatalogViewModel extends ViewModel {
       mResponse = CatalogRepository.getInstance().addCartItem();
       return mResponse;
    }
+
+   public LiveData<String> getResponseDeleteItem() {
+      mResponse = CatalogRepository.getInstance().deleteCatalogItem();
+      return mResponse;
+   }
 }

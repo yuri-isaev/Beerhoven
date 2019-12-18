@@ -20,9 +20,11 @@ import ru.mobile.beerhoven.models.Item;
 public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ItemHolder> {
 
    protected List<Item> mAdapterList;
+   private final InteractionListener mListener;
 
-   public CatalogAdapter(List<Item> list) {
+   public CatalogAdapter(List<Item> list, Context context, InteractionListener mListener) {
       this.mAdapterList = list;
+      this.mListener = mListener;
    }
 
    @NonNull
