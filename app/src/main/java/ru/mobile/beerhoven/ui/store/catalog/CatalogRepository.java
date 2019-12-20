@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-import ru.mobile.beerhoven.configs.Constants;
-import ru.mobile.beerhoven.configs.HashMapRepository;
+import ru.mobile.beerhoven.utils.Constants;
+import ru.mobile.beerhoven.utils.HashMapRepository;
 import ru.mobile.beerhoven.interfaces.CrudRepository;
 import ru.mobile.beerhoven.models.Item;
 

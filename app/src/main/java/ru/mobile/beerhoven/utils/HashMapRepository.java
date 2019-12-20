@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.configs;
+package ru.mobile.beerhoven.utils;
 
 import java.util.HashMap;
 
