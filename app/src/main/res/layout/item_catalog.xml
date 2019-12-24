@@ -34,6 +34,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/size_150">
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/item_image"
+                    android:layout_width="91dp"
+                    android:layout_height="93dp"
+                    android:layout_marginEnd="44dp"
+                    android:background="@drawable/shadow_circle"
+                    android:elevation="3mm"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="ContentDescription,InOrMmUsage,MissingConstraints,ObsoleteLayoutParam,UnusedAttribute" />
+
                 <LinearLayout
                     android:id="@+id/item_parent"
                     android:layout_width="wrap_content"
@@ -46,7 +59,7 @@
                     tools:layout_editor_absoluteY="0dp">
 
                     <TextView
-                        android:id="@+id/item_title"
+                        android:id="@+id/item_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style_1"
@@ -99,8 +112,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textColor="@color/colorBlue"
                             android:fontFamily="@font/roboto_regular"
+                            android:textColor="@color/colorBlue"
                             android:textSize="@dimen/text_16"
                             android:textStyle="bold"
                             tools:ignore="UnusedAttribute" />
@@ -109,9 +122,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_regular"
                             android:text="@string/item_price"
                             android:textColor="@color/colorBlue"
-                            android:fontFamily="@font/roboto_regular"
                             android:textSize="@dimen/text_14"
                             tools:ignore="UnusedAttribute" />
                     </LinearLayout>
@@ -136,8 +149,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:textColor="@color/colorBlue"
                             android:fontFamily="@font/roboto_regular"
+                            android:textColor="@color/colorBlue"
                             android:textSize="@dimen/text_16"
                             android:textStyle="bold"
                             tools:ignore="UnusedAttribute" />
@@ -146,13 +159,39 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:fontFamily="@font/roboto_regular"
                             android:text="@string/item_delivery_time"
                             android:textColor="@color/colorBlue"
-                            android:fontFamily="@font/roboto_regular"
                             android:textSize="@dimen/text_14"
                             tools:ignore="UnusedAttribute" />
                     </LinearLayout>
                 </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/item_selector"
+                    android:layout_width="29dp"
+                    android:layout_height="28dp"
+                    android:layout_alignEnd="@+id/item_image"
+                    android:layout_alignRight="@+id/item_image"
+                    android:layout_toEndOf="@+id/item_image"
+                    android:layout_toRightOf="@+id/item_image"
+                    android:clickable="true"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_more_vert_24"
+                    tools:ignore="ContentDescription,MissingConstraints">
+                </ImageView>
+
+                <ImageView
+                    android:id="@+id/item_plus"
+                    android:layout_width="29dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_add_24"
+                    tools:ignore="ContentDescription,MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

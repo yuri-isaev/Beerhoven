@@ -27,4 +27,6 @@
     <string name="item_price">цена товара</string>
     <string name="item_style">стиль товара</string>
     <string name="item_title">название товара</string>
+    <string name="card_open">Открыть</string>
+    <string name="card_delete">Удалить</string>
 </resources>
