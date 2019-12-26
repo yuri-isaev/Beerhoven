@@ -4,6 +4,9 @@ apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 31
+    viewBinding.enabled = true
+    dataBinding.enabled = true
+
     defaultConfig {
         applicationId "ru.mobile.beerhoven"
         minSdkVersion 19
