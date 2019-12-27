@@ -16,6 +16,7 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.data.repository.CatalogRepository;
 import ru.mobile.beerhoven.interfaces.InteractionListener;
 import ru.mobile.beerhoven.models.Item;
 
@@ -24,14 +25,15 @@ public class CatalogFragment extends Fragment {
    private CatalogAdapter mCatalogAdapter;
    private CatalogViewModel mCatalogViewModel;
 
+   @SuppressWarnings("unchecked")
    @SuppressLint("NotifyDataSetChanged")
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
-
       View view = inflater.inflate(R.layout.fragment_catalog, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view);
+      mCatalogViewModel = new CatalogViewModel(new CatalogRepository());
 
-      mCatalogViewModel = new CatalogViewModel();
+      // Catalog adapter observer
       mCatalogViewModel.getCatalogList().observe(getViewLifecycleOwner(),
           list -> mCatalogAdapter.notifyDataSetChanged());
 
@@ -39,24 +41,27 @@ public class CatalogFragment extends Fragment {
       return view;
    }
 
+   @SuppressWarnings("unchecked")
    @SuppressLint("NotifyDataSetChanged")
    private void initRecyclerView() {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-      // Add on store cart observer
-      mCatalogAdapter = new CatalogAdapter((List<Item>) mCatalogViewModel.getCatalogList().getValue(), getContext(), new InteractionListener() {
+      // Store cart observer
+      mCatalogAdapter = new CatalogAdapter((List<Item>) mCatalogViewModel.getCatalogList().getValue(),
+          getContext(),
+          new InteractionListener() {
          @Override
          public void onInteractionAdd(Item model) {
             mCatalogViewModel.getReportAddCart().observe(getViewLifecycleOwner(), (Observer<String>) s ->
-                Toasty.success(requireActivity(), "Товар добавлен в корзину!!", Toast.LENGTH_SHORT, true).show());
+                Toasty.success(requireActivity(), "Товар добавлен в корзину", Toast.LENGTH_SHORT, true).show());
          }
 
          @SuppressLint("NotifyDataSetChanged")
          @Override
          public void onInteractionDelete(Item model) {
             mCatalogViewModel.getResponseDeleteItem().observe(getViewLifecycleOwner(), s -> {
-               Toasty.success(requireActivity(), "Товар удален!!", Toast.LENGTH_SHORT, true).show();
+               Toasty.success(requireActivity(), "Товар удален", Toast.LENGTH_SHORT, true).show();
                mCatalogAdapter.notifyDataSetChanged();
             });
          }
