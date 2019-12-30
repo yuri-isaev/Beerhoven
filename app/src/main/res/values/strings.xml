@@ -14,19 +14,30 @@
     <string name="auth_input_code_confirm">Дождитесь подтверждения</string>
 
     <!-- Navigation menu. -->
-    <string name="menu_user_name">Имя пользователя</string>
-    <string name="menu_news">Новости магазина</string>
-    <string name="menu_store">Магазин</string>
-    <string name="menu_order">Мои заказы</string>
-    <string name="menu_map">Карта</string>
     <string name="menu_cart">Корзина заказа</string>
+    <string name="menu_details">Детали товара</string>
+    <string name="menu_map">Карта</string>
+    <string name="menu_news">Новости магазина</string>
+    <string name="menu_order">Мои заказы</string>
+    <string name="menu_user_name">Имя пользователя</string>
+    <string name="menu_store">Магазин</string>
 
     <!-- Item. -->
+    <string name="item_country">страна производитель</string>
+    <string name="item_density">Плотность</string>
+    <string name="item_description">Описание</string>
     <string name="item_delivery_time">время доставки</string>
-    <string name="item_fortress">крепость товара</string>
+    <string name="item_fortress">Крепость</string>
+    <string name="item_name">название товара</string>
+    <string name="item_manufacture">мануфактура</string>
     <string name="item_price">цена товара</string>
-    <string name="item_style">стиль товара</string>
+    <string name="item_special">спецтализация</string>
+    <string name="item_style">Стиль</string>
     <string name="item_title">название товара</string>
+
     <string name="card_open">Открыть</string>
     <string name="card_delete">Удалить</string>
+
+    <!-- Cart. -->
+    <string name="cart_add">Добавить в корзину</string>
 </resources>

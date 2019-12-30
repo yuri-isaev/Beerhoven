@@ -11,5 +11,58 @@
         android:name="ru.mobile.beerhoven.ui.store.sections.StoreFragment"
         android:label="@string/menu_store"
         tools:layout="@layout/fragment_store">
+        <action
+            android:id="@+id/action_nav_store_to_nav_details"
+            app:destination="@id/nav_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_details"
+        android:name="ru.mobile.beerhoven.ui.store.details.DetailsFragment"
+        android:label="@string/menu_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="itemID"
+            app:argType="string"
+            android:defaultValue="default" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="default" />
+        <argument
+            android:name="country"
+            app:argType="string"
+            android:defaultValue="default" />
+        <argument
+            android:name="manufacture"
+            app:argType="string"
+            android:defaultValue="default" />
+        <argument
+            android:name="price"
+            android:defaultValue="default" />
+        <argument
+            android:name="style"
+            app:argType="string"
+            android:defaultValue="default" />
+        <argument
+            android:name="fortress"
+            app:argType="string"
+            android:defaultValue="default"/>
+        <argument
+            android:name="density"
+            app:argType="string"
+            android:defaultValue="default"/>
+        <argument
+            android:name="description"
+            app:argType="string"
+            android:defaultValue="default"/>
+        <argument
+            android:name="image"
+            app:argType="string"
+            android:defaultValue="default" />
+        <argument
+            android:name="change"
+            app:argType="string"
+            android:defaultValue="default" />
     </fragment>
 </navigation>

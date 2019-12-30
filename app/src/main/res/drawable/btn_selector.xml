@@ -6,7 +6,6 @@
             <corners android:radius="@dimen/size_20" />
         </shape>
     </item>
-    <item android:drawable="?attr/selectableItemBackground" />
 </layer-list>
 
 

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    tools:context=".ui.store.details.DetailsFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:ignore="UselessParent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/size_5"
+            tools:ignore="ScrollViewSize">
+
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="190dp"
+                android:layout_height="41dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/tt_bluescreens_round_bold"
+                android:text="@string/item_name"
+                android:textAllCaps="true"
+                android:textColor="@color/colorMainYellow"
+                android:textSize="@dimen/text_36"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.14"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText,MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tvSpecial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/tt_bluescreens_round_bold"
+                android:text="@string/item_special"
+                android:textColor="@color/colorRed"
+                android:textSize="@dimen/text_24"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.106"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvProductName"
+                tools:ignore="HardcodedText,MissingConstraints" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/tvItemFrame"
+                android:layout_width="115dp"
+                android:layout_height="115dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shadow_circle"
+                android:elevation="2mm"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.112"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSpecial"
+                tools:ignore="InOrMmUsage,MissingConstraints,UnusedAttribute" />
+
+            <TextView
+                android:id="@+id/tvManufacture"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_24"
+                android:fontFamily="@font/catorze27_style_1"
+                android:text="@string/item_manufacture"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_20"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@+id/tvItemFrame"
+                app:layout_constraintTop_toTopOf="@+id/tvItemFrame"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/tvCountry"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_24"
+                android:layout_marginTop="@dimen/size_6"
+                android:layout_marginRight="@dimen/size_24"
+                android:fontFamily="@font/catorze27_style_1"
+                android:text="@string/item_country"
+                android:textColor="@color/colorMainBlack"
+                android:textSize="@dimen/text_16"
+                app:layout_constraintLeft_toRightOf="@+id/tvItemFrame"
+                app:layout_constraintTop_toBottomOf="@+id/tvManufacture" />
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/catorze27_style_1"
+                android:text="15.00"
+                android:textColor="@color/colorMainBlack"
+                android:textSize="@dimen/text_24"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tvItemFrame"
+                app:layout_constraintLeft_toRightOf="@+id/tvItemFrame"
+                tools:ignore="HardcodedText,RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/tvProductUnit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_2"
+                android:layout_marginTop="@dimen/size_3"
+                android:fontFamily="@font/catorze27_style_1"
+                android:text="  рублей"
+                android:textColor="@color/colorMainBlack"
+                android:textSize="@dimen/text_14"
+                app:layout_constraintLeft_toRightOf="@+id/tvPrice"
+                app:layout_constraintTop_toTopOf="@+id/tvPrice"
+                tools:ignore="HardcodedText,RtlHardcoded" />
+
+            <View
+                android:id="@+id/separator1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_1"
+                android:background="@color/colorMainGrey"
+                app:layout_constraintTop_toBottomOf="@+id/tvItemFrame"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="341dp"
+                android:layout_height="27dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.69"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/separator1"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/item_style1"
+                    android:layout_width="155dp"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/item_style"
+                    android:textColor="@color/colorMainGrey"
+                    android:textSize="@dimen/size_15"
+                    tools:ignore="HardcodedText,SpUsage"
+                    tools:layout_editor_absoluteX="214dp"
+                    tools:layout_editor_absoluteY="241dp" />
+
+                <TextView
+                    android:id="@+id/tvStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Лагерь"
+                    android:textColor="@color/colorMainGrey"
+                    android:textSize="@dimen/size_15"
+                    tools:ignore="HardcodedText,SpUsage"
+                    tools:layout_editor_absoluteX="27dp"
+                    tools:layout_editor_absoluteY="245dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="339dp"
+                android:layout_height="24dp"
+                android:orientation="horizontal"
+                android:textColor="@color/colorMainBlack"
+                android:textSize="@dimen/text_16"
+                app:layout_constraintBottom_toTopOf="@+id/separator2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.708"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                app:layout_constraintVertical_bias="0.127"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/item_des1"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/item_fortress"
+                    android:textColor="@color/colorMainGrey"
+                    android:textSize="@dimen/size_15"
+                    tools:ignore="HardcodedText,SpUsage"
+                    tools:layout_editor_absoluteX="214dp"
+                    tools:layout_editor_absoluteY="241dp" />
+
+                <TextView
+                    android:id="@+id/tvFortrDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="7%"
+                    android:textColor="@color/colorMainGrey"
+                    android:textSize="@dimen/size_15"
+                    tools:ignore="HardcodedText,SpUsage"
+                    tools:layout_editor_absoluteX="27dp"
+                    tools:layout_editor_absoluteY="245dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="339dp"
+                android:layout_height="24dp"
+                android:orientation="horizontal"
+                android:textColor="@color/colorMainBlack"
+                android:textSize="@dimen/text_16"
+                app:layout_constraintBottom_toTopOf="@+id/separator2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.708"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+                app:layout_constraintVertical_bias="0.291"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/item_des3"
+                    android:layout_width="155dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/item_density"
+                    android:textColor="@color/colorMainGrey"
+                    android:textSize="@dimen/size_15"
+                    tools:ignore="HardcodedText,SpUsage"
+                    tools:layout_editor_absoluteX="214dp"
+                    tools:layout_editor_absoluteY="241dp" />
+
+                <TextView
+                    android:id="@+id/tvDensityDes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="12%"
+                    android:textColor="@color/colorMainGrey"
+                    android:textSize="@dimen/size_15"
+                    tools:ignore="HardcodedText,SpUsage"
+                    tools:layout_editor_absoluteX="27dp"
+                    tools:layout_editor_absoluteY="245dp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/separator2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/size_1"
+                android:layout_marginTop="@dimen/size_100"
+                android:background="@color/colorMainGrey"
+                app:layout_constraintTop_toBottomOf="@+id/tvItemFrame"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <TextView
+                android:id="@+id/tvFullDescription"
+                android:layout_width="333dp"
+                android:layout_height="73dp"
+                android:fontFamily="@font/catorze27_style_1"
+                android:orientation="horizontal"
+                android:text="@string/item_description"
+                android:textColor="@color/colorMainBlack"
+                android:textSize="@dimen/text_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.666"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/separator2"
+                tools:ignore="HardcodedText,MissingConstraints" />
+
+            <LinearLayout
+                android:id="@+id/priceCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.679"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvFullDescription"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/item_price"
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/colorMainBlack"
+                        tools:ignore="RtlCompat" />
+
+                    <TextView
+                        android:id="@+id/tvTotalAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="@dimen/size_25"
+                        android:text="15.00"
+                        android:textColor="@color/colorMainBlack"
+                        android:textSize="@dimen/text_24"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.916"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include2"
+                        tools:ignore="HardcodedText,MissingConstraints,RtlHardcoded,RtlSymmetry" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/addCartButton"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="@dimen/size_300"
+                android:layout_height="56dp"
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/btn_selector"
+                android:text="@string/cart_add"
+                app:backgroundTint="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.666"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/priceCounter"
+                app:layout_constraintVertical_bias="0.213"
+                tools:ignore="MissingConstraints,MissingPrefix" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>
