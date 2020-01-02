@@ -15,8 +15,11 @@ import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -24,12 +27,14 @@ import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.databinding.ItemCatalogBinding;
 import ru.mobile.beerhoven.interfaces.InteractionListener;
 import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.ui.store.sections.StoreFragmentDirections;
+import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.HashMapRepository;
 
 public class CatalogAdapter extends Adapter<ItemHolder> implements OnMenuItemClickListener {
    protected List<Item> mAdapterList;
    private final InteractionListener mListener;
-   private NavController mNavController;
+   private NavController navController;
 
    public CatalogAdapter(List<Item> list, Context context, InteractionListener mListener) {
       this.mAdapterList = list;
@@ -51,12 +56,29 @@ public class CatalogAdapter extends Adapter<ItemHolder> implements OnMenuItemCli
       String PID = model.getId();
       String image = model.getUrl();
 
-      holder.recyclerBinding.itemName.setText(model.getTitle());
+      Glide.with(holder.recyclerBinding.itemImage.getContext())
+          .load(model.getUrl())
+          .into(holder.recyclerBinding.itemImage);
+
+      StoreFragmentDirections.ActionNavStoreToNavDetails action = StoreFragmentDirections.actionNavStoreToNavDetails()
+          .setChange(Constants.OBJECT_VISIBLE)
+          .setItemID(PID).setCountry(model.getCountry())
+          .setManufacture(model.getManufacture())
+          .setName(model.getName())
+          .setPrice(String.valueOf(model.getPrice()))
+          .setStyle(model.getStyle())
+          .setFortress(model.getFortress())
+          .setDensity(model.getDensity())
+          .setDescription(model.getDescription())
+          .setImage(image);
+
+      holder.recyclerBinding.itemName.setText(model.getName());
       holder.recyclerBinding.itemPrice.setText((model.getPrice() + " руб."));
       holder.recyclerBinding.itemStyle.setText(model.getStyle());
       holder.recyclerBinding.itemFortress.setText((model.getFortress() + "%"));
       holder.recyclerBinding.itemContainer.setOnClickListener(v -> {
-         //
+         navController = Navigation.findNavController(v);
+         navController.navigate(action);
       });
       holder.recyclerBinding.itemSelector.setOnClickListener(v -> {
          PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
@@ -66,7 +88,8 @@ public class CatalogAdapter extends Adapter<ItemHolder> implements OnMenuItemCli
          popupMenu.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                case R.id.action_context_open:
-               //
+                  navController = Navigation.findNavController(v);
+                  navController.navigate(action);
                   break;
                case R.id.action_context_delete:
                   HashMapRepository.map.put("item_id", PID);

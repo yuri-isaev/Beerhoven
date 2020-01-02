@@ -3,7 +3,7 @@ package ru.mobile.beerhoven.models;
 import androidx.annotation.Nullable;
 
 public class Item {
-   private String id;// == pushID(PID)
+   private String id; // pushID(PID)
    private String name;
    private String country;
    private String manufacture;
@@ -24,11 +24,11 @@ public class Item {
 
    public Item() {}
 
-   public Item(String id, String title, String country, String manufacture, String density, String description, String quantity,
-               String style, String fortress, String address, String phone, String time, String date, String url,
-               double price, double total, double common, float color) {
+   public Item(String id, String name, String country, String manufacture, String density, String description,
+               String quantity, String style, String fortress, String address, String phone, String time, String date,
+               String url, double price, double total, double common, float color) {
       this.id = id;
-      this.name = title;
+      this.name = name;
       this.country = country;
       this.manufacture = manufacture;
       this.density = density;
@@ -61,12 +61,12 @@ public class Item {
       this.id = id;
    }
 
-   public String getTitle() {
+   public String getName() {
       return name;
    }
 
-   public void setTitle(String title) {
-      this.name = title;
+   public void setName(String name) {
+      this.name = name;
    }
 
    public String getCountry() {
