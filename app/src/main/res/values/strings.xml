@@ -31,6 +31,7 @@
     <string name="item_name">название товара</string>
     <string name="item_manufacture">мануфактура</string>
     <string name="item_price">цена товара</string>
+    <string name="item_price_colon">Цена товара:  </string>
     <string name="item_special">спецтализация</string>
     <string name="item_style">Стиль</string>
     <string name="item_title">название товара</string>

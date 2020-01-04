@@ -283,19 +283,30 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvFullDescription"
                 tools:ignore="MissingConstraints">
 
+                <include
+                    android:id="@+id/include_fragment_counter"
+                    layout="@layout/fragment_counter"
+                    android:layout_width="match_parent"
+                    android:layout_height="119dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.67"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFullDescription" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="0dp"
+                        android:layout_width="@dimen/size_253"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/item_price"
+                        android:text="@string/item_price_colon"
                         android:textAlignment="textEnd"
                         android:textColor="@color/colorMainBlack"
-                        tools:ignore="RtlCompat" />
+                        tools:ignore="InefficientWeight,RtlCompat" />
 
                     <TextView
                         android:id="@+id/tvTotalAmount"

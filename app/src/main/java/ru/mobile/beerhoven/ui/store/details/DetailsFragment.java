@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import ru.mobile.beerhoven.databinding.FragmentDetailsBinding;
 
 public class DetailsFragment extends Fragment {
+   private int mValue = 1;
    private String itemID;
    private String name;
    private String country;
@@ -33,6 +34,7 @@ public class DetailsFragment extends Fragment {
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       DetailsViewModel mDetailsViewModel = new ViewModelProvider(requireActivity(), getDefaultViewModelProviderFactory()).get(DetailsViewModel.class);
       fragmentBind = FragmentDetailsBinding.inflate(inflater, container, false);
+      countListener();
       return fragmentBind.getRoot();
    }
 
@@ -68,5 +70,33 @@ public class DetailsFragment extends Fragment {
 
          Glide.with(fragmentBind.tvItemFrame.getContext()).load(args.getImage()).into(fragmentBind.tvItemFrame);
       }
+   }
+
+   /**
+    * Price calculator
+    */
+   private void countListener() {
+      fragmentBind.includeFragmentCounter.iCounterPlus.setOnClickListener(v -> {
+         if (mValue != 15) {
+            mValue++;
+         }
+         updateValue();
+      });
+
+      fragmentBind.includeFragmentCounter.iCounterMinus.setOnClickListener(v -> {
+         if (mValue <= 1) {
+            mValue = 1;
+         } else {
+            mValue--;
+         }
+         updateValue();
+      });
+   }
+
+   private void updateValue() {
+      fragmentBind.includeFragmentCounter.iCounterValue.setText(String.valueOf(mValue));
+      double cost = (Double.parseDouble(price) * mValue);
+      total = Math.round(cost * 100.0) / 100.0;
+      fragmentBind.tvTotalAmount.setText(String.valueOf(total));
    }
 }
