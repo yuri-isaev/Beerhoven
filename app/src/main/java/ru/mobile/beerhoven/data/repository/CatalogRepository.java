@@ -110,7 +110,7 @@ public class CatalogRepository implements CrudRepository<Item> {
       HashMap<String, Double> price = HashMapRepository.priceMap;
 
       Item post = new Item();
-      post.setTitle(catalog.get("name"));
+      post.setName(catalog.get("name"));
       post.setCountry(catalog.get("country"));
       post.setManufacture(catalog.get("manufacture"));
       post.setStyle(catalog.get("style"));

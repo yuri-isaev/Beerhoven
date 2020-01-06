@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,7 +52,7 @@ public class CatalogFragment extends Fragment {
           new InteractionListener() {
          @Override
          public void onInteractionAdd(Item model) {
-            mCatalogViewModel.getReportAddCart().observe(getViewLifecycleOwner(), (Observer<String>) s ->
+            mCatalogViewModel.getReportAddCart().observe(getViewLifecycleOwner(), s ->
                 Toasty.success(requireActivity(), "Товар добавлен в корзину", Toast.LENGTH_SHORT, true).show());
          }
 

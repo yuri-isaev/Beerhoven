@@ -73,7 +73,7 @@ dependencies {
 
     // Glide Library
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     // Maska for phone number
     implementation 'ru.egslava:MaskedEditText:1.0.5'
