@@ -41,4 +41,8 @@
 
     <!-- Cart. -->
     <string name="cart_add">Добавить в корзину</string>
+    <string name="cart_total">Сумма корзины</string>
+
+    <!-- Order. -->
+    <string name="order_form">Подать заявку</string>
 </resources>

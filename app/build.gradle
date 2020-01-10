@@ -75,6 +75,9 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-    // Maska for phone number
+    // Mask for phone number
     implementation 'ru.egslava:MaskedEditText:1.0.5'
+
+    // Custom button library
+    implementation 'info.hoang8f:fbutton:1.0.5'
 }
