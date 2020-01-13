@@ -69,5 +69,9 @@
         android:id="@+id/nav_cart"
         android:name="ru.mobile.beerhoven.ui.cart.CartFragment"
         android:label="@string/menu_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_nav_cart_to_nav_details"
+            app:destination="@id/nav_details" />
+    </fragment>
 </navigation>

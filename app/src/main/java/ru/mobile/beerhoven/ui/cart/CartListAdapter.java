@@ -14,6 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import com.bumptech.glide.Glide;
 
 import java.util.EventListener;
@@ -21,14 +26,17 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.activity.MainActivity;
 import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.utils.Constants;
 
 public class CartListAdapter extends Adapter<CartViewHolder> {
+   private final List<Item> mCartList;
+   private final Callback mCallback;
+   private final CartViewModel cartViewModel;
    private final Context mContext;
    private double mOverTotalPrice;
-   protected double oneTypeProductPrice;
-   protected List<Item> mCartList;
-   private final Callback mCallback;
+   private double oneTypeProductPrice;
 
    public interface Callback extends EventListener {
       void onPassData(String data);
@@ -38,6 +46,7 @@ public class CartListAdapter extends Adapter<CartViewHolder> {
       this.mCartList = list;
       this.mContext = context;
       this.mCallback = listener;
+      this.cartViewModel = new ViewModelProvider((ViewModelStoreOwner) this).get(CartViewModel.class);
    }
 
    @NonNull
@@ -51,6 +60,7 @@ public class CartListAdapter extends Adapter<CartViewHolder> {
    @Override
    public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
       Item model = mCartList.get(position);
+      String positionID = model.getId();
       Glide.with(holder.mImageTv.getContext()).load(model.getUrl()).into(holder.mImageTv);
 
       holder.mNameTv.setText(model.getName());
@@ -60,11 +70,33 @@ public class CartListAdapter extends Adapter<CartViewHolder> {
       holder.mPriceTv.setText(model.getPrice() + " руб.");
       holder.mTotalTv.setText(model.getTotal() + " руб.");
 
-      // The total price of the entire cart
-      oneTypeProductPrice = model.getTotal();
-      double sum = mOverTotalPrice + oneTypeProductPrice;
-      mOverTotalPrice = Math.round(sum * 100.0) / 100.0;
-      mCallback.onPassData(String.valueOf(mOverTotalPrice));
+      holder.mDeleteTv.setOnClickListener(v -> {
+         // Initialize cart list from database
+         cartViewModel.deleteCartListItem(positionID);
+
+         // The total price of the entire cart
+         oneTypeProductPrice = model.getTotal();
+         double sum = mOverTotalPrice + oneTypeProductPrice;
+         mOverTotalPrice = Math.round(sum * 100.0) / 100.0;
+         mCallback.onPassData(String.valueOf(mOverTotalPrice));
+      });
+
+      holder.mViewContainer.setOnClickListener(v -> {
+         NavController navController = Navigation.findNavController(v);
+         CartFragmentDirections.ActionNavCartToNavDetails action = CartFragmentDirections.actionNavCartToNavDetails()
+             .setChange(Constants.OBJECT_RENAME)
+             .setItemID(positionID)
+             .setCountry(model.getCountry())
+             .setManufacture(model.getManufacture())
+             .setName(model.getName())
+             .setPrice(String.valueOf(model.getPrice()))
+             .setStyle(model.getStyle())
+             .setFortress(model.getFortress())
+             .setDensity(model.getDensity())
+             .setDescription(model.getDescription())
+             .setImage(model.getUrl());
+         navController.navigate(action);
+      });
    }
 
    @Override

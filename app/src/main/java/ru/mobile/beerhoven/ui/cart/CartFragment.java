@@ -1,5 +1,7 @@
 package ru.mobile.beerhoven.ui.cart;
 
+import static java.util.Objects.*;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import info.hoang8f.widget.FButton;
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.ui.store.details.DetailsViewModel;
 
 public class CartFragment extends Fragment implements CartListAdapter.Callback {
    private RecyclerView mRecyclerView;
@@ -24,7 +25,7 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
    private CartViewModel mCartViewModel;
    private TextView mOrderTotal;
    private FButton mCartAddConfirmButton;
-   private String common;
+   private String mData;
 
    @SuppressLint("NotifyDataSetChanged")
    @Override
@@ -45,11 +46,10 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
       mOrderTotal.setText("Сумма корзины: 0.0");
 
       // Initialize cart list from database
-      mCartViewModel.initList();
+      mCartViewModel.initCartList();
 
       // Cart list adapter observer
-      mCartViewModel.getCartList().observe(getViewLifecycleOwner(),
-          list -> mCartListAdapter.notifyDataSetChanged());
+      mCartViewModel.getCartList().observe(getViewLifecycleOwner(), list -> mCartListAdapter.notifyDataSetChanged());
 
       // Initialize cart list adapter
       initRecyclerView();
@@ -60,18 +60,26 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
    @Override
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      onPassData(common);
+      onPassData(mData);
    }
 
    @SuppressLint("SetTextI18n")
    private void initRecyclerView() {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+      mCartListAdapter = new CartListAdapter(requireNonNull(mCartViewModel.getCartList().getValue()), getContext(), res -> {
+         mOrderTotal.setText("Сумма корзины: " + res + " руб.");
+         mData = res;
+      });
+
+      mCartAddConfirmButton.setClickable(mCartViewModel.getCartList().getValue().size() != 0);
+
       mRecyclerView.setAdapter(mCartListAdapter);
    }
 
    @Override
    public void onPassData(String data) {
-      common = data;
+      mData = data;
    }
 }

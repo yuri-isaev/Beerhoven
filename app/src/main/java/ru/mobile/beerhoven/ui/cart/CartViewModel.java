@@ -22,7 +22,7 @@ public class CartViewModel extends AndroidViewModel {
       this.mCartList = new MutableLiveData<List<Item>>();
    }
 
-   public void initList() {
+   public void initCartList() {
       if (mCartList != null) {
          return;
       }
@@ -31,5 +31,9 @@ public class CartViewModel extends AndroidViewModel {
 
    public LiveData<List<Item>> getCartList() {
       return mCartList;
+   }
+
+   public void deleteCartListItem(String position) {
+      mRepository.deleteCartItem(position);
    }
 }

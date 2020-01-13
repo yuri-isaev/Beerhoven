@@ -34,13 +34,14 @@ public class CartRepository {
 
    public MutableLiveData<List<Item>> getCartList() {
       if (mDataList.size() == 0) {
-         loadOrderList();
+         readCartList();
       }
       mMutableList.setValue(mDataList);
       return mMutableList;
    }
 
-   private void loadOrderList() {
+   // Read cart product list
+   private void readCartList() {
       assert UID != null;
       mFirebaseRef.child(Constants.NODE_CART).child(UID).addChildEventListener(new ChildEventListener() {
          @Override
@@ -80,5 +81,12 @@ public class CartRepository {
          @Override
          public void onCancelled(@NonNull DatabaseError databaseError) {}
       });
+   }
+
+   // Delete cart list item by position
+   public void deleteCartItem(String position) {
+      assert UID != null;
+      mFirebaseRef.child(Constants.NODE_CART).child(UID)
+          .child(position).removeValue();
    }
 }
