@@ -31,7 +31,7 @@ import ru.mobile.beerhoven.ui.store.sections.StoreFragmentDirections;
 import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.HashMapRepository;
 
-public class CatalogAdapter extends Adapter<ItemHolder> implements OnMenuItemClickListener {
+public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuItemClickListener {
    protected List<Item> mAdapterList;
    private final InteractionListener mListener;
    private NavController navController;
@@ -43,15 +43,15 @@ public class CatalogAdapter extends Adapter<ItemHolder> implements OnMenuItemCli
 
    @NonNull
    @Override
-   public ItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+   public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
       ItemCatalogBinding recyclerBinding = ItemCatalogBinding
           .inflate(LayoutInflater.from(parent.getContext()), parent, false);
-      return new ItemHolder(recyclerBinding);
+      return new ItemViewHolder(recyclerBinding);
    }
 
    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
    @Override
-   public void onBindViewHolder(@NonNull ItemHolder holder, int position) {
+   public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
       Item model = mAdapterList.get(position);
       String PID = model.getId();
       String image = model.getUrl();
@@ -112,10 +112,10 @@ public class CatalogAdapter extends Adapter<ItemHolder> implements OnMenuItemCli
       return false;
    }
 
-   public static class ItemHolder extends ViewHolder implements OnClickListener, OnMenuItemClickListener {
+   public static class ItemViewHolder extends ViewHolder implements OnClickListener, OnMenuItemClickListener {
       ItemCatalogBinding recyclerBinding;
 
-      public ItemHolder(ItemCatalogBinding recyclerBinding) {
+      public ItemViewHolder(ItemCatalogBinding recyclerBinding) {
          super(recyclerBinding.getRoot());
          this.recyclerBinding = recyclerBinding;
       }

@@ -9,9 +9,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,13 +21,11 @@ import com.bumptech.glide.Glide;
 import java.util.EventListener;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.activity.MainActivity;
+import ru.mobile.beerhoven.databinding.ItemCartBinding;
 import ru.mobile.beerhoven.models.Item;
 import ru.mobile.beerhoven.utils.Constants;
 
-public class CartListAdapter extends Adapter<CartViewHolder> {
+public class CartListAdapter extends Adapter<CartListViewHolder> {
    private final List<Item> mCartList;
    private final Callback mCallback;
    private final CartViewModel cartViewModel;
@@ -51,26 +46,29 @@ public class CartListAdapter extends Adapter<CartViewHolder> {
 
    @NonNull
    @Override
-   public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart, parent, false);
-      return new CartViewHolder(view);
+   public CartListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+      ItemCartBinding recyclerBinding = ItemCartBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+      return new CartListViewHolder(recyclerBinding);
    }
 
    @SuppressLint("SetTextI18n")
    @Override
-   public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
+   public void onBindViewHolder(@NonNull CartListViewHolder holder, int position) {
       Item model = mCartList.get(position);
       String positionID = model.getId();
-      Glide.with(holder.mImageTv.getContext()).load(model.getUrl()).into(holder.mImageTv);
 
-      holder.mNameTv.setText(model.getName());
-      holder.mStyleTv.setText(model.getStyle());
-      holder.mFortressTv.setText(model.getFortress() + "%");
-      holder.mQuantityTv.setText(model.getQuantity());
-      holder.mPriceTv.setText(model.getPrice() + " руб.");
-      holder.mTotalTv.setText(model.getTotal() + " руб.");
+      Glide.with(holder.recyclerBinding.tvName.getContext())
+          .load(model.getUrl())
+          .into(holder.recyclerBinding.tvImage);
 
-      holder.mDeleteTv.setOnClickListener(v -> {
+      holder.recyclerBinding.tvName.setText(model.getName());
+      holder.recyclerBinding.tvStyle.setText(model.getStyle());
+      holder.recyclerBinding.tvFortress.setText(model.getFortress() + "%");
+      holder.recyclerBinding.tvQuantity.setText(model.getQuantity());
+      holder.recyclerBinding.tvPrice.setText(model.getPrice() + " руб.");
+      holder.recyclerBinding.tvTotal.setText(model.getTotal() + " руб.");
+
+      holder.recyclerBinding.tvDeleteItem.setOnClickListener(v -> {
          // Initialize cart list from database
          cartViewModel.deleteCartListItem(positionID);
 
@@ -81,7 +79,7 @@ public class CartListAdapter extends Adapter<CartViewHolder> {
          mCallback.onPassData(String.valueOf(mOverTotalPrice));
       });
 
-      holder.mViewContainer.setOnClickListener(v -> {
+      holder.recyclerBinding.tvContainer.setOnClickListener(v -> {
          NavController navController = Navigation.findNavController(v);
          CartFragmentDirections.ActionNavCartToNavDetails action = CartFragmentDirections.actionNavCartToNavDetails()
              .setChange(Constants.OBJECT_RENAME)
@@ -105,34 +103,18 @@ public class CartListAdapter extends Adapter<CartViewHolder> {
    }
 
 
-   public static class CartViewHolder extends ViewHolder implements OnClickListener {
-      private final LinearLayout mViewContainer;
-      private final CircleImageView mImageTv;
-      private final TextView mNameTv;
-      private final TextView mPriceTv;
-      private final TextView mStyleTv;
-      private final TextView mFortressTv;
-      private final TextView mQuantityTv;
-      private final TextView mTotalTv;
-      private final ImageView mDeleteTv;
+   public static class CartListViewHolder extends ViewHolder implements OnClickListener {
+      ItemCartBinding recyclerBinding;
 
-      public CartViewHolder(@NonNull View itemView) {
-         super(itemView);
-         this.mNameTv = itemView.findViewById(R.id.tvName);
-         this.mPriceTv = itemView.findViewById(R.id.tvPrice);
-         this.mStyleTv = itemView.findViewById(R.id.tvStyle);
-         this.mFortressTv = itemView.findViewById(R.id.tvFortress);
-         this.mImageTv = itemView.findViewById(R.id.tvImage);
-         this.mDeleteTv = itemView.findViewById(R.id.tvDeleteItem);
-         this.mViewContainer = itemView.findViewById(R.id.tvContainer);
-         this.mQuantityTv = itemView.findViewById(R.id.tvProductQuantity);
-         this.mTotalTv = itemView.findViewById(R.id.tvTotal);
+      public CartListViewHolder(ItemCartBinding recyclerBinding) {
+         super(recyclerBinding.getRoot());
+         this.recyclerBinding = recyclerBinding;
       }
 
       @Override
       public void onClick(View v) {
-         mDeleteTv.setOnClickListener(this);
-         mViewContainer.setOnClickListener(this);
+         recyclerBinding.tvDeleteItem.setOnClickListener(this);
+         recyclerBinding.tvContainer.setOnClickListener(this);
       }
    }
 }
