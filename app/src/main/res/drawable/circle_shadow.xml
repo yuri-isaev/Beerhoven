@@ -9,7 +9,6 @@
                 android:top="0dp" />
             <!-- <gradient android:endColor="@color/colorMainBlack"/>-->
             <solid android:color="#00CCCCCC" />
-
             <corners android:radius="4dp" />
         </shape>
     </item>
@@ -20,9 +19,7 @@
                 android:left="0dp"
                 android:right="0dp"
                 android:top="0dp" />
-
             <solid android:color="#10CCCCCC" />
-
             <corners android:radius="3dp" />
         </shape>
     </item>
@@ -33,9 +30,7 @@
                 android:left="0dp"
                 android:right="0dp"
                 android:top="0dp" />
-
             <solid android:color="#20CCCCCC" />
-
             <corners android:radius="3dp" />
         </shape>
     </item>
@@ -48,7 +43,6 @@
                 android:top="0dp" />
             <!-- <gradient android:endColor="@color/colorMainBlack"/>-->
             <solid android:color="#30CCCCCC" />
-
             <corners android:radius="3dp" />
         </shape>
     </item>
@@ -59,9 +53,7 @@
                 android:left="2dp"
                 android:right="2dp"
                 android:top="2dp" />
-
             <solid android:color="#50CCCCCC" />
-
             <corners android:radius="4dp" />
         </shape>
     </item>
@@ -70,7 +62,6 @@
     <item>
         <shape android:shape="oval">
             <solid android:color="@android:color/primary_text_dark_nodisable" />
-
             <corners android:radius="10dp" />
         </shape>
     </item>

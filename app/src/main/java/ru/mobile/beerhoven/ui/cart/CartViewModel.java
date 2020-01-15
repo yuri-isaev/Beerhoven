@@ -19,7 +19,6 @@ public class CartViewModel extends AndroidViewModel {
    public CartViewModel(@NonNull Application application) {
       super(application);
       this.mRepository = new CartRepository();
-      this.mCartList = new MutableLiveData<List<Item>>();
    }
 
    public void initCartList() {

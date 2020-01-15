@@ -54,13 +54,13 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/tvItemFrame"
-                android:layout_width="115dp"
+                android:layout_width="120dp"
                 android:layout_height="115dp"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/shadow_circle"
+                android:background="@drawable/circle_shadow"
                 android:elevation="2mm"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.112"
+                app:layout_constraintHorizontal_bias="0.104"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvSpecial"
                 tools:ignore="InOrMmUsage,MissingConstraints,UnusedAttribute" />
@@ -126,6 +126,7 @@
                 android:id="@+id/separator1"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/size_1"
+                android:layout_marginTop="8dp"
                 android:background="@color/colorMainGrey"
                 app:layout_constraintTop_toBottomOf="@+id/tvItemFrame"
                 tools:ignore="MissingConstraints"
@@ -196,7 +197,7 @@
                     tools:layout_editor_absoluteY="241dp" />
 
                 <TextView
-                    android:id="@+id/tvFortrDes"
+                    android:id="@+id/tvFortress"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/roboto_bold"
@@ -235,7 +236,7 @@
                     tools:layout_editor_absoluteY="241dp" />
 
                 <TextView
-                    android:id="@+id/tvDensityDes"
+                    android:id="@+id/tvDensity"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/roboto_bold"

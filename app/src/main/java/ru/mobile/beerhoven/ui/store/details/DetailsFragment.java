@@ -36,15 +36,13 @@ public class DetailsFragment extends Fragment {
    private String image;
    private String price;
    private String quantity;
-   private String change;
    private double total;
    private FragmentDetailsBinding fragmentBind;
    private DetailsViewModel mDetailsViewModel;
 
    @Override
-   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      mDetailsViewModel = new ViewModelProvider(requireActivity(), getDefaultViewModelProviderFactory())
-          .get(DetailsViewModel.class);
+   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+      mDetailsViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
       fragmentBind = FragmentDetailsBinding.inflate(inflater, container, false);
       countListener();
       addCartList();
@@ -77,13 +75,14 @@ public class DetailsFragment extends Fragment {
          fragmentBind.tvPrice.setText(String.valueOf(price));
          fragmentBind.tvTotalAmount.setText(String.valueOf(total));
          fragmentBind.tvStyle.setText(style);
-         fragmentBind.tvFortrDes.setText(fortress + "%");
-         fragmentBind.tvDensityDes.setText(density + "%");
+         fragmentBind.tvFortress.setText(fortress + "%");
+         fragmentBind.tvDensity.setText(density + "%");
          fragmentBind.tvFullDescription.setText(description);
 
-         Glide.with(fragmentBind.tvItemFrame.getContext()).load(args.getImage()).into(fragmentBind.tvItemFrame);
+         Glide.with(fragmentBind.tvItemFrame.getContext())
+             .load(args.getImage()).into(fragmentBind.tvItemFrame);
 
-         change = args.getChange();
+         String change = args.getChange();
          switch (change) {
             case Constants.OBJECT_VISIBLE:
                fragmentBind.addCartButton.setVisibility(View.VISIBLE);
@@ -105,10 +104,13 @@ public class DetailsFragment extends Fragment {
       fragmentBind.addCartButton.setOnClickListener(v -> {
          String saveCurrentDate, saveCurrentTime;
          Calendar calForDate = Calendar.getInstance();
+
          SimpleDateFormat currentDate = new SimpleDateFormat(Constants.CURRENT_DATA);
          saveCurrentDate = currentDate.format(calForDate.getTime());
+
          SimpleDateFormat currentTime = new SimpleDateFormat(Constants.CURRENT_TIME);
          saveCurrentTime = currentTime.format(calForDate.getTime());
+
          double cartPrice = Double.parseDouble(price);
          quantity = String.valueOf(mValue);
 
@@ -137,16 +139,13 @@ public class DetailsFragment extends Fragment {
       });
    }
 
-   /**
-    * Use case
-    * Price calculator
-    */
+   // Product count constrains
    private void countListener() {
       fragmentBind.includeFragmentCounter.iCounterPlus.setOnClickListener(v -> {
          if (mValue != 15) {
             mValue++;
          }
-         updateValue();
+         calculateValue();
       });
 
       fragmentBind.includeFragmentCounter.iCounterMinus.setOnClickListener(v -> {
@@ -155,11 +154,12 @@ public class DetailsFragment extends Fragment {
          } else {
             mValue--;
          }
-         updateValue();
+         calculateValue();
       });
    }
 
-   private void updateValue() {
+   // Calculate product total
+   private void calculateValue() {
       fragmentBind.includeFragmentCounter.iCounterValue.setText(String.valueOf(mValue));
       double cost = (Double.parseDouble(price) * mValue);
       total = Math.round(cost * 100.0) / 100.0;

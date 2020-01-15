@@ -5,14 +5,11 @@ import static androidx.recyclerview.widget.RecyclerView.*;
 import static ru.mobile.beerhoven.ui.cart.CartListAdapter.*;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -21,6 +18,7 @@ import com.bumptech.glide.Glide;
 import java.util.EventListener;
 import java.util.List;
 
+import ru.mobile.beerhoven.activity.MainActivity;
 import ru.mobile.beerhoven.databinding.ItemCartBinding;
 import ru.mobile.beerhoven.models.Item;
 import ru.mobile.beerhoven.utils.Constants;
@@ -28,26 +26,24 @@ import ru.mobile.beerhoven.utils.Constants;
 public class CartListAdapter extends Adapter<CartListViewHolder> {
    private final List<Item> mCartList;
    private final Callback mCallback;
-   private final CartViewModel cartViewModel;
-   private final Context mContext;
+   private final CartViewModel mCartViewModel;
    private double mOverTotalPrice;
-   private double oneTypeProductPrice;
 
    public interface Callback extends EventListener {
       void onPassData(String data);
    }
 
-   public CartListAdapter(@NonNull List<Item> list, Context context, Callback listener) {
+   public CartListAdapter(@NonNull List<Item> list, Callback listener) {
       this.mCartList = list;
-      this.mContext = context;
       this.mCallback = listener;
-      this.cartViewModel = new ViewModelProvider((ViewModelStoreOwner) this).get(CartViewModel.class);
+      this.mCartViewModel = new CartViewModel(new MainActivity().getApplication());
    }
 
    @NonNull
    @Override
    public CartListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      ItemCartBinding recyclerBinding = ItemCartBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+      ItemCartBinding recyclerBinding = ItemCartBinding
+          .inflate(LayoutInflater.from(parent.getContext()), parent, false);
       return new CartListViewHolder(recyclerBinding);
    }
 
@@ -70,11 +66,10 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
 
       holder.recyclerBinding.tvDeleteItem.setOnClickListener(v -> {
          // Initialize cart list from database
-         cartViewModel.deleteCartListItem(positionID);
+         mCartViewModel.deleteCartListItem(positionID);
 
          // The total price of the entire cart
-         oneTypeProductPrice = model.getTotal();
-         double sum = mOverTotalPrice + oneTypeProductPrice;
+         double sum = mOverTotalPrice + model.getTotal();
          mOverTotalPrice = Math.round(sum * 100.0) / 100.0;
          mCallback.onPassData(String.valueOf(mOverTotalPrice));
       });

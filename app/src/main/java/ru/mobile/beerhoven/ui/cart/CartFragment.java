@@ -68,13 +68,12 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-      mCartListAdapter = new CartListAdapter(requireNonNull(mCartViewModel.getCartList().getValue()), getContext(), res -> {
-         mOrderTotal.setText("Сумма корзины: " + res + " руб.");
+      mCartListAdapter = new CartListAdapter(requireNonNull(mCartViewModel.getCartList().getValue()), res -> {
          mData = res;
+         mOrderTotal.setText("Сумма корзины: " + res + " руб.");
       });
 
       mCartAddConfirmButton.setClickable(mCartViewModel.getCartList().getValue().size() != 0);
-
       mRecyclerView.setAdapter(mCartListAdapter);
    }
 
