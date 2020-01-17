@@ -3,6 +3,7 @@ package ru.mobile.beerhoven.utils;
 public final class Constants {
     // For shared preference
     public static final String SHARED_PREF = "SHARED_PREF";
+    public static final String COUNTER_VALUE = "COUNTER_VALUE";
     public static final String CURRENT_USER_NAME = "CURRENT_USER_NAME";
 
     // For database state
