@@ -44,5 +44,19 @@
     <string name="cart_total">Сумма корзины</string>
 
     <!-- Order. -->
+    <string name="order_address">Адресс заказа</string>
+    <string name="order_confirmation">Подтверждение заказа</string>
+    <string name="order_clarification">Уточнить заказ</string>
+    <string name="order_data">Дата заказа</string>
+    <string name="order_details">Пожалуйста, уточните детали заказа</string>
     <string name="order_form">Подать заявку</string>
+    <string name="order_make">сделать заказ</string>
+    <string name="order_name">Имя заказа</string>
+    <string name="order_notification">Спасибо за заказ</string>
+    <string name="order_phone">Телефон заказа</string>
+    <string name="order_time">Время заказа</string>
+    <string name="order_waiting">Ваш заказ получен, ожидайте доставки…</string>
+
+    <!-- Details. -->
+    <string name="details_order">Детали</string>
 </resources>
