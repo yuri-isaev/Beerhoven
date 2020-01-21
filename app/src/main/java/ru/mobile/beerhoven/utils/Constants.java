@@ -9,7 +9,9 @@ public final class Constants {
     // For database state
     public static final String ADMIN = "ADMIN";
     public static final String NODE_CART = "CART LIST";
+    public static final String NODE_CONFIRMS = "CONFIRMS";
     public static final String NODE_ITEMS = "ITEMS";
+    public static final String NODE_ORDERS = "ORDERS";
 
     public static final String CURRENT_DATA = "MMM dd, yyyy";
     public static final String CURRENT_TIME = "HH:mm:ss a";
