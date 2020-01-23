@@ -1,5 +1,6 @@
 package ru.mobile.beerhoven.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -30,7 +31,6 @@ import ru.mobile.beerhoven.utils.Constants;
 public class MainActivity extends AppCompatActivity {
    private AppBarConfiguration mAppBarConfiguration;
    private ImageView mIcon;
-   private NavController mNavigationController;
    private NavigationView mNavigationView;
    private SharedPreferences mSharedPref;
    private TextView mCounterText;
@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
       Toolbar toolbar = findViewById(R.id.toolbar);
       setSupportActionBar(toolbar);
 
+      mSharedPref = getApplicationContext().getSharedPreferences(Constants.SHARED_PREF, Context.MODE_PRIVATE);
+      mCounterValue = mSharedPref.getInt(Constants.COUNTER_VALUE, 0);
+
       DrawerLayout drawer = findViewById(R.id.drawer_layout);
       mNavigationView = findViewById(R.id.nav_view);
 
@@ -52,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
           .Builder(R.id.nav_news, R.id.nav_store, R.id.nav_order, R.id.nav_cart, R.id.nav_map)
           .setDrawerLayout(drawer).build();
 
-      NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-      NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-      NavigationUI.setupWithNavController(mNavigationView, navController);
+      NavController mNavigationController = Navigation.findNavController(this, R.id.nav_host_fragment);
+      NavigationUI.setupActionBarWithNavController(this, mNavigationController, mAppBarConfiguration);
+      NavigationUI.setupWithNavController(mNavigationView, mNavigationController);
 
       setFontToMenuItem();
    }
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
    @Override
    public boolean onSupportNavigateUp() {
+      NavController mNavigationController = Navigation.findNavController(this, R.id.nav_host_fragment);
       return NavigationUI.navigateUp(mNavigationController, mAppBarConfiguration) || super.onSupportNavigateUp();
    }
 

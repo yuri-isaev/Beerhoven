@@ -19,10 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.data.repository.CatalogRepository;
-import ru.mobile.beerhoven.data.repository.OrderRepository;
 import ru.mobile.beerhoven.models.Item;
-import ru.mobile.beerhoven.ui.store.catalog.CatalogViewModel;
 
 public class OrderFragment extends Fragment {
    int count = 0;
@@ -39,7 +36,8 @@ public class OrderFragment extends Fragment {
    @SuppressLint("NotifyDataSetChanged")
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      mOrderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
+     mOrderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
+      //mOrderViewModel = new OrderViewModel(new OrderRepository());
 
       View view = inflater.inflate(R.layout.fragment_order, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view_order);

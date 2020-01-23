@@ -1,34 +1,28 @@
 package ru.mobile.beerhoven.ui.orders.order;
 
+import static java.util.Objects.requireNonNull;
+import static ru.mobile.beerhoven.ui.orders.order.OrderAdapter.*;
+
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import androidx.recyclerview.widget.RecyclerView.Adapter;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import java.util.List;
-import java.util.Objects;
 
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.data.repository.OrderRepository;
 import ru.mobile.beerhoven.databinding.ItemOrderBinding;
 import ru.mobile.beerhoven.models.Item;
-import ru.mobile.beerhoven.utils.Constants;
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
-
-   private String PID;
+public class OrderAdapter extends Adapter<OrderViewHolder> {
    private final List<Item> mOrderList;
 
    public OrderAdapter(@NonNull List<Item> list) {
@@ -45,10 +39,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
    @SuppressLint("SetTextI18n")
    @Override
    public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
+      OrderViewModel orderViewModel = new OrderViewModel(new OrderRepository());
       Item model = mOrderList.get(position);
-      String keyID = model.getId();
-      String UID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
 
+      // Get phone number current user aka user id from database
+      String UID = orderViewModel.getCurrentUserPhone();
+
+      // Binding view fields
       holder.recyclerBinding.tvTimeOrder.setText(model.getTime());
       holder.recyclerBinding.tvDateOrder.setText(model.getDate());
       holder.recyclerBinding.tvNameOrder.setText(model.getName());
@@ -56,31 +53,21 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
       holder.recyclerBinding.tvAddressOrder.setText(model.getAddress());
       holder.recyclerBinding.tvCommonOrder.setText(model.getCommon() + " руб.");
 
-      DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-      Query query = rootRef.child(Constants.NODE_ORDERS).child(UID);
-      ValueEventListener valueEventListener = new ValueEventListener() {
-         @Override
-         public void onDataChange(DataSnapshot dataSnapshot) {
-            for (DataSnapshot push : dataSnapshot.getChildren()) {
-               PID = push.getKey();
-            }
-         }
+      // Get order key from database
+      String orderKey = orderViewModel.gePushId();
 
-         @Override
-         public void onCancelled(@NonNull DatabaseError databaseError) {
-         }
-      };
-
-      query.addListenerForSingleValueEvent(valueEventListener);
+      holder.itemView.setOnClickListener(v -> {
+         NavController navController = Navigation.findNavController(v);
+         OrderFragmentDirections.ActionNavOrderToNavOrderDetails action = OrderFragmentDirections.actionNavOrderToNavOrderDetails()
+             .setID(requireNonNull(UID))
+             .setPushID(requireNonNull(orderKey));
+         navController.navigate(action);
+      });
 
       holder.recyclerBinding.tvDeleteOrder.setVisibility(View.INVISIBLE);
 
-      holder.recyclerBinding.tvDeleteOrder.setOnClickListener(v -> FirebaseDatabase.getInstance()
-          .getReference()
-          .child(Constants.NODE_CONFIRMS)
-          .child(UID)
-          .child(keyID)
-          .removeValue());
+      // Remove order from on click delete button
+      holder.recyclerBinding.tvDeleteOrder.setOnClickListener(v -> orderViewModel.getId(model.getId()));
    }
 
    @Override
@@ -89,7 +76,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
    }
 
 
-   public static class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+   public static class OrderViewHolder extends ViewHolder implements OnClickListener {
       ItemOrderBinding recyclerBinding;
 
       public OrderViewHolder(@NonNull View itemView) {
