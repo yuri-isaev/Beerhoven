@@ -17,7 +17,7 @@ import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.repository.CatalogRepository;
 import ru.mobile.beerhoven.interfaces.InteractionListener;
-import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.domain.model.Product;
 
 public class CatalogFragment extends Fragment {
    private RecyclerView mRecyclerView;
@@ -47,18 +47,18 @@ public class CatalogFragment extends Fragment {
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
       // Store cart observer
-      mCatalogAdapter = new CatalogAdapter((List<Item>) mCatalogViewModel.getCatalogList().getValue(),
+      mCatalogAdapter = new CatalogAdapter((List<Product>) mCatalogViewModel.getCatalogList().getValue(),
           getContext(),
           new InteractionListener() {
          @Override
-         public void onInteractionAdd(Item model) {
+         public void onInteractionAdd(Product model) {
             mCatalogViewModel.getReportAddCart().observe(getViewLifecycleOwner(), s ->
                 Toasty.success(requireActivity(), "Товар добавлен в корзину", Toast.LENGTH_SHORT, true).show());
          }
 
          @SuppressLint("NotifyDataSetChanged")
          @Override
-         public void onInteractionDelete(Item model) {
+         public void onInteractionDelete(Product model) {
             mCatalogViewModel.getResponseDeleteItem().observe(getViewLifecycleOwner(), s -> {
                Toasty.success(requireActivity(), "Товар удален", Toast.LENGTH_SHORT, true).show();
                mCatalogAdapter.notifyDataSetChanged();

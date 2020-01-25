@@ -20,11 +20,11 @@ import java.util.List;
 
 import ru.mobile.beerhoven.activity.MainActivity;
 import ru.mobile.beerhoven.databinding.ItemCartBinding;
-import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class CartListAdapter extends Adapter<CartListViewHolder> {
-   private final List<Item> mCartList;
+   private final List<Product> mCartList;
    private final Callback mCallback;
    private final CartViewModel mCartViewModel;
    private double mOverTotalPrice;
@@ -33,7 +33,7 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
       void onPassData(String data);
    }
 
-   public CartListAdapter(@NonNull List<Item> list, Callback listener) {
+   public CartListAdapter(@NonNull List<Product> list, Callback listener) {
       this.mCartList = list;
       this.mCallback = listener;
       this.mCartViewModel = new CartViewModel(new MainActivity().getApplication());
@@ -50,7 +50,7 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
    @SuppressLint("SetTextI18n")
    @Override
    public void onBindViewHolder(@NonNull CartListViewHolder holder, int position) {
-      Item model = mCartList.get(position);
+      Product model = mCartList.get(position);
       String positionID = model.getId();
 
       Glide.with(holder.recyclerBinding.tvName.getContext())

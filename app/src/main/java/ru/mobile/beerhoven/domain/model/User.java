@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.models;
+package ru.mobile.beerhoven.domain.model;
 
 public class User {
     private String name, email, phone;

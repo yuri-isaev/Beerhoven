@@ -12,8 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Objects;
 
-import ru.mobile.beerhoven.data.storage.CrudRepository;
-import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.HashMapRepository;
 
@@ -46,7 +45,7 @@ public class DetailsRepository {
       HashMap<String, String> map = HashMapRepository.detailsMap;
       HashMap<String, Double> price = HashMapRepository.priceMap;
 
-      Item post = new Item();
+      Product post = new Product();
       post.setName(map.get("name"));
       post.setCountry(map.get("country"));
       post.setManufacture(map.get("manufacture"));

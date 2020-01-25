@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.data.storage;
+package ru.mobile.beerhoven.domain.repository;
 
 public interface IUserStateRepository {
    String getCurrentUserPhoneNumber();

@@ -10,10 +10,10 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 import ru.mobile.beerhoven.data.repository.CartRepository;
-import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.domain.model.Product;
 
 public class CartViewModel extends AndroidViewModel {
-   private MutableLiveData<List<Item>> mCartList;
+   private MutableLiveData<List<Product>> mCartList;
    private final CartRepository mRepository;
 
    public CartViewModel(@NonNull Application application) {
@@ -28,7 +28,7 @@ public class CartViewModel extends AndroidViewModel {
       mCartList = mRepository.getCartList();
    }
 
-   public LiveData<List<Item>> getCartList() {
+   public LiveData<List<Product>> getCartList() {
       return mCartList;
    }
 

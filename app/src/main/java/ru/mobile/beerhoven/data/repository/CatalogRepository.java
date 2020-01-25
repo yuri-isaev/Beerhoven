@@ -18,14 +18,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import ru.mobile.beerhoven.data.storage.CrudRepository;
+import ru.mobile.beerhoven.domain.model.Product;
+import ru.mobile.beerhoven.domain.repository.CrudRepository;
 import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.HashMapRepository;
-import ru.mobile.beerhoven.models.Item;
 
-public class CatalogRepository implements CrudRepository<Item> {
-   private final List<Item> mDataList;
-   private final MutableLiveData<List<Item>> mMutableList;
+public class CatalogRepository implements CrudRepository<Product> {
+   private final List<Product> mDataList;
+   private final MutableLiveData<List<Product>> mMutableList;
    private final MutableLiveData<String> mValue;
    private final String UID;
    private final DatabaseReference mInstanceFirebase;
@@ -41,7 +41,7 @@ public class CatalogRepository implements CrudRepository<Item> {
    /**
     * Read store catalog
     */
-   public MutableLiveData<List<Item>> readList() {
+   public MutableLiveData<List<Product>> readList() {
       if (mDataList.size() == 0) {
          readCatalogList();
       }
@@ -53,34 +53,34 @@ public class CatalogRepository implements CrudRepository<Item> {
       mInstanceFirebase.child(Constants.NODE_ITEMS).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            Item item = snapshot.getValue(Item.class);
-            assert item != null;
-            item.setId(snapshot.getKey());
+            Product product = snapshot.getValue(Product.class);
+            assert product != null;
+            product.setId(snapshot.getKey());
 
-            if (!mDataList.contains(item)) {
-               mDataList.add(item);
+            if (!mDataList.contains(product)) {
+               mDataList.add(product);
             }
             mMutableList.postValue(mDataList);
          }
 
          @Override
          public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            Item item = snapshot.getValue(Item.class);
-            assert item != null;
-            item.setId(snapshot.getKey());
-            if (mDataList.contains(item)) {
-               mDataList.set(mDataList.indexOf(item), item);
+            Product product = snapshot.getValue(Product.class);
+            assert product != null;
+            product.setId(snapshot.getKey());
+            if (mDataList.contains(product)) {
+               mDataList.set(mDataList.indexOf(product), product);
             }
             mMutableList.postValue(mDataList);
          }
 
          @Override
          public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-            Item item = snapshot.getValue(Item.class);
-            assert item != null;
-            item.setId(snapshot.getKey());
-            if (mDataList.contains(item)) {
-               mDataList.remove(item);
+            Product product = snapshot.getValue(Product.class);
+            assert product != null;
+            product.setId(snapshot.getKey());
+            if (mDataList.contains(product)) {
+               mDataList.remove(product);
             }
             mMutableList.postValue(mDataList);
          }
@@ -109,7 +109,7 @@ public class CatalogRepository implements CrudRepository<Item> {
       HashMap<String, String> catalog = HashMapRepository.catalogMap;
       HashMap<String, Double> price = HashMapRepository.priceMap;
 
-      Item post = new Item();
+      Product post = new Product();
       post.setName(catalog.get("name"));
       post.setCountry(catalog.get("country"));
       post.setManufacture(catalog.get("manufacture"));

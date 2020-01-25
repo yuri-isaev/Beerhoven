@@ -30,7 +30,7 @@ import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.activity.MainActivity;
 import ru.mobile.beerhoven.utils.Constants;
-import ru.mobile.beerhoven.models.User;
+import ru.mobile.beerhoven.domain.model.User;
 
 public class AuthenticationFragment extends Fragment {
 

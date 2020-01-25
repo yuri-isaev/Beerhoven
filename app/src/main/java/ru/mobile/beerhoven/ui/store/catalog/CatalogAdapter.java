@@ -25,18 +25,18 @@ import java.util.List;
 
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.databinding.ItemCatalogBinding;
+import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.interfaces.InteractionListener;
-import ru.mobile.beerhoven.models.Item;
 import ru.mobile.beerhoven.ui.store.sections.StoreFragmentDirections;
 import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.HashMapRepository;
 
 public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuItemClickListener {
-   protected List<Item> mAdapterList;
+   protected List<Product> mAdapterList;
    private final InteractionListener mListener;
    private NavController navController;
 
-   public CatalogAdapter(List<Item> list, Context context, InteractionListener mListener) {
+   public CatalogAdapter(List<Product> list, Context context, InteractionListener mListener) {
       this.mAdapterList = list;
       this.mListener = mListener;
    }
@@ -52,7 +52,7 @@ public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuIte
    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
    @Override
    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-      Item model = mAdapterList.get(position);
+      Product model = mAdapterList.get(position);
       String PID = model.getId();
       String image = model.getUrl();
 

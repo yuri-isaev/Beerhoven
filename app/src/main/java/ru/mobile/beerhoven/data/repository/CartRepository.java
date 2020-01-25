@@ -16,12 +16,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class CartRepository {
-   private final List<Item> mDataList;
-   private final MutableLiveData<List<Item>> mMutableList;
+   private final List<Product> mDataList;
+   private final MutableLiveData<List<Product>> mMutableList;
    private final String UID;
    private final DatabaseReference mFirebaseRef;
 
@@ -32,7 +32,7 @@ public class CartRepository {
       mFirebaseRef = FirebaseDatabase.getInstance().getReference();
    }
 
-   public MutableLiveData<List<Item>> getCartList() {
+   public MutableLiveData<List<Product>> getCartList() {
       if (mDataList.size() == 0) {
          readCartList();
       }
@@ -46,7 +46,7 @@ public class CartRepository {
       mFirebaseRef.child(Constants.NODE_CART).child(UID).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            Item order = dataSnapshot.getValue(Item.class);
+            Product order = dataSnapshot.getValue(Product.class);
             assert order != null;
             order.setId(dataSnapshot.getKey());
             if (!mDataList.contains(order)) {
@@ -57,7 +57,7 @@ public class CartRepository {
 
          @Override
          public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            Item order = dataSnapshot.getValue(Item.class);
+            Product order = dataSnapshot.getValue(Product.class);
             assert order != null;
             order.setId(dataSnapshot.getKey());
             if (mDataList.contains(order)) {
@@ -68,7 +68,7 @@ public class CartRepository {
 
          @Override
          public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-            Item order = dataSnapshot.getValue(Item.class);
+            Product order = dataSnapshot.getValue(Product.class);
             assert order != null;
             order.setId(dataSnapshot.getKey());
             mDataList.remove(order);

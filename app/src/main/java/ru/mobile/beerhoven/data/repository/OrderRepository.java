@@ -15,14 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import ru.mobile.beerhoven.data.storage.IOrderRepository;
-import ru.mobile.beerhoven.data.storage.IUserStateRepository;
-import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.domain.model.Product;
+import ru.mobile.beerhoven.domain.repository.IOrderRepository;
+import ru.mobile.beerhoven.domain.repository.IUserStateRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class OrderRepository implements IOrderRepository, IUserStateRepository {
-   private final List<Item> mDataList;
-   private final MutableLiveData<List<Item>> mMutableList;
+   private final List<Product> mDataList;
+   private final MutableLiveData<List<Product>> mMutableList;
    private String UID;
    private final DatabaseReference mFirebaseRef;
 
@@ -46,7 +46,7 @@ public class OrderRepository implements IOrderRepository, IUserStateRepository {
 
    // Get order confirm list
    @Override
-   public MutableLiveData<List<Item>> getOrderMutableList() {
+   public MutableLiveData<List<Product>> getOrderMutableList() {
       if (mDataList.size() == 0) {
          readOrderConfirmList();
       }
@@ -59,7 +59,7 @@ public class OrderRepository implements IOrderRepository, IUserStateRepository {
       mFirebaseRef.child(Constants.NODE_CONFIRMS).child(UID).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            Item order = snapshot.getValue(Item.class);
+            Product order = snapshot.getValue(Product.class);
             assert order != null;
             order.setId(snapshot.getKey());
             if (!mDataList.contains(order)) {
@@ -70,7 +70,7 @@ public class OrderRepository implements IOrderRepository, IUserStateRepository {
 
          @Override
          public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            Item order = snapshot.getValue(Item.class);
+            Product order = snapshot.getValue(Product.class);
             assert order != null;
             order.setId(snapshot.getKey());
             if (mDataList.contains(order)) {
@@ -81,7 +81,7 @@ public class OrderRepository implements IOrderRepository, IUserStateRepository {
 
          @Override
          public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-            Item order = snapshot.getValue(Item.class);
+            Product order = snapshot.getValue(Product.class);
             assert order != null;
             order.setId(snapshot.getKey());
             mDataList.remove(order);

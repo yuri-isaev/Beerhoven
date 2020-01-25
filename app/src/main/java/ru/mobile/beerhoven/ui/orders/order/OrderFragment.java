@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.domain.model.Product;
 
 public class OrderFragment extends Fragment {
    int count = 0;
@@ -44,7 +44,7 @@ public class OrderFragment extends Fragment {
 
       mOrderViewModel.initOrderList();
 
-      mOrderViewModel.getOrderList().observe(getViewLifecycleOwner(), (Observer<List<Item>>)
+      mOrderViewModel.getOrderList().observe(getViewLifecycleOwner(), (Observer<List<Product>>)
           list -> mOrderAdapter.notifyDataSetChanged());
       initRecyclerView();
       return view;

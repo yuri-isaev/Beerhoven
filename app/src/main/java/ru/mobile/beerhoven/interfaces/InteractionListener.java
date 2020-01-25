@@ -1,8 +1,8 @@
 package ru.mobile.beerhoven.interfaces;
 
-import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.domain.model.Product;
 
 public interface InteractionListener {
-   void onInteractionAdd(Item model);
-   void onInteractionDelete(Item model);
+   void onInteractionAdd(Product model);
+   void onInteractionDelete(Product model);
 }

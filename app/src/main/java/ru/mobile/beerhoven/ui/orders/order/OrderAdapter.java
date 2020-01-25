@@ -20,12 +20,12 @@ import java.util.List;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.repository.OrderRepository;
 import ru.mobile.beerhoven.databinding.ItemOrderBinding;
-import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.domain.model.Product;
 
 public class OrderAdapter extends Adapter<OrderViewHolder> {
-   private final List<Item> mOrderList;
+   private final List<Product> mOrderList;
 
-   public OrderAdapter(@NonNull List<Item> list) {
+   public OrderAdapter(@NonNull List<Product> list) {
       this.mOrderList = list;
    }
 
@@ -40,7 +40,7 @@ public class OrderAdapter extends Adapter<OrderViewHolder> {
    @Override
    public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
       OrderViewModel orderViewModel = new OrderViewModel(new OrderRepository());
-      Item model = mOrderList.get(position);
+      Product model = mOrderList.get(position);
 
       // Get phone number current user aka user id from database
       String UID = orderViewModel.getCurrentUserPhone();

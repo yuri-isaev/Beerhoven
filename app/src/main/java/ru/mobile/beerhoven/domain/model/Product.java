@@ -1,8 +1,8 @@
-package ru.mobile.beerhoven.models;
+package ru.mobile.beerhoven.domain.model;
 
 import androidx.annotation.Nullable;
 
-public class Item {
+public class Product {
    private String id; // pushID(PID)
    private String name;
    private String country;
@@ -22,11 +22,11 @@ public class Item {
    private double common;
    private float color;
 
-   public Item() {}
+   public Product() {}
 
-   public Item(String id, String name, String country, String manufacture, String density, String description,
-               String quantity, String style, String fortress, String address, String phone, String time, String date,
-               String url, double price, double total, double common, float color) {
+   public Product(String id, String name, String country, String manufacture, String density, String description,
+                  String quantity, String style, String fortress, String address, String phone, String time, String date,
+                  String url, double price, double total, double common, float color) {
       this.id = id;
       this.name = name;
       this.country = country;
@@ -50,7 +50,7 @@ public class Item {
    @Override
    public boolean equals(@Nullable Object obj) {
       assert obj != null;
-      return id.equals(((Item) obj).id);
+      return id.equals(((Product) obj).id);
    }
 
    public String getId() {

@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.mobile.beerhoven.common.FakeContent;
-import ru.mobile.beerhoven.data.storage.CrudRepository;
-import ru.mobile.beerhoven.models.Item;
+import ru.mobile.beerhoven.domain.repository.CrudRepository;
+import ru.mobile.beerhoven.domain.model.Product;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -49,9 +49,9 @@ public class CatalogViewModelTest {
    }
 
    private void setFakeItems() {
-      List<Item> itemList = new ArrayList<>();
-      itemList.add(FakeContent.fakePost);
-      mMutableList.setValue(itemList);
+      List<Product> productList = new ArrayList<>();
+      productList.add(FakeContent.fakePost);
+      mMutableList.setValue(productList);
    }
 
    @Test
