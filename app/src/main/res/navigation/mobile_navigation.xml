@@ -78,5 +78,26 @@
         android:id="@+id/nav_order"
         android:name="ru.mobile.beerhoven.ui.orders.order.OrderFragment"
         android:label="@string/menu_order"
-        tools:layout="@layout/fragment_order" />
+        tools:layout="@layout/fragment_order" >
+        <action
+            android:id="@+id/action_nav_order_to_nav_order_details"
+            app:destination="@id/nav_order_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_order_details"
+        android:name="ru.mobile.beerhoven.ui.orders.details.OrderDetailsFragment"
+        android:label="@string/details_order"
+        tools:layout="@layout/fragment_order_details" >
+        <argument
+            android:name="ID"
+            app:argType="string"
+            android:defaultValue="default" />
+        <argument
+            android:name="pushID"
+            app:argType="string"
+            android:defaultValue="default" />
+        <action
+            android:id="@+id/action_nav_order_details_to_nav_details"
+            app:destination="@id/nav_details" />
+    </fragment>
 </navigation>
