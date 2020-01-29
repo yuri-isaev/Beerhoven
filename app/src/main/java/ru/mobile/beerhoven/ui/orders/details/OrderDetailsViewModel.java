@@ -7,15 +7,21 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import ru.mobile.beerhoven.domain.model.Product;
+import ru.mobile.beerhoven.domain.repository.IOrderDetailsRepository;
 
 public class OrderDetailsViewModel extends ViewModel {
    private MutableLiveData<List<Product>> mOrderDetailsList;
+   private final IOrderDetailsRepository mRepository;
 
-   public void initList(){
-      if (mOrderDetailsList != null){
+   public OrderDetailsViewModel(IOrderDetailsRepository repository) {
+      this.mRepository = repository;
+   }
+
+   public void initOrderDetailsList() {
+      if (mOrderDetailsList != null) {
          return;
       }
-      mOrderDetailsList = OrderDetailsRepository.getInstance().getOrderDetailsList();
+      mOrderDetailsList = mRepository.getOrderDetailsList();
    }
 
    public LiveData<List<Product>> getOrderDetailsList() {

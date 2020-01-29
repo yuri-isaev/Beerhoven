@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.data.repository.CatalogRepository;
+import ru.mobile.beerhoven.data.repository.OrderDetailsRepository;
+import ru.mobile.beerhoven.ui.store.catalog.CatalogViewModel;
 
 public class OrderDetailsFragment extends Fragment {
    private RecyclerView mRecyclerView;
@@ -28,19 +31,20 @@ public class OrderDetailsFragment extends Fragment {
          OrderDetailsFragmentArgs argsOrder = OrderDetailsFragmentArgs.fromBundle(getArguments());
          String mOrderID = argsOrder.getID();
          String mPushID = argsOrder.getPushID();
-         OrderDetailsRepository.getInstance().stateMap.put("push_id", mPushID);
+         // OrderDetailsRepository.getInstance().stateMap.put("push_id", mPushID);
       }
    }
 
    @SuppressLint("NotifyDataSetChanged")
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      mOrderDetailsViewModel = new ViewModelProvider(this).get(OrderDetailsViewModel.class);
+      // mOrderDetailsViewModel = new ViewModelProvider(this).get(OrderDetailsViewModel.class);
+      mOrderDetailsViewModel = new OrderDetailsViewModel(new OrderDetailsRepository());
 
       View view = inflater.inflate(R.layout.fragment_order_details, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view_cart);
 
-      mOrderDetailsViewModel.initList();
+      mOrderDetailsViewModel.initOrderDetailsList();
 
       mOrderDetailsViewModel.getOrderDetailsList().observe(getViewLifecycleOwner(),
           list -> mOrderDetailsAdapter.notifyDataSetChanged());
