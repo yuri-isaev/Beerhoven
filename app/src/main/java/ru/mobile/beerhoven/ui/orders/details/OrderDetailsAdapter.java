@@ -4,14 +4,12 @@ import static android.view.View.*;
 import static androidx.recyclerview.widget.RecyclerView.*;
 
 import static ru.mobile.beerhoven.ui.orders.details.OrderDetailsAdapter.*;
+import static ru.mobile.beerhoven.ui.orders.details.OrderDetailsFragmentDirections.*;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
@@ -21,8 +19,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.databinding.ItemCartBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 
@@ -45,21 +43,24 @@ public class OrderDetailsAdapter extends Adapter<OrderDetailsViewHolder> {
    public void onBindViewHolder(@NonNull OrderDetailsViewHolder holder, int position) {
       Product order = mOrderDetails.get(position);
       String keyID = order.getId();
-      Glide.with(holder.mImageTv.getContext()).load(order.getUrl()).into(holder.mImageTv);
+
+      Glide.with(holder.binding.tvImage.getContext())
+          .load(order.getUrl())
+          .into(holder.binding.tvImage);
 
       // Binding view fields
-      holder.mNameTv.setText(order.getName());
-      holder.mStyleTv.setText(order.getStyle());
-      holder.mFortressTv.setText(order.getFortress() + "%");
-      holder.mQuantityTv.setText(order.getQuantity());
-      holder.mPriceTv.setText(order.getPrice() + " руб.");
-      holder.mTotalTv.setText(order.getTotal() + " руб.");
-      holder.mDeleteTv.setVisibility(INVISIBLE);
+      holder.binding.tvNameCart.setText(order.getName());
+      holder.binding.tvStyleCart.setText(order.getStyle());
+      holder.binding.tvFortressCart.setText(order.getFortress() + "%");
+      holder.binding.tvQuantityCart.setText(order.getQuantity());
+      holder.binding.tvPriceCart.setText(order.getPrice() + " руб.");
+      holder.binding.tvTotalCart.setText(order.getTotal() + " руб.");
+      holder.binding.tvDeleteItemCart.setVisibility(INVISIBLE);
 
-      holder.mViewContainer.setOnClickListener(v -> {
+      holder.binding.tvContainerCart.setOnClickListener(v -> {
          NavController navController = Navigation.findNavController(v);
          assert keyID != null;
-         OrderDetailsFragmentDirections.ActionNavOrderDetailsToNavDetails action = OrderDetailsFragmentDirections.actionNavOrderDetailsToNavDetails()
+         ActionNavOrderDetailsToNavDetails action = actionNavOrderDetailsToNavDetails()
              .setChange(Constants.OBJECT_INVISIBLE)
              .setItemID(keyID)
              .setCountry(order.getCountry())
@@ -82,33 +83,16 @@ public class OrderDetailsAdapter extends Adapter<OrderDetailsViewHolder> {
 
 
    public static class OrderDetailsViewHolder extends ViewHolder implements OnClickListener {
-      private final LinearLayout mViewContainer;
-      private final CircleImageView mImageTv;
-      private final TextView mNameTv;
-      private final TextView mPriceTv;
-      private final TextView mStyleTv;
-      private final TextView mFortressTv;
-      private final TextView mQuantityTv;
-      private final TextView mTotalTv;
-      private final ImageView mDeleteTv;
+      ItemCartBinding binding;
 
       public OrderDetailsViewHolder(@NonNull View itemView) {
          super(itemView);
-         this.mNameTv = itemView.findViewById(R.id.tvName);
-         this.mPriceTv = itemView.findViewById(R.id.tvPrice);
-         this.mStyleTv = itemView.findViewById(R.id.tvStyle);
-         this.mFortressTv = itemView.findViewById(R.id.tvFortress);
-         this.mImageTv = itemView.findViewById(R.id.tvImage);
-         this.mDeleteTv = itemView.findViewById(R.id.tvDeleteItem);
-         this.mViewContainer = itemView.findViewById(R.id.tvContainer);
-         this.mQuantityTv = itemView.findViewById(R.id.tvQuantity);
-         this.mTotalTv = itemView.findViewById(R.id.tvTotal);
       }
 
       @Override
       public void onClick(View v) {
-         mViewContainer.setOnClickListener(this);
          itemView.setOnClickListener(this);
+         binding.tvContainerCart.setOnClickListener(this);
       }
    }
 }

@@ -26,13 +26,13 @@ public class CartRepository {
    private final DatabaseReference mFirebaseRef;
 
    public CartRepository() {
-      mDataList = new ArrayList<>();
-      mMutableList = new MutableLiveData<>();
-      UID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
-      mFirebaseRef = FirebaseDatabase.getInstance().getReference();
+      this.mDataList = new ArrayList<>();
+      this.mMutableList = new MutableLiveData<>();
+      this.UID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
    }
 
-   public MutableLiveData<List<Product>> getCartList() {
+   public MutableLiveData<List<Product>> getCartMutableList() {
       if (mDataList.size() == 0) {
          readCartList();
       }
@@ -86,7 +86,6 @@ public class CartRepository {
    // Delete cart list item by position
    public void deleteCartItem(String position) {
       assert UID != null;
-      mFirebaseRef.child(Constants.NODE_CART).child(UID)
-          .child(position).removeValue();
+      mFirebaseRef.child(Constants.NODE_CART).child(UID).child(position).removeValue();
    }
 }

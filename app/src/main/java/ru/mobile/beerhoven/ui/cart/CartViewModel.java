@@ -25,7 +25,7 @@ public class CartViewModel extends AndroidViewModel {
       if (mCartList != null) {
          return;
       }
-      mCartList = mRepository.getCartList();
+      mCartList = mRepository.getCartMutableList();
    }
 
    public LiveData<List<Product>> getCartList() {

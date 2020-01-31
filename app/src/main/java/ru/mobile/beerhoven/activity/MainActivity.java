@@ -31,6 +31,7 @@ import ru.mobile.beerhoven.utils.Constants;
 public class MainActivity extends AppCompatActivity {
    private AppBarConfiguration mAppBarConfiguration;
    private ImageView mIcon;
+   private NavController mNavController;
    private NavigationView mNavigationView;
    private SharedPreferences mSharedPref;
    private TextView mCounterText;
@@ -55,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
           .Builder(R.id.nav_news, R.id.nav_store, R.id.nav_order, R.id.nav_cart, R.id.nav_map)
           .setDrawerLayout(drawer).build();
 
-      NavController mNavigationController = Navigation.findNavController(this, R.id.nav_host_fragment);
-      NavigationUI.setupActionBarWithNavController(this, mNavigationController, mAppBarConfiguration);
-      NavigationUI.setupWithNavController(mNavigationView, mNavigationController);
+      mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
+      NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
+      NavigationUI.setupWithNavController(mNavigationView, mNavController);
 
       setFontToMenuItem();
    }
@@ -69,9 +70,13 @@ public class MainActivity extends AppCompatActivity {
    }
 
    @Override
+   public boolean onOptionsItemSelected(MenuItem item) {
+      return NavigationUI.onNavDestinationSelected(item, mNavController) || super.onOptionsItemSelected(item);
+   }
+
+   @Override
    public boolean onSupportNavigateUp() {
-      NavController mNavigationController = Navigation.findNavController(this, R.id.nav_host_fragment);
-      return NavigationUI.navigateUp(mNavigationController, mAppBarConfiguration) || super.onSupportNavigateUp();
+      return NavigationUI.navigateUp(mNavController, mAppBarConfiguration) || super.onSupportNavigateUp();
    }
 
    // Cart badge counter
@@ -82,14 +87,35 @@ public class MainActivity extends AppCompatActivity {
    }
 
    private void initBadgeCounter(Menu menu) {
-      MenuItem menuItem = menu.findItem(R.id.navCartCounter);
+      MenuItem menuItem = menu.findItem(R.id.cart_counter_bar);
       View counter = menuItem.getActionView();
 
-      mIcon = counter.findViewById(R.id.badgeCart);
-      mCounterText = counter.findViewById(R.id.badgeCounter);
+      mIcon = counter.findViewById(R.id.badge_cart);
+      mCounterText = counter.findViewById(R.id.badge_counter_cart);
 
       counter.setOnClickListener(v -> onOptionsItemSelected(menuItem));
       updateCounter(mCounterValue);
+   }
+
+   public void onIncreaseCounterClick() {
+      updateCounter(++mCounterValue);
+   }
+
+   public void onDecreaseCounterClick() {
+      if (mCounterValue <= 0) {
+         mCounterValue = 0;
+      } else {
+         updateCounter(--mCounterValue);
+      }
+   }
+
+   public void onCounterSave() {
+      SharedPreferences.Editor editor = mSharedPref.edit();
+      editor.putInt(Constants.COUNTER_VALUE, mCounterValue).apply();
+   }
+
+   public void onDeleteValueSharedPrefs() {
+      mSharedPref.edit().remove(Constants.COUNTER_VALUE).apply();
    }
 
    public void updateCounter(int newCounterValue) {
@@ -103,11 +129,6 @@ public class MainActivity extends AppCompatActivity {
          mCounterText.setText(String.valueOf(newCounterValue));
          onCounterSave();
       }
-   }
-
-   public void onCounterSave() {
-      SharedPreferences.Editor editor = mSharedPref.edit();
-      editor.putInt(Constants.COUNTER_VALUE, mCounterValue).apply();
    }
 
    // Menu item font

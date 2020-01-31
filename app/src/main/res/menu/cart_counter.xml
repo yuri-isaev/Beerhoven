@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        android:id="@+id/navCartCounter"
+        android:id="@+id/cart_counter_bar"
         android:title="existing action view"
         app:actionLayout="@layout/badge_counter"
         app:showAsAction="ifRoom"

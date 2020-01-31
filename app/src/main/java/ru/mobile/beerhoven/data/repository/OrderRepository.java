@@ -1,5 +1,7 @@
 package ru.mobile.beerhoven.data.repository;
 
+import static java.util.Objects.requireNonNull;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.MutableLiveData;
@@ -13,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IOrderRepository;
@@ -23,19 +24,20 @@ import ru.mobile.beerhoven.utils.Constants;
 public class OrderRepository implements IOrderRepository, IUserStateRepository {
    private final List<Product> mDataList;
    private final MutableLiveData<List<Product>> mMutableList;
-   private String UID;
+   private final String UID;
    private final DatabaseReference mFirebaseRef;
 
    public OrderRepository() {
       this.mDataList = new ArrayList<>();
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
       this.mMutableList = new MutableLiveData<>();
+      this.UID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    // Get current user phone number
    @Override
    public String getCurrentUserPhoneNumber() {
-      return this.UID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      return this.UID;
    }
 
    // Get order id key
@@ -56,6 +58,7 @@ public class OrderRepository implements IOrderRepository, IUserStateRepository {
 
    @Override
    public void readOrderConfirmList() {
+      assert UID != null;
       mFirebaseRef.child(Constants.NODE_CONFIRMS).child(UID).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

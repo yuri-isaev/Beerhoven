@@ -13,9 +13,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.repository.CatalogRepository;
 import ru.mobile.beerhoven.data.repository.OrderDetailsRepository;
+import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.ui.store.catalog.CatalogViewModel;
 
 public class OrderDetailsFragment extends Fragment {
@@ -38,7 +41,6 @@ public class OrderDetailsFragment extends Fragment {
    @SuppressLint("NotifyDataSetChanged")
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      // mOrderDetailsViewModel = new ViewModelProvider(this).get(OrderDetailsViewModel.class);
       mOrderDetailsViewModel = new OrderDetailsViewModel(new OrderDetailsRepository());
 
       View view = inflater.inflate(R.layout.fragment_order_details, container, false);
@@ -46,8 +48,9 @@ public class OrderDetailsFragment extends Fragment {
 
       mOrderDetailsViewModel.initOrderDetailsList();
 
+      // Get order details list and order adapter aka observe
       mOrderDetailsViewModel.getOrderDetailsList().observe(getViewLifecycleOwner(),
-          list -> mOrderDetailsAdapter.notifyDataSetChanged());
+          (List<Product> list) -> mOrderDetailsAdapter.notifyDataSetChanged());
 
       initRecyclerView();
       return view;

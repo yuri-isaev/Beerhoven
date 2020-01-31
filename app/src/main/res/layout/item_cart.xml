@@ -24,7 +24,7 @@
         android:padding="@dimen/size_5">
 
         <LinearLayout
-            android:id="@+id/tvContainer"
+            android:id="@+id/tvContainerCart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/selectableItemBackground"
@@ -67,7 +67,7 @@
                     tools:ignore="MissingConstraints,RtlHardcoded,RtlSymmetry">
 
                     <TextView
-                        android:id="@+id/tvName"
+                        android:id="@+id/tvNameCart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style_1"
@@ -78,7 +78,7 @@
                         tools:ignore="SpUsage" />
 
                     <TextView
-                        android:id="@+id/tvStyle"
+                        android:id="@+id/tvStyleCart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style_1"
@@ -88,7 +88,7 @@
                         tools:ignore="SpUsage" />
 
                     <TextView
-                        android:id="@+id/tvFortress"
+                        android:id="@+id/tvFortressCart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style_1"
@@ -99,7 +99,7 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/tvDeleteItem"
+                    android:id="@+id/tvDeleteItemCart"
                     android:layout_width="29dp"
                     android:layout_height="28dp"
                     android:background="@drawable/circle_shadow"
@@ -123,7 +123,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvPrice"
+                        android:id="@+id/tvPriceCart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -161,7 +161,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvQuantity"
+                        android:id="@+id/tvQuantityCart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -199,7 +199,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tvTotal"
+                        android:id="@+id/tvTotalCart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

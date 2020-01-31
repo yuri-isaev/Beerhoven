@@ -10,7 +10,7 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/badgeCart"
+        android:id="@+id/badge_cart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -18,7 +18,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/badgeCounter"
+        android:id="@+id/badge_counter_cart"
         style="@style/TextAppearance.MaterialComponents.Caption"
         android:layout_width="18dp"
         android:layout_height="18dp"
