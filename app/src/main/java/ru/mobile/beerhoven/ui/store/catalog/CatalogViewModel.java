@@ -4,31 +4,27 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import ru.mobile.beerhoven.domain.model.Product;
-import ru.mobile.beerhoven.domain.repository.CrudRepository;
+import ru.mobile.beerhoven.domain.repository.ICatalogRepository;
 
 public class CatalogViewModel extends ViewModel {
    private MutableLiveData mCatalogList;
-   private MutableLiveData<String> mResponse;
-   private final CrudRepository<Product> mRepository;
+   private final ICatalogRepository mRepository;
 
-   public CatalogViewModel(CrudRepository<Product> repository) {
+   public CatalogViewModel(ICatalogRepository repository) {
       this.mCatalogList = new MutableLiveData();
       this.mRepository = repository;
    }
 
    public MutableLiveData getCatalogList() {
-      mCatalogList = mRepository.readList();
+      mCatalogList = mRepository.readProductList();
       return mCatalogList;
    }
 
-   public LiveData<String> getReportAddCart() {
-      mResponse = mRepository.createItem();
-      return mResponse;
+   public LiveData<String> addProductToCart() {
+      return mRepository.addProductToCart();
    }
 
-   public LiveData<String> getResponseDeleteItem() {
-      mResponse = mRepository.deleteItem();
-      return mResponse;
+   public LiveData<String> removeProductFromCart() {
+      return mRepository.deleteProductFromCart();
    }
 }

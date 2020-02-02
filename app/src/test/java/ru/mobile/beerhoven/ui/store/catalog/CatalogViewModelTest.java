@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.mobile.beerhoven.common.FakeContent;
-import ru.mobile.beerhoven.domain.repository.CrudRepository;
+import ru.mobile.beerhoven.domain.repository.ICatalogRepository;
 import ru.mobile.beerhoven.domain.model.Product;
 
 import static org.junit.Assert.assertEquals;
@@ -31,7 +31,7 @@ public class CatalogViewModelTest {
    private MutableLiveData mMutableList;
 
    @Mock
-   private CrudRepository mMockRepo;
+   private ICatalogRepository mMockRepo;
 
    @Mock
    private List<String> mMockList;
@@ -42,9 +42,9 @@ public class CatalogViewModelTest {
    @Before
    public void setUp() {
       mMutableList = new MutableLiveData<>();
-      mMockRepo = mock(CrudRepository.class);
+      mMockRepo = mock(ICatalogRepository.class);
       mViewModel = new CatalogViewModel(mMockRepo);
-      Mockito.when(mMockRepo.readList()).thenReturn(mMutableList);
+      Mockito.when(mMockRepo.readProductList()).thenReturn(mMutableList);
       setFakeItems();
    }
 
@@ -90,6 +90,6 @@ public class CatalogViewModelTest {
       // Act
       mViewModel.getCatalogList();
       // Assert
-      verify(mMockRepo, times(1)).readList();
+      verify(mMockRepo, times(1)).readProductList();
    }
 }

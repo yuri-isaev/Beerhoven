@@ -2,6 +2,7 @@ package ru.mobile.beerhoven.ui.cart;
 
 import static androidx.recyclerview.widget.RecyclerView.*;
 
+import static ru.mobile.beerhoven.ui.cart.CartFragmentDirections.*;
 import static ru.mobile.beerhoven.ui.cart.CartListAdapter.*;
 
 import android.annotation.SuppressLint;
@@ -53,18 +54,18 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
       Product model = mCartList.get(position);
       String positionID = model.getId();
 
-      Glide.with(holder.recyclerBinding.tvName.getContext())
+      Glide.with(holder.binding.tvNameCart.getContext())
           .load(model.getUrl())
-          .into(holder.recyclerBinding.tvImage);
+          .into(holder.binding.tvImage);
 
-      holder.recyclerBinding.tvName.setText(model.getName());
-      holder.recyclerBinding.tvStyle.setText(model.getStyle());
-      holder.recyclerBinding.tvFortress.setText(model.getFortress() + "%");
-      holder.recyclerBinding.tvQuantity.setText(model.getQuantity());
-      holder.recyclerBinding.tvPrice.setText(model.getPrice() + " руб.");
-      holder.recyclerBinding.tvTotal.setText(model.getTotal() + " руб.");
+      holder.binding.tvNameCart.setText(model.getName());
+      holder.binding.tvStyleCart.setText(model.getStyle());
+      holder.binding.tvFortressCart.setText(model.getFortress() + "%");
+      holder.binding.tvQuantityCart.setText(model.getQuantity());
+      holder.binding.tvPriceCart.setText(model.getPrice() + " руб.");
+      holder.binding.tvTotalCart.setText(model.getTotal() + " руб.");
 
-      holder.recyclerBinding.tvDeleteItem.setOnClickListener(v -> {
+      holder.binding.tvDeleteItemCart.setOnClickListener(v -> {
          // Initialize cart list from database
          mCartViewModel.deleteCartListItem(positionID);
 
@@ -74,9 +75,9 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
          mCallback.onPassData(String.valueOf(mOverTotalPrice));
       });
 
-      holder.recyclerBinding.tvContainer.setOnClickListener(v -> {
+      holder.binding.tvContainerCart.setOnClickListener(v -> {
          NavController navController = Navigation.findNavController(v);
-         CartFragmentDirections.ActionNavCartToNavDetails action = CartFragmentDirections.actionNavCartToNavDetails()
+         ActionNavCartToNavDetails action = actionNavCartToNavDetails()
              .setChange(Constants.OBJECT_RENAME)
              .setItemID(positionID)
              .setCountry(model.getCountry())
@@ -99,17 +100,18 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
 
 
    public static class CartListViewHolder extends ViewHolder implements OnClickListener {
-      ItemCartBinding recyclerBinding;
+      // Recycler binding
+      ItemCartBinding binding;
 
       public CartListViewHolder(ItemCartBinding recyclerBinding) {
          super(recyclerBinding.getRoot());
-         this.recyclerBinding = recyclerBinding;
+         this.binding = recyclerBinding;
       }
 
       @Override
       public void onClick(View v) {
-         recyclerBinding.tvDeleteItem.setOnClickListener(this);
-         recyclerBinding.tvContainer.setOnClickListener(this);
+         binding.tvContainerCart.setOnClickListener(this);
+         binding.tvDeleteItemCart.setOnClickListener(this);
       }
    }
 }

@@ -19,11 +19,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import ru.mobile.beerhoven.domain.model.Product;
-import ru.mobile.beerhoven.domain.repository.CrudRepository;
+import ru.mobile.beerhoven.domain.repository.ICatalogRepository;
 import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.HashMapRepository;
 
-public class CatalogRepository implements CrudRepository<Product> {
+public class CatalogRepository implements ICatalogRepository {
    private final List<Product> mDataList;
    private final MutableLiveData<List<Product>> mMutableList;
    private final MutableLiveData<String> mValue;
@@ -31,17 +31,16 @@ public class CatalogRepository implements CrudRepository<Product> {
    private final DatabaseReference mInstanceFirebase;
 
    public CatalogRepository() {
-      mDataList = new ArrayList<>();
-      mMutableList = new MutableLiveData<>();
-      mValue = new MutableLiveData<>();
-      UID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
-      mInstanceFirebase = FirebaseDatabase.getInstance().getReference();
+      this.mDataList = new ArrayList<>();
+      this.mMutableList = new MutableLiveData<>();
+      this.mValue = new MutableLiveData<>();
+      this.UID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mInstanceFirebase = FirebaseDatabase.getInstance().getReference();
    }
 
-   /**
-    * Read store catalog
-    */
-   public MutableLiveData<List<Product>> readList() {
+   // Read store catalog
+   @Override
+   public MutableLiveData<List<Product>> readProductList() {
       if (mDataList.size() == 0) {
          readCatalogList();
       }
@@ -86,19 +85,16 @@ public class CatalogRepository implements CrudRepository<Product> {
          }
 
          @Override
-         public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-         }
+         public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
 
          @Override
-         public void onCancelled(@NonNull DatabaseError error) {
-         }
+         public void onCancelled(@NonNull DatabaseError error) {}
       });
    }
 
-   /**
-    * Create store catalog item
-    */
-   public MutableLiveData<String> createItem() {
+   // Create store catalog item
+   @Override
+   public MutableLiveData<String> addProductToCart() {
       addCatalogItem();
       mValue.setValue(null);
       return mValue;
@@ -125,13 +121,13 @@ public class CatalogRepository implements CrudRepository<Product> {
       post.setTotal(price.get("catalog_total"));
 
       assert UID != null;
-      mInstanceFirebase.child(Constants.NODE_CART).child(UID).child(requireNonNull(id.get("catalog_id"))).setValue(post);
+      mInstanceFirebase.child(Constants.NODE_CART).child(UID)
+          .child(requireNonNull(id.get("catalog_id"))).setValue(post);
    }
 
-   /**
-    * Delete store catalog item
-    */
-   public MutableLiveData<String> deleteItem() {
+   // Delete store catalog item
+   @Override
+   public MutableLiveData<String> deleteProductFromCart() {
       deleteCatalogItem();
       mValue.setValue(null);
       return mValue;
@@ -143,4 +139,3 @@ public class CatalogRepository implements CrudRepository<Product> {
       FirebaseStorage.getInstance().getReferenceFromUrl(requireNonNull(pid.get("image"))).delete();
    }
 }
-

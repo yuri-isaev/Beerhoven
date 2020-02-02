@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 
 import es.dmoral.toasty.Toasty;
+import ru.mobile.beerhoven.activity.MainActivity;
 import ru.mobile.beerhoven.databinding.FragmentDetailsBinding;
 import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.HashMapRepository;
@@ -37,16 +38,16 @@ public class DetailsFragment extends Fragment {
    private String price;
    private String quantity;
    private double total;
-   private FragmentDetailsBinding fragmentBind;
+   private FragmentDetailsBinding mFragmentBind;
    private DetailsViewModel mDetailsViewModel;
 
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       mDetailsViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
-      fragmentBind = FragmentDetailsBinding.inflate(inflater, container, false);
+      mFragmentBind = FragmentDetailsBinding.inflate(inflater, container, false);
       countListener();
-      addCartList();
-      return fragmentBind.getRoot();
+      addProductToCartList();
+      return mFragmentBind.getRoot();
    }
 
    @SuppressLint("SetTextI18n")
@@ -69,30 +70,31 @@ public class DetailsFragment extends Fragment {
          description = args.getDescription();
          image = args.getImage();
 
-         fragmentBind.tvProductName.setText(name);
-         fragmentBind.tvCountry.setText(country);
-         fragmentBind.tvManufacture.setText(manufacture);
-         fragmentBind.tvPrice.setText(String.valueOf(price));
-         fragmentBind.tvTotalAmount.setText(String.valueOf(total));
-         fragmentBind.tvStyle.setText(style);
-         fragmentBind.tvFortress.setText(fortress + "%");
-         fragmentBind.tvDensity.setText(density + "%");
-         fragmentBind.tvFullDescription.setText(description);
+         mFragmentBind.tvProductName.setText(name);
+         mFragmentBind.tvCountry.setText(country);
+         mFragmentBind.tvManufacture.setText(manufacture);
+         mFragmentBind.tvPrice.setText(String.valueOf(price));
+         mFragmentBind.tvTotalAmount.setText(String.valueOf(total));
+         mFragmentBind.tvStyle.setText(style);
+         mFragmentBind.tvFortress.setText(fortress + "%");
+         mFragmentBind.tvDensity.setText(density + "%");
+         mFragmentBind.tvFullDescription.setText(description);
 
-         Glide.with(fragmentBind.tvItemFrame.getContext())
-             .load(args.getImage()).into(fragmentBind.tvItemFrame);
+         Glide.with(mFragmentBind.tvItemFrame.getContext())
+             .load(args.getImage())
+             .into(mFragmentBind.tvItemFrame);
 
          String change = args.getChange();
          switch (change) {
             case Constants.OBJECT_VISIBLE:
-               fragmentBind.addCartButton.setVisibility(View.VISIBLE);
+               mFragmentBind.addProductToCarButton.setVisibility(View.VISIBLE);
                break;
             case Constants.OBJECT_RENAME:
-               fragmentBind.addCartButton.setVisibility(View.VISIBLE);
-               fragmentBind.addCartButton.setText("Обновить данные товара");
+               mFragmentBind.addProductToCarButton.setVisibility(View.VISIBLE);
+               mFragmentBind.addProductToCarButton.setText("Обновить данные товара");
                break;
             case Constants.OBJECT_INVISIBLE:
-               fragmentBind.addCartButton.setVisibility(View.INVISIBLE);
+               mFragmentBind.addProductToCarButton.setVisibility(View.INVISIBLE);
                break;
          }
       }
@@ -100,8 +102,8 @@ public class DetailsFragment extends Fragment {
 
    // Adding an instance of a product to the cart
    @SuppressLint({"NewApi", "LocalSuppress", "SimpleDateFormat"})
-   public void addCartList() {
-      fragmentBind.addCartButton.setOnClickListener(v -> {
+   public void addProductToCartList() {
+      mFragmentBind.addProductToCarButton.setOnClickListener(v -> {
          String saveCurrentDate, saveCurrentTime;
          Calendar calForDate = Calendar.getInstance();
 
@@ -132,8 +134,10 @@ public class DetailsFragment extends Fragment {
          map.put("quantity", quantity);
 
          // Details view model observer
-         mDetailsViewModel.addItemOrder().observe(getViewLifecycleOwner(), s ->
-             Toasty.success(requireActivity(), "Товар добавлен в корзину", Toast.LENGTH_SHORT, true).show());
+         mDetailsViewModel.addItemOrder().observe(getViewLifecycleOwner(),
+             s -> Toasty.success(requireActivity(), "Товар добавлен в корзину", Toast.LENGTH_SHORT, true).show());
+
+         ((MainActivity) requireActivity()).onIncreaseCounterClick();
 
          v.setClickable(false);
       });
@@ -141,14 +145,14 @@ public class DetailsFragment extends Fragment {
 
    // Product count constrains
    private void countListener() {
-      fragmentBind.includeFragmentCounter.iCounterPlus.setOnClickListener(v -> {
+      mFragmentBind.includeFragmentCounter.iCounterPlus.setOnClickListener(v -> {
          if (mValue != 15) {
             mValue++;
          }
          calculateValue();
       });
 
-      fragmentBind.includeFragmentCounter.iCounterMinus.setOnClickListener(v -> {
+      mFragmentBind.includeFragmentCounter.iCounterMinus.setOnClickListener(v -> {
          if (mValue <= 1) {
             mValue = 1;
          } else {
@@ -160,9 +164,9 @@ public class DetailsFragment extends Fragment {
 
    // Calculate product total
    private void calculateValue() {
-      fragmentBind.includeFragmentCounter.iCounterValue.setText(String.valueOf(mValue));
+      mFragmentBind.includeFragmentCounter.iCounterValue.setText(String.valueOf(mValue));
       double cost = (Double.parseDouble(price) * mValue);
       total = Math.round(cost * 100.0) / 100.0;
-      fragmentBind.tvTotalAmount.setText(String.valueOf(total));
+      mFragmentBind.tvTotalAmount.setText(String.valueOf(total));
    }
 }

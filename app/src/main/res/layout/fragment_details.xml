@@ -327,7 +327,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/addCartButton"
+                android:id="@+id/addProductToCarButton"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="@dimen/size_300"
                 android:layout_height="56dp"

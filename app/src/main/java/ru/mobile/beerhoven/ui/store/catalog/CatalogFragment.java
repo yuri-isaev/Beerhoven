@@ -50,21 +50,22 @@ public class CatalogFragment extends Fragment {
       mCatalogAdapter = new CatalogAdapter((List<Product>) mCatalogViewModel.getCatalogList().getValue(),
           getContext(),
           new InteractionListener() {
-         @Override
-         public void onInteractionAdd(Product model) {
-            mCatalogViewModel.getReportAddCart().observe(getViewLifecycleOwner(), s ->
-                Toasty.success(requireActivity(), "Товар добавлен в корзину", Toast.LENGTH_SHORT, true).show());
-         }
+             @Override
+             public void onInteractionAdd(Product product) {
+                mCatalogViewModel.addProductToCart().observe(getViewLifecycleOwner(), s ->
+                    Toasty.success(requireActivity(), "Товар добавлен в корзину", Toast.LENGTH_SHORT, true).show());
+             }
 
-         @SuppressLint("NotifyDataSetChanged")
-         @Override
-         public void onInteractionDelete(Product model) {
-            mCatalogViewModel.getResponseDeleteItem().observe(getViewLifecycleOwner(), s -> {
-               Toasty.success(requireActivity(), "Товар удален", Toast.LENGTH_SHORT, true).show();
-               mCatalogAdapter.notifyDataSetChanged();
-            });
-         }
-      });
+             @SuppressLint("NotifyDataSetChanged")
+             @Override
+             public void onInteractionDelete(Product product) {
+                mCatalogViewModel.removeProductFromCart().observe(getViewLifecycleOwner(), s -> {
+                   Toasty.success(requireActivity(), "Товар удален", Toast.LENGTH_SHORT, true).show();
+                   mCatalogAdapter.notifyDataSetChanged();
+                });
+             }
+          }
+      );
       mRecyclerView.setAdapter(mCatalogAdapter);
       mCatalogAdapter.notifyDataSetChanged();
    }
