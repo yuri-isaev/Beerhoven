@@ -15,5 +15,5 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/size_50"
         tools:itemCount="3"
-        tools:listitem="@layout/item_catalog" />
+        tools:listitem="@layout/product_catalog" />
 </FrameLayout>

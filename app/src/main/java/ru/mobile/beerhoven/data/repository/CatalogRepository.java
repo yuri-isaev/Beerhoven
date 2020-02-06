@@ -117,12 +117,12 @@ public class CatalogRepository implements ICatalogRepository {
       post.setTime(catalog.get("time"));
       post.setUrl(catalog.get("url"));
       post.setQuantity(catalog.get("quantity"));
-      post.setPrice(price.get("catalog_price"));
-      post.setTotal(price.get("catalog_total"));
+      post.setPrice(price.get("price"));
+      post.setTotal(price.get("total"));
 
       assert UID != null;
       mInstanceFirebase.child(Constants.NODE_CART).child(UID)
-          .child(requireNonNull(id.get("catalog_id"))).setValue(post);
+          .child(requireNonNull(id.get("productID"))).setValue(post);
    }
 
    // Delete store catalog item
@@ -135,7 +135,11 @@ public class CatalogRepository implements ICatalogRepository {
 
    private void deleteCatalogItem() {
       HashMap<String, String> pid = HashMapRepository.pushMap;
-      mInstanceFirebase.child(Constants.NODE_ITEMS).child(requireNonNull(pid.get("item_id"))).removeValue();
-      FirebaseStorage.getInstance().getReferenceFromUrl(requireNonNull(pid.get("image"))).delete();
+      mInstanceFirebase.child(Constants.NODE_ITEMS)
+          .child(requireNonNull(pid.get("item_id")))
+          .removeValue();
+      FirebaseStorage.getInstance()
+          .getReferenceFromUrl(requireNonNull(pid.get("image")))
+          .delete();
    }
 }
