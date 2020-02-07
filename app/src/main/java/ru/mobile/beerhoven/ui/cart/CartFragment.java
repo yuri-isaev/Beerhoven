@@ -16,8 +16,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import info.hoang8f.widget.FButton;
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.domain.model.Product;
 
 public class CartFragment extends Fragment implements CartListAdapter.Callback {
    private RecyclerView mRecyclerView;
@@ -49,7 +52,8 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
       mCartViewModel.initCartList();
 
       // Cart list adapter observer
-      mCartViewModel.getCartList().observe(getViewLifecycleOwner(), list -> mCartListAdapter.notifyDataSetChanged());
+      mCartViewModel.getCartList().observe(getViewLifecycleOwner(),
+          (List<Product> list) -> mCartListAdapter.notifyDataSetChanged());
 
       // Initialize cart list adapter
       initRecyclerView();
@@ -68,10 +72,12 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-      mCartListAdapter = new CartListAdapter(requireNonNull(mCartViewModel.getCartList().getValue()), res -> {
+      mCartListAdapter = new CartListAdapter(requireNonNull(mCartViewModel.getCartList().getValue()),
+          res -> {
          mData = res;
          mOrderTotal.setText("Сумма корзины: " + res + " руб.");
-      });
+         },
+          getContext());
 
       mCartAddConfirmButton.setClickable(mCartViewModel.getCartList().getValue().size() != 0);
       mRecyclerView.setAdapter(mCartListAdapter);

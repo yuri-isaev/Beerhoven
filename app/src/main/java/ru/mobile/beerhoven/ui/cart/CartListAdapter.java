@@ -6,6 +6,7 @@ import static ru.mobile.beerhoven.ui.cart.CartFragmentDirections.*;
 import static ru.mobile.beerhoven.ui.cart.CartListAdapter.*;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import java.util.EventListener;
 import java.util.List;
 
 import ru.mobile.beerhoven.activity.MainActivity;
-import ru.mobile.beerhoven.databinding.ItemCartBinding;
+import ru.mobile.beerhoven.databinding.ProductCartBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 
@@ -28,49 +29,55 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
    private final List<Product> mCartList;
    private final Callback mCallback;
    private final CartViewModel mCartViewModel;
+   private final Context mContext;
    private double mOverTotalPrice;
 
    public interface Callback extends EventListener {
       void onPassData(String data);
    }
 
-   public CartListAdapter(@NonNull List<Product> list, Callback listener) {
+   public CartListAdapter(@NonNull List<Product> list, Callback listener, Context context) {
       this.mCartList = list;
       this.mCallback = listener;
+      this.mContext = context;
       this.mCartViewModel = new CartViewModel(new MainActivity().getApplication());
    }
 
    @NonNull
    @Override
    public CartListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      ItemCartBinding recyclerBinding = ItemCartBinding
+      ProductCartBinding binding = ProductCartBinding
           .inflate(LayoutInflater.from(parent.getContext()), parent, false);
-      return new CartListViewHolder(recyclerBinding);
+      return new CartListViewHolder(binding);
    }
 
    @SuppressLint("SetTextI18n")
    @Override
    public void onBindViewHolder(@NonNull CartListViewHolder holder, int position) {
-      Product model = mCartList.get(position);
-      String positionID = model.getId();
+      Product product = mCartList.get(position);
+      String productId = product.getId();
 
       Glide.with(holder.binding.tvNameCart.getContext())
-          .load(model.getUrl())
+          .load(product.getUrl())
           .into(holder.binding.tvImage);
 
-      holder.binding.tvNameCart.setText(model.getName());
-      holder.binding.tvStyleCart.setText(model.getStyle());
-      holder.binding.tvFortressCart.setText(model.getFortress() + "%");
-      holder.binding.tvQuantityCart.setText(model.getQuantity());
-      holder.binding.tvPriceCart.setText(model.getPrice() + " руб.");
-      holder.binding.tvTotalCart.setText(model.getTotal() + " руб.");
+      // Binding view fields
+      holder.binding.tvNameCart.setText(product.getName());
+      holder.binding.tvStyleCart.setText(product.getStyle());
+      holder.binding.tvFortressCart.setText(product.getFortress() + "%");
+      holder.binding.tvQuantityCart.setText(product.getQuantity());
+      holder.binding.tvPriceCart.setText(product.getPrice() + " руб.");
+      holder.binding.tvTotalCart.setText(product.getTotal() + " руб.");
 
       holder.binding.tvDeleteItemCart.setOnClickListener(v -> {
-         // Initialize cart list from database
-         mCartViewModel.deleteCartListItem(positionID);
+         // Delete product from cart and database
+         mCartViewModel.deleteCartListItem(productId);
+
+         // Decrease counter when delete product from cart and database
+         ((MainActivity) mContext).onDecreaseCounterClick();
 
          // The total price of the entire cart
-         double sum = mOverTotalPrice + model.getTotal();
+         double sum = mOverTotalPrice + product.getTotal();
          mOverTotalPrice = Math.round(sum * 100.0) / 100.0;
          mCallback.onPassData(String.valueOf(mOverTotalPrice));
       });
@@ -79,16 +86,16 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
          NavController navController = Navigation.findNavController(v);
          ActionNavCartToNavDetails action = actionNavCartToNavDetails()
              .setChange(Constants.OBJECT_RENAME)
-             .setItemID(positionID)
-             .setCountry(model.getCountry())
-             .setManufacture(model.getManufacture())
-             .setName(model.getName())
-             .setPrice(String.valueOf(model.getPrice()))
-             .setStyle(model.getStyle())
-             .setFortress(model.getFortress())
-             .setDensity(model.getDensity())
-             .setDescription(model.getDescription())
-             .setImage(model.getUrl());
+             .setItemID(productId)
+             .setCountry(product.getCountry())
+             .setManufacture(product.getManufacture())
+             .setName(product.getName())
+             .setPrice(String.valueOf(product.getPrice()))
+             .setStyle(product.getStyle())
+             .setFortress(product.getFortress())
+             .setDensity(product.getDensity())
+             .setDescription(product.getDescription())
+             .setImage(product.getUrl());
          navController.navigate(action);
       });
    }
@@ -100,10 +107,9 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
 
 
    public static class CartListViewHolder extends ViewHolder implements OnClickListener {
-      // Recycler binding
-      ItemCartBinding binding;
+      private final ProductCartBinding binding;
 
-      public CartListViewHolder(ItemCartBinding recyclerBinding) {
+      public CartListViewHolder(ProductCartBinding recyclerBinding) {
          super(recyclerBinding.getRoot());
          this.binding = recyclerBinding;
       }

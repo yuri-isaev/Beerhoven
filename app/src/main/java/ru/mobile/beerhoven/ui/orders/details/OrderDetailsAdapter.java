@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.databinding.ItemCartBinding;
+import ru.mobile.beerhoven.databinding.ProductCartBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 
@@ -34,7 +34,8 @@ public class OrderDetailsAdapter extends Adapter<OrderDetailsViewHolder> {
    @NonNull
    @Override
    public OrderDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart, parent, false);
+      View view = LayoutInflater.from(parent.getContext())
+          .inflate(R.layout.product_cart, parent, false);
       return new OrderDetailsViewHolder(view);
    }
 
@@ -42,7 +43,7 @@ public class OrderDetailsAdapter extends Adapter<OrderDetailsViewHolder> {
    @Override
    public void onBindViewHolder(@NonNull OrderDetailsViewHolder holder, int position) {
       Product order = mOrderDetails.get(position);
-      String keyID = order.getId();
+      String orderId = order.getId();
 
       Glide.with(holder.binding.tvImage.getContext())
           .load(order.getUrl())
@@ -57,12 +58,13 @@ public class OrderDetailsAdapter extends Adapter<OrderDetailsViewHolder> {
       holder.binding.tvTotalCart.setText(order.getTotal() + " руб.");
       holder.binding.tvDeleteItemCart.setVisibility(INVISIBLE);
 
+      // Navigate action on order details
       holder.binding.tvContainerCart.setOnClickListener(v -> {
          NavController navController = Navigation.findNavController(v);
-         assert keyID != null;
+         assert orderId != null;
          ActionNavOrderDetailsToNavDetails action = actionNavOrderDetailsToNavDetails()
              .setChange(Constants.OBJECT_INVISIBLE)
-             .setItemID(keyID)
+             .setItemID(orderId)
              .setCountry(order.getCountry())
              .setManufacture(order.getManufacture())
              .setName(order.getName())
@@ -83,7 +85,7 @@ public class OrderDetailsAdapter extends Adapter<OrderDetailsViewHolder> {
 
 
    public static class OrderDetailsViewHolder extends ViewHolder implements OnClickListener {
-      ItemCartBinding binding;
+      ProductCartBinding binding;
 
       public OrderDetailsViewHolder(@NonNull View itemView) {
          super(itemView);

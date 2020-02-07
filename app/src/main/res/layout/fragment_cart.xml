@@ -26,8 +26,7 @@
                 tools:ignore="MissingConstraints"
                 tools:itemCount="1"
                 tools:layout_editor_absoluteX="2dp"
-                tools:listitem="@layout/item_cart">
-            </androidx.recyclerview.widget.RecyclerView>
+                tools:listitem="@layout/product_cart" />
         </LinearLayout>
 
         <LinearLayout
