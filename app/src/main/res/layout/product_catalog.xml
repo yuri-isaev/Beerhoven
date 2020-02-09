@@ -63,7 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style_1"
-                        android:text="@string/item_title"
+                        android:text="@string/product_title"
                         android:textColor="@color/colorMainBlack"
                         android:textSize="@dimen/text_25"
                         android:textStyle="bold"
@@ -74,7 +74,7 @@
                         android:layout_width="@dimen/size_182"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style_1"
-                        android:text="@string/item_style"
+                        android:text="@string/product_style"
                         android:textColor="@color/colorMainGrey"
                         android:textSize="@dimen/text_20"
                         tools:ignore="UnusedAttribute" />
@@ -84,7 +84,7 @@
                         android:layout_width="@dimen/size_182"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style_1"
-                        android:text="@string/item_fortress"
+                        android:text="@string/product_fortress"
                         android:textColor="@color/colorMainGrey"
                         android:textSize="@dimen/text_20"
                         tools:ignore="SpUsage,UnusedAttribute" />
@@ -123,7 +123,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="@string/item_price"
+                            android:text="@string/product_price"
                             android:textColor="@color/colorBlue"
                             android:textSize="@dimen/text_14"
                             tools:ignore="UnusedAttribute" />
@@ -160,7 +160,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="@string/item_delivery_time"
+                            android:text="@string/product_delivery_time"
                             android:textColor="@color/colorBlue"
                             android:textSize="@dimen/text_14"
                             tools:ignore="UnusedAttribute" />

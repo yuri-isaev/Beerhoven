@@ -22,26 +22,29 @@
     <string name="menu_user_name">Имя пользователя</string>
     <string name="menu_store">Магазин</string>
 
-    <!-- Item. -->
-    <string name="item_country">страна производитель</string>
-    <string name="item_density">Плотность</string>
-    <string name="item_description">Описание</string>
-    <string name="item_delivery_time">время доставки</string>
-    <string name="item_fortress">Крепость</string>
-    <string name="item_name">название товара</string>
-    <string name="item_manufacture">мануфактура</string>
-    <string name="item_price">цена товара</string>
-    <string name="item_price_colon">Цена товара:  </string>
-    <string name="item_special">спецтализация</string>
-    <string name="item_style">Стиль</string>
-    <string name="item_title">название товара</string>
-
-    <string name="card_open">Открыть</string>
-    <string name="card_delete">Удалить</string>
-
     <!-- Cart. -->
     <string name="cart_add">Добавить в корзину</string>
     <string name="cart_total">Сумма корзины</string>
+    <string name="cart_update">обновить данные товара</string>
+
+    <!-- Product. -->
+    <string name="product_country">страна производитель</string>
+    <string name="product_density">Плотность</string>
+    <string name="product_description">Описание</string>
+    <string name="product_delivery_time">время доставки</string>
+    <string name="product_fortress">Крепость</string>
+    <string name="product_name">название товара</string>
+    <string name="product_manufacture">мануфактура</string>
+    <string name="product_price">цена товара</string>
+    <string name="product_price_colon">Цена товара:  </string>
+    <string name="product_special">спецтализация</string>
+    <string name="product_style">Стиль</string>
+    <string name="product_title">название товара</string>
+    <string name="product_total">общая цена</string>
+    <string name="product_quantity">количество</string>
+
+    <string name="product_details_open">открыть детали</string>
+    <string name="product_delete">удалить из каталога</string>
 
     <!-- Order. -->
     <string name="order_address">Адресс заказа</string>

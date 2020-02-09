@@ -14,12 +14,12 @@ public class DetailsViewModel extends AndroidViewModel {
 
    public DetailsViewModel(@NonNull Application application) {
       super(application);
-      this.mRepository = new DetailsRepository(getApplication());
+      this.mRepository = new DetailsRepository();
       this.mResponse = new MutableLiveData<>();
    }
 
-   public MutableLiveData<String> addItemOrder() {
-      mResponse = mRepository.addItemInOrder();
+   public MutableLiveData<String> addProductToCart() {
+      mResponse = mRepository.createProductToCart();
       return mResponse;
    }
 }

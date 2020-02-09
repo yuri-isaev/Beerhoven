@@ -1,7 +1,6 @@
 package ru.mobile.beerhoven.data.repository;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
+import static java.util.Objects.*;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -10,58 +9,55 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.HashMapRepository;
 
 public class DetailsRepository {
-   private MutableLiveData<String> mLiveData;
+   private final MutableLiveData<String> mLiveData;
    private final DatabaseReference mInstanceFirebase;
    private final String UID;
+   private String data = null;
 
-   @SuppressLint("StaticFieldLeak")
-   private static Context context;
-
-   public DetailsRepository(Context context) {
-      DetailsRepository.context = context;
-      mLiveData = new MutableLiveData<>();
-      mInstanceFirebase = FirebaseDatabase.getInstance().getReference();
-      UID = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+   public DetailsRepository() {
+      this.mLiveData = new MutableLiveData<>();
+      this.mInstanceFirebase = FirebaseDatabase.getInstance().getReference();
+      this.UID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    // Create an instance of a product to the cart
-   public MutableLiveData<String> addItemInOrder() {
-      if (mLiveData == null) {
-         mLiveData = new MutableLiveData<>();
-         createItemOrder();
+   public MutableLiveData<String> createProductToCart() {
+      if (data == null) {
+         addPostToCartList();
       }
+      mLiveData.setValue(data);
       return mLiveData;
    }
 
-   public void createItemOrder() {
+   private void addPostToCartList() {
       HashMap<String, String> id = HashMapRepository.idMap;
       HashMap<String, String> map = HashMapRepository.detailsMap;
       HashMap<String, Double> price = HashMapRepository.priceMap;
 
       Product post = new Product();
-      post.setName(map.get("name"));
       post.setCountry(map.get("country"));
-      post.setManufacture(map.get("manufacture"));
-      post.setStyle(map.get("style"));
-      post.setFortress(map.get("fortress"));
+      post.setDate(map.get("data"));
       post.setDensity(map.get("density"));
       post.setDescription(map.get("description"));
-      post.setDate(map.get("data"));
-      post.setTime(map.get("time"));
-      post.setUrl(map.get("url"));
-      post.setQuantity(map.get("quantity"));
+      post.setFortress(map.get("fortress"));
+      post.setManufacture(map.get("manufacture"));
+      post.setName(map.get("name"));
       post.setPrice(price.get("details_price"));
+      post.setQuantity(map.get("quantity"));
+      post.setStyle(map.get("style"));
+      post.setTime(map.get("time"));
+      post.setTotal(price.get("details_total"));
+      post.setUrl(map.get("url"));
 
       assert UID != null;
       mInstanceFirebase.child(Constants.NODE_CART).child(UID)
-          .child(Objects.requireNonNull(id.get("details_id")))
+          .child(requireNonNull(id.get("details_id")))
           .setValue(post);
    }
 }

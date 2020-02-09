@@ -40,7 +40,7 @@
                     android:id="@+id/tvImage"
                     android:layout_width="91dp"
                     android:layout_height="93dp"
-                    android:layout_marginEnd="44dp"
+                    android:layout_marginEnd="52dp"
                     android:background="@drawable/circle_shadow"
                     android:elevation="2mm"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style_1"
-                        android:text="@string/item_name"
+                        android:text="@string/product_name"
                         android:textColor="@color/colorMainBlack"
                         android:textSize="@dimen/size_25"
                         android:textStyle="bold"
@@ -82,7 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style_1"
-                        android:text="@string/item_style"
+                        android:text="@string/product_style"
                         android:textColor="@color/colorMainBlack"
                         android:textSize="@dimen/size_15"
                         tools:ignore="SpUsage" />
@@ -92,14 +92,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style_1"
-                        android:text="@string/item_fortress"
+                        android:text="@string/product_fortress"
                         android:textColor="@color/colorMainBlack"
                         android:textSize="@dimen/size_15"
                         tools:ignore="SpUsage" />
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/tvDeleteItemCart"
+                    android:id="@+id/tvDeleteProductCart"
                     android:layout_width="29dp"
                     android:layout_height="28dp"
                     android:background="@drawable/circle_shadow"
@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="@string/item_price"
+                        android:text="@string/product_price"
                         android:textColor="@color/colorBlue"
                         android:textSize="@dimen/size_12"
                         tools:ignore="SpUsage" />
@@ -177,7 +177,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="количество"
+                        android:text="@string/product_quantity"
                         android:textColor="@color/colorBlue"
                         android:textSize="@dimen/size_15"
                         tools:ignore="HardcodedText,SpUsage" />
@@ -215,7 +215,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="Общая цена"
+                        android:text="@string/product_total"
                         android:textAlignment="center"
                         android:textColor="@color/colorBlue"
                         android:textSize="@dimen/size_15"

@@ -56,7 +56,7 @@ public class OrderDetailsAdapter extends Adapter<OrderDetailsViewHolder> {
       holder.binding.tvQuantityCart.setText(order.getQuantity());
       holder.binding.tvPriceCart.setText(order.getPrice() + " руб.");
       holder.binding.tvTotalCart.setText(order.getTotal() + " руб.");
-      holder.binding.tvDeleteItemCart.setVisibility(INVISIBLE);
+      holder.binding.tvDeleteProductCart.setVisibility(INVISIBLE);
 
       // Navigate action on order details
       holder.binding.tvContainerCart.setOnClickListener(v -> {

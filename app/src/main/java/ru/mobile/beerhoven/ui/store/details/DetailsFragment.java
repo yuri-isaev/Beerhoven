@@ -1,7 +1,7 @@
 package ru.mobile.beerhoven.ui.store.details;
 
 import android.annotation.SuppressLint;
-import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,18 +10,19 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 
-import java.util.Calendar;
 import java.util.HashMap;
 
 import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.activity.MainActivity;
 import ru.mobile.beerhoven.databinding.FragmentDetailsBinding;
 import ru.mobile.beerhoven.utils.Constants;
+import ru.mobile.beerhoven.utils.CurrentDateTime;
 import ru.mobile.beerhoven.utils.HashMapRepository;
 
 public class DetailsFragment extends Fragment {
@@ -41,6 +42,7 @@ public class DetailsFragment extends Fragment {
    private FragmentDetailsBinding mFragmentBind;
    private DetailsViewModel mDetailsViewModel;
 
+   @SuppressLint("NewApi")
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       mDetailsViewModel = new ViewModelProvider(this).get(DetailsViewModel.class);
@@ -101,23 +103,18 @@ public class DetailsFragment extends Fragment {
    }
 
    // Adding an instance of a product to the cart
-   @SuppressLint({"NewApi", "LocalSuppress", "SimpleDateFormat"})
+   @RequiresApi(api = Build.VERSION_CODES.N)
    public void addProductToCartList() {
       mFragmentBind.addProductToCarButton.setOnClickListener(v -> {
-         String saveCurrentDate, saveCurrentTime;
-         Calendar calForDate = Calendar.getInstance();
-
-         SimpleDateFormat currentDate = new SimpleDateFormat(Constants.CURRENT_DATA);
-         saveCurrentDate = currentDate.format(calForDate.getTime());
-
-         SimpleDateFormat currentTime = new SimpleDateFormat(Constants.CURRENT_TIME);
-         saveCurrentTime = currentTime.format(calForDate.getTime());
-
          double cartPrice = Double.parseDouble(price);
          quantity = String.valueOf(mValue);
 
          HashMapRepository.idMap.put("details_id", itemID);
+
+         assert total != 0;
          HashMapRepository.priceMap.put("details_total", total);
+
+         assert cartPrice != 0;
          HashMapRepository.priceMap.put("details_price", cartPrice);
 
          HashMap<String, String> map = HashMapRepository.detailsMap;
@@ -128,14 +125,14 @@ public class DetailsFragment extends Fragment {
          map.put("fortress", fortress);
          map.put("density", density);
          map.put("description", description);
-         map.put("data", saveCurrentDate);
-         map.put("time", saveCurrentTime);
+         map.put("data", CurrentDateTime.getCurrentDate());
+         map.put("time", CurrentDateTime.getCurrentTime());
          map.put("url", image);
          map.put("quantity", quantity);
 
          // Details view model observer
-         mDetailsViewModel.addItemOrder().observe(getViewLifecycleOwner(),
-             s -> Toasty.success(requireActivity(), "Товар добавлен в корзину", Toast.LENGTH_SHORT, true).show());
+         mDetailsViewModel.addProductToCart().observe(getViewLifecycleOwner(),
+             s -> Toasty.success(requireActivity(), Constants.ADD_TO_CART_SUCCESS, Toast.LENGTH_SHORT, true).show());
 
          ((MainActivity) requireActivity()).onIncreaseCounterClick();
 

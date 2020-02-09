@@ -37,7 +37,6 @@ public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuIte
    private final List<Product> mAdapterList;
    private final Context mContext;
    private final InteractionListener mListener;
-   private NavController navController;
 
    public CatalogAdapter(List<Product> list, Context context, InteractionListener mListener) {
       this.mAdapterList = list;
@@ -64,6 +63,7 @@ public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuIte
           .load(product.getUrl())
           .into(holder.binding.tvImageProduct);
 
+      // Set navigate action args
       ActionNavStoreToNavDetails action = actionNavStoreToNavDetails()
           .setChange(Constants.OBJECT_VISIBLE)
           .setItemID(productId).setCountry(product.getCountry())
@@ -84,7 +84,7 @@ public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuIte
 
       // Navigate action for click product catalog card
       holder.binding.tvContainer.setOnClickListener(v -> {
-         navController = Navigation.findNavController(v);
+         NavController navController = Navigation.findNavController(v);
          navController.navigate(action);
       });
 
@@ -111,7 +111,7 @@ public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuIte
 
       // Add product to cart when click catalog card element
       holder.binding.tvAddProduct.setOnClickListener(v -> {
-         int mValue = 1;
+         int defaultCountValue = 1;
          Calendar calForDate = Calendar.getInstance();
 
          @SuppressLint({"NewApi", "LocalSuppress", "SimpleDateFormat"})
@@ -141,7 +141,7 @@ public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuIte
          map.put("url", product.getUrl());
          map.put("data", saveCurrentDate);
          map.put("time", saveCurrentTime);
-         map.put("quantity", String.valueOf(mValue));
+         map.put("quantity", String.valueOf(defaultCountValue));
 
          mListener.onInteractionAdd(mAdapterList.get(position));
 
@@ -163,7 +163,6 @@ public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuIte
    }
 
    public static class ItemViewHolder extends ViewHolder implements OnClickListener, OnMenuItemClickListener {
-      // Recycler binding
       ProductCatalogBinding binding;
 
       public ItemViewHolder(ProductCatalogBinding recyclerBinding) {

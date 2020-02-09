@@ -31,6 +31,7 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
    private final CartViewModel mCartViewModel;
    private final Context mContext;
    private double mOverTotalPrice;
+   protected double oneTypeProductPrice;
 
    public interface Callback extends EventListener {
       void onPassData(String data);
@@ -69,16 +70,22 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
       holder.binding.tvPriceCart.setText(product.getPrice() + " руб.");
       holder.binding.tvTotalCart.setText(product.getTotal() + " руб.");
 
-      holder.binding.tvDeleteItemCart.setOnClickListener(v -> {
+      // The total price of the entire cart
+      oneTypeProductPrice = product.getTotal();
+      double sum = mOverTotalPrice + oneTypeProductPrice;
+      mOverTotalPrice = Math.round(sum * 100.0) / 100.0;
+      mCallback.onPassData(String.valueOf(mOverTotalPrice));
+
+      holder.binding.tvDeleteProductCart.setOnClickListener(v -> {
          // Delete product from cart and database
          mCartViewModel.deleteCartListItem(productId);
 
          // Decrease counter when delete product from cart and database
          ((MainActivity) mContext).onDecreaseCounterClick();
 
-         // The total price of the entire cart
-         double sum = mOverTotalPrice + product.getTotal();
-         mOverTotalPrice = Math.round(sum * 100.0) / 100.0;
+         // Update total price of the entire cart after decrease counter
+         double dif = 0.0;
+         mOverTotalPrice = Math.round(dif * 100.0) / 100.0;
          mCallback.onPassData(String.valueOf(mOverTotalPrice));
       });
 
@@ -117,7 +124,7 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
       @Override
       public void onClick(View v) {
          binding.tvContainerCart.setOnClickListener(this);
-         binding.tvDeleteItemCart.setOnClickListener(this);
+         binding.tvDeleteProductCart.setOnClickListener(this);
       }
    }
 }
