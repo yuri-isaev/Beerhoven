@@ -21,6 +21,7 @@ import java.util.EventListener;
 import java.util.List;
 
 import ru.mobile.beerhoven.activity.MainActivity;
+import ru.mobile.beerhoven.data.repository.CartRepository;
 import ru.mobile.beerhoven.databinding.ProductCartBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
@@ -28,7 +29,6 @@ import ru.mobile.beerhoven.utils.Constants;
 public class CartListAdapter extends Adapter<CartListViewHolder> {
    private final List<Product> mCartList;
    private final Callback mCallback;
-   private final CartViewModel mCartViewModel;
    private final Context mContext;
    private double mOverTotalPrice;
    protected double oneTypeProductPrice;
@@ -41,7 +41,6 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
       this.mCartList = list;
       this.mCallback = listener;
       this.mContext = context;
-      this.mCartViewModel = new CartViewModel(new MainActivity().getApplication());
    }
 
    @NonNull
@@ -78,7 +77,8 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
 
       holder.binding.tvDeleteProductCart.setOnClickListener(v -> {
          // Delete product from cart and database
-         mCartViewModel.deleteCartListItem(productId);
+         CartViewModel mCartViewModel = new CartViewModel(new CartRepository());
+         mCartViewModel.onDeleteCartListItem(productId);
 
          // Decrease counter when delete product from cart and database
          ((MainActivity) mContext).onDecreaseCounterClick();

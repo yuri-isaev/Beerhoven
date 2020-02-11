@@ -1,7 +1,7 @@
 package ru.mobile.beerhoven.activity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.annotation.SuppressLint;
+import android.app.Application;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -26,14 +26,15 @@ import com.google.android.material.navigation.NavigationView;
 
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.custom.CustomTypeFaceSpan;
-import ru.mobile.beerhoven.utils.Constants;
+import ru.mobile.beerhoven.data.repository.CartRepository;
+import ru.mobile.beerhoven.ui.cart.CartViewModel;
 
 public class MainActivity extends AppCompatActivity {
    private AppBarConfiguration mAppBarConfiguration;
+   private CartViewModel viewModel;
    private ImageView mIcon;
    private NavController mNavController;
    private NavigationView mNavigationView;
-   private SharedPreferences mSharedPref;
    private TextView mCounterText;
    private int mCounterValue;
 
@@ -46,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
       Toolbar toolbar = findViewById(R.id.toolbar);
       setSupportActionBar(toolbar);
 
-      mSharedPref = getApplicationContext().getSharedPreferences(Constants.SHARED_PREF, Context.MODE_PRIVATE);
-      mCounterValue = mSharedPref.getInt(Constants.COUNTER_VALUE, 0);
+      // Set cart count value by shared preferences
+      viewModel = new CartViewModel(new CartRepository(), (Application) getApplicationContext());
+      viewModel.onSetCartCount();
 
       DrawerLayout drawer = findViewById(R.id.drawer_layout);
       mNavigationView = findViewById(R.id.nav_view);
@@ -109,13 +111,9 @@ public class MainActivity extends AppCompatActivity {
       }
    }
 
+   // Save cart count value by shared preferences
    public void onCounterSave() {
-      SharedPreferences.Editor editor = mSharedPref.edit();
-      editor.putInt(Constants.COUNTER_VALUE, mCounterValue).apply();
-   }
-
-   public void onDeleteValueSharedPrefs() {
-      mSharedPref.edit().remove(Constants.COUNTER_VALUE).apply();
+      viewModel.onCounterCartSave();
    }
 
    public void updateCounter(int newCounterValue) {
@@ -154,5 +152,17 @@ public class MainActivity extends AppCompatActivity {
          }
          applyFontToMenuItem(menuItem);
       }
+   }
+
+   @SuppressLint("CommitPrefEdits")
+   @Override
+   protected void onDestroy() {
+      super.onDestroy();
+      // Delete cart list values when destroy
+      viewModel.onDeleteCartList();
+
+      // Delete shared preferences values when destroy
+      // Delete cart counter when destroy
+      viewModel.onDeleteCartCounter();
    }
 }

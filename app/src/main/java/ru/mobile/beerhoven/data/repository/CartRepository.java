@@ -17,9 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.mobile.beerhoven.domain.model.Product;
+import ru.mobile.beerhoven.domain.repository.ICartRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
-public class CartRepository {
+public class CartRepository implements ICartRepository {
    private final List<Product> mDataList;
    private final MutableLiveData<List<Product>> mMutableList;
    private final String UID;
@@ -84,8 +85,15 @@ public class CartRepository {
    }
 
    // Delete cart list item by position
-   public void deleteCartItem(String position) {
+   @Override
+   public void onDeleteCartItem(String position) {
       assert UID != null;
       mFirebaseRef.child(Constants.NODE_CART).child(UID).child(position).removeValue();
+   }
+
+   // Delete child node cart list
+   @Override
+   public void onDeleteNodeCartList() {
+      mFirebaseRef.child(Constants.NODE_CART).removeValue();
    }
 }

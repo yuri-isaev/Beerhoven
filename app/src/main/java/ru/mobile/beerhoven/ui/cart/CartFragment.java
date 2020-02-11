@@ -3,6 +3,7 @@ package ru.mobile.beerhoven.ui.cart;
 import static java.util.Objects.*;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import info.hoang8f.widget.FButton;
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.data.repository.CartRepository;
 import ru.mobile.beerhoven.domain.model.Product;
 
 public class CartFragment extends Fragment implements CartListAdapter.Callback {
@@ -33,7 +35,7 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
    @SuppressLint("NotifyDataSetChanged")
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      mCartViewModel = new ViewModelProvider(this).get(CartViewModel.class);
+      mCartViewModel = new CartViewModel(new CartRepository());
       View view = inflater.inflate(R.layout.fragment_cart, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view_cart);
 

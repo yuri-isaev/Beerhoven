@@ -2,23 +2,29 @@ package ru.mobile.beerhoven.ui.cart;
 
 import android.app.Application;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import ru.mobile.beerhoven.data.repository.CartRepository;
+import ru.mobile.beerhoven.data.storage.PreferencesStorage;
 import ru.mobile.beerhoven.domain.model.Product;
+import ru.mobile.beerhoven.domain.repository.ICartRepository;
 
-public class CartViewModel extends AndroidViewModel {
-   private MutableLiveData<List<Product>> mCartList;
-   private final CartRepository mRepository;
+public class CartViewModel extends ViewModel {
+   private LiveData<List<Product>> mCartList;
+   private final ICartRepository mRepository;
+   private  PreferencesStorage mStorage;
 
-   public CartViewModel(@NonNull Application application) {
-      super(application);
-      this.mRepository = new CartRepository();
+   public CartViewModel(ICartRepository repository) {
+      this.mRepository = repository;
+   }
+
+   public CartViewModel(ICartRepository repository, Application applicationContext) {
+      this.mCartList = new MutableLiveData();
+      this.mRepository = repository;
+      this.mStorage = new PreferencesStorage(applicationContext);
    }
 
    public void initCartList() {
@@ -32,7 +38,23 @@ public class CartViewModel extends AndroidViewModel {
       return mCartList;
    }
 
-   public void deleteCartListItem(String position) {
-      mRepository.deleteCartItem(position);
+   public void onDeleteCartListItem(String position) {
+      mRepository.onDeleteCartItem(position);
+   }
+
+   public void onDeleteCartCounter() {
+      mStorage.onDeleteCounter();
+   }
+
+   public void onDeleteCartList() {
+      mRepository.onDeleteNodeCartList();
+   }
+
+   public void onSetCartCount() {
+      mStorage.onSetIntCount();
+   }
+
+   public void onCounterCartSave() {
+      mStorage.onCounterSave();
    }
 }
