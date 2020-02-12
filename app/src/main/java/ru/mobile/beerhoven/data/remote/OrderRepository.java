@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.data.repository;
+package ru.mobile.beerhoven.data.remote;
 
 import static java.util.Objects.requireNonNull;
 

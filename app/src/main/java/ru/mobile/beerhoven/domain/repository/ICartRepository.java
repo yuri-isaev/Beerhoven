@@ -9,5 +9,5 @@ import ru.mobile.beerhoven.domain.model.Product;
 public interface ICartRepository {
    MutableLiveData<List<Product>> getCartMutableList();
    void onDeleteCartItem(String position);
-   void onDeleteNodeCartList();
+   void onDeleteUserCartList();
 }

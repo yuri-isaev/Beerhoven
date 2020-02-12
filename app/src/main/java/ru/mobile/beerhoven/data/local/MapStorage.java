@@ -1,8 +1,8 @@
-package ru.mobile.beerhoven.utils;
+package ru.mobile.beerhoven.data.local;
 
 import java.util.HashMap;
 
-public final class HashMapRepository {
+public final class MapStorage {
    public static HashMap<String, String> idMap = new HashMap<>();
    public static HashMap<String, Double> priceMap = new HashMap<>();
    public static HashMap<String, String> catalogMap = new HashMap<>();

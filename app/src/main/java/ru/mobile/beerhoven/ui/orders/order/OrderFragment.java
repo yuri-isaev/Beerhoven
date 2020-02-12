@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.data.repository.OrderRepository;
+import ru.mobile.beerhoven.data.remote.OrderRepository;
 import ru.mobile.beerhoven.domain.model.Product;
 
 public class OrderFragment extends Fragment {

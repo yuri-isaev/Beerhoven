@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.data.repository;
+package ru.mobile.beerhoven.data.remote;
 
 import static java.util.Objects.*;
 
@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.ICatalogRepository;
 import ru.mobile.beerhoven.utils.Constants;
-import ru.mobile.beerhoven.utils.HashMapRepository;
 
 public class CatalogRepository implements ICatalogRepository {
    private final List<Product> mDataList;
@@ -101,9 +101,8 @@ public class CatalogRepository implements ICatalogRepository {
    }
 
    private void addCatalogItem() {
-      HashMap<String, String> id = HashMapRepository.idMap;
-      HashMap<String, String> catalog = HashMapRepository.catalogMap;
-      HashMap<String, Double> price = HashMapRepository.priceMap;
+      HashMap<String, String> catalog = MapStorage.catalogMap;
+      HashMap<String, Double> price = MapStorage.priceMap;
 
       Product post = new Product();
       post.setName(catalog.get("name"));
@@ -122,7 +121,7 @@ public class CatalogRepository implements ICatalogRepository {
 
       assert UID != null;
       mInstanceFirebase.child(Constants.NODE_CART).child(UID)
-          .child(requireNonNull(id.get("productID"))).setValue(post);
+          .child(requireNonNull(MapStorage.idMap.get("productID"))).setValue(post);
    }
 
    // Delete store catalog item
@@ -134,12 +133,13 @@ public class CatalogRepository implements ICatalogRepository {
    }
 
    private void deleteCatalogItem() {
-      HashMap<String, String> pid = HashMapRepository.pushMap;
+      HashMap<String, String> map = MapStorage.pushMap;
+
       mInstanceFirebase.child(Constants.NODE_ITEMS)
-          .child(requireNonNull(pid.get("item_id")))
+          .child(requireNonNull(map.get("item_id")))
           .removeValue();
       FirebaseStorage.getInstance()
-          .getReferenceFromUrl(requireNonNull(pid.get("image")))
+          .getReferenceFromUrl(requireNonNull(map.get("image")))
           .delete();
    }
 }

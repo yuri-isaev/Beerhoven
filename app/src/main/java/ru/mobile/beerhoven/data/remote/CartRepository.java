@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.data.repository;
+package ru.mobile.beerhoven.data.remote;
 
 import static java.util.Objects.requireNonNull;
 
@@ -33,6 +33,7 @@ public class CartRepository implements ICartRepository {
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
    }
 
+   @Override
    public MutableLiveData<List<Product>> getCartMutableList() {
       if (mDataList.size() == 0) {
          readCartList();
@@ -91,9 +92,9 @@ public class CartRepository implements ICartRepository {
       mFirebaseRef.child(Constants.NODE_CART).child(UID).child(position).removeValue();
    }
 
-   // Delete child node cart list
+   // Delete user cart list
    @Override
-   public void onDeleteNodeCartList() {
-      mFirebaseRef.child(Constants.NODE_CART).removeValue();
+   public void onDeleteUserCartList() {
+      mFirebaseRef.child(Constants.NODE_CART).child(UID).removeValue();
    }
 }

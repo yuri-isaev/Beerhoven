@@ -15,7 +15,7 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.data.repository.CatalogRepository;
+import ru.mobile.beerhoven.data.remote.CatalogRepository;
 import ru.mobile.beerhoven.interfaces.InteractionListener;
 import ru.mobile.beerhoven.domain.model.Product;
 

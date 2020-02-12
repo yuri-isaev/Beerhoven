@@ -3,7 +3,6 @@ package ru.mobile.beerhoven.ui.cart;
 import static java.util.Objects.*;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +19,7 @@ import java.util.List;
 
 import info.hoang8f.widget.FButton;
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.data.repository.CartRepository;
+import ru.mobile.beerhoven.data.remote.CartRepository;
 import ru.mobile.beerhoven.domain.model.Product;
 
 public class CartFragment extends Fragment implements CartListAdapter.Callback {
@@ -74,12 +72,10 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-      mCartListAdapter = new CartListAdapter(requireNonNull(mCartViewModel.getCartList().getValue()),
-          res -> {
+      mCartListAdapter = new CartListAdapter(requireNonNull(mCartViewModel.getCartList().getValue()), res -> {
          mData = res;
          mOrderTotal.setText("Сумма корзины: " + res + " руб.");
-         },
-          getContext());
+      }, getContext());
 
       mCartAddConfirmButton.setClickable(mCartViewModel.getCartList().getValue().size() != 0);
       mRecyclerView.setAdapter(mCartListAdapter);

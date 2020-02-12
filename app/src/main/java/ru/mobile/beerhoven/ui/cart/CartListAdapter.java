@@ -21,7 +21,7 @@ import java.util.EventListener;
 import java.util.List;
 
 import ru.mobile.beerhoven.activity.MainActivity;
-import ru.mobile.beerhoven.data.repository.CartRepository;
+import ru.mobile.beerhoven.data.remote.CartRepository;
 import ru.mobile.beerhoven.databinding.ProductCartBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;

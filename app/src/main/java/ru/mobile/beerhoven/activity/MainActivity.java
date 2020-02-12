@@ -26,7 +26,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.custom.CustomTypeFaceSpan;
-import ru.mobile.beerhoven.data.repository.CartRepository;
+import ru.mobile.beerhoven.data.remote.CartRepository;
 import ru.mobile.beerhoven.ui.cart.CartViewModel;
 
 public class MainActivity extends AppCompatActivity {

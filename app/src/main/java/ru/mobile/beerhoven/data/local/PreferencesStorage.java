@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.data.storage;
+package ru.mobile.beerhoven.data.local;
 
 import android.app.Application;
 import android.content.Context;

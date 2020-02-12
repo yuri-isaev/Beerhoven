@@ -27,11 +27,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import ru.mobile.beerhoven.activity.MainActivity;
+import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.databinding.ProductCatalogBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.interfaces.InteractionListener;
 import ru.mobile.beerhoven.utils.Constants;
-import ru.mobile.beerhoven.utils.HashMapRepository;
 
 public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuItemClickListener {
    private final List<Product> mAdapterList;
@@ -126,11 +126,11 @@ public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuIte
          @SuppressLint({"NewApi", "LocalSuppress"})
          String saveCurrentTime = currentTime.format(calForDate.getTime());
 
-         HashMapRepository.idMap.put("productID", productId);
-         HashMapRepository.priceMap.put("total", product.getPrice());
-         HashMapRepository.priceMap.put("price", product.getPrice());
+         MapStorage.idMap.put("productID", productId);
+         MapStorage.priceMap.put("total", product.getPrice());
+         MapStorage.priceMap.put("price", product.getPrice());
 
-         HashMap<String, String> map = HashMapRepository.catalogMap;
+         HashMap<String, String> map = MapStorage.catalogMap;
          map.put("name", product.getName());
          map.put("country", product.getCountry());
          map.put("manufacture", product.getManufacture());

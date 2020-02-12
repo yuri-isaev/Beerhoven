@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.data.repository;
+package ru.mobile.beerhoven.data.remote;
 
 import static java.util.Objects.*;
 
@@ -10,17 +10,17 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
+import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
-import ru.mobile.beerhoven.utils.HashMapRepository;
 
-public class DetailsRepository {
+public class CatalogDetailsRepository {
    private final MutableLiveData<String> mLiveData;
    private final DatabaseReference mInstanceFirebase;
    private final String UID;
-   private String data = null;
+   private String data;
 
-   public DetailsRepository() {
+   public CatalogDetailsRepository() {
       this.mLiveData = new MutableLiveData<>();
       this.mInstanceFirebase = FirebaseDatabase.getInstance().getReference();
       this.UID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
@@ -36,9 +36,8 @@ public class DetailsRepository {
    }
 
    private void addPostToCartList() {
-      HashMap<String, String> id = HashMapRepository.idMap;
-      HashMap<String, String> map = HashMapRepository.detailsMap;
-      HashMap<String, Double> price = HashMapRepository.priceMap;
+      HashMap<String, String> map = MapStorage.detailsMap;
+      HashMap<String, Double> price = MapStorage.priceMap;
 
       Product post = new Product();
       post.setCountry(map.get("country"));
@@ -57,7 +56,7 @@ public class DetailsRepository {
 
       assert UID != null;
       mInstanceFirebase.child(Constants.NODE_CART).child(UID)
-          .child(requireNonNull(id.get("details_id")))
+          .child(requireNonNull(MapStorage.idMap.get("details_id")))
           .setValue(post);
    }
 }

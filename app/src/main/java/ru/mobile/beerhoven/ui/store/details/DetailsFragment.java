@@ -20,10 +20,10 @@ import java.util.HashMap;
 
 import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.activity.MainActivity;
+import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.databinding.FragmentDetailsBinding;
 import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.CurrentDateTime;
-import ru.mobile.beerhoven.utils.HashMapRepository;
 
 public class DetailsFragment extends Fragment {
    private int mValue = 1;
@@ -109,15 +109,15 @@ public class DetailsFragment extends Fragment {
          double cartPrice = Double.parseDouble(price);
          quantity = String.valueOf(mValue);
 
-         HashMapRepository.idMap.put("details_id", itemID);
+         MapStorage.idMap.put("details_id", itemID);
 
          assert total != 0;
-         HashMapRepository.priceMap.put("details_total", total);
+         MapStorage.priceMap.put("details_total", total);
 
          assert cartPrice != 0;
-         HashMapRepository.priceMap.put("details_price", cartPrice);
+         MapStorage.priceMap.put("details_price", cartPrice);
 
-         HashMap<String, String> map = HashMapRepository.detailsMap;
+         HashMap<String, String> map = MapStorage.detailsMap;
          map.put("name", name);
          map.put("country", country);
          map.put("manufacture", manufacture);

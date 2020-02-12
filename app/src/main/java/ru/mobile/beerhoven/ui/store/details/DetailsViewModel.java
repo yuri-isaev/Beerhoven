@@ -6,15 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import ru.mobile.beerhoven.data.repository.DetailsRepository;
+import ru.mobile.beerhoven.data.remote.CatalogDetailsRepository;
 
 public class DetailsViewModel extends AndroidViewModel {
    private MutableLiveData<String> mResponse;
-   private final DetailsRepository mRepository;
+   private final CatalogDetailsRepository mRepository;
 
    public DetailsViewModel(@NonNull Application application) {
       super(application);
-      this.mRepository = new DetailsRepository();
+      this.mRepository = new CatalogDetailsRepository();
       this.mResponse = new MutableLiveData<>();
    }
 
