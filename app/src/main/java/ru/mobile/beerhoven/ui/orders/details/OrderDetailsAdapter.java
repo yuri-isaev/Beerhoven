@@ -64,7 +64,7 @@ public class OrderDetailsAdapter extends Adapter<OrderDetailsViewHolder> {
          assert orderId != null;
          ActionNavOrderDetailsToNavDetails action = actionNavOrderDetailsToNavDetails()
              .setChange(Constants.OBJECT_INVISIBLE)
-             .setItemID(orderId)
+             .setProductID(orderId)
              .setCountry(order.getCountry())
              .setManufacture(order.getManufacture())
              .setName(order.getName())

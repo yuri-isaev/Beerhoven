@@ -93,7 +93,7 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
          NavController navController = Navigation.findNavController(v);
          ActionNavCartToNavDetails action = actionNavCartToNavDetails()
              .setChange(Constants.OBJECT_RENAME)
-             .setItemID(productId)
+             .setProductID(productId)
              .setCountry(product.getCountry())
              .setManufacture(product.getManufacture())
              .setName(product.getName())

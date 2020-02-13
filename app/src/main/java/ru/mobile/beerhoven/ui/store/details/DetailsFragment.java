@@ -27,7 +27,7 @@ import ru.mobile.beerhoven.utils.CurrentDateTime;
 
 public class DetailsFragment extends Fragment {
    private int mValue = 1;
-   private String itemID;
+   private String productId;
    private String name;
    private String country;
    private String manufacture;
@@ -60,7 +60,7 @@ public class DetailsFragment extends Fragment {
       if (getActivity() != null) {
          assert getArguments() != null;
          DetailsFragmentArgs args = DetailsFragmentArgs.fromBundle(getArguments());
-         itemID = args.getItemID();
+         productId = args.getProductID();
          name = args.getName();
          country = args.getCountry();
          manufacture = args.getManufacture();
@@ -106,18 +106,23 @@ public class DetailsFragment extends Fragment {
    @RequiresApi(api = Build.VERSION_CODES.N)
    public void addProductToCartList() {
       mFragmentBind.addProductToCarButton.setOnClickListener(v -> {
+
+         // Counter value control
+         if (!MapStorage.productMap.containsValue(productId)) {
+            ((MainActivity) requireActivity()).onIncreaseCounterClick();
+            MapStorage.productMap.put("productID", productId);
+         }
+
          double cartPrice = Double.parseDouble(price);
          quantity = String.valueOf(mValue);
 
-         MapStorage.idMap.put("details_id", itemID);
-
          assert total != 0;
-         MapStorage.priceMap.put("details_total", total);
+         MapStorage.priceMap.put("total", total);
 
          assert cartPrice != 0;
-         MapStorage.priceMap.put("details_price", cartPrice);
+         MapStorage.priceMap.put("price", cartPrice);
 
-         HashMap<String, String> map = MapStorage.detailsMap;
+         HashMap<String, String> map = MapStorage.productMap;
          map.put("name", name);
          map.put("country", country);
          map.put("manufacture", manufacture);
@@ -133,8 +138,6 @@ public class DetailsFragment extends Fragment {
          // Details view model observer
          mDetailsViewModel.addProductToCart().observe(getViewLifecycleOwner(),
              s -> Toasty.success(requireActivity(), Constants.ADD_TO_CART_SUCCESS, Toast.LENGTH_SHORT, true).show());
-
-         ((MainActivity) requireActivity()).onIncreaseCounterClick();
 
          v.setClickable(false);
       });

@@ -158,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
    @Override
    protected void onDestroy() {
       super.onDestroy();
+      // Toast.makeText(this, ": Destroy", Toast.LENGTH_LONG).show();
+
       // Delete cart list values when destroy
       viewModel.onDeleteCartList();
 

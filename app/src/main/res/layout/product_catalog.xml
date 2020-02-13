@@ -167,20 +167,20 @@
                     </LinearLayout>
                 </LinearLayout>
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/tvSelectorProduct"-->
-<!--                    android:layout_width="29dp"-->
-<!--                    android:layout_height="28dp"-->
-<!--                    android:layout_alignEnd="@+id/item_image"-->
-<!--                    android:layout_alignRight="@+id/item_image"-->
-<!--                    android:layout_toEndOf="@+id/item_image"-->
-<!--                    android:layout_toRightOf="@+id/item_image"-->
-<!--                    android:clickable="true"-->
-<!--                    android:gravity="center"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:srcCompat="@drawable/ic_baseline_more_vert_24"-->
-<!--                    tools:ignore="ContentDescription,MissingConstraints">-->
-<!--                </ImageView>-->
+                <ImageView
+                    android:id="@+id/tvSelectorProduct"
+                    android:layout_width="29dp"
+                    android:layout_height="28dp"
+                    android:layout_alignEnd="@+id/item_image"
+                    android:layout_alignRight="@+id/item_image"
+                    android:layout_toEndOf="@+id/item_image"
+                    android:layout_toRightOf="@+id/item_image"
+                    android:clickable="true"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_more_vert_24"
+                    tools:ignore="ContentDescription,MissingConstraints">
+                </ImageView>
 
                 <ImageView
                     android:id="@+id/tvAddProduct"

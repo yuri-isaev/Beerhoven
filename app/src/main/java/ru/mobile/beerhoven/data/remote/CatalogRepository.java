@@ -101,7 +101,7 @@ public class CatalogRepository implements ICatalogRepository {
    }
 
    private void addCatalogItem() {
-      HashMap<String, String> catalog = MapStorage.catalogMap;
+      HashMap<String, String> catalog = MapStorage.productMap;
       HashMap<String, Double> price = MapStorage.priceMap;
 
       Product post = new Product();
@@ -121,7 +121,7 @@ public class CatalogRepository implements ICatalogRepository {
 
       assert UID != null;
       mInstanceFirebase.child(Constants.NODE_CART).child(UID)
-          .child(requireNonNull(MapStorage.idMap.get("productID"))).setValue(post);
+          .child(requireNonNull(MapStorage.productMap.get("productID"))).setValue(post);
    }
 
    // Delete store catalog item
@@ -133,10 +133,10 @@ public class CatalogRepository implements ICatalogRepository {
    }
 
    private void deleteCatalogItem() {
-      HashMap<String, String> map = MapStorage.pushMap;
+      HashMap<String, String> map = MapStorage.productMap;
 
       mInstanceFirebase.child(Constants.NODE_ITEMS)
-          .child(requireNonNull(map.get("item_id")))
+          .child(requireNonNull(map.get("productID")))
           .removeValue();
       FirebaseStorage.getInstance()
           .getReferenceFromUrl(requireNonNull(map.get("image")))

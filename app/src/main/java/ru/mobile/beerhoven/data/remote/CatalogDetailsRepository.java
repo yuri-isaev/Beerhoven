@@ -36,7 +36,7 @@ public class CatalogDetailsRepository {
    }
 
    private void addPostToCartList() {
-      HashMap<String, String> map = MapStorage.detailsMap;
+      HashMap<String, String> map = MapStorage.productMap;
       HashMap<String, Double> price = MapStorage.priceMap;
 
       Product post = new Product();
@@ -47,16 +47,16 @@ public class CatalogDetailsRepository {
       post.setFortress(map.get("fortress"));
       post.setManufacture(map.get("manufacture"));
       post.setName(map.get("name"));
-      post.setPrice(price.get("details_price"));
+      post.setPrice(price.get("price"));
       post.setQuantity(map.get("quantity"));
       post.setStyle(map.get("style"));
       post.setTime(map.get("time"));
-      post.setTotal(price.get("details_total"));
+      post.setTotal(price.get("total"));
       post.setUrl(map.get("url"));
 
       assert UID != null;
       mInstanceFirebase.child(Constants.NODE_CART).child(UID)
-          .child(requireNonNull(MapStorage.idMap.get("details_id")))
+          .child(requireNonNull(MapStorage.productMap.get("productID")))
           .setValue(post);
    }
 }

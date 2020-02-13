@@ -22,7 +22,7 @@
         android:label="@string/menu_details"
         tools:layout="@layout/fragment_details" >
         <argument
-            android:name="itemID"
+            android:name="productID"
             app:argType="string"
             android:defaultValue="default" />
         <argument
