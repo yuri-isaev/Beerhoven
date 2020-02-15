@@ -46,6 +46,16 @@
     <string name="product_details_open">открыть детали</string>
     <string name="product_delete">удалить из каталога</string>
 
+    <!-- Add product. -->
+    <string name="add_cart_product">Карточка добавления товара</string>
+    <string name="add_product_catalog">Добавление товара в оссортимент</string>
+    <string name="add_item_number">номер товара</string>
+    <string name="add_item_name">название товара</string>
+    <string name="add_item_price">цена товара</string>
+    <string name="add_data_base">Добавить в базу данных</string>
+    <string name="add_gallery_image">Добавить в базу данных</string>
+    <string name="add_camera_photo">Добавить в базу данных</string>
+
     <!-- Order. -->
     <string name="order_address">Адресс заказа</string>
     <string name="order_confirmation">Подтверждение заказа</string>
@@ -62,4 +72,7 @@
 
     <!-- Details. -->
     <string name="details_order">Детали</string>
+
+    <!-- Menu. -->
+    <string name="menu_close">закрыть меню</string>
 </resources>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey"
+    android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/size_15"
+        android:layout_marginTop="@dimen/size_20"
+        android:layout_marginEnd="@dimen/size_15"
+        tools:ignore="ScrollViewSize,UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/size_1"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="2dp"
+            tools:layout_editor_absoluteY="174dp">
+
+            <TextView
+                android:id="@+id/main_title"
+                android:layout_width="304dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_24"
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_marginRight="@dimen/size_24"
+                android:fontFamily="@font/catorze27_style_1"
+                android:gravity="center_horizontal"
+                android:text="@string/add_cart_product"
+                android:textAlignment="center"
+                android:textColor="@color/colorMainYellow"
+                android:textSize="@dimen/text_24" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_product_country"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/size_16"
+                android:layout_marginTop="@dimen/size_14"
+                android:layout_marginRight="@dimen/size_16"
+                android:hint="@string/product_country"
+                android:textColorHint="@color/colorMainGrey"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:text=""
+                    android:textColor="@color/colorWhite" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_product_manufacture"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/size_16"
+                android:layout_marginTop="@dimen/size_14"
+                android:layout_marginRight="@dimen/size_16"
+                android:hint="@string/product_manufacture"
+                android:textColorHint="@color/colorMainGrey"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:text=""
+                    android:textColor="@color/colorWhite" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_product_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16"
+                android:layout_marginTop="@dimen/size_14"
+                android:layout_marginRight="@dimen/size_16"
+                android:hint="@string/add_item_name"
+                android:textColorHint="@color/colorMainGrey"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:text=""
+                    android:textColor="@color/colorMainYellow" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_product_price"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16"
+                android:layout_marginTop="@dimen/size_14"
+                android:layout_marginRight="@dimen/size_16"
+                android:hint="@string/add_item_price"
+                android:textColorHint="@color/colorMainGrey"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:text=""
+                    android:textColor="@color/colorMainYellow" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_product_style"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16"
+                android:layout_marginTop="@dimen/size_14"
+                android:layout_marginRight="@dimen/size_16"
+                android:hint="@string/product_style"
+                android:textColorHint="@color/colorMainGrey"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:text=""
+                    android:textColor="@color/colorMainYellow" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_product_fortress"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16"
+                android:layout_marginTop="@dimen/size_14"
+                android:layout_marginRight="@dimen/size_16"
+                android:hint="@string/product_fortress"
+                android:textColorHint="@color/colorMainGrey"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:text=""
+                    android:textColor="@color/colorMainYellow" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_product_density"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16"
+                android:layout_marginTop="@dimen/size_14"
+                android:layout_marginRight="@dimen/size_16"
+                android:hint="@string/product_density"
+                android:textColorHint="@color/colorMainGrey"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:text=""
+                    android:textColor="@color/colorMainYellow" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/add_product_description"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/size_16"
+                android:layout_marginTop="@dimen/size_14"
+                android:layout_marginRight="@dimen/size_16"
+                android:hint="@string/product_description"
+                android:textColorHint="@color/colorMainGrey"
+                tools:ignore="MissingConstraints">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="53dp"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine"
+                    android:text=""
+                    android:textColor="@color/colorMainYellow" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="RedundantNamespace">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/add_image"
+                    android:layout_width="90dp"
+                    android:layout_height="86dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/size_24"
+                    android:layout_marginTop="@dimen/size_35"
+                    android:layout_marginRight="@dimen/size_24"
+                    android:background="@drawable/circle_img" />
+
+                <com.github.clans.fab.FloatingActionMenu
+                    android:id="@+id/material_design_android_floating_action_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp"
+                    fab:menu_backgroundColor="@color/colorGrey"
+                    fab:menu_fab_label="@string/menu_close"
+                    fab:menu_labels_ellipsize="end"
+                    fab:menu_labels_singleLine="true"
+                    tools:ignore="RtlHardcoded">
+
+                    <com.github.clans.fab.FloatingActionButton
+                        android:id="@+id/btn_camera"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_add_a_photo_24"
+                        fab:fab_label="@string/add_camera_photo"
+                        fab:fab_shadowColor="@color/colorMainBlack"
+                        fab:fab_size="mini"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <com.github.clans.fab.FloatingActionButton
+                        android:id="@+id/btn_gallery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_add_photo_alternate_24"
+                        fab:fab_label="@string/add_gallery_image"
+                        fab:fab_shadowColor="@color/colorMainBlack"
+                        fab:fab_size="mini"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <com.github.clans.fab.FloatingActionButton
+                        android:id="@+id/btn_add_data_base"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_post_add_24"
+                        fab:fab_label="@string/add_data_base"
+                        fab:fab_shadowColor="@color/colorMainBlack"
+                        fab:fab_size="mini"
+                        tools:ignore="VectorDrawableCompat" />
+                </com.github.clans.fab.FloatingActionMenu>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

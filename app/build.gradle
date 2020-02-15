@@ -36,7 +36,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // Support libraries.
+    // Support libraries
     implementation 'androidx.browser:browser:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
@@ -48,7 +48,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.google.android.material:material:1.2.0'
 
-    // Test libraries.
+    // Test libraries
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:3.1.0'
     testImplementation 'androidx.arch.core:core-testing:2.1.0'
@@ -80,4 +80,5 @@ dependencies {
 
     // Custom button library
     implementation 'info.hoang8f:fbutton:1.0.5'
+    implementation 'com.github.clans:fab:1.6.4'
 }
