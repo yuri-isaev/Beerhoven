@@ -27,6 +27,7 @@ public class CartViewModel extends ViewModel {
       this.mStorage = new PreferencesStorage(applicationContext);
    }
 
+   // Initialize adapter list when create fragment
    public void initCartList() {
       if (mCartList != null) {
          return;

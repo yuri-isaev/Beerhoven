@@ -49,7 +49,7 @@ public class CatalogRepository implements ICatalogRepository {
    }
 
    private void readCatalogList() {
-      mInstanceFirebase.child(Constants.NODE_ITEMS).addChildEventListener(new ChildEventListener() {
+      mInstanceFirebase.child(Constants.NODE_PRODUCTS).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             Product product = snapshot.getValue(Product.class);
@@ -135,7 +135,7 @@ public class CatalogRepository implements ICatalogRepository {
    private void deleteCatalogItem() {
       HashMap<String, String> map = MapStorage.productMap;
 
-      mInstanceFirebase.child(Constants.NODE_ITEMS)
+      mInstanceFirebase.child(Constants.NODE_PRODUCTS)
           .child(requireNonNull(map.get("productID")))
           .removeValue();
       FirebaseStorage.getInstance()

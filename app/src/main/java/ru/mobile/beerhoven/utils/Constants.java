@@ -10,8 +10,9 @@ public final class Constants {
     public static final String ADMIN = "ADMIN";
     public static final String NODE_CART = "CART LIST";
     public static final String NODE_CONFIRMS = "CONFIRMS";
-    public static final String NODE_ITEMS = "ITEMS";
+    public static final String NODE_PRODUCTS = "PRODUCTS";
     public static final String NODE_ORDERS = "ORDERS";
+    public static final String PRODUCT_IMG = "ITEMS_IMG";
 
     // For data time
     public static final String CURRENT_DATA = "MMM dd, yyyy";
