@@ -53,7 +53,7 @@ public class AddProductFragment extends Fragment {
    }
 
    @Override
-   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       mAddProductViewModel = new AddProductViewModel(new AddProductRepository());
       mFragmentBind = FragmentAddProductBinding.inflate(inflater, container, false);
       return mFragmentBind.getRoot();
@@ -71,18 +71,18 @@ public class AddProductFragment extends Fragment {
              !Validation.isValidNameField(mFragmentBind.addProductFortress) |
              !Validation.isValidNameField(mFragmentBind.addProductDensity) |
              !Validation.isValidNameField(mFragmentBind.addProductDescription)) {
-            Toasty.error(requireActivity(), "Заполните форму!", Toast.LENGTH_LONG, true).show();
+            Toasty.error(requireActivity(), "Заполните форму", Toast.LENGTH_LONG, true).show();
          } else if (mUriImage == null) {
-            Toasty.error(requireActivity(), "Добавьте изображение!", Toast.LENGTH_LONG, true).show();
+            Toasty.error(requireActivity(), "Добавьте изображение", Toast.LENGTH_LONG, true).show();
          } else {
-            country = mFragmentBind.addProductCountry.getEditText().getText().toString();
-            manufacture = mFragmentBind.addProductManufacture.getEditText().getText().toString();
-            name = mFragmentBind.addProductName.getEditText().getText().toString();
-            price = mFragmentBind.addProductPrice.getEditText().getText().toString();
-            style = mFragmentBind.addProductStyle.getEditText().getText().toString();
-            fortress = mFragmentBind.addProductFortress.getEditText().getText().toString();
-            density = mFragmentBind.addProductDensity.getEditText().getText().toString();
-            description = mFragmentBind.addProductDescription.getEditText().getText().toString();
+            country = requireNonNull(mFragmentBind.addProductCountry.getEditText()).getText().toString();
+            manufacture = requireNonNull(mFragmentBind.addProductManufacture.getEditText()).getText().toString();
+            name = requireNonNull(mFragmentBind.addProductName.getEditText()).getText().toString();
+            price = requireNonNull(mFragmentBind.addProductPrice.getEditText()).getText().toString();
+            style = requireNonNull(mFragmentBind.addProductStyle.getEditText()).getText().toString();
+            fortress = requireNonNull(mFragmentBind.addProductFortress.getEditText()).getText().toString();
+            density = requireNonNull(mFragmentBind.addProductDensity.getEditText()).getText().toString();
+            description = requireNonNull(mFragmentBind.addProductDescription.getEditText()).getText().toString();
 
             MapStorage.productMap.put("name", name);
             MapStorage.productMap.put("country", country);
@@ -129,6 +129,7 @@ public class AddProductFragment extends Fragment {
    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
       super.onActivityResult(requestCode, resultCode, data);
 
+      // Pop-up menu adding an image
       switch (requestCode) {
          case CODE_GALLERY:
             if (data != null) {
@@ -142,16 +143,15 @@ public class AddProductFragment extends Fragment {
                   }
                });
                try {
-                  Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), mUriImage);
+                  Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireNonNull(getActivity()).getContentResolver(), mUriImage);
                   mFragmentBind.addImage.setImageBitmap(bitmap);
                } catch (IOException e) {
                   e.printStackTrace();
                }
             }
             break;
-
          case CODE_CAMERA:
-            Bitmap bitmap = BitmapFactory.decodeFile(getActivity().getExternalFilesDir(null) + "/test.jpg");
+            Bitmap bitmap = BitmapFactory.decodeFile(requireNonNull(getActivity()).getExternalFilesDir(null) + "/test.jpg");
             mFragmentBind.addImage.setImageBitmap(bitmap);
             break;
       }

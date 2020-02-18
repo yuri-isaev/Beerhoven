@@ -14,6 +14,7 @@
     <string name="auth_input_code_confirm">Дождитесь подтверждения</string>
 
     <!-- Navigation menu. -->
+    <string name="menu_add_product">Добавление товара</string>
     <string name="menu_cart">Корзина заказа</string>
     <string name="menu_details">Детали товара</string>
     <string name="menu_map">Карта</string>
@@ -48,13 +49,14 @@
 
     <!-- Add product. -->
     <string name="add_cart_product">Карточка добавления товара</string>
+    <string name="add_product">Добавление товара</string>
     <string name="add_product_catalog">Добавление товара в оссортимент</string>
     <string name="add_item_number">номер товара</string>
     <string name="add_item_name">название товара</string>
     <string name="add_item_price">цена товара</string>
     <string name="add_data_base">Добавить в базу данных</string>
-    <string name="add_gallery_image">Добавить в базу данных</string>
-    <string name="add_camera_photo">Добавить в базу данных</string>
+    <string name="add_gallery_image">Добавить изображение из галлерии</string>
+    <string name="add_camera_photo">Добавить снимок с камеры</string>
 
     <!-- Order. -->
     <string name="order_address">Адресс заказа</string>
@@ -74,5 +76,8 @@
     <string name="details_order">Детали</string>
 
     <!-- Menu. -->
-    <string name="menu_close">закрыть меню</string>
+    <string name="menu_close">Закрыть меню</string>
+
+    <!-- Settings. -->
+    <string name="settings">Настройки</string>
 </resources>
