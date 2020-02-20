@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorMainBlack"
+    android:theme="@style/AppTheme"
+    tools:context=".ui.orders.confirm.OrderConfirmFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="359dp"
+        android:layout_height="467dp"
+        android:layout_marginBottom="108dp"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/size_25"
+        app:layout_constraintBottom_toTopOf="@+id/confirm_order"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/size_15"
+            android:layout_marginTop="@dimen/size_10"
+            android:fontFamily="@font/catorze27_style_1"
+            android:text="@string/order_details"
+            android:textAlignment="center"
+            android:textColor="@color/colorMainYellow"
+            android:textSize="@dimen/text_24"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirm_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16"
+            android:layout_marginRight="@dimen/size_16"
+            android:hint="@string/order_name"
+            android:textColorHint="@color/colorGrey"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:text=""
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorSilver" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirm_address"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_25"
+            android:layout_marginRight="@dimen/size_16"
+            android:hint="@string/order_address"
+            android:textColorHint="@color/colorGrey"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:textColor="@color/colorWhite"
+                tools:ignore="HardcodedText" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirm_number"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16"
+            android:layout_marginTop="@dimen/size_25"
+            android:layout_marginRight="@dimen/size_16"
+            android:hint="@string/order_phone_number"
+            android:textColorHint="@color/colorGrey"
+            tools:ignore="MissingConstraints">
+
+            <br.com.sapereaude.maskedEditText.MaskedEditText
+                android:id="@+id/number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="+() 1234567890-"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="phone"
+                android:maxLength="19"
+                android:text=""
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp"
+                app:mask="+7 (###) ### ####"
+                tools:ignore="MissingPrefix" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/confirm_order"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="@dimen/size_300"
+        android:layout_height="@dimen/size_50"
+        android:layout_gravity="center"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/btn_selector"
+        android:backgroundTint="@color/colorMainYellow"
+        android:foreground="?attr/selectableItemBackground"
+        android:text="@string/order_make"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints,UnusedAttribute" />
+</androidx.constraintlayout.widget.ConstraintLayout>

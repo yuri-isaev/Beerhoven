@@ -5,8 +5,11 @@
     <color name="colorMainYellow">#ead294</color>
     <color name="colorBlue">#6A90B5</color>
     <color name="colorRed">#EB3939</color>
+    <color name="colorSilver">#73ffffff</color>
+    <color name="colorDimGrey">#696969</color>
+    <color name="colorGrey">#4a4c4c</color>
     <color name="colorMainGrey">#2d2e2e</color>
+    <color name="colorGreyDark">#121212</color>
     <color name="colorMainBlack">#111111</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorGrey">#121212</color>
 </resources>
