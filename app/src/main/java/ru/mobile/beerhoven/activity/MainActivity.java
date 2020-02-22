@@ -129,6 +129,11 @@ public class MainActivity extends AppCompatActivity {
       }
    }
 
+   public void onUpdateCounterFromFragment(int data) {
+      mCounterValue = data;
+      updateCounter(data);
+   }
+
    // Menu item font
    private void applyFontToMenuItem(MenuItem mi) {
       Typeface font = ResourcesCompat.getFont(this, R.font.catorze27_style_1);

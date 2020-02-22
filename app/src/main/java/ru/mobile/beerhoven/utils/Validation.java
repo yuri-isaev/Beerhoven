@@ -5,6 +5,8 @@ import static java.util.Objects.*;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Objects;
+
 public final class Validation {
 
    /**
@@ -58,6 +60,19 @@ public final class Validation {
          field.setError(null);
          field.setErrorEnabled(false);
          return PHONE.matcher(number).matches();
+      }
+   }
+
+   public static Boolean setValidateAddress(TextInputLayout field) {
+      String address = Objects.requireNonNull(field.getEditText()).getText().toString();
+
+      if (address.isEmpty()) {
+         field.setError("Поле не должно быть пустым");
+         return false;
+      } else {
+         field.setError(null);
+         field.setErrorEnabled(false);
+         return true;
       }
    }
 }

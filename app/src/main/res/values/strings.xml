@@ -81,4 +81,7 @@
 
     <!-- Settings. -->
     <string name="settings">Настройки</string>
+
+    <!-- Form -->
+    <string name="form_completed">Заполните форму</string>
 </resources>

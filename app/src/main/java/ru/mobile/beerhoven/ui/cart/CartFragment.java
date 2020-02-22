@@ -2,6 +2,8 @@ package ru.mobile.beerhoven.ui.cart;
 
 import static java.util.Objects.*;
 
+import static ru.mobile.beerhoven.ui.cart.CartFragmentDirections.*;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,10 +78,23 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
 
       mCartListAdapter = new CartListAdapter(requireNonNull(mCartViewModel.getCartList().getValue()), res -> {
          mData = res;
-         mOrderTotal.setText("Сумма корзины: " + res + " руб.");
-      }, getContext());
+         mOrderTotal.setText("Сумма корзины:  " + res + " руб.");
+      },
+          getContext());
 
-      mCartAddConfirmButton.setClickable(mCartViewModel.getCartList().getValue().size() != 0);
+      if (mCartViewModel.getCartList().getValue().size() == 0) {
+         mCartAddConfirmButton.setClickable(true);
+
+         mCartAddConfirmButton.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(v);
+            ActionNavCartToNavOrderConfirm action = actionNavCartToNavOrderConfirm().setCommon(mData);
+            navController.navigate(action);
+         });
+
+      } else {
+         mCartAddConfirmButton.setClickable(false);
+      }
+
       mRecyclerView.setAdapter(mCartListAdapter);
    }
 

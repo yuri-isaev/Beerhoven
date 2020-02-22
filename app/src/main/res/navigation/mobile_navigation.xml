@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
@@ -20,65 +19,68 @@
         android:id="@+id/nav_details"
         android:name="ru.mobile.beerhoven.ui.store.details.DetailsFragment"
         android:label="@string/menu_details"
-        tools:layout="@layout/fragment_details" >
+        tools:layout="@layout/fragment_details">
         <argument
             android:name="productID"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
         <argument
             android:name="name"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
         <argument
             android:name="country"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
         <argument
             android:name="manufacture"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
         <argument
             android:name="price"
             android:defaultValue="default" />
         <argument
             android:name="style"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
         <argument
             android:name="fortress"
-            app:argType="string"
-            android:defaultValue="default"/>
+            android:defaultValue="default"
+            app:argType="string" />
         <argument
             android:name="density"
-            app:argType="string"
-            android:defaultValue="default"/>
+            android:defaultValue="default"
+            app:argType="string" />
         <argument
             android:name="description"
-            app:argType="string"
-            android:defaultValue="default"/>
+            android:defaultValue="default"
+            app:argType="string" />
         <argument
             android:name="image"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
         <argument
             android:name="change"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/nav_cart"
         android:name="ru.mobile.beerhoven.ui.cart.CartFragment"
         android:label="@string/menu_cart"
-        tools:layout="@layout/fragment_cart" >
+        tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_nav_cart_to_nav_details"
             app:destination="@id/nav_details" />
+        <action
+            android:id="@+id/action_nav_cart_to_nav_order_confirm"
+            app:destination="@id/nav_order_confirm" />
     </fragment>
     <fragment
         android:id="@+id/nav_order"
         android:name="ru.mobile.beerhoven.ui.orders.order.OrderFragment"
         android:label="@string/menu_order"
-        tools:layout="@layout/fragment_order" >
+        tools:layout="@layout/fragment_order">
         <action
             android:id="@+id/action_nav_order_to_nav_order_details"
             app:destination="@id/nav_order_details" />
@@ -87,15 +89,15 @@
         android:id="@+id/nav_order_details"
         android:name="ru.mobile.beerhoven.ui.orders.details.OrderDetailsFragment"
         android:label="@string/details_order"
-        tools:layout="@layout/fragment_order_details" >
+        tools:layout="@layout/fragment_order_details">
         <argument
             android:name="ID"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
         <argument
             android:name="pushID"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
         <action
             android:id="@+id/action_nav_order_details_to_nav_details"
             app:destination="@id/nav_details" />
@@ -105,4 +107,14 @@
         android:name="ru.mobile.beerhoven.ui.add.AddProductFragment"
         android:label="@string/menu_add_product"
         tools:layout="@layout/fragment_add_product" />
+    <fragment
+        android:id="@+id/nav_order_confirm"
+        android:name="ru.mobile.beerhoven.ui.orders.confirm.OrderConfirmFragment"
+        android:label="fragment_confirm_order"
+        tools:layout="@layout/fragment_order_confirm">
+        <argument
+            android:name="common"
+            android:defaultValue="default"
+            app:argType="string" />
+    </fragment>
 </navigation>

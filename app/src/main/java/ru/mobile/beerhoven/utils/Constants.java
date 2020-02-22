@@ -25,4 +25,8 @@ public final class Constants {
 
     // For string success state
     public static final String ADD_TO_CART_SUCCESS = "Товар добавлен в корзину";
+
+    // URL address
+    public static final String GOOGLE_API = "https://fcm.googleapis.com/fcm/send";
+
 }
