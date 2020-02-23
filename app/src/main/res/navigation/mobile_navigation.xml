@@ -110,11 +110,23 @@
     <fragment
         android:id="@+id/nav_order_confirm"
         android:name="ru.mobile.beerhoven.ui.orders.confirm.OrderConfirmFragment"
-        android:label="fragment_confirm_order"
+        android:label="@string/nav_order_confirm"
         tools:layout="@layout/fragment_order_confirm">
         <argument
             android:name="common"
             android:defaultValue="default"
             app:argType="string" />
+        <action
+            android:id="@+id/action_nav_order_confirm_to_nav_order_notify"
+            app:destination="@id/nav_order_notify" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_order_notify"
+        android:name="ru.mobile.beerhoven.ui.orders.notify.OrderNotifyFragment"
+        android:label="@string/nav_order_notify"
+        tools:layout="@layout/fragment_order_notify" >
+        <action
+            android:id="@+id/action_nav_order_notify_to_nav_store"
+            app:destination="@id/nav_store" />
     </fragment>
 </navigation>

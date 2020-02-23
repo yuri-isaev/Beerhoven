@@ -22,6 +22,8 @@
     <string name="menu_order">Мои заказы</string>
     <string name="menu_user_name">Имя пользователя</string>
     <string name="menu_store">Магазин</string>
+    <string name="nav_order_confirm">Подтверждение</string>
+    <string name="nav_order_notify">Уведомление</string>
 
     <!-- Cart. -->
     <string name="cart_add">Добавить в корзину</string>
