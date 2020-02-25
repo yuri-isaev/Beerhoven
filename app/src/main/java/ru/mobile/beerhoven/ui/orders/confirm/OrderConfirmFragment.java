@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -82,13 +84,17 @@ public class OrderConfirmFragment extends Fragment {
          map.put("phone", String.valueOf(requireNonNull(mPhoneEditText.getEditText()).getText()));
          map.put("time", CurrentDateTime.getCurrentTime());
 
-         mOrderConfirmViewModel.onCreateConfirmOrderOnDatabase();
-         mOrderConfirmViewModel.onDeleteConfirmOrderOnDatabase();
-         mOrderConfirmViewModel.onDeleteCartCounterFromStorage();
-         Toasty.success(requireActivity(), "Ваш заказ успешно отправлен", Toast.LENGTH_LONG, true).show();
-
+         sendConfirmOnOrderList();
          toActivity(0);
+         navigateFragment(view);
       });
+   }
+
+   public void sendConfirmOnOrderList() {
+      mOrderConfirmViewModel.onCreateConfirmOrderOnDatabase();
+      mOrderConfirmViewModel.onDeleteConfirmOrderOnDatabase();
+      mOrderConfirmViewModel.onDeleteCartCounterFromStorage();
+      Toasty.success(requireActivity(), "Ваш заказ успешно отправлен", Toast.LENGTH_LONG, true).show();
    }
 
    public void toActivity(int data) {
@@ -96,5 +102,10 @@ public class OrderConfirmFragment extends Fragment {
       if (activity != null && !activity.isFinishing() && activity instanceof MainActivity) {
          ((MainActivity) activity).onUpdateCounterFromFragment(data);
       }
+   }
+
+   public void navigateFragment(View view) {
+      NavDirections action = OrderConfirmFragmentDirections.actionNavOrderConfirmToNavOrderNotify();
+      Navigation.findNavController(view).navigate(action);
    }
 }

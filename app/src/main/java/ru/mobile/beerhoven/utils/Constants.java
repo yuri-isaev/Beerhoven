@@ -13,6 +13,7 @@ public final class Constants {
     public static final String NODE_PRODUCTS = "PRODUCTS";
     public static final String NODE_ORDERS = "ORDERS";
     public static final String PRODUCT_IMG = "ITEMS_IMG";
+    public static final String NODE_USERS = "USERS";
 
     // For data time
     public static final String CURRENT_DATA = "MMM dd, yyyy";
@@ -29,4 +30,6 @@ public final class Constants {
     // URL address
     public static final String GOOGLE_API = "https://fcm.googleapis.com/fcm/send";
 
+    // Display delay
+    public static final long SPLASH_DISPLAY_LENGTH = 3000;
 }
