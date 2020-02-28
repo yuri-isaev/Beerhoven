@@ -5,6 +5,7 @@ import static java.util.Objects.*;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,19 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 import info.hoang8f.widget.FButton;
@@ -26,6 +37,7 @@ import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.activity.MainActivity;
 import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.data.remote.OrderConfirmRepository;
+import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.CurrentDateTime;
 import ru.mobile.beerhoven.utils.Randomizer;
 import ru.mobile.beerhoven.utils.Validation;
@@ -87,6 +99,7 @@ public class OrderConfirmFragment extends Fragment {
          sendConfirmOnOrderList();
          toActivity(0);
          navigateFragment(view);
+         sendPushNotification();
       });
    }
 
@@ -107,5 +120,42 @@ public class OrderConfirmFragment extends Fragment {
    public void navigateFragment(View view) {
       NavDirections action = OrderConfirmFragmentDirections.actionNavOrderConfirmToNavOrderNotify();
       Navigation.findNavController(view).navigate(action);
+   }
+
+   public void sendPushNotification() {
+      RequestQueue requestQue = Volley.newRequestQueue(requireNonNull(getActivity()));
+      FirebaseMessaging.getInstance().subscribeToTopic("news");
+      JSONObject json = new JSONObject();
+
+      try {
+         json.put("to", "/topics/" + "news");
+
+         JSONObject notificationObj = new JSONObject();
+         notificationObj.put("title", "Получен новый заказ");
+         notificationObj.put("body", "от Имени");
+
+         JSONObject extraData = new JSONObject();
+         extraData.put("brandId", "brand");
+         extraData.put("category", "logo");
+         json.put("notification", notificationObj);
+         json.put("data", extraData);
+
+         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Constants.GOOGLE_API, json,
+             response -> Log.d("MUR", "onResponse: "),
+             error -> Log.d("MUR", "onError: " + error.networkResponse)) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+               Map<String, String> header = new HashMap<>();
+               header.put("content-type", "application/json");
+               header.put("authorization", getString(R.string.server_key));
+               return header;
+            }
+         };
+
+         requestQue.add(request);
+
+      } catch (JSONException e) {
+         e.printStackTrace();
+      }
    }
 }

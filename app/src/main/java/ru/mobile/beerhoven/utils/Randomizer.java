@@ -14,4 +14,8 @@ public class Randomizer {
    public static float getRandomColorMarker() {
       return rnd.nextInt(360);
    }
+
+   public static int getRandomInt() {
+      return rnd.nextInt(9999 - 1000) + 1000;
+   }
 }

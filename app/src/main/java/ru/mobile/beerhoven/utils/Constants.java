@@ -6,7 +6,8 @@ public final class Constants {
     public static final String COUNTER_VALUE = "COUNTER_VALUE";
     public static final String CURRENT_USER_NAME = "CURRENT_USER_NAME";
 
-    // For database state node
+    // Database state node
+    public static final String ADMIN_CHANNEL_ID = "admin_channel";
     public static final String ADMIN = "ADMIN";
     public static final String NODE_CART = "CART LIST";
     public static final String NODE_CONFIRMS = "CONFIRMS";
