@@ -41,7 +41,6 @@ public class CatalogDetailsRepository {
 
       Product post = new Product();
       post.setCountry(map.get("country"));
-      post.setDate(map.get("data"));
       post.setDensity(map.get("density"));
       post.setDescription(map.get("description"));
       post.setFortress(map.get("fortress"));
@@ -50,7 +49,6 @@ public class CatalogDetailsRepository {
       post.setPrice(price.get("price"));
       post.setQuantity(map.get("quantity"));
       post.setStyle(map.get("style"));
-      post.setTime(map.get("time"));
       post.setTotal(price.get("total"));
       post.setUrl(map.get("url"));
 

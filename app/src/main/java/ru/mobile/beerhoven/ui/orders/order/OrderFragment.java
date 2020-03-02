@@ -17,12 +17,12 @@ import java.util.List;
 
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.OrderRepository;
-import ru.mobile.beerhoven.domain.model.Product;
+import ru.mobile.beerhoven.domain.model.Order;
 
 public class OrderFragment extends Fragment {
-   private RecyclerView mRecyclerView;
-   private OrderAdapter mOrderAdapter;
+   private OrderListAdapter mOrderListAdapter;
    private OrderViewModel mOrderViewModel;
+   private RecyclerView mRecyclerView;
 
    @SuppressLint("NotifyDataSetChanged")
    @Override
@@ -37,7 +37,7 @@ public class OrderFragment extends Fragment {
 
       // Get order list and order adapter aka observe
       mOrderViewModel.getOrderList().observe(getViewLifecycleOwner(),
-          (Observer<List<Product>>) list -> mOrderAdapter.notifyDataSetChanged());
+          (Observer<List<Order>>) list -> mOrderListAdapter.notifyDataSetChanged());
 
       initRecyclerView();
       return view;
@@ -47,8 +47,8 @@ public class OrderFragment extends Fragment {
    private void initRecyclerView() {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-      mOrderAdapter = new OrderAdapter(requireNonNull(mOrderViewModel.getOrderList().getValue()));
-      mRecyclerView.setAdapter(mOrderAdapter);
-      mOrderAdapter.notifyDataSetChanged();
+      mOrderListAdapter = new OrderListAdapter(requireNonNull(mOrderViewModel.getOrderList().getValue()));
+      mRecyclerView.setAdapter(mOrderListAdapter);
+      mOrderListAdapter.notifyDataSetChanged();
    }
 }

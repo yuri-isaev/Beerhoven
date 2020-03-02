@@ -158,7 +158,7 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="@dimen/size_6"
                         android:fontFamily="@font/catorze27_style_1"
-                        android:text="Общая стоимость заказа"
+                        android:text="@string/order_total"
                         android:textColor="@color/colorMainGrey"
                         android:textSize="@dimen/size_15"
                         app:layout_constraintBottom_toBottomOf="parent"

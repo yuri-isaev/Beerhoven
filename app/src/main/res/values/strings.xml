@@ -71,9 +71,10 @@
     <string name="order_name">Имя заказа</string>
     <string name="order_notification">Спасибо за заказ</string>
     <string name="order_phone">Телефон заказа</string>
-    <string name="order_time">Время заказа</string>
-    <string name="order_waiting">Ваш заказ получен, ожидайте доставки…</string>
     <string name="order_phone_number">Номер телефона</string>
+    <string name="order_time">Время заказа</string>
+    <string name="order_total">Общая стоимость заказа</string>
+    <string name="order_waiting">Ваш заказ получен, ожидайте доставки…</string>
 
     <!-- Details. -->
     <string name="details_order">Детали</string>

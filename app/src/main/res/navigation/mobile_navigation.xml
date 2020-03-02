@@ -113,7 +113,7 @@
         android:label="@string/nav_order_confirm"
         tools:layout="@layout/fragment_order_confirm">
         <argument
-            android:name="common"
+            android:name="total"
             android:defaultValue="default"
             app:argType="string" />
         <action

@@ -6,11 +6,12 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IOrderRepository;
 
 public class OrderViewModel extends ViewModel {
-   private MutableLiveData<List<Product>> mOrderList;
+   private MutableLiveData<List<Order>> mOrderList;
    private final IOrderRepository mRepository;
 
    public OrderViewModel(IOrderRepository repository) {
@@ -24,7 +25,7 @@ public class OrderViewModel extends ViewModel {
       mOrderList = mRepository.getOrderMutableList();
    }
 
-   public LiveData<List<Product>> getOrderList() {
+   public LiveData<List<Order>> getOrderList() {
       return mOrderList;
    }
 

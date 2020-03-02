@@ -112,8 +112,6 @@ public class CatalogRepository implements ICatalogRepository {
       post.setFortress(catalog.get("fortress"));
       post.setDensity(catalog.get("density"));
       post.setDescription(catalog.get("description"));
-      post.setDate(catalog.get("ru/mobile/beerhoven/data"));
-      post.setTime(catalog.get("time"));
       post.setUrl(catalog.get("url"));
       post.setQuantity(catalog.get("quantity"));
       post.setPrice(price.get("price"));

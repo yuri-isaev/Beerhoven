@@ -32,7 +32,7 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
    private CartViewModel mCartViewModel;
    private TextView mOrderTotal;
    private FButton mCartAddConfirmButton;
-   private String mData;
+   private String mTotal;
 
    @SuppressLint("NotifyDataSetChanged")
    @Override
@@ -68,7 +68,7 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
    @Override
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      onPassData(mData);
+      onPassData(mTotal);
    }
 
    @SuppressLint("SetTextI18n")
@@ -76,9 +76,9 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-      mCartListAdapter = new CartListAdapter(requireNonNull(mCartViewModel.getCartList().getValue()), res -> {
-         mData = res;
-         mOrderTotal.setText("Сумма корзины:  " + res + " руб.");
+      mCartListAdapter = new CartListAdapter(requireNonNull(mCartViewModel.getCartList().getValue()), (String total) -> {
+         mTotal = total;
+         mOrderTotal.setText("Сумма корзины:  " + total + " руб.");
       },
           getContext());
 
@@ -87,7 +87,7 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
 
          mCartAddConfirmButton.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(v);
-            ActionNavCartToNavOrderConfirm action = actionNavCartToNavOrderConfirm().setCommon(mData);
+            ActionNavCartToNavOrderConfirm action = actionNavCartToNavOrderConfirm().setTotal(mTotal);
             navController.navigate(action);
          });
 
@@ -100,6 +100,6 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
 
    @Override
    public void onPassData(String data) {
-      mData = data;
+      mTotal = data;
    }
 }

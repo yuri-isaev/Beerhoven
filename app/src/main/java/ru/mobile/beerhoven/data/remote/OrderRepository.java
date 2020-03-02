@@ -16,16 +16,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.mobile.beerhoven.domain.model.Product;
+import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.domain.repository.IOrderRepository;
 import ru.mobile.beerhoven.domain.repository.IUserStateRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class OrderRepository implements IOrderRepository, IUserStateRepository {
-   private final List<Product> mDataList;
-   private final MutableLiveData<List<Product>> mMutableList;
-   private final String UID;
    private final DatabaseReference mFirebaseRef;
+   private final List<Order> mDataList;
+   private final MutableLiveData<List<Order>> mMutableList;
+   private final String UID;
 
    public OrderRepository() {
       this.mDataList = new ArrayList<>();
@@ -48,7 +48,7 @@ public class OrderRepository implements IOrderRepository, IUserStateRepository {
 
    // Get order confirm list
    @Override
-   public MutableLiveData<List<Product>> getOrderMutableList() {
+   public MutableLiveData<List<Order>> getOrderMutableList() {
       if (mDataList.size() == 0) {
          readOrderConfirmList();
       }
@@ -62,32 +62,32 @@ public class OrderRepository implements IOrderRepository, IUserStateRepository {
       mFirebaseRef.child(Constants.NODE_CONFIRMS).child(UID).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            Product order = snapshot.getValue(Product.class);
-            assert order != null;
-            order.setId(snapshot.getKey());
-            if (!mDataList.contains(order)) {
-               mDataList.add(order);
+            Order confirm = snapshot.getValue(Order.class);
+            assert confirm != null;
+            confirm.setId(snapshot.getKey());
+            if (!mDataList.contains(confirm)) {
+               mDataList.add(confirm);
             }
             mMutableList.postValue(mDataList);
          }
 
          @Override
          public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            Product order = snapshot.getValue(Product.class);
-            assert order != null;
-            order.setId(snapshot.getKey());
-            if (mDataList.contains(order)) {
-               mDataList.set(mDataList.indexOf(order), order);
+            Order confirm = snapshot.getValue(Order.class);
+            assert confirm != null;
+            confirm.setId(snapshot.getKey());
+            if (mDataList.contains(confirm)) {
+               mDataList.set(mDataList.indexOf(confirm), confirm);
             }
             mMutableList.postValue(mDataList);
          }
 
          @Override
          public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-            Product order = snapshot.getValue(Product.class);
-            assert order != null;
-            order.setId(snapshot.getKey());
-            mDataList.remove(order);
+            Order confirm = snapshot.getValue(Order.class);
+            assert confirm != null;
+            confirm.setId(snapshot.getKey());
+            mDataList.remove(confirm);
             mMutableList.postValue(mDataList);
          }
 

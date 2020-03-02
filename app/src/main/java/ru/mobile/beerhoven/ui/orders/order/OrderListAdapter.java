@@ -1,7 +1,7 @@
 package ru.mobile.beerhoven.ui.orders.order;
 
 import static java.util.Objects.requireNonNull;
-import static ru.mobile.beerhoven.ui.orders.order.OrderAdapter.*;
+import static ru.mobile.beerhoven.ui.orders.order.OrderListAdapter.*;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -17,41 +17,40 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import java.util.List;
 
-import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.OrderRepository;
 import ru.mobile.beerhoven.databinding.ItemOrderBinding;
-import ru.mobile.beerhoven.domain.model.Product;
+import ru.mobile.beerhoven.domain.model.Order;
 
-public class OrderAdapter extends Adapter<OrderViewHolder> {
-   private final List<Product> mOrderList;
+public class OrderListAdapter extends Adapter<OrderViewHolder> {
+   private final List<Order> mOrderList;
 
-   public OrderAdapter(@NonNull List<Product> list) {
+   public OrderListAdapter(@NonNull List<Order> list) {
       this.mOrderList = list;
    }
 
    @NonNull
    @Override
    public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order, parent, false);
-      return new OrderViewHolder(view);
+      ItemOrderBinding binding = ItemOrderBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+      return new OrderViewHolder(binding);
    }
 
    @SuppressLint("SetTextI18n")
    @Override
    public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
       OrderViewModel orderViewModel = new OrderViewModel(new OrderRepository());
-      Product model = mOrderList.get(position);
+      Order order = mOrderList.get(position);
 
       // Get phone number current user aka user id from database
       String UID = orderViewModel.getCurrentUserPhone();
 
       // Binding view fields
-      holder.recyclerBinding.tvTimeOrder.setText(model.getTime());
-      holder.recyclerBinding.tvDateOrder.setText(model.getDate());
-      holder.recyclerBinding.tvNameOrder.setText(model.getName());
-      holder.recyclerBinding.tvPhoneOrder.setText(model.getPhone());
-      holder.recyclerBinding.tvAddressOrder.setText(model.getAddress());
-      holder.recyclerBinding.tvCommonOrder.setText(model.getCommon() + " руб.");
+      holder.binding.tvAddressOrder.setText(order.getAddress());
+      holder.binding.tvDateOrder.setText(order.getDate());
+      holder.binding.tvNameOrder.setText(order.getName());
+      holder.binding.tvPhoneOrder.setText(order.getPhone());
+      holder.binding.tvTimeOrder.setText(order.getTime());
+      holder.binding.tvCommonOrder.setText(order.getTotal() + " руб.");
 
       // Get order key from database
       String orderKey = orderViewModel.gePushId();
@@ -64,10 +63,10 @@ public class OrderAdapter extends Adapter<OrderViewHolder> {
          navController.navigate(action);
       });
 
-      holder.recyclerBinding.tvDeleteOrder.setVisibility(View.INVISIBLE);
+      holder.binding.tvDeleteOrder.setVisibility(View.INVISIBLE);
 
       // Remove order from on click delete button
-      holder.recyclerBinding.tvDeleteOrder.setOnClickListener(v -> orderViewModel.getId(model.getId()));
+      holder.binding.tvDeleteOrder.setOnClickListener(v -> orderViewModel.getId(order.getId()));
    }
 
    @Override
@@ -77,15 +76,16 @@ public class OrderAdapter extends Adapter<OrderViewHolder> {
 
 
    public static class OrderViewHolder extends ViewHolder implements OnClickListener {
-      ItemOrderBinding recyclerBinding;
+      ItemOrderBinding binding;
 
-      public OrderViewHolder(@NonNull View itemView) {
-         super(itemView);
+      public OrderViewHolder(ItemOrderBinding recyclerBinding) {
+         super(recyclerBinding.getRoot());
+         this.binding = recyclerBinding;
       }
 
       @Override
       public void onClick(View v) {
-         recyclerBinding.tvDeleteOrder.setOnClickListener(this);
+         binding.tvDeleteOrder.setOnClickListener(this);
          itemView.setOnClickListener(this);
       }
    }

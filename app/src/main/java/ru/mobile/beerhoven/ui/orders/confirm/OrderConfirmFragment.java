@@ -45,7 +45,7 @@ import ru.mobile.beerhoven.utils.Validation;
 public class OrderConfirmFragment extends Fragment {
    private FButton mAddOrderButton;
    private OrderConfirmViewModel mOrderConfirmViewModel;
-   private String mData;
+   private String mTotal;
    private TextInputLayout mNameEditText;
    private TextInputLayout mPhoneEditText;
    private TextInputLayout mAddressEditText;
@@ -57,7 +57,7 @@ public class OrderConfirmFragment extends Fragment {
       if (getActivity() != null) {
          assert getArguments() != null;
          OrderConfirmFragmentArgs args = OrderConfirmFragmentArgs.fromBundle(getArguments());
-         mData = args.getCommon();
+         mTotal = args.getTotal();
       }
    }
 
@@ -90,7 +90,7 @@ public class OrderConfirmFragment extends Fragment {
          HashMap<String, String> map = MapStorage.productMap;
          map.put("address", requireNonNull(mAddressEditText.getEditText()).getText().toString());
          map.put("color", String.valueOf(Randomizer.getRandomColorMarker()));
-         map.put("common", String.valueOf(Double.parseDouble(mData)));
+         map.put("total", String.valueOf(Double.parseDouble(mTotal)));
          map.put("date", CurrentDateTime.getCurrentDate());
          map.put("name", requireNonNull((mNameEditText.getEditText()).getText()).toString());
          map.put("phone", String.valueOf(requireNonNull(mPhoneEditText.getEditText()).getText()));

@@ -20,6 +20,7 @@ import java.util.HashMap;
 import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.activity.MainActivity;
 import ru.mobile.beerhoven.data.local.MapStorage;
+import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IOrderConfirmRepository;
 import ru.mobile.beerhoven.utils.Constants;
@@ -36,10 +37,10 @@ public class OrderConfirmRepository implements IOrderConfirmRepository {
    // Add order value to database
    public void createConfirmOrder() {
       HashMap<String, String> catalog = MapStorage.productMap;
-      Product confirm = new Product();
+      Order confirm = new Order();
       confirm.setAddress(catalog.get("address"));
       confirm.setColor(Float.parseFloat(requireNonNull(catalog.get("color"))));
-      confirm.setCommon(Double.parseDouble(requireNonNull(catalog.get("common"))));
+      confirm.setTotal(Double.parseDouble(requireNonNull(catalog.get("total"))));
       confirm.setDate(catalog.get("date"));
       confirm.setName(catalog.get("name"));
       confirm.setPhone(catalog.get("phone"));
@@ -59,7 +60,7 @@ public class OrderConfirmRepository implements IOrderConfirmRepository {
    }
 
    // Copying node from Cart List to Order List
-   private void onTransferNodeDataBase(DatabaseReference fromPath, final DatabaseReference toPath, Product model) {
+   private void onTransferNodeDataBase(DatabaseReference fromPath, final DatabaseReference toPath, Order model) {
       fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
          @Override
          public void onDataChange(DataSnapshot dataSnapshot) {

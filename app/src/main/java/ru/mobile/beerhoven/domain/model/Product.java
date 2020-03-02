@@ -3,49 +3,21 @@ package ru.mobile.beerhoven.domain.model;
 import androidx.annotation.Nullable;
 
 public class Product {
-   private String id; // pushID(PID)
-   private String name;
+   private String id;
    private String country;
-   private String manufacture;
-   private String density;
    private String description;
-   private String quantity;
-   private String style;
+   private String density;
    private String fortress;
-   private String address;
+   private String manufacture;
+   private String name;
    private String phone;
-   private String time;
-   private String date;
-   private String url;
    private double price;
    private double total;
-   private double common;
-   private float color;
+   private String quantity;
+   private String style;
+   private String url;
 
    public Product() {}
-
-   public Product(String id, String name, String country, String manufacture, String density, String description,
-                  String quantity, String style, String fortress, String address, String phone, String time, String date,
-                  String url, double price, double total, double common, float color) {
-      this.id = id;
-      this.name = name;
-      this.country = country;
-      this.manufacture = manufacture;
-      this.density = density;
-      this.description = description;
-      this.quantity = quantity;
-      this.style = style;
-      this.fortress = fortress;
-      this.address = address;
-      this.phone = phone;
-      this.time = time;
-      this.date = date;
-      this.url = url;
-      this.price = price;
-      this.total = total;
-      this.common = common;
-      this.color = color;
-   }
 
    @Override
    public boolean equals(@Nullable Object obj) {
@@ -61,36 +33,12 @@ public class Product {
       this.id = id;
    }
 
-   public String getName() {
-      return name;
-   }
-
-   public void setName(String name) {
-      this.name = name;
-   }
-
    public String getCountry() {
       return country;
    }
 
    public void setCountry(String country) {
       this.country = country;
-   }
-
-   public String getManufacture() {
-      return manufacture;
-   }
-
-   public void setManufacture(String manufacture) {
-      this.manufacture = manufacture;
-   }
-
-   public String getDensity() {
-      return density;
-   }
-
-   public void setDensity(String density) {
-      this.density = density;
    }
 
    public String getDescription() {
@@ -101,20 +49,12 @@ public class Product {
       this.description = description;
    }
 
-   public String getQuantity() {
-      return quantity;
+   public String getDensity() {
+      return density;
    }
 
-   public void setQuantity(String quantity) {
-      this.quantity = quantity;
-   }
-
-   public String getStyle() {
-      return style;
-   }
-
-   public void setStyle(String style) {
-      this.style = style;
+   public void setDensity(String density) {
+      this.density = density;
    }
 
    public String getFortress() {
@@ -125,12 +65,20 @@ public class Product {
       this.fortress = fortress;
    }
 
-   public String getAddress() {
-      return address;
+   public String getManufacture() {
+      return manufacture;
    }
 
-   public void setAddress(String address) {
-      this.address = address;
+   public void setManufacture(String manufacture) {
+      this.manufacture = manufacture;
+   }
+
+   public String getName() {
+      return name;
+   }
+
+   public void setName(String name) {
+      this.name = name;
    }
 
    public String getPhone() {
@@ -139,30 +87,6 @@ public class Product {
 
    public void setPhone(String phone) {
       this.phone = phone;
-   }
-
-   public String getTime() {
-      return time;
-   }
-
-   public void setTime(String time) {
-      this.time = time;
-   }
-
-   public String getDate() {
-      return date;
-   }
-
-   public void setDate(String date) {
-      this.date = date;
-   }
-
-   public String getUrl() {
-      return url;
-   }
-
-   public void setUrl(String url) {
-      this.url = url;
    }
 
    public double getPrice() {
@@ -181,19 +105,27 @@ public class Product {
       this.total = total;
    }
 
-   public double getCommon() {
-      return common;
+   public String getQuantity() {
+      return quantity;
    }
 
-   public void setCommon(double common) {
-      this.common = common;
+   public void setQuantity(String quantity) {
+      this.quantity = quantity;
    }
 
-   public float getColor() {
-      return color;
+   public String getStyle() {
+      return style;
    }
 
-   public void setColor(float color) {
-      this.color = color;
+   public void setStyle(String style) {
+      this.style = style;
+   }
+
+   public String getUrl() {
+      return url;
+   }
+
+   public void setUrl(String url) {
+      this.url = url;
    }
 }
