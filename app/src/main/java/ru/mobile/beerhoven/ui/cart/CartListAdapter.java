@@ -22,7 +22,7 @@ import java.util.List;
 
 import ru.mobile.beerhoven.activity.MainActivity;
 import ru.mobile.beerhoven.data.remote.CartRepository;
-import ru.mobile.beerhoven.databinding.ProductCartBinding;
+import ru.mobile.beerhoven.databinding.ItemCartBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 
@@ -46,8 +46,7 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
    @NonNull
    @Override
    public CartListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      ProductCartBinding binding = ProductCartBinding
-          .inflate(LayoutInflater.from(parent.getContext()), parent, false);
+      ItemCartBinding binding = ItemCartBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
       return new CartListViewHolder(binding);
    }
 
@@ -114,9 +113,9 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
 
 
    public static class CartListViewHolder extends ViewHolder implements OnClickListener {
-      private final ProductCartBinding binding;
+      private final ItemCartBinding binding;
 
-      public CartListViewHolder(ProductCartBinding recyclerBinding) {
+      public CartListViewHolder(ItemCartBinding recyclerBinding) {
          super(recyclerBinding.getRoot());
          this.binding = recyclerBinding;
       }

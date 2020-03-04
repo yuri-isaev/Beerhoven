@@ -14,49 +14,50 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
+import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IOrderDetailsRepository;
 import ru.mobile.beerhoven.domain.repository.IUserStateRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class OrderDetailsRepository implements IOrderDetailsRepository, IUserStateRepository {
+   private final DatabaseReference mFirebaseRef;
    private final List<Product> mDataList;
    private final MutableLiveData<List<Product>> mMutableList;
-   private String UID;
-   public final HashMap<String, Object> mStateMap;
-   private final DatabaseReference mFirebaseRef;
+   private final String mUserPhoneID;
 
    public OrderDetailsRepository() {
       this.mDataList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
-      this.mStateMap = new HashMap<>();
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
+      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    @Override
    public String getCurrentUserPhoneNumber() {
-      return this.UID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      return mUserPhoneID;
    }
 
    @Override
    public MutableLiveData<List<Product>> getOrderDetailsList() {
       if (mDataList.size() == 0) {
-         readOrderList((String) mStateMap.get("push_id"));
+         String push = MapStorage.productMap.get("push_id");
+         readOrderList(push);
       }
       mMutableList.setValue(mDataList);
       return mMutableList;
    }
 
    private void readOrderList(String pushID) {
-      mFirebaseRef.child(Constants.NODE_ORDERS).child(UID).child(pushID).addChildEventListener(new ChildEventListener() {
+      mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserPhoneID).child(pushID).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             Product order = snapshot.getValue(Product.class);
             assert order != null;
             order.setId(snapshot.getKey());
+
             if (!mDataList.contains(order)) {
                mDataList.add(order);
             }
@@ -68,6 +69,7 @@ public class OrderDetailsRepository implements IOrderDetailsRepository, IUserSta
             Product order = snapshot.getValue(Product.class);
             assert order != null;
             order.setId(snapshot.getKey());
+
             if (mDataList.contains(order)) {
                mDataList.set(mDataList.indexOf(order), order);
             }

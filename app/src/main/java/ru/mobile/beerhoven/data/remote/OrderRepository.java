@@ -12,6 +12,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,26 +25,24 @@ import ru.mobile.beerhoven.utils.Constants;
 public class OrderRepository implements IOrderRepository, IUserStateRepository {
    private final DatabaseReference mFirebaseRef;
    private final List<Order> mDataList;
+   private String mOrderData;
+   private final MutableLiveData<String> mMutableOrderData;
    private final MutableLiveData<List<Order>> mMutableList;
-   private final String UID;
+   private final String mUserPhoneID;
 
    public OrderRepository() {
       this.mDataList = new ArrayList<>();
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
       this.mMutableList = new MutableLiveData<>();
-      this.UID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mOrderData = null;
+      this.mMutableOrderData = new MutableLiveData<>();
    }
 
    // Get current user phone number
    @Override
    public String getCurrentUserPhoneNumber() {
-      return this.UID;
-   }
-
-   // Get order id key
-   @Override
-   public String readOrderId() {
-      return mFirebaseRef.child(Constants.NODE_ORDERS).child(UID).push().getKey();
+      return this.mUserPhoneID;
    }
 
    // Get order confirm list
@@ -57,9 +56,32 @@ public class OrderRepository implements IOrderRepository, IUserStateRepository {
    }
 
    @Override
+   public MutableLiveData<String> getOrderMutableData() {
+      if (mOrderData == null) {
+         readOrderData();
+      }
+      mMutableOrderData.setValue(mOrderData);
+      return mMutableOrderData;
+   }
+
+   private void readOrderData() {
+      mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserPhoneID).addValueEventListener(new ValueEventListener() {
+         @Override
+         public void onDataChange(DataSnapshot dataSnapshot) {
+            for (DataSnapshot push : dataSnapshot.getChildren()) {
+               mOrderData = push.getKey();
+            }
+         }
+
+         @Override
+         public void onCancelled(@NonNull DatabaseError databaseError) {}
+      });
+   }
+
+   @Override
    public void readOrderConfirmList() {
-      assert UID != null;
-      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(UID).addChildEventListener(new ChildEventListener() {
+      assert mUserPhoneID != null;
+      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserPhoneID).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             Order confirm = snapshot.getValue(Order.class);
@@ -102,6 +124,6 @@ public class OrderRepository implements IOrderRepository, IUserStateRepository {
    // Get order confirm by id key
    @Override
    public void deleteOrderById(String keyId) {
-      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(UID).child(keyId).removeValue();
+      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserPhoneID).child(keyId).removeValue();
    }
 }

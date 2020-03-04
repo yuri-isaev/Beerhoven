@@ -4,14 +4,16 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.google.firebase.database.Query;
+
 import java.util.List;
 
 import ru.mobile.beerhoven.domain.model.Order;
-import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IOrderRepository;
 
 public class OrderViewModel extends ViewModel {
    private MutableLiveData<List<Order>> mOrderList;
+   private String mOrderData;
    private final IOrderRepository mRepository;
 
    public OrderViewModel(IOrderRepository repository) {
@@ -25,16 +27,19 @@ public class OrderViewModel extends ViewModel {
       mOrderList = mRepository.getOrderMutableList();
    }
 
+   public String getCurrentOrderId() {
+      if (mOrderData != null) {
+         return "error";
+      }
+       return mOrderData = mRepository.getOrderMutableData().getValue();
+   }
+
    public LiveData<List<Order>> getOrderList() {
       return mOrderList;
    }
 
    public void getId(String key) {
       mRepository.deleteOrderById(key);
-   }
-
-   public String gePushId() {
-      return mRepository.readOrderId();
    }
 
    public String getCurrentUserPhone() {

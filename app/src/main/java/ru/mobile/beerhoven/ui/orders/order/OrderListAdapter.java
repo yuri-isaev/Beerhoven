@@ -42,7 +42,7 @@ public class OrderListAdapter extends Adapter<OrderViewHolder> {
       Order order = mOrderList.get(position);
 
       // Get phone number current user aka user id from database
-      String UID = orderViewModel.getCurrentUserPhone();
+      String userPhoneID = orderViewModel.getCurrentUserPhone();
 
       // Binding view fields
       holder.binding.tvAddressOrder.setText(order.getAddress());
@@ -53,13 +53,13 @@ public class OrderListAdapter extends Adapter<OrderViewHolder> {
       holder.binding.tvCommonOrder.setText(order.getTotal() + " руб.");
 
       // Get order key from database
-      String orderKey = orderViewModel.gePushId();
+      orderViewModel.getCurrentOrderId();
 
       holder.itemView.setOnClickListener(v -> {
          NavController navController = Navigation.findNavController(v);
          OrderFragmentDirections.ActionNavOrderToNavOrderDetails action = OrderFragmentDirections.actionNavOrderToNavOrderDetails()
-             .setID(requireNonNull(UID))
-             .setPushID(requireNonNull(orderKey));
+             .setUserID(requireNonNull(userPhoneID))
+             .setOrderKey(requireNonNull(orderViewModel.getCurrentOrderId()));
          navController.navigate(action);
       });
 

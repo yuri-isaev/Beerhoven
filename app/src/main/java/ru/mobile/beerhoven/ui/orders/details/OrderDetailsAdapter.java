@@ -19,8 +19,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.databinding.ProductCartBinding;
+import ru.mobile.beerhoven.databinding.ItemCartBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 
@@ -34,46 +33,45 @@ public class OrderDetailsAdapter extends Adapter<OrderDetailsViewHolder> {
    @NonNull
    @Override
    public OrderDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      View view = LayoutInflater.from(parent.getContext())
-          .inflate(R.layout.product_cart, parent, false);
-      return new OrderDetailsViewHolder(view);
+      ItemCartBinding binding = ItemCartBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+      return new OrderDetailsViewHolder(binding);
    }
 
    @SuppressLint("SetTextI18n")
    @Override
    public void onBindViewHolder(@NonNull OrderDetailsViewHolder holder, int position) {
-      Product order = mOrderDetails.get(position);
-      String orderId = order.getId();
+      Product product = mOrderDetails.get(position);
+      String productId = product.getId();
 
       Glide.with(holder.binding.tvImage.getContext())
-          .load(order.getUrl())
+          .load(product.getUrl())
           .into(holder.binding.tvImage);
 
       // Binding view fields
-      holder.binding.tvNameCart.setText(order.getName());
-      holder.binding.tvStyleCart.setText(order.getStyle());
-      holder.binding.tvFortressCart.setText(order.getFortress() + "%");
-      holder.binding.tvQuantityCart.setText(order.getQuantity());
-      holder.binding.tvPriceCart.setText(order.getPrice() + " руб.");
-      holder.binding.tvTotalCart.setText(order.getTotal() + " руб.");
+      holder.binding.tvNameCart.setText(product.getName());
+      holder.binding.tvStyleCart.setText(product.getStyle());
+      holder.binding.tvFortressCart.setText(product.getFortress() + "%");
+      holder.binding.tvQuantityCart.setText(product.getQuantity());
+      holder.binding.tvPriceCart.setText(product.getPrice() + " руб.");
+      holder.binding.tvTotalCart.setText(product.getTotal() + " руб.");
       holder.binding.tvDeleteProductCart.setVisibility(INVISIBLE);
 
       // Navigate action on order details
       holder.binding.tvContainerCart.setOnClickListener(v -> {
          NavController navController = Navigation.findNavController(v);
-         assert orderId != null;
+         assert productId != null;
          ActionNavOrderDetailsToNavDetails action = actionNavOrderDetailsToNavDetails()
              .setChange(Constants.OBJECT_INVISIBLE)
-             .setProductID(orderId)
-             .setCountry(order.getCountry())
-             .setManufacture(order.getManufacture())
-             .setName(order.getName())
-             .setPrice(String.valueOf(order.getPrice()))
-             .setStyle(order.getStyle())
-             .setFortress(order.getFortress())
-             .setDensity(order.getDensity())
-             .setDescription(order.getDescription())
-             .setImage(order.getUrl());
+             .setProductID(productId)
+             .setCountry(product.getCountry())
+             .setManufacture(product.getManufacture())
+             .setName(product.getName())
+             .setPrice(String.valueOf(product.getPrice()))
+             .setStyle(product.getStyle())
+             .setFortress(product.getFortress())
+             .setDensity(product.getDensity())
+             .setDescription(product.getDescription())
+             .setImage(product.getUrl());
          navController.navigate(action);
       });
    }
@@ -85,10 +83,11 @@ public class OrderDetailsAdapter extends Adapter<OrderDetailsViewHolder> {
 
 
    public static class OrderDetailsViewHolder extends ViewHolder implements OnClickListener {
-      ProductCartBinding binding;
+      ItemCartBinding binding;
 
-      public OrderDetailsViewHolder(@NonNull View itemView) {
-         super(itemView);
+      public OrderDetailsViewHolder(ItemCartBinding recyclerBinding) {
+         super(recyclerBinding.getRoot());
+         this.binding = recyclerBinding;
       }
 
       @Override

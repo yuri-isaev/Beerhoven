@@ -15,13 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.data.remote.OrderDetailsRepository;
 import ru.mobile.beerhoven.domain.model.Product;
 
 public class OrderDetailsFragment extends Fragment {
-   private RecyclerView mRecyclerView;
    private OrderDetailsAdapter mOrderDetailsAdapter;
    private OrderDetailsViewModel mOrderDetailsViewModel;
+   private RecyclerView mRecyclerView;
 
    @Override
    public void onCreate(Bundle savedInstanceState) {
@@ -29,9 +30,8 @@ public class OrderDetailsFragment extends Fragment {
 
       if (getArguments() != null) {
          OrderDetailsFragmentArgs argsOrder = OrderDetailsFragmentArgs.fromBundle(getArguments());
-         String mOrderID = argsOrder.getID();
-         String mPushID = argsOrder.getPushID();
-         // OrderDetailsRepository.getInstance().stateMap.put("push_id", mPushID);
+         String pushId = argsOrder.getOrderKey();
+         MapStorage.productMap.put("push_id", pushId);
       }
    }
 

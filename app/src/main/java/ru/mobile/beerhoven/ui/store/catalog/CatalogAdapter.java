@@ -137,8 +137,6 @@ public class CatalogAdapter extends Adapter<ItemViewHolder> implements OnMenuIte
          map.put("density", product.getDensity());
          map.put("description", product.getDescription());
          map.put("url", product.getUrl());
-         //map.put("data", CurrentDateTime.getCurrentDate());
-         //map.put("time", CurrentDateTime.getCurrentTime());
          map.put("quantity", String.valueOf(defaultCountValue));
 
          // Add product list position to cart

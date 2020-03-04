@@ -61,7 +61,7 @@
     <!-- Background Color (white) -->
     <item>
         <shape android:shape="oval">
-            <solid android:color="@android:color/primary_text_dark_nodisable" />
+            <solid android:color="@color/colorMainBlack" />
             <corners android:radius="10dp" />
         </shape>
     </item>

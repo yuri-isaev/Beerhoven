@@ -91,11 +91,11 @@
         android:label="@string/details_order"
         tools:layout="@layout/fragment_order_details">
         <argument
-            android:name="ID"
+            android:name="userID"
             android:defaultValue="default"
             app:argType="string" />
         <argument
-            android:name="pushID"
+            android:name="orderKey"
             android:defaultValue="default"
             app:argType="string" />
         <action
