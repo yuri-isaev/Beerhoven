@@ -19,6 +19,7 @@
     <string name="menu_details">Детали товара</string>
     <string name="menu_map">Карта</string>
     <string name="menu_news">Новости магазина</string>
+    <string name="menu_notifications">Уведомления</string>
     <string name="menu_order">Мои заказы</string>
     <string name="menu_user_name">Имя пользователя</string>
     <string name="menu_store">Магазин</string>
