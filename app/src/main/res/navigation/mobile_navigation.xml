@@ -81,6 +81,10 @@
         android:name="ru.mobile.beerhoven.ui.orders.order.OrderFragment"
         android:label="@string/menu_order"
         tools:layout="@layout/fragment_order">
+        <argument
+            android:name="ID"
+            app:argType="string"
+            android:defaultValue="default" />
         <action
             android:id="@+id/action_nav_order_to_nav_order_details"
             app:destination="@id/nav_order_details" />
@@ -128,5 +132,14 @@
         <action
             android:id="@+id/action_nav_order_notify_to_nav_store"
             app:destination="@id/nav_store" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_notifications"
+        android:name="ru.mobile.beerhoven.ui.notifications.notification.NotificationFragment"
+        android:label="@string/menu_notifications"
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_nav_notifications_to_nav_order"
+            app:destination="@id/nav_order" />
     </fragment>
 </navigation>
