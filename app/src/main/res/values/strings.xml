@@ -1,4 +1,9 @@
 <resources>
+    <!-- Action -->
+    <string name="action_search">Search</string>
+    <string name="settings">Настройки</string>
+
+    <!-- App -->
     <string name="app">Приложениe</string>
     <string name="app_name">Beerhoven</string>
     <string name="app_about">для заказа и доставки еды</string>
@@ -32,7 +37,9 @@
     <string name="cart_update">обновить данные товара</string>
 
     <!-- Product. -->
+    <string name="product_add_cart">Товар добавлен в корзину</string>
     <string name="product_country">страна производитель</string>
+    <string name="product_catalog_delete">Товар удален</string>
     <string name="product_density">Плотность</string>
     <string name="product_description">Описание</string>
     <string name="product_delivery_time">время доставки</string>
@@ -82,9 +89,6 @@
 
     <!-- Menu. -->
     <string name="menu_close">Закрыть меню</string>
-
-    <!-- Settings. -->
-    <string name="settings">Настройки</string>
 
     <!-- Form -->
     <string name="form_completed">Заполните форму</string>

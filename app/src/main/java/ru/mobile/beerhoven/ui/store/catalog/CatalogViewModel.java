@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.List;
+
+import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.ICatalogRepository;
 
 public class CatalogViewModel extends ViewModel {
@@ -15,7 +18,7 @@ public class CatalogViewModel extends ViewModel {
       this.mRepository = repository;
    }
 
-   public MutableLiveData getCatalogList() {
+   public LiveData<List<Product>> getCatalogList() {
       mCatalogList = mRepository.readProductList();
       return mCatalogList;
    }
