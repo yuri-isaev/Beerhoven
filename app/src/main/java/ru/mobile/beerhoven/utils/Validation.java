@@ -9,9 +9,6 @@ import java.util.Objects;
 
 public final class Validation {
 
-   /**
-    * Validation of User Name
-    */
    public static boolean isValidNameField(TextInputLayout field) {
       String name = requireNonNull(field.getEditText()).getText().toString();
 
@@ -25,9 +22,6 @@ public final class Validation {
       }
    }
 
-   /**
-    * Validation of Email Address
-    */
    public static boolean isValidateEmail(TextInputLayout field) {
       String email = requireNonNull(field.getEditText()).getText().toString();
       String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -45,9 +39,6 @@ public final class Validation {
       }
    }
 
-   /**
-    * Validation of Phone Number
-    */
    public static boolean isValidPhoneNumber(TextInputLayout field) {
       String number = requireNonNull(field.getEditText()).getText().toString();
 

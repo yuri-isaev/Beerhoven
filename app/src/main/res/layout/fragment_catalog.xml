@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorMainBlack"
     android:theme="@style/Theme.MaterialComponents"
-    tools:context=".ui.store.catalog.CatalogFragment">
+    tools:context=".presentation.ui.store.catalog.CatalogFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -15,5 +15,5 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/size_50"
         tools:itemCount="3"
-        tools:listitem="@layout/product_catalog" />
+        tools:listitem="@layout/item_catalog" />
 </FrameLayout>

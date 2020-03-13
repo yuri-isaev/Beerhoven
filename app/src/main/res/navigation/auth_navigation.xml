@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/nav_splash"
-        android:name="ru.mobile.beerhoven.authentication.SplashFragment"
+        android:name="ru.mobile.beerhoven.presentation.authentication.SplashFragment"
         android:label="SplashFragment"
         tools:layout="@layout/activity_splash">
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_reg"
-        android:name="ru.mobile.beerhoven.authentication.RegistrationFragment"
+        android:name="ru.mobile.beerhoven.presentation.authentication.RegistrationFragment"
         android:label="RegFragment"
         tools:layout="@layout/fragment_registration">
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_auth"
-        android:name="ru.mobile.beerhoven.authentication.AuthenticationFragment"
+        android:name="ru.mobile.beerhoven.presentation.authentication.AuthenticationFragment"
         android:label="AuthFragment"
         tools:layout="@layout/fragment_auth">
         <argument
@@ -47,7 +47,7 @@
     </fragment>
     <activity
         android:id="@+id/splashActivity"
-        android:name="ru.mobile.beerhoven.activity.SplashActivity"
+        android:name="ru.mobile.beerhoven.presentation.activity.SplashActivity"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" />
 </navigation>

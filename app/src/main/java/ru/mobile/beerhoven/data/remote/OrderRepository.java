@@ -19,10 +19,10 @@ import java.util.List;
 
 import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.domain.repository.IOrderRepository;
-import ru.mobile.beerhoven.domain.repository.IUserStateRepository;
+import ru.mobile.beerhoven.domain.repository.IUserRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
-public class OrderRepository implements IOrderRepository, IUserStateRepository {
+public class OrderRepository implements IOrderRepository, IUserRepository {
    private final DatabaseReference mFirebaseRef;
    private final List<Order> mDataList;
    private String mOrderData;

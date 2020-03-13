@@ -8,19 +8,27 @@
     <string name="app_name">Beerhoven</string>
     <string name="app_about">для заказа и доставки еды</string>
 
-    <!-- Registration. -->
-    <string name="registration">Для полноценного использования приложения необходимо пройти регистрацию</string>
-    <string name="reg">Регистрация</string>
-    <string name="reg_name">Ваше Имя</string>
-    <string name="req_email">Email</string>
-    <string name="reg_phone_number">Номер телефона</string>
-
-    <!-- Authentication. -->
+    <!-- Authentication -->
+    <string name="auth_failed">Проверка подлинности не удалась</string>
     <string name="auth_input_code_confirm">Дождитесь подтверждения</string>
+    <string name="auth_phone_number_wrong">Неверный номер телефона</string>
+    <string name="auth_quota_exceeded">Превышение квоты доступа</string>
+    <string name="auth_user_success">Пользователь аутентифицирован</string>
+    <string name="auth_user_failed">Пользователь не существует</string>
 
-    <!-- Navigation menu. -->
+    <!-- Cart -->
+    <string name="cart_add">Добавить в корзину</string>
+    <string name="cart_add_success">Товар добавлен в корзину</string>
+    <string name="cart_total">Сумма корзины</string>
+    <string name="cart_update">обновить данные товара</string>
+
+    <!-- Form -->
+    <string name="form_fill">Заполните форму</string>
+
+    <!-- Menu -->
     <string name="menu_add_product">Добавление товара</string>
     <string name="menu_cart">Корзина заказа</string>
+    <string name="menu_close">Закрыть меню</string>
     <string name="menu_details">Детали товара</string>
     <string name="menu_map">Карта</string>
     <string name="menu_news">Новости магазина</string>
@@ -28,16 +36,35 @@
     <string name="menu_order">Мои заказы</string>
     <string name="menu_user_name">Имя пользователя</string>
     <string name="menu_store">Магазин</string>
+
+    <!-- Navigation -->
     <string name="nav_order_confirm">Подтверждение</string>
     <string name="nav_order_notify">Уведомление</string>
 
-    <!-- Cart. -->
-    <string name="cart_add">Добавить в корзину</string>
-    <string name="cart_total">Сумма корзины</string>
-    <string name="cart_update">обновить данные товара</string>
+    <!-- Order -->
+    <string name="order_address">Адресс заказа</string>
+    <string name="order_confirmation">Подтверждение заказа</string>
+    <string name="order_clarification">Уточнить заказ</string>
+    <string name="order_data">Дата заказа</string>
+    <string name="order_details">Детали</string>
+    <string name="order_details_specify">Пожалуйста, уточните детали заказа</string>
+    <string name="order_form">Подать заявку</string>
+    <string name="order_make">сделать заказ</string>
+    <string name="order_name">Имя заказа</string>
+    <string name="order_notification">Спасибо за заказ</string>
+    <string name="order_phone">Телефон заказа</string>
+    <string name="order_phone_number">Номер телефона</string>
+    <string name="order_received">Заказ получен</string>
+    <string name="order_received_already">Заказ получен</string>
+    <string name="order_sent_success">Ваш заказ успешно отправлен</string>
+    <string name="order_time">Время заказа</string>
+    <string name="order_total">Общая стоимость заказа</string>
+    <string name="order_waiting">Ваш заказ получен, ожидайте доставки…</string>
 
-    <!-- Product. -->
+    <!-- Product -->
+    <string name="product_add">Добавление товара</string>
     <string name="product_add_cart">Товар добавлен в корзину</string>
+    <string name="product_add_database">Товар добавлен в базу данных</string>
     <string name="product_country">страна производитель</string>
     <string name="product_catalog_delete">Товар удален</string>
     <string name="product_density">Плотность</string>
@@ -48,7 +75,7 @@
     <string name="product_manufacture">мануфактура</string>
     <string name="product_price">цена товара</string>
     <string name="product_price_colon">Цена товара:  </string>
-    <string name="product_special">спецтализация</string>
+    <string name="product_special">специализация</string>
     <string name="product_style">Стиль</string>
     <string name="product_title">название товара</string>
     <string name="product_total">общая цена</string>
@@ -57,39 +84,21 @@
     <string name="product_details_open">открыть детали</string>
     <string name="product_delete">удалить из каталога</string>
 
-    <!-- Add product. -->
-    <string name="add_cart_product">Карточка добавления товара</string>
-    <string name="add_product">Добавление товара</string>
-    <string name="add_product_catalog">Добавление товара в оссортимент</string>
-    <string name="add_item_number">номер товара</string>
-    <string name="add_item_name">название товара</string>
-    <string name="add_item_price">цена товара</string>
+    <!-- Product add card -->
+    <string name="add_product_card">Карточка добавления товара</string>
     <string name="add_data_base">Добавить в базу данных</string>
     <string name="add_gallery_image">Добавить изображение из галлерии</string>
+    <string name="add_image">Добавьте изображение</string>
+    <string name="add_image_inside">Изображение добавлено</string>
     <string name="add_camera_photo">Добавить снимок с камеры</string>
+    <string name="add_photo">Добавьте снимок</string>
 
-    <!-- Order. -->
-    <string name="order_address">Адресс заказа</string>
-    <string name="order_confirmation">Подтверждение заказа</string>
-    <string name="order_clarification">Уточнить заказ</string>
-    <string name="order_data">Дата заказа</string>
-    <string name="order_details">Пожалуйста, уточните детали заказа</string>
-    <string name="order_form">Подать заявку</string>
-    <string name="order_make">сделать заказ</string>
-    <string name="order_name">Имя заказа</string>
-    <string name="order_notification">Спасибо за заказ</string>
-    <string name="order_phone">Телефон заказа</string>
-    <string name="order_phone_number">Номер телефона</string>
-    <string name="order_time">Время заказа</string>
-    <string name="order_total">Общая стоимость заказа</string>
-    <string name="order_waiting">Ваш заказ получен, ожидайте доставки…</string>
-
-    <!-- Details. -->
-    <string name="details_order">Детали</string>
-
-    <!-- Menu. -->
-    <string name="menu_close">Закрыть меню</string>
-
-    <!-- Form -->
-    <string name="form_completed">Заполните форму</string>
+    <!-- Registration -->
+    <string name="registration">Для полноценного использования приложения необходимо пройти регистрацию</string>
+    <string name="reg">Регистрация</string>
+    <string name="reg_success">Регистрация прошла успешно</string>
+    <string name="reg_account_success">Ваш аккаунт успешно создан</string>
+    <string name="reg_name">Ваше Имя</string>
+    <string name="req_email">Email</string>
+    <string name="reg_phone_number">Номер телефона</string>
 </resources>

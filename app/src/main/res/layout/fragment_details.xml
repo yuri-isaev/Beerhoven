@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".ui.store.details.DetailsFragment">
+    tools:context=".presentation.ui.store.details.ProductDetailsFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             tools:ignore="ScrollViewSize">
 
             <TextView
-                android:id="@+id/tvProductName"
+                android:id="@+id/product_name"
                 android:layout_width="190dp"
                 android:layout_height="41dp"
                 android:layout_marginTop="5dp"
@@ -38,7 +38,7 @@
                 tools:ignore="HardcodedText,MissingConstraints" />
 
             <TextView
-                android:id="@+id/tvSpecial"
+                android:id="@+id/product_special"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/tt_bluescreens_round_bold"
@@ -49,11 +49,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.106"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductName"
+                app:layout_constraintTop_toBottomOf="@+id/product_name"
                 tools:ignore="HardcodedText,MissingConstraints" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/tvItemFrame"
+                android:id="@+id/product_item_frame"
                 android:layout_width="120dp"
                 android:layout_height="115dp"
                 android:layout_marginTop="12dp"
@@ -62,11 +62,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.104"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSpecial"
+                app:layout_constraintTop_toBottomOf="@+id/product_special"
                 tools:ignore="InOrMmUsage,MissingConstraints,UnusedAttribute" />
 
             <TextView
-                android:id="@+id/tvManufacture"
+                android:id="@+id/product_manufacture"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_24"
@@ -80,7 +80,7 @@
                 tools:ignore="RtlHardcoded" />
 
             <TextView
-                android:id="@+id/tvCountry"
+                android:id="@+id/product_country"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_24"
@@ -91,10 +91,10 @@
                 android:textColor="@color/colorMainBlack"
                 android:textSize="@dimen/text_16"
                 app:layout_constraintLeft_toRightOf="@+id/tvItemFrame"
-                app:layout_constraintTop_toBottomOf="@+id/tvManufacture" />
+                app:layout_constraintTop_toBottomOf="@+id/product_manufacture" />
 
             <TextView
-                android:id="@+id/tvPrice"
+                android:id="@+id/product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -118,8 +118,8 @@
                 android:text="  рублей"
                 android:textColor="@color/colorMainBlack"
                 android:textSize="@dimen/text_14"
-                app:layout_constraintLeft_toRightOf="@+id/tvPrice"
-                app:layout_constraintTop_toTopOf="@+id/tvPrice"
+                app:layout_constraintLeft_toRightOf="@+id/product_price"
+                app:layout_constraintTop_toTopOf="@+id/product_price"
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
             <View
@@ -157,7 +157,7 @@
                     tools:layout_editor_absoluteY="241dp" />
 
                 <TextView
-                    android:id="@+id/tvStyle"
+                    android:id="@+id/product_style"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/roboto_bold"
@@ -197,7 +197,7 @@
                     tools:layout_editor_absoluteY="241dp" />
 
                 <TextView
-                    android:id="@+id/tvFortress"
+                    android:id="@+id/product_fortress"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/roboto_bold"
@@ -236,7 +236,7 @@
                     tools:layout_editor_absoluteY="241dp" />
 
                 <TextView
-                    android:id="@+id/tvDensity"
+                    android:id="@+id/product_density"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/roboto_bold"
@@ -259,7 +259,7 @@
                 tools:layout_editor_absoluteX="0dp" />
 
             <TextView
-                android:id="@+id/tvFullDescription"
+                android:id="@+id/product_description"
                 android:layout_width="333dp"
                 android:layout_height="73dp"
                 android:fontFamily="@font/catorze27_style_1"
@@ -274,14 +274,14 @@
                 tools:ignore="HardcodedText,MissingConstraints" />
 
             <LinearLayout
-                android:id="@+id/priceCounter"
+                android:id="@+id/product_price_counter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.679"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvFullDescription"
+                app:layout_constraintTop_toBottomOf="@+id/product_description"
                 tools:ignore="MissingConstraints">
 
                 <include
@@ -310,7 +310,7 @@
                         tools:ignore="InefficientWeight,RtlCompat" />
 
                     <TextView
-                        android:id="@+id/tvTotalAmount"
+                        android:id="@+id/product_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="@dimen/size_25"
@@ -327,7 +327,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/addProductToCarButton"
+                android:id="@+id/btn_add_product_to_cart"
                 style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="@dimen/size_300"
                 android:layout_height="56dp"
@@ -340,7 +340,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.666"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/priceCounter"
+                app:layout_constraintTop_toBottomOf="@+id/product_price_counter"
                 app:layout_constraintVertical_bias="0.213"
                 tools:ignore="MissingConstraints,MissingPrefix" />
         </androidx.constraintlayout.widget.ConstraintLayout>

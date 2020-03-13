@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorMainBlack"
     android:theme="@style/AppTheme"
-    tools:context=".ui.orders.confirm.OrderConfirmFragment">
+    tools:context=".presentation.ui.orders.confirm.OrderConfirmFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout7"
@@ -15,7 +15,7 @@
         android:layout_marginBottom="108dp"
         android:orientation="vertical"
         android:paddingTop="@dimen/size_25"
-        app:layout_constraintBottom_toTopOf="@+id/confirm_order"
+        app:layout_constraintBottom_toTopOf="@+id/btn_confirm_order"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +108,7 @@
     </LinearLayout>
 
     <info.hoang8f.widget.FButton
-        android:id="@+id/confirm_order"
+        android:id="@+id/btn_confirm_order"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="@dimen/size_300"
         android:layout_height="@dimen/size_50"

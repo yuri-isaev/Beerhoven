@@ -9,7 +9,7 @@
     android:animationCache="true"
     android:fitsSystemWindows="true"
     app:layout_insetEdge="left"
-    tools:context=".activity.MainActivity"
+    tools:context=".presentation.activity.MainActivity"
     tools:openDrawer="start">
 
     <include

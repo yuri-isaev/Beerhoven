@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBlack"
     android:theme="@style/AppTheme"
-    tools:context="ru.mobile.beerhoven.activity.SplashActivity">
+    tools:context="ru.mobile.beerhoven.presentation.activity.SplashActivity">
 
     <ImageView
         android:id="@+id/image_logo"

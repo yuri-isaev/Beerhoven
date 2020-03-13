@@ -2,8 +2,6 @@ package ru.mobile.beerhoven.domain.model;
 
 public class User {
     private String name, email, phone;
-    
-    public User() {}
 
     public User(String name, String email, String phone) {
         this.name = name;

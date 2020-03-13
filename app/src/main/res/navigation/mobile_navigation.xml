@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_store"
-        android:name="ru.mobile.beerhoven.ui.store.sections.StoreFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.store.sections.StoreFragment"
         android:label="@string/menu_store"
         tools:layout="@layout/fragment_store">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/nav_details"
-        android:name="ru.mobile.beerhoven.ui.store.details.DetailsFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.store.details.ProductDetailFragment"
         android:label="@string/menu_details"
         tools:layout="@layout/fragment_details">
         <argument
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_cart"
-        android:name="ru.mobile.beerhoven.ui.cart.CartFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.cart.CartFragment"
         android:label="@string/menu_cart"
         tools:layout="@layout/fragment_cart">
         <action
@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_order"
-        android:name="ru.mobile.beerhoven.ui.orders.order.OrderFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.orders.order.OrderFragment"
         android:label="@string/menu_order"
         tools:layout="@layout/fragment_order">
         <argument
@@ -91,8 +91,8 @@
     </fragment>
     <fragment
         android:id="@+id/nav_order_details"
-        android:name="ru.mobile.beerhoven.ui.orders.details.OrderDetailsFragment"
-        android:label="@string/details_order"
+        android:name="ru.mobile.beerhoven.presentation.ui.orders.details.OrderDetailFragment"
+        android:label="@string/order_details"
         tools:layout="@layout/fragment_order_details">
         <argument
             android:name="userID"
@@ -108,12 +108,12 @@
     </fragment>
     <fragment
         android:id="@+id/nav_add_product"
-        android:name="ru.mobile.beerhoven.ui.add.AddProductFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.adding.AddProductFragment"
         android:label="@string/menu_add_product"
         tools:layout="@layout/fragment_add_product" />
     <fragment
         android:id="@+id/nav_order_confirm"
-        android:name="ru.mobile.beerhoven.ui.orders.confirm.OrderConfirmFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.orders.confirm.OrderConfirmFragment"
         android:label="@string/nav_order_confirm"
         tools:layout="@layout/fragment_order_confirm">
         <argument
@@ -126,7 +126,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_order_notify"
-        android:name="ru.mobile.beerhoven.ui.orders.notify.OrderNotifyFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.orders.notify.OrderNotifyFragment"
         android:label="@string/nav_order_notify"
         tools:layout="@layout/fragment_order_notify" >
         <action
@@ -135,7 +135,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_notifications"
-        android:name="ru.mobile.beerhoven.ui.notifications.notification.NotificationFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.notifications.notification.NotificationFragment"
         android:label="@string/menu_notifications"
         tools:layout="@layout/fragment_notification" >
         <action

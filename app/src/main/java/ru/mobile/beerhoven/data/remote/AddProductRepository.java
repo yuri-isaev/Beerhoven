@@ -1,62 +1,66 @@
 package ru.mobile.beerhoven.data.remote;
 
 import android.net.Uri;
+
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.Date;
+
 import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IAddProductRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class AddProductRepository implements IAddProductRepository {
-   private boolean res;
-   private Uri uriImage;
-   private final MutableLiveData<Boolean> value = new MutableLiveData<>();
+   private boolean mResponse;
+   private final MutableLiveData<Boolean> mMutableData;
+   private Uri mUriImage;
+
+   public AddProductRepository() {
+      this.mMutableData = new MutableLiveData<>();
+   }
 
    @Override
-   public MutableLiveData<Boolean> getListImageCamera() {
-      if (!res) {
-         addImageFromCamera();
+   public MutableLiveData<Boolean> onGetCameraResponse() {
+      if (!mResponse) {
+         addPhotoFromCamera();
       }
-      value.setValue(res);
-      return value;
+      mMutableData.setValue(mResponse);
+      return mMutableData;
    }
 
-   public void addImageFromCamera() {
-      uriImage = MapStorage.uriMap.get("camera");
-      res = false;
+   public void addPhotoFromCamera() {
+      mUriImage = MapStorage.uriMap.get("camera");
+      mResponse = false;
    }
 
    @Override
-   public MutableLiveData<Boolean> getListImageGallery() {
-      if (!res) {
-         addImageFromGallery();
+   public MutableLiveData<Boolean> onGetImageResponse() {
+      if (!mResponse) {
+         getImageFromGallery();
       }
-      value.setValue(res);
-      return value;
+      mMutableData.setValue(mResponse);
+      return mMutableData;
    }
 
-   private void addImageFromGallery() {
-      uriImage = MapStorage.uriMap.get("gallery");
-      res = false;
+   private void getImageFromGallery() {
+      mUriImage = MapStorage.uriMap.get("gallery");
+      mResponse = false;
    }
 
    @Override
-   public MutableLiveData<Boolean> getListDataBase() {
-      if (!res) {
+   public MutableLiveData<Boolean> onGetCreatePostResponse() {
+      if (!mResponse) {
          createPost();
       }
-      value.setValue(res);
-      return value;
+      mMutableData.setValue(mResponse);
+      return mMutableData;
    }
 
    public void createPost() {
@@ -64,29 +68,25 @@ public class AddProductRepository implements IAddProductRepository {
       StorageReference folderRef = storageRef.child(Constants.PRODUCT_IMG);
       StorageReference photoRef = folderRef.child(new Date().toString());
 
-      photoRef.putFile(uriImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-         @Override
-         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+      photoRef.putFile(mUriImage).addOnSuccessListener(taskSnapshot -> {
+         Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
 
-            while ((!uriTask.isComplete()));
-            Uri downloadUri = uriTask.getResult();
+         while ((!uriTask.isComplete())) ;
+         Uri downloadUri = uriTask.getResult();
 
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference reference = database.getReference(Constants.NODE_PRODUCTS);
+         Product post = new Product();
+         post.setName(MapStorage.productMap.get("name"));
+         post.setCountry(MapStorage.productMap.get("country"));
+         post.setManufacture(MapStorage.productMap.get("manufacture"));
+         post.setStyle(MapStorage.productMap.get("style"));
+         post.setFortress(MapStorage.productMap.get("fortress"));
+         post.setDensity(MapStorage.productMap.get("density"));
+         post.setDescription(MapStorage.productMap.get("description"));
+         post.setPrice(Double.parseDouble(MapStorage.productMap.get("price")));
+         post.setUrl(downloadUri.toString());
 
-            Product post = new Product();
-            post.setName(MapStorage.productMap.get("name"));
-            post.setCountry(MapStorage.productMap.get("country"));
-            post.setManufacture(MapStorage.productMap.get("manufacture"));
-            post.setStyle(MapStorage.productMap.get("style"));
-            post.setFortress(MapStorage.productMap.get("fortress"));
-            post.setDensity(MapStorage.productMap.get("density"));
-            post.setDescription(MapStorage.productMap.get("description"));
-            post.setPrice(Double.parseDouble(MapStorage.productMap.get("price")));
-            post.setUrl(downloadUri.toString());
-            reference.push().setValue(post);
-         }
+         DatabaseReference reference = FirebaseDatabase.getInstance().getReference(Constants.NODE_PRODUCTS);
+         reference.push().setValue(post);
       });
    }
 }

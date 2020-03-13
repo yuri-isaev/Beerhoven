@@ -2,8 +2,6 @@ package ru.mobile.beerhoven.data.remote;
 
 import static java.util.Objects.requireNonNull;
 
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,11 +15,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-import es.dmoral.toasty.Toasty;
-import ru.mobile.beerhoven.activity.MainActivity;
 import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.domain.model.Order;
-import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IOrderConfirmRepository;
 import ru.mobile.beerhoven.utils.Constants;
 

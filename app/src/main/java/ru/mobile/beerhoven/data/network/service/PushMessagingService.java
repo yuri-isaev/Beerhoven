@@ -21,14 +21,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.activity.MainActivity;
+import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.Randomizer;
 

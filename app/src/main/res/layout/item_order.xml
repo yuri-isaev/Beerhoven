@@ -25,7 +25,7 @@
         android:padding="@dimen/size_5">
 
         <LinearLayout
-            android:id="@+id/tvContainer"
+            android:id="@+id/order_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/selectableItemBackground"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/tvImageMarker"
+                    android:id="@+id/order_marker"
                     android:layout_width="93dp"
                     android:layout_height="95dp"
                     android:layout_marginEnd="40dp"
@@ -52,7 +52,7 @@
                     tools:ignore="ContentDescription,VectorDrawableCompat" />
 
                 <TextView
-                    android:id="@+id/tvDateOrder"
+                    android:id="@+id/order_date"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -67,7 +67,7 @@
                     tools:ignore="SpUsage" />
 
                 <TextView
-                    android:id="@+id/tvTimeOrder"
+                    android:id="@+id/order_time"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
@@ -81,7 +81,7 @@
                     tools:ignore="SpUsage" />
 
                 <TextView
-                    android:id="@+id/tvNameOrder"
+                    android:id="@+id/order_name"
                     android:layout_width="229dp"
                     android:layout_height="30dp"
                     android:fontFamily="@font/catorze27_style_1"
@@ -95,7 +95,7 @@
                     tools:ignore="SpUsage" />
 
                 <TextView
-                    android:id="@+id/tvPhoneOrder"
+                    android:id="@+id/order_phone"
                     android:layout_width="229dp"
                     android:layout_height="23dp"
                     android:fontFamily="@font/catorze27_style_1"
@@ -109,7 +109,7 @@
                     tools:ignore="SpUsage" />
 
                 <TextView
-                    android:id="@+id/tvAddressOrder"
+                    android:id="@+id/order_address"
                     android:layout_width="228dp"
                     android:layout_height="18dp"
                     android:layout_marginBottom="5dp"
@@ -126,7 +126,7 @@
                     tools:ignore="SpUsage" />
 
                 <ImageView
-                    android:id="@+id/tvDeleteOrder"
+                    android:id="@+id/img_order_delete"
                     android:layout_width="29dp"
                     android:layout_height="28dp"
                     android:background="@drawable/circle_shadow"
@@ -151,7 +151,7 @@
                     app:layout_constraintVertical_bias="0.0">
 
                     <TextView
-                        android:id="@+id/tvTotalOrderPrice"
+                        android:id="@+id/order_common"
                         android:layout_width="140dp"
                         android:layout_height="26dp"
                         android:layout_marginStart="16dp"
@@ -166,7 +166,7 @@
                         tools:ignore="HardcodedText,SpUsage" />
 
                     <TextView
-                        android:id="@+id/tvCommonOrder"
+                        android:id="@+id/order_total"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"

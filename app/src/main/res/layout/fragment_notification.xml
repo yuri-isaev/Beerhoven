@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorGrey"
     android:theme="@style/Theme.MaterialComponents"
-    tools:context=".ui.notifications.notification.NotificationFragment">
+    tools:context=".presentation.ui.notifications.notification.NotificationFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_notification"

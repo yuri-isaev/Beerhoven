@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorMainBlack"
     android:theme="@style/Theme.MaterialComponents"
-    tools:context=".ui.orders.order.OrderFragment">
+    tools:context=".presentation.ui.orders.order.OrderFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_order"

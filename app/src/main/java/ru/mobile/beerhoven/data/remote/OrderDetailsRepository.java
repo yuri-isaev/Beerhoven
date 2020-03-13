@@ -19,10 +19,10 @@ import java.util.List;
 import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IOrderDetailsRepository;
-import ru.mobile.beerhoven.domain.repository.IUserStateRepository;
+import ru.mobile.beerhoven.domain.repository.IUserRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
-public class OrderDetailsRepository implements IOrderDetailsRepository, IUserStateRepository {
+public class OrderDetailsRepository implements IOrderDetailsRepository, IUserRepository {
    private final DatabaseReference mFirebaseRef;
    private final List<Product> mDataList;
    private final MutableLiveData<List<Product>> mMutableList;

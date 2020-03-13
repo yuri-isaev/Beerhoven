@@ -34,13 +34,13 @@
                 android:layout_marginRight="@dimen/size_24"
                 android:fontFamily="@font/catorze27_style_1"
                 android:gravity="center_horizontal"
-                android:text="@string/add_cart_product"
+                android:text="@string/add_product_card"
                 android:textAlignment="center"
                 android:textColor="@color/colorMainYellow"
                 android:textSize="@dimen/text_24" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_product_country"
+                android:id="@+id/product_country"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -62,7 +62,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_product_manufacture"
+                android:id="@+id/product_manufacture"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -84,14 +84,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_product_name"
+                android:id="@+id/product_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16"
                 android:layout_marginTop="@dimen/size_14"
                 android:layout_marginRight="@dimen/size_16"
-                android:hint="@string/add_item_name"
+                android:hint="@string/product_name"
                 android:textColorHint="@color/colorMainGrey"
                 tools:ignore="MissingConstraints">
 
@@ -106,14 +106,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_product_price"
+                android:id="@+id/product_price"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16"
                 android:layout_marginTop="@dimen/size_14"
                 android:layout_marginRight="@dimen/size_16"
-                android:hint="@string/add_item_price"
+                android:hint="@string/product_price"
                 android:textColorHint="@color/colorMainGrey"
                 tools:ignore="MissingConstraints">
 
@@ -128,7 +128,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_product_style"
+                android:id="@+id/product_style"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_product_fortress"
+                android:id="@+id/product_fortress"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_product_density"
+                android:id="@+id/product_density"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -194,7 +194,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/add_product_description"
+                android:id="@+id/product_description"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -221,7 +221,7 @@
                 tools:ignore="RedundantNamespace">
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/add_image"
+                    android:id="@+id/image"
                     android:layout_width="90dp"
                     android:layout_height="86dp"
                     android:layout_gravity="center"
@@ -266,7 +266,7 @@
                         tools:ignore="VectorDrawableCompat" />
 
                     <com.github.clans.fab.FloatingActionButton
-                        android:id="@+id/btn_add_data_base"
+                        android:id="@+id/btn_add_database"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_baseline_post_add_24"
