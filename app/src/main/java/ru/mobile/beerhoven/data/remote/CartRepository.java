@@ -22,38 +22,38 @@ import ru.mobile.beerhoven.utils.Constants;
 
 public class CartRepository implements ICartRepository {
    private final DatabaseReference mFirebaseRef;
-   private final List<Product> mDataList;
+   private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
-   private final String mUserPhoneId;
+   private final String mUserPhoneID;
 
    public CartRepository() {
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
-      this.mDataList = new ArrayList<>();
+      this.mProductList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
-      this.mUserPhoneId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();}
+      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();}
 
    @Override
    public MutableLiveData<List<Product>> getCartMutableList() {
-      if (mDataList.size() == 0) {
+      if (mProductList.size() == 0) {
          readCartList();
       }
-      mMutableList.setValue(mDataList);
+      mMutableList.setValue(mProductList);
       return mMutableList;
    }
 
    // Read cart product list
    private void readCartList() {
-      assert mUserPhoneId != null;
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).addChildEventListener(new ChildEventListener() {
+      assert mUserPhoneID != null;
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneID).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
             Product order = dataSnapshot.getValue(Product.class);
             assert order != null;
             order.setId(dataSnapshot.getKey());
-            if (!mDataList.contains(order)) {
-               mDataList.add(order);
+            if (!mProductList.contains(order)) {
+               mProductList.add(order);
             }
-            mMutableList.postValue(mDataList);
+            mMutableList.postValue(mProductList);
          }
 
          @Override
@@ -61,10 +61,10 @@ public class CartRepository implements ICartRepository {
             Product order = dataSnapshot.getValue(Product.class);
             assert order != null;
             order.setId(dataSnapshot.getKey());
-            if (mDataList.contains(order)) {
-               mDataList.set(mDataList.indexOf(order), order);
+            if (mProductList.contains(order)) {
+               mProductList.set(mProductList.indexOf(order), order);
             }
-            mMutableList.postValue(mDataList);
+            mMutableList.postValue(mProductList);
          }
 
          @Override
@@ -72,8 +72,8 @@ public class CartRepository implements ICartRepository {
             Product order = dataSnapshot.getValue(Product.class);
             assert order != null;
             order.setId(dataSnapshot.getKey());
-            mDataList.remove(order);
-            mMutableList.postValue(mDataList);
+            mProductList.remove(order);
+            mMutableList.postValue(mProductList);
          }
 
          @Override
@@ -87,13 +87,13 @@ public class CartRepository implements ICartRepository {
    // Delete cart list item by position
    @Override
    public void onDeleteCartItem(String position) {
-      assert mUserPhoneId != null;
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).child(position).removeValue();
+      assert mUserPhoneID != null;
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneID).child(position).removeValue();
    }
 
    // Delete user cart list
    @Override
    public void onDeleteUserCartList() {
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).removeValue();
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneID).removeValue();
    }
 }

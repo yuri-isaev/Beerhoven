@@ -18,20 +18,20 @@ import java.util.List;
 
 import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.domain.model.Product;
-import ru.mobile.beerhoven.domain.repository.IOrderDetailsRepository;
+import ru.mobile.beerhoven.domain.repository.IOrderDetailRepository;
 import ru.mobile.beerhoven.domain.repository.IUserRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
-public class OrderDetailsRepository implements IOrderDetailsRepository, IUserRepository {
+public class OrderDetailRepository implements IOrderDetailRepository, IUserRepository {
    private final DatabaseReference mFirebaseRef;
-   private final List<Product> mDataList;
+   private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
    private final String mUserPhoneID;
 
-   public OrderDetailsRepository() {
-      this.mDataList = new ArrayList<>();
-      this.mMutableList = new MutableLiveData<>();
+   public OrderDetailRepository() {
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
+      this.mProductList = new ArrayList<>();
+      this.mMutableList = new MutableLiveData<>();
       this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
@@ -42,11 +42,11 @@ public class OrderDetailsRepository implements IOrderDetailsRepository, IUserRep
 
    @Override
    public MutableLiveData<List<Product>> getOrderDetailsList() {
-      if (mDataList.size() == 0) {
+      if (mProductList.size() == 0) {
          String push = MapStorage.productMap.get("push_id");
          readOrderList(push);
       }
-      mMutableList.setValue(mDataList);
+      mMutableList.setValue(mProductList);
       return mMutableList;
    }
 
@@ -58,10 +58,10 @@ public class OrderDetailsRepository implements IOrderDetailsRepository, IUserRep
             assert order != null;
             order.setId(snapshot.getKey());
 
-            if (!mDataList.contains(order)) {
-               mDataList.add(order);
+            if (!mProductList.contains(order)) {
+               mProductList.add(order);
             }
-            mMutableList.postValue(mDataList);
+            mMutableList.postValue(mProductList);
          }
 
          @Override
@@ -70,10 +70,10 @@ public class OrderDetailsRepository implements IOrderDetailsRepository, IUserRep
             assert order != null;
             order.setId(snapshot.getKey());
 
-            if (mDataList.contains(order)) {
-               mDataList.set(mDataList.indexOf(order), order);
+            if (mProductList.contains(order)) {
+               mProductList.set(mProductList.indexOf(order), order);
             }
-            mMutableList.postValue(mDataList);
+            mMutableList.postValue(mProductList);
          }
 
          @Override
@@ -81,8 +81,8 @@ public class OrderDetailsRepository implements IOrderDetailsRepository, IUserRep
             Product order = snapshot.getValue(Product.class);
             assert order != null;
             order.setId(snapshot.getKey());
-            mDataList.remove(order);
-            mMutableList.postValue(mDataList);
+            mProductList.remove(order);
+            mMutableList.postValue(mProductList);
          }
 
          @Override

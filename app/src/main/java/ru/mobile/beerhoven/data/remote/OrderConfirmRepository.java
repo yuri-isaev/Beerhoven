@@ -21,11 +21,11 @@ import ru.mobile.beerhoven.domain.repository.IOrderConfirmRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class OrderConfirmRepository implements IOrderConfirmRepository {
-   private final String UID;
    private final DatabaseReference mFirebaseRef;
+   private final String mUserPhoneID;
 
    public OrderConfirmRepository() {
-      this.UID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
    }
 
@@ -41,10 +41,10 @@ public class OrderConfirmRepository implements IOrderConfirmRepository {
       confirm.setPhone(catalog.get("phone"));
       confirm.setTime(catalog.get("time"));
 
-      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(UID).push().setValue(confirm);
+      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserPhoneID).push().setValue(confirm);
 
-      DatabaseReference databaseCartList = mFirebaseRef.child(Constants.NODE_CART).child(UID);
-      DatabaseReference databaseOrderList = mFirebaseRef.child(Constants.NODE_ORDERS).child(UID).push();
+      DatabaseReference databaseCartList = mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneID);
+      DatabaseReference databaseOrderList = mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserPhoneID).push();
       onTransferNodeDataBase(databaseCartList, databaseOrderList, confirm);
    }
 

@@ -47,7 +47,7 @@ import ru.mobile.beerhoven.utils.Validation;
 public class OrderConfirmFragment extends Fragment {
    private FragmentOrderConfirmBinding mFragmentBind;
    private FButton mAddOrderButton;
-   private OrderConfirmViewModel mOrderConfirmViewModel;
+   private OrderConfirmViewModel mViewModel;
    private String mTotal;
    private TextInputLayout mNameEditText;
    private TextInputLayout mPhoneEditText;
@@ -66,8 +66,7 @@ public class OrderConfirmFragment extends Fragment {
 
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      mOrderConfirmViewModel = new OrderConfirmViewModel(new OrderConfirmRepository(),
-          requireNonNull(getActivity()).getApplicationContext());
+      mViewModel = new OrderConfirmViewModel(new OrderConfirmRepository(), requireNonNull(getActivity()).getApplicationContext());
 
       mFragmentBind = FragmentOrderConfirmBinding.inflate(inflater, container, false);
       mNameEditText = mFragmentBind.confirmName;
@@ -108,9 +107,9 @@ public class OrderConfirmFragment extends Fragment {
    }
 
    public void sendConfirmOnOrderList() {
-      mOrderConfirmViewModel.onCreateConfirmOrderToRepository();
-      mOrderConfirmViewModel.onDeleteConfirmOrderToRepository();
-      mOrderConfirmViewModel.onDeleteCartCounterToStorage();
+      mViewModel.onCreateConfirmOrderToRepository();
+      mViewModel.onDeleteConfirmOrderToRepository();
+      mViewModel.onDeleteCartCounterToStorage();
       Toasty.success(requireActivity(), R.string.order_sent_success, Toast.LENGTH_LONG, true).show();
    }
 

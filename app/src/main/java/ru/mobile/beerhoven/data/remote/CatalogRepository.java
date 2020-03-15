@@ -24,27 +24,27 @@ import ru.mobile.beerhoven.domain.repository.ICatalogRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class CatalogRepository implements ICatalogRepository {
-   private final List<Product> mDataList;
+   private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
-   private final MutableLiveData<String> mValue;
-   private final String UID;
+   private final MutableLiveData<String> mMutableData;
+   private final String mUserPhoneID;
    private final DatabaseReference mInstanceFirebase;
 
    public CatalogRepository() {
-      this.mDataList = new ArrayList<>();
+      this.mProductList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
-      this.mValue = new MutableLiveData<>();
-      this.UID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mMutableData = new MutableLiveData<>();
+      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
       this.mInstanceFirebase = FirebaseDatabase.getInstance().getReference();
    }
 
    // Read store catalog
    @Override
    public MutableLiveData<List<Product>> readProductList() {
-      if (mDataList.size() == 0) {
+      if (mProductList.size() == 0) {
          readCatalogList();
       }
-      mMutableList.setValue(mDataList);
+      mMutableList.setValue(mProductList);
       return mMutableList;
    }
 
@@ -56,10 +56,10 @@ public class CatalogRepository implements ICatalogRepository {
             assert product != null;
             product.setId(snapshot.getKey());
 
-            if (!mDataList.contains(product)) {
-               mDataList.add(product);
+            if (!mProductList.contains(product)) {
+               mProductList.add(product);
             }
-            mMutableList.postValue(mDataList);
+            mMutableList.postValue(mProductList);
          }
 
          @Override
@@ -67,10 +67,10 @@ public class CatalogRepository implements ICatalogRepository {
             Product product = snapshot.getValue(Product.class);
             assert product != null;
             product.setId(snapshot.getKey());
-            if (mDataList.contains(product)) {
-               mDataList.set(mDataList.indexOf(product), product);
+            if (mProductList.contains(product)) {
+               mProductList.set(mProductList.indexOf(product), product);
             }
-            mMutableList.postValue(mDataList);
+            mMutableList.postValue(mProductList);
          }
 
          @Override
@@ -78,10 +78,10 @@ public class CatalogRepository implements ICatalogRepository {
             Product product = snapshot.getValue(Product.class);
             assert product != null;
             product.setId(snapshot.getKey());
-            if (mDataList.contains(product)) {
-               mDataList.remove(product);
+            if (mProductList.contains(product)) {
+               mProductList.remove(product);
             }
-            mMutableList.postValue(mDataList);
+            mMutableList.postValue(mProductList);
          }
 
          @Override
@@ -96,8 +96,8 @@ public class CatalogRepository implements ICatalogRepository {
    @Override
    public MutableLiveData<String> addProductToCart() {
       addCatalogItem();
-      mValue.setValue(null);
-      return mValue;
+      mMutableData.setValue(null);
+      return mMutableData;
    }
 
    private void addCatalogItem() {
@@ -117,8 +117,8 @@ public class CatalogRepository implements ICatalogRepository {
       post.setPrice(price.get("price"));
       post.setTotal(price.get("total"));
 
-      assert UID != null;
-      mInstanceFirebase.child(Constants.NODE_CART).child(UID)
+      assert mUserPhoneID != null;
+      mInstanceFirebase.child(Constants.NODE_CART).child(mUserPhoneID)
           .child(requireNonNull(MapStorage.productMap.get("productID"))).setValue(post);
    }
 
@@ -126,8 +126,8 @@ public class CatalogRepository implements ICatalogRepository {
    @Override
    public MutableLiveData<String> deleteProductFromCart() {
       deleteCatalogItem();
-      mValue.setValue(null);
-      return mValue;
+      mMutableData.setValue(null);
+      return mMutableData;
    }
 
    private void deleteCatalogItem() {

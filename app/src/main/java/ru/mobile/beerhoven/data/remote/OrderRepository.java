@@ -25,18 +25,18 @@ import ru.mobile.beerhoven.utils.Constants;
 public class OrderRepository implements IOrderRepository, IUserRepository {
    private final DatabaseReference mFirebaseRef;
    private final List<Order> mDataList;
-   private String mOrderData;
    private final MutableLiveData<String> mMutableOrderData;
    private final MutableLiveData<List<Order>> mMutableList;
+   private String mOrderData;
    private final String mUserPhoneID;
 
    public OrderRepository() {
-      this.mDataList = new ArrayList<>();
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
-      this.mMutableList = new MutableLiveData<>();
-      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
-      this.mOrderData = null;
+      this.mDataList = new ArrayList<>();
       this.mMutableOrderData = new MutableLiveData<>();
+      this.mMutableList = new MutableLiveData<>();
+      this.mOrderData = null;
+      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    // Get current user phone number

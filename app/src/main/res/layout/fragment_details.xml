@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".presentation.ui.store.details.ProductDetailsFragment">
+    tools:context=".presentation.ui.store.details.ProductDetailFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -75,8 +75,8 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/text_20"
                 android:textStyle="bold"
-                app:layout_constraintLeft_toRightOf="@+id/tvItemFrame"
-                app:layout_constraintTop_toTopOf="@+id/tvItemFrame"
+                app:layout_constraintLeft_toRightOf="@+id/product_item_frame"
+                app:layout_constraintTop_toTopOf="@+id/product_item_frame"
                 tools:ignore="RtlHardcoded" />
 
             <TextView
@@ -90,7 +90,7 @@
                 android:text="@string/product_country"
                 android:textColor="@color/colorMainBlack"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintLeft_toRightOf="@+id/tvItemFrame"
+                app:layout_constraintLeft_toRightOf="@+id/product_item_frame"
                 app:layout_constraintTop_toBottomOf="@+id/product_manufacture" />
 
             <TextView
@@ -104,8 +104,8 @@
                 android:textColor="@color/colorMainBlack"
                 android:textSize="@dimen/text_24"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/tvItemFrame"
-                app:layout_constraintLeft_toRightOf="@+id/tvItemFrame"
+                app:layout_constraintBottom_toBottomOf="@+id/product_item_frame"
+                app:layout_constraintLeft_toRightOf="@+id/product_item_frame"
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
             <TextView
@@ -128,7 +128,7 @@
                 android:layout_height="@dimen/size_1"
                 android:layout_marginTop="8dp"
                 android:background="@color/colorMainGrey"
-                app:layout_constraintTop_toBottomOf="@+id/tvItemFrame"
+                app:layout_constraintTop_toBottomOf="@+id/product_item_frame"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="0dp" />
 
@@ -254,7 +254,7 @@
                 android:layout_height="@dimen/size_1"
                 android:layout_marginTop="@dimen/size_100"
                 android:background="@color/colorMainGrey"
-                app:layout_constraintTop_toBottomOf="@+id/tvItemFrame"
+                app:layout_constraintTop_toBottomOf="@+id/product_item_frame"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="0dp" />
 

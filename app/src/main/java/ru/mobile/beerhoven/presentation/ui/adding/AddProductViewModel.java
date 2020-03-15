@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import ru.mobile.beerhoven.data.remote.AddProductRepository;
 import ru.mobile.beerhoven.domain.repository.IAddProductRepository;
 
 public class AddProductViewModel extends ViewModel {

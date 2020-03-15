@@ -6,6 +6,6 @@ import java.util.List;
 
 import ru.mobile.beerhoven.domain.model.Product;
 
-public interface IOrderDetailsRepository {
+public interface IOrderDetailRepository {
    MutableLiveData<List<Product>> getOrderDetailsList();
 }

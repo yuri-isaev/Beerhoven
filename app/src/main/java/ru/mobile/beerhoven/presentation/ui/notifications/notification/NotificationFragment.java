@@ -20,20 +20,20 @@ import ru.mobile.beerhoven.domain.model.Order;
 
 public class NotificationFragment extends Fragment {
    private NotificationListAdapter mNotificationAdapter;
-   private NotificationViewModel mNotificationViewModel;
+   private NotificationViewModel mViewModel;
    private RecyclerView mRecyclerView;
 
    @SuppressLint("NotifyDataSetChanged")
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      mNotificationViewModel = new NotificationViewModel(new NotificationRepository());
+      mViewModel = new NotificationViewModel(new NotificationRepository());
 
       View view = inflater.inflate(R.layout.fragment_notification, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view_notification);
 
-      mNotificationViewModel.initNotificationList();
+      mViewModel.initNotificationList();
 
-      mNotificationViewModel.getNotificationList().observe(getViewLifecycleOwner(),
+      mViewModel.getNotificationList().observe(getViewLifecycleOwner(),
           (List<Order> list) -> mNotificationAdapter.notifyDataSetChanged());
 
       initRecyclerView();
@@ -45,7 +45,7 @@ public class NotificationFragment extends Fragment {
    private void initRecyclerView() {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-      mNotificationAdapter = new NotificationListAdapter(requireNonNull(mNotificationViewModel.getNotificationList().getValue()));
+      mNotificationAdapter = new NotificationListAdapter(requireNonNull(mViewModel.getNotificationList().getValue()));
       mRecyclerView.setAdapter(mNotificationAdapter);
       mNotificationAdapter.notifyDataSetChanged();
    }
