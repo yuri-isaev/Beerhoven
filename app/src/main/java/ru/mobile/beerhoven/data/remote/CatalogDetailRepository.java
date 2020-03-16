@@ -15,23 +15,23 @@ import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class CatalogDetailRepository {
-   private final DatabaseReference mInstanceFirebase;
+   private final DatabaseReference mFirebaseRef;
    private final MutableLiveData<String> mLiveData;
-   private final String mUserPhoneID;
-   private String data;
+   private final String mUserPhoneId;
+   private String mValue;
 
    public CatalogDetailRepository() {
-      this.mInstanceFirebase = FirebaseDatabase.getInstance().getReference();
+      this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
       this.mLiveData = new MutableLiveData<>();
-      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mUserPhoneId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    // Create an instance of a product to the cart
    public MutableLiveData<String> createProductToCart() {
-      if (data == null) {
+      if (mValue == null) {
          addPostToCartList();
       }
-      mLiveData.setValue(data);
+      mLiveData.setValue(mValue);
       return mLiveData;
    }
 
@@ -52,8 +52,8 @@ public class CatalogDetailRepository {
       post.setTotal(price.get("total"));
       post.setUrl(map.get("url"));
 
-      assert mUserPhoneID != null;
-      mInstanceFirebase.child(Constants.NODE_CART).child(mUserPhoneID)
+      assert mUserPhoneId != null;
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId)
           .child(requireNonNull(MapStorage.productMap.get("productID")))
           .setValue(post);
    }

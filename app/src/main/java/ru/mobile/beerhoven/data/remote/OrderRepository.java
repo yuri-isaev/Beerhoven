@@ -24,34 +24,33 @@ import ru.mobile.beerhoven.utils.Constants;
 
 public class OrderRepository implements IOrderRepository, IUserRepository {
    private final DatabaseReference mFirebaseRef;
-   private final List<Order> mDataList;
-   private final MutableLiveData<String> mMutableOrderData;
+   private final List<Order> mOrderList;
+   private final MutableLiveData<String> mMutableData;
    private final MutableLiveData<List<Order>> mMutableList;
    private String mOrderData;
-   private final String mUserPhoneID;
+   private final String mUserPhoneId;
 
    public OrderRepository() {
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
-      this.mDataList = new ArrayList<>();
-      this.mMutableOrderData = new MutableLiveData<>();
+      this.mOrderList = new ArrayList<>();
+      this.mMutableData = new MutableLiveData<>();
       this.mMutableList = new MutableLiveData<>();
-      this.mOrderData = null;
-      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mUserPhoneId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    // Get current user phone number
    @Override
    public String getCurrentUserPhoneNumber() {
-      return this.mUserPhoneID;
+      return this.mUserPhoneId;
    }
 
    // Get order confirm list
    @Override
    public MutableLiveData<List<Order>> getOrderMutableList() {
-      if (mDataList.size() == 0) {
-         readOrderConfirmList();
+      if (mOrderList.size() == 0) {
+         onReadOrderConfirmList();
       }
-      mMutableList.setValue(mDataList);
+      mMutableList.setValue(mOrderList);
       return mMutableList;
    }
 
@@ -60,12 +59,12 @@ public class OrderRepository implements IOrderRepository, IUserRepository {
       if (mOrderData == null) {
          readOrderData();
       }
-      mMutableOrderData.setValue(mOrderData);
-      return mMutableOrderData;
+      mMutableData.setValue(mOrderData);
+      return mMutableData;
    }
 
    private void readOrderData() {
-      mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserPhoneID).addValueEventListener(new ValueEventListener() {
+      mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserPhoneId).addValueEventListener(new ValueEventListener() {
          @Override
          public void onDataChange(DataSnapshot dataSnapshot) {
             for (DataSnapshot push : dataSnapshot.getChildren()) {
@@ -79,18 +78,18 @@ public class OrderRepository implements IOrderRepository, IUserRepository {
    }
 
    @Override
-   public void readOrderConfirmList() {
-      assert mUserPhoneID != null;
-      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserPhoneID).addChildEventListener(new ChildEventListener() {
+   public void onReadOrderConfirmList() {
+      assert mUserPhoneId != null;
+      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserPhoneId).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             Order confirm = snapshot.getValue(Order.class);
             assert confirm != null;
             confirm.setId(snapshot.getKey());
-            if (!mDataList.contains(confirm)) {
-               mDataList.add(confirm);
+            if (!mOrderList.contains(confirm)) {
+               mOrderList.add(confirm);
             }
-            mMutableList.postValue(mDataList);
+            mMutableList.postValue(mOrderList);
          }
 
          @Override
@@ -98,10 +97,10 @@ public class OrderRepository implements IOrderRepository, IUserRepository {
             Order confirm = snapshot.getValue(Order.class);
             assert confirm != null;
             confirm.setId(snapshot.getKey());
-            if (mDataList.contains(confirm)) {
-               mDataList.set(mDataList.indexOf(confirm), confirm);
+            if (mOrderList.contains(confirm)) {
+               mOrderList.set(mOrderList.indexOf(confirm), confirm);
             }
-            mMutableList.postValue(mDataList);
+            mMutableList.postValue(mOrderList);
          }
 
          @Override
@@ -109,8 +108,8 @@ public class OrderRepository implements IOrderRepository, IUserRepository {
             Order confirm = snapshot.getValue(Order.class);
             assert confirm != null;
             confirm.setId(snapshot.getKey());
-            mDataList.remove(confirm);
-            mMutableList.postValue(mDataList);
+            mOrderList.remove(confirm);
+            mMutableList.postValue(mOrderList);
          }
 
          @Override
@@ -123,7 +122,7 @@ public class OrderRepository implements IOrderRepository, IUserRepository {
 
    // Get order confirm by id key
    @Override
-   public void deleteOrderById(String keyId) {
-      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserPhoneID).child(keyId).removeValue();
+   public void onDeleteOrderById(String keyId) {
+      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserPhoneId).child(keyId).removeValue();
    }
 }

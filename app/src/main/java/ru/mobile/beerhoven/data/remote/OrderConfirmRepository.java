@@ -22,15 +22,15 @@ import ru.mobile.beerhoven.utils.Constants;
 
 public class OrderConfirmRepository implements IOrderConfirmRepository {
    private final DatabaseReference mFirebaseRef;
-   private final String mUserPhoneID;
+   private final String mUserPhoneId;
 
    public OrderConfirmRepository() {
-      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
+      this.mUserPhoneId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    // Add order value to database
-   public void createConfirmOrder() {
+   public void onCreateConfirmOrder() {
       HashMap<String, String> catalog = MapStorage.productMap;
       Order confirm = new Order();
       confirm.setAddress(catalog.get("address"));
@@ -41,20 +41,19 @@ public class OrderConfirmRepository implements IOrderConfirmRepository {
       confirm.setPhone(catalog.get("phone"));
       confirm.setTime(catalog.get("time"));
 
-      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserPhoneID).push().setValue(confirm);
+      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserPhoneId).push().setValue(confirm);
 
-      DatabaseReference databaseCartList = mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneID);
-      DatabaseReference databaseOrderList = mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserPhoneID).push();
+      DatabaseReference databaseCartList = mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId);
+      DatabaseReference databaseOrderList = mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserPhoneId).push();
       onTransferNodeDataBase(databaseCartList, databaseOrderList, confirm);
    }
 
-   // Remove cart data
-   public void removeConfirmOrder() {
-      // Emptying the user's cart
+   // Emptying the user's cart
+   public void onRemoveConfirmOrder() {
       mFirebaseRef.child(Constants.NODE_CART).removeValue();
    }
 
-   // Copying node from Cart List to Order List
+   // Copying node from cart list to order list
    private void onTransferNodeDataBase(DatabaseReference fromPath, final DatabaseReference toPath, Order model) {
       fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
          @Override

@@ -9,6 +9,6 @@ import ru.mobile.beerhoven.domain.model.Order;
 public interface IOrderRepository extends IUserRepository {
    MutableLiveData<List<Order>> getOrderMutableList();
    MutableLiveData<String> getOrderMutableData();
-   void readOrderConfirmList();
-   void deleteOrderById(String keyId);
+   void onReadOrderConfirmList();
+   void onDeleteOrderById(String keyId);
 }

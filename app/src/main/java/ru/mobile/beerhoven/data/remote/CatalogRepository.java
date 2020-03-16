@@ -24,18 +24,18 @@ import ru.mobile.beerhoven.domain.repository.ICatalogRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class CatalogRepository implements ICatalogRepository {
+   private final DatabaseReference mFirebaseRef;
    private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
    private final MutableLiveData<String> mMutableData;
-   private final String mUserPhoneID;
-   private final DatabaseReference mInstanceFirebase;
+   private final String mUserPhoneId;
 
    public CatalogRepository() {
+      this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
       this.mProductList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
       this.mMutableData = new MutableLiveData<>();
-      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
-      this.mInstanceFirebase = FirebaseDatabase.getInstance().getReference();
+      this.mUserPhoneId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    // Read store catalog
@@ -49,7 +49,7 @@ public class CatalogRepository implements ICatalogRepository {
    }
 
    private void readCatalogList() {
-      mInstanceFirebase.child(Constants.NODE_PRODUCTS).addChildEventListener(new ChildEventListener() {
+      mFirebaseRef.child(Constants.NODE_PRODUCTS).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             Product product = snapshot.getValue(Product.class);
@@ -117,8 +117,8 @@ public class CatalogRepository implements ICatalogRepository {
       post.setPrice(price.get("price"));
       post.setTotal(price.get("total"));
 
-      assert mUserPhoneID != null;
-      mInstanceFirebase.child(Constants.NODE_CART).child(mUserPhoneID)
+      assert mUserPhoneId != null;
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId)
           .child(requireNonNull(MapStorage.productMap.get("productID"))).setValue(post);
    }
 
@@ -133,7 +133,7 @@ public class CatalogRepository implements ICatalogRepository {
    private void deleteCatalogItem() {
       HashMap<String, String> map = MapStorage.productMap;
 
-      mInstanceFirebase.child(Constants.NODE_PRODUCTS)
+      mFirebaseRef.child(Constants.NODE_PRODUCTS)
           .child(requireNonNull(map.get("productID")))
           .removeValue();
       FirebaseStorage.getInstance()

@@ -39,6 +39,7 @@ public class CatalogFragment extends Fragment {
       setHasOptionsMenu(true);
    }
 
+   @SuppressWarnings("unchecked")
    @SuppressLint("NotifyDataSetChanged")
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
@@ -56,10 +57,12 @@ public class CatalogFragment extends Fragment {
       return view;
    }
 
+   @SuppressWarnings("unchecked")
    @SuppressLint("NotifyDataSetChanged")
    private void initRecyclerView() {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
       // Store cart observer
       mCatalogAdapter = new CatalogAdapter((List<Product>) mViewModel.getCatalogList().getValue(),
@@ -117,6 +120,7 @@ public class CatalogFragment extends Fragment {
       return super.onOptionsItemSelected(item);
    }
 
+   @SuppressWarnings("unchecked")
    @SuppressLint("NotifyDataSetChanged")
    private void onItemSearch(String searchText) {
       List<Product> searchList = new ArrayList<>();

@@ -65,8 +65,7 @@ public class AddProductRepository implements IAddProductRepository {
 
    public void createPost() {
       StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-      StorageReference folderRef = storageRef.child(Constants.PRODUCT_IMG);
-      StorageReference photoRef = folderRef.child(new Date().toString());
+      StorageReference photoRef = storageRef.child(Constants.PRODUCT_IMG).child(new Date().toString());
 
       photoRef.putFile(mUriImage).addOnSuccessListener(taskSnapshot -> {
          Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();

@@ -70,12 +70,10 @@ public class NotificationRepository implements INotificationRepository {
          }
 
          @Override
-         public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-         }
+         public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
 
          @Override
-         public void onCancelled(@NonNull DatabaseError databaseError) {
-         }
+         public void onCancelled(@NonNull DatabaseError databaseError) {}
       });
    }
 }

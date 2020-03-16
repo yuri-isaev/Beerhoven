@@ -37,7 +37,7 @@ public class OrderViewModel extends ViewModel {
    }
 
    public void onDeleteOrderByIdToRepository(String key) {
-      mRepository.deleteOrderById(key);
+      mRepository.onDeleteOrderById(key);
    }
 
    public String getCurrentUserPhoneToRepository() {

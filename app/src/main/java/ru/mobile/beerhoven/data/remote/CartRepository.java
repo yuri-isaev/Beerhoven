@@ -24,13 +24,13 @@ public class CartRepository implements ICartRepository {
    private final DatabaseReference mFirebaseRef;
    private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
-   private final String mUserPhoneID;
+   private final String mUserPhoneId;
 
    public CartRepository() {
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
       this.mProductList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
-      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();}
+      this.mUserPhoneId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();}
 
    @Override
    public MutableLiveData<List<Product>> getCartMutableList() {
@@ -43,8 +43,8 @@ public class CartRepository implements ICartRepository {
 
    // Read cart product list
    private void readCartList() {
-      assert mUserPhoneID != null;
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneID).addChildEventListener(new ChildEventListener() {
+      assert mUserPhoneId != null;
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
             Product order = dataSnapshot.getValue(Product.class);
@@ -87,13 +87,13 @@ public class CartRepository implements ICartRepository {
    // Delete cart list item by position
    @Override
    public void onDeleteCartItem(String position) {
-      assert mUserPhoneID != null;
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneID).child(position).removeValue();
+      assert mUserPhoneId != null;
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).child(position).removeValue();
    }
 
    // Delete user cart list
    @Override
    public void onDeleteUserCartList() {
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneID).removeValue();
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).removeValue();
    }
 }

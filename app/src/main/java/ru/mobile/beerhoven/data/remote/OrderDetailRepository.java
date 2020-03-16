@@ -26,18 +26,18 @@ public class OrderDetailRepository implements IOrderDetailRepository, IUserRepos
    private final DatabaseReference mFirebaseRef;
    private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
-   private final String mUserPhoneID;
+   private final String mUserPhoneId;
 
    public OrderDetailRepository() {
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
       this.mProductList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
-      this.mUserPhoneID = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mUserPhoneId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    @Override
    public String getCurrentUserPhoneNumber() {
-      return mUserPhoneID;
+      return mUserPhoneId;
    }
 
    @Override
@@ -51,7 +51,7 @@ public class OrderDetailRepository implements IOrderDetailRepository, IUserRepos
    }
 
    private void readOrderList(String pushID) {
-      mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserPhoneID).child(pushID).addChildEventListener(new ChildEventListener() {
+      mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserPhoneId).child(pushID).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             Product order = snapshot.getValue(Product.class);

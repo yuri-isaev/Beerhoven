@@ -18,11 +18,11 @@ public class OrderConfirmViewModel extends ViewModel {
    }
 
    public void onCreateConfirmOrderToRepository() {
-      mRepository.createConfirmOrder();
+      mRepository.onCreateConfirmOrder();
    }
 
    public void onDeleteConfirmOrderToRepository() {
-      mRepository.removeConfirmOrder();
+      mRepository.onRemoveConfirmOrder();
    }
 
    public void onDeleteCartCounterToStorage() {
