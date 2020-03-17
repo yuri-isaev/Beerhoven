@@ -19,6 +19,23 @@ public class Product {
 
    public Product() {}
 
+   public Product(String id, String country, String description, String density, String fortress, String manufacture,
+                  String name, String phone, double price, double total, String quantity, String style, String url) {
+      this.id = id;
+      this.country = country;
+      this.description = description;
+      this.density = density;
+      this.fortress = fortress;
+      this.manufacture = manufacture;
+      this.name = name;
+      this.phone = phone;
+      this.price = price;
+      this.total = total;
+      this.quantity = quantity;
+      this.style = style;
+      this.url = url;
+   }
+
    @Override
    public boolean equals(@Nullable Object obj) {
       assert obj != null;

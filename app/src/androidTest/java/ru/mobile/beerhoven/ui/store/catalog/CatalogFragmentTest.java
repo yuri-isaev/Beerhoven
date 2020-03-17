@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.presenter.ui.activity.MainActivity;
+import ru.mobile.beerhoven.presentation.activity.MainActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;

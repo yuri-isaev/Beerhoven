@@ -17,6 +17,7 @@ import java.util.List;
 import ru.mobile.beerhoven.common.FakeContent;
 import ru.mobile.beerhoven.domain.repository.ICatalogRepository;
 import ru.mobile.beerhoven.domain.model.Product;
+import ru.mobile.beerhoven.presentation.ui.store.catalog.CatalogViewModel;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -65,28 +66,22 @@ public class CatalogViewModelTest {
 
    @Test
    public void viewModel_getCatalogList_returns_what_not_null() {
-      // Method getList should return not null
-
       // Act
-      MutableLiveData result = (MutableLiveData) mViewModel.getCatalogList();
+      MutableLiveData result = mViewModel.getCatalogList();
       // Assert
       assertNotNull(result);
    }
 
    @Test
    public void viewModel_getCatalogList_returns_what_repository_readList() {
-      // Method getCatalogList should return value quantity
-
       // Act
-      // MutableLiveData result = mViewModel.getCatalogList();
+      MutableLiveData result = mViewModel.getCatalogList();
       // Assert
-      // assertEquals(mMutableList, result);
+      assertEquals(mMutableList, result);
    }
 
    @Test
-   public void viewModel_getCatalogList_calls_repository_readList() {
-      // Method getList should calls method getList
-
+   public void viewModel_getCatalogList_should_calls_method_readProductList() {
       // Act
       mViewModel.getCatalogList();
       // Assert
