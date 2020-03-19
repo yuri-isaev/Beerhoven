@@ -56,6 +56,6 @@ public class CartViewModel extends ViewModel {
    }
 
    public void onSaveCartCounterToStorage() {
-      mStorage.onCounterSave();
+      mStorage.onSaveCounter();
    }
 }

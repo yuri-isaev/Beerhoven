@@ -19,18 +19,21 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.databinding.FragmentRegistrationBinding;
 import ru.mobile.beerhoven.utils.Validation;
 
 public class RegistrationFragment extends Fragment {
+   private FragmentRegistrationBinding mFragmentBind;
 
    @Nullable
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      View view = inflater.inflate(R.layout.fragment_registration, container, false);
-      TextInputLayout regName = view.findViewById(R.id.reg_name);
-      TextInputLayout regEmail = view.findViewById(R.id.req_email);
-      TextInputLayout regPhoneNumber = view.findViewById(R.id.reg_phone_number);
-      Button btnRegister = view.findViewById(R.id.reg_btn);
+      mFragmentBind = FragmentRegistrationBinding.inflate(inflater, container, false);
+
+      TextInputLayout regName = mFragmentBind.regName;
+      TextInputLayout regEmail = mFragmentBind.reqEmail;
+      TextInputLayout regPhoneNumber = mFragmentBind.regPhoneNumber;
+      Button btnRegister = mFragmentBind.regBtn;
 
       btnRegister.setOnClickListener(v -> {
          if (!Validation.isValidNameField(regName) | !Validation.isValidateEmail(regEmail) | !Validation.isValidPhoneNumber(regPhoneNumber)) {
@@ -41,14 +44,11 @@ public class RegistrationFragment extends Fragment {
          String email = requireNonNull(regEmail.getEditText()).getText().toString();
          String phoneNumber = requireNonNull(regPhoneNumber.getEditText()).getText().toString();
 
-         NavDirections action = RegistrationFragmentDirections
-             .actionNavRegToNavAuth()
-             .setName(name)
-             .setEmail(email)
-             .setPhone(phoneNumber);
+         NavDirections action = RegistrationFragmentDirections.actionNavRegToNavAuth()
+             .setName(name).setEmail(email).setPhone(phoneNumber);
          Navigation.findNavController(v).navigate(action);
       });
 
-      return view;
+      return mFragmentBind.getRoot();
    }
 }

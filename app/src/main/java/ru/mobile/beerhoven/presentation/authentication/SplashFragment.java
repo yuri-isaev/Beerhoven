@@ -15,18 +15,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.data.remote.AuthRepository;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class SplashFragment extends Fragment {
+   private AuthViewModel mViewModel;
 
    @Nullable
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+      mViewModel = new AuthViewModel(new AuthRepository());
       return inflater.inflate(R.layout.fragment_splash, container, false);
    }
 
@@ -36,7 +36,7 @@ public class SplashFragment extends Fragment {
 
       new Handler().postDelayed(() -> {
 
-         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+         Object currentUser = mViewModel.getCurrentUserToRepository();
 
          if (currentUser != null) {
             Toast.makeText(getActivity(), R.string.auth_user_success, Toast.LENGTH_LONG).show();
@@ -50,6 +50,7 @@ public class SplashFragment extends Fragment {
                Navigation.findNavController(view).navigate(R.id.action_nav_splash_to_nav_reg);
             }
          }
-      }, Constants.SPLASH_DISPLAY_LENGTH);
+      },
+          Constants.SPLASH_DISPLAY_LENGTH);
    }
 }
