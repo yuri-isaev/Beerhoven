@@ -142,4 +142,10 @@
             android:id="@+id/action_nav_notifications_to_nav_order"
             app:destination="@id/nav_order" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="ru.mobile.beerhoven.presentation.ui.map.ClientMapFragment"
+        android:label="@string/menu_map"
+        tools:layout="@layout/fragment_client_map" >
+    </fragment>
 </navigation>
