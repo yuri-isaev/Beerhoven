@@ -17,6 +17,6 @@ public class ClientMapViewModel extends ViewModel {
    }
 
    public void getDriverLocationToUseCase() {
-      mUseCase.execute();
+      mUseCase.invoke();
    }
 }
