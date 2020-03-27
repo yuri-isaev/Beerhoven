@@ -11,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +39,8 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+
+import java.util.Locale;
 
 import ru.mobile.beerhoven.R;
 
@@ -84,8 +87,8 @@ public class ClientMapFragment extends Fragment implements OnMapReadyCallback, O
       Dexter.withContext(getContext()).withPermission(ACCESS_FINE_LOCATION).withListener(new PermissionListener() {
          @Override
          public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-            if (checkSelfPermission(requireContext(), ACCESS_FINE_LOCATION) !=
-                PERMISSION_GRANTED && checkSelfPermission(requireContext(), ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED) {
+            if (checkSelfPermission(requireContext(), ACCESS_FINE_LOCATION) != PERMISSION_GRANTED &&
+                checkSelfPermission(requireContext(), ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED) {
                return;
             }
 
@@ -104,7 +107,6 @@ public class ClientMapFragment extends Fragment implements OnMapReadyCallback, O
                   LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
                   mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 18f));
                });
-
                return true;
             });
 
@@ -129,8 +131,12 @@ public class ClientMapFragment extends Fragment implements OnMapReadyCallback, O
           .check();
 
       mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
+
+      Geocoder mGeocoder = new Geocoder(mActivity, Locale.getDefault());
       ClientMapViewModel viewModel = new ClientMapViewModel(getActivity(), requireNonNull(getActivity()).getApplicationContext(), mGoogleMap);
-      viewModel.getDriverLocationToUseCase();
+
+      viewModel.onGetDriverLocationToUseCase();
+      viewModel.onGetOrderLocationToUseCase(mFusedLocationProviderClient, mGeocoder);
    }
 
    @Override

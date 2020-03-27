@@ -30,4 +30,8 @@ public final class Constants {
 
     // Display delay
     public static final long SPLASH_DISPLAY_LENGTH = 3000;
+
+    // Geo
+    public static final String DRIVER_INFO_REFERENCES = "DriverInfo";
+    public static final String DRIVER_LOCATION_REFERENCES = "DriverLocation";
 }
