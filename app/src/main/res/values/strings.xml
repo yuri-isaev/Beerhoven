@@ -5,8 +5,8 @@
 
     <!-- App -->
     <string name="app">Приложениe</string>
-    <string name="app_name">Beerhoven</string>
     <string name="app_about">для заказа и доставки еды</string>
+    <string name="app_name">Beerhoven</string>
 
     <!-- Authentication -->
     <string name="auth_failed">Проверка подлинности не удалась</string>
@@ -26,6 +26,7 @@
     <string name="form_fill">Заполните форму</string>
 
     <!-- Menu -->
+    <string name="menu_add_news">Добавление новостей</string>
     <string name="menu_add_product">Добавление товара</string>
     <string name="menu_cart">Корзина заказа</string>
     <string name="menu_close">Закрыть меню</string>
@@ -40,6 +41,23 @@
     <!-- Navigation -->
     <string name="nav_order_confirm">Подтверждение</string>
     <string name="nav_order_notify">Уведомление</string>
+
+    <!-- News -->
+    <string name="news_add">Добавить новость</string>
+    <string name="news_add_success">Новость добавлена успешно</string>
+    <string name="news_add_failed">Новость не добавлена</string>
+    <string name="news_add_image">Загрузить изображение</string>
+    <string name="news_add_image_success">Изображение добавлено успешно</string>
+    <string name="news_add_image_failed">Изображение не добавлено </string>
+    <string name="news_comment">Сделайте пост для уведомления пользователей приложения о новостях магазина</string>
+    <string name="news_description">Описание</string>
+    <string name="news_title">Заголовок</string>
+
+    <!-- News dialog alert -->
+    <string name="dialog_btn_camera">Камера</string>
+    <string name="dialog_btn_default">Изображение логотипа</string>
+    <string name="dialog_btn_gallery">Галерея</string>
+    <string name="dialog_description">Выберите способ загрузки изображения</string>
 
     <!-- Order -->
     <string name="order_address">Адресс заказа</string>
@@ -62,7 +80,7 @@
     <string name="order_waiting">Ваш заказ получен, ожидайте доставки…</string>
 
     <!-- Product -->
-    <string name="product_add">Добавление товара</string>
+    <string name="product_add">Добавить товара</string>
     <string name="product_add_cart">Товар добавлен в корзину</string>
     <string name="product_add_database">Товар добавлен в базу данных</string>
     <string name="product_country">страна производитель</string>
@@ -94,7 +112,7 @@
     <string name="add_photo">Добавьте снимок</string>
 
     <!-- Registration -->
-    <string name="registration">Для полноценного использования приложения необходимо пройти регистрацию</string>
+    <string name="reg_description">Для полноценного использования приложения необходимо пройти регистрацию</string>
     <string name="reg">Регистрация</string>
     <string name="reg_success">Регистрация прошла успешно</string>
     <string name="reg_account_success">Ваш аккаунт успешно создан</string>

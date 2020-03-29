@@ -4,7 +4,10 @@
     <color name="colorMainWhite">#d9ffffff</color>
     <color name="colorMainYellow">#ead294</color>
     <color name="colorBlue">#6A90B5</color>
+    <color name="colorPictonBlue">#42A5F5</color>
+    <color name="colorGreen">#5EAE5B</color>
     <color name="colorRed">#EB3939</color>
+    <color name="colorVioletRed">#8E3232</color>
     <color name="colorSilver">#73ffffff</color>
     <color name="colorDimGrey">#696969</color>
     <color name="colorGrey">#4a4c4c</color>

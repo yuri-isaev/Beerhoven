@@ -29,11 +29,13 @@
     <dimen name="size_83">83dp</dimen>
     <dimen name="size_98">98dp</dimen>
     <dimen name="size_100">100dp</dimen>
+    <dimen name="size_120">120dp</dimen>
     <dimen name="size_124">124dp</dimen>
     <dimen name="size_150">150dp</dimen>
     <dimen name="size_170">170dp</dimen>
     <dimen name="size_176">176dp</dimen>
     <dimen name="size_182">182dp</dimen>
+    <dimen name="size_200">200dp</dimen>
     <dimen name="size_243">243dp</dimen>
     <dimen name="size_253">253dp</dimen>
     <dimen name="size_300">300dp</dimen>
