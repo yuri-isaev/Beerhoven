@@ -11,10 +11,14 @@ public final class Constants {
     public static final String NODE_ADMIN = "ADMIN";
     public static final String NODE_CART = "CART LIST";
     public static final String NODE_CONFIRMS = "CONFIRMS";
-    public static final String NODE_PRODUCTS = "PRODUCTS";
+    public static final String NODE_NEWS = "NEWS";
     public static final String NODE_ORDERS = "ORDERS";
-    public static final String PRODUCT_IMG = "ITEMS_IMG";
+    public static final String NODE_PRODUCTS = "PRODUCTS";
     public static final String NODE_USERS = "USERS";
+
+    // Database images storage
+    public static final String FOLDER_NEWS_IMG = "NEWS_IMG";
+    public static final String FOLDER_PRODUCT_IMG = "ITEMS_IMG";
 
     // Data time
     public static final String CURRENT_DATA = "MMM dd, yyyy";
@@ -25,8 +29,9 @@ public final class Constants {
     public static final String OBJECT_INVISIBLE = "Invisible";
     public static final String OBJECT_RENAME = "Rename";
 
-    // URL address
+    // URI address
     public static final String GOOGLE_API = "https://fcm.googleapis.com/fcm/send";
+    public static final String APP_LOGO = "gs://beerhoven-app.appspot.com/NEWS_IMG/logo.png";
 
     // Display delay
     public static final long SPLASH_DISPLAY_LENGTH = 3000;
