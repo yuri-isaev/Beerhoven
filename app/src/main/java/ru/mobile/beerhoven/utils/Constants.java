@@ -32,6 +32,7 @@ public final class Constants {
     // URI address
     public static final String GOOGLE_API = "https://fcm.googleapis.com/fcm/send";
     public static final String APP_LOGO = "gs://beerhoven-app.appspot.com/NEWS_IMG/logo.png";
+    public static final String URI_LOGO = "https://firebasestorage.googleapis.com/v0/b/beerhoven-app.appspot.com/o/NEWS_IMG%2FSat%20Jan%2028%2022%3A36%3A21%20GMT%2B02%3A00%202023?alt=media&token=394b75f7-7dac-4b80-95d5-ab2a53516987";
 
     // Display delay
     public static final long SPLASH_DISPLAY_LENGTH = 3000;

@@ -2,9 +2,12 @@ package ru.mobile.beerhoven.domain.model;
 
 public class News {
    private String description;
+   private String id;
    private String time;
    private String title;
    private String uri;
+
+   public News() {}
 
    public News(String description, String time, String title, String uri) {
       this.description = description;
@@ -19,6 +22,14 @@ public class News {
 
    public void setDescription(String description) {
       this.description = description;
+   }
+
+   public String getId() {
+      return id;
+   }
+
+   public void setId(String id) {
+      this.id = id;
    }
 
    public String getTime() {

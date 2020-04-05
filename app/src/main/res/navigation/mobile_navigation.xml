@@ -152,7 +152,7 @@
         android:id="@+id/nav_news"
         android:name="ru.mobile.beerhoven.presentation.ui.user.news.corporate.NewsListFragment"
         android:label="@string/menu_news"
-        tools:layout="@layout/fragment_list_news" />
+        tools:layout="@layout/fragment_news_list" />
     <fragment
         android:id="@+id/nav_add_news"
         android:name="ru.mobile.beerhoven.presentation.ui.owner.post.AddNewsFragment"
