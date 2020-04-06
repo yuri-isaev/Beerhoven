@@ -1,98 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<soup.neumorphism.NeumorphCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppTheme.Neumorph.CardView"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/size_5"
+    android:layout_marginRight="@dimen/size_5"
+    tools:context=".presentation.ui.user.news.corporate.NewsListFragment">
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="11dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginRight="11dp"
-        android:layout_marginBottom="7dp"
-        app:cardBackgroundColor="@color/colorMainWhite"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="@dimen/cardview_default_elevation">
+    <RelativeLayout
+        android:id="@+id/item_news_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true">
 
-        <RelativeLayout
-            android:id="@+id/item_container"
+        <ImageView
+            android:id="@+id/item_news_image"
+            android:layout_width="wrap_content"
+            android:layout_height="147dp"
+            android:background="@drawable/logo"
+            android:scaleType="centerCrop"
+            tools:ignore="ContentDescription,UnusedAttribute" />
+
+        <ImageView
+            android:id="@+id/item_news_shadow"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            app:cardBackgroundColor="@color/colorWhite">
+            android:layout_height="80dp"
+            android:layout_alignBottom="@id/item_news_image"
+            android:src="@drawable/gradient_shadow"
+            tools:ignore="ContentDescription" />
+
+        <FrameLayout
+            android:id="@+id/item_news_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_news_image"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="-34dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/rectangle_rounded_white"
+            android:padding="5dp">
 
             <ImageView
-                android:id="@+id/news_image"
-                android:layout_width="364dp"
-                android:layout_height="147dp"
-                android:background="@drawable/logo"
-                android:scaleType="centerCrop"
-                android:transitionName="img"
-                tools:ignore="ContentDescription,UnusedAttribute" />
-
-            <ImageView
-                android:id="@+id/shadow_bottom"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_alignBottom="@id/news_image"
-                android:src="@drawable/gradient_shadow"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/ic_date"
                 tools:ignore="ContentDescription" />
 
-            <FrameLayout
-                android:id="@+id/layoutDate"
+            <TextView
+                android:id="@+id/item_news_published_at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/news_image"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="-50dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/rectangle_rounded_white"
-                android:padding="5dp">
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="10dp"
+                android:text="01 January 2020"
+                android:textColor="@color/colorGrey"
+                tools:ignore="HardcodedText" />
+        </FrameLayout>
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:src="@drawable/ic_date" />
-
-                <TextView
-                    android:id="@+id/news_published_at"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="27dp"
-                    android:layout_marginRight="10dp"
-                    android:text="01 January 2020"
-                    android:textColor="@color/colorGrey" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/news_image"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="16dp"
-                android:fontFamily="sans-serif-light"
-                android:text="Title"
-                android:textColor="@color/colorGreyDark"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/desc"
-                android:layout_width="365dp"
-                android:layout_height="44dp"
-                android:layout_below="@id/title"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="16dp"
-                android:text="Description"
-                android:textColor="@color/colorGrey" />
-        </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
-</FrameLayout>
+        <TextView
+            android:id="@+id/item_news_title"
+            android:layout_width="371dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_news_image"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/colorBackground"
+            android:fontFamily="@font/catorze27_style_1"
+            android:text="Title"
+            android:textColor="@color/colorGreyDark"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+    </RelativeLayout>
+</soup.neumorphism.NeumorphCardView>
