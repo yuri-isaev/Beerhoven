@@ -158,4 +158,39 @@
         android:name="ru.mobile.beerhoven.presentation.ui.owner.post.AddNewsFragment"
         android:label="@string/menu_add_news"
         tools:layout="@layout/fragment_add_news" />
+    <fragment
+        android:id="@+id/nav_news_list"
+        android:name="ru.mobile.beerhoven.presentation.ui.user.news.corporate.NewsListFragment"
+        android:label="@string/menu_news"
+        tools:layout="@layout/fragment_news_list">
+        <action
+            android:id="@+id/action_nav_news_list_to_nav_news_detail"
+            app:destination="@id/nav_news_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_news_detail"
+        android:name="ru.mobile.beerhoven.presentation.ui.user.news.details.NewsDetailFragment"
+        android:label="@string/menu_details"
+        tools:layout="@layout/fragment_news_detail">
+        <argument
+            android:name="newsId"
+            android:defaultValue="default"
+            app:argType="string" />
+        <argument
+            android:name="newsTitle"
+            android:defaultValue="default"
+            app:argType="string" />
+        <argument
+            android:name="newsDesc"
+            android:defaultValue="default"
+            app:argType="string" />
+        <argument
+            android:name="newsDateTime"
+            android:defaultValue="default"
+            app:argType="string" />
+        <argument
+            android:name="newsImage"
+            android:defaultValue="default"
+            app:argType="string" />
+    </fragment>
 </navigation>
