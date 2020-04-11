@@ -72,7 +72,7 @@
             android:background="@color/colorBackground"
             android:fontFamily="@font/catorze27_style_1"
             android:text="Title"
-            android:textColor="@color/colorGreyDark"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText" />

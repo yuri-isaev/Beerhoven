@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
-    tools:context=".presentation.ui.owner.post.AddNewsFragment">
+    tools:context=".presentation.ui.admin.post.AddNewsFragment">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
@@ -16,118 +17,201 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.497"
+        app:layout_constraintVertical_bias="0.13"
         tools:ignore="MissingConstraints">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_50"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/size_16"
             android:layout_marginTop="@dimen/size_10"
             android:layout_marginRight="@dimen/size_16"
+            android:layout_marginBottom="@dimen/size_10"
             android:fontFamily="@font/catorze27_style_1"
+            android:gravity="center"
             android:text="@string/news_comment"
-            android:textColor="@color/colorMainYellow"
-            android:textSize="@dimen/text_18" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_22"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/news_title"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginLeft="@dimen/size_12"
-            android:layout_marginTop="@dimen/size_12"
-            android:layout_marginRight="@dimen/size_12"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/border_yellow"
-            android:hint="@string/news_title"
-            android:importantForAutofill="no"
-            android:minHeight="48dp"
-            android:padding="@dimen/size_10"
-            android:singleLine="true"
-            tools:ignore="MissingConstraints,TextFields" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:elevation="100dp"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/news_wrap"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/news_wrap"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/colorBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
+
+                <soup.neumorphism.NeumorphImageView
+                    android:id="@+id/news_image_logo"
+                    style="@style/Widget.Neumorph.ImageView"
+                    android:layout_width="95dp"
+                    android:layout_height="94dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_photo_camera"
+                    app:layout_constraintBottom_toTopOf="@+id/news_image_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:neumorph_shadowColorDark="#BBC1C1"
+                    app:neumorph_shadowColorLight="@color/colorMainWhite"
+                    app:neumorph_shadowElevation="@dimen/size_5"
+                    app:neumorph_shapeType="flat"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+
+                <ImageView
+                    android:id="@+id/news_image"
+                    android:layout_width="363dp"
+                    android:layout_height="114dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.533"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
+
+                <TextView
+                    android:id="@+id/news_image_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/catorze27_style_1"
+                    android:gravity="center"
+                    android:text="@string/news_add_image"
+                    android:textColor="@color/colorVioletBlue"
+                    android:textSize="@dimen/text_20"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginLeft="@dimen/size_12"
-            android:layout_marginRight="@dimen/size_12"
-            android:background="@drawable/border_yellow"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.51"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorMainWhite"
+            android:elevation="@dimen/size_25"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
 
-            <ImageView
-                android:id="@+id/news_image_logo"
-                android:layout_width="63dp"
-                android:layout_height="69dp"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_photo_camera"
-                app:layout_constraintBottom_toTopOf="@+id/news_image_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/news_image"
-                tools:ignore="ContentDescription" />
-
-            <ImageView
-                android:id="@+id/news_image"
-                android:layout_width="352dp"
-                android:layout_height="130dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="32dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.487"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/news_image_text"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/catorze27_style_1"
-                android:text="@string/news_add_image"
-                android:textColor="@color/colorMainYellow"
-                android:textSize="@dimen/text_18"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:background="@color/colorMainDark"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/news_description"
+                <TextView
+                    android:id="@+id/textCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorMainWhite"
+                    android:fontFamily="@font/catorze27_style_1"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="14dp"
+                    android:paddingRight="14dp"
+                    android:text="@string/news_title_post"
+                    android:textColor="@color/colorVioletBlue"
+                    android:textSize="@dimen/text_20" />
+
+                <EditText
+                    android:id="@+id/news_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:background="@color/colorMainWhite"
+                    android:minHeight="48dp"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="14dp"
+                    android:paddingBottom="14dp"
+                    android:text=""
+                    android:textColor="@color/colorMainBlack"
+                    android:textSize="@dimen/size_17"
+                    tools:ignore="HardcodedText,LabelFor,SpUsage,SpeakableTextPresentCheck,TextFields" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_150"
-            android:layout_marginLeft="@dimen/size_12"
-            android:layout_marginTop="@dimen/size_10"
-            android:layout_marginRight="@dimen/size_12"
-            android:background="@drawable/border_yellow"
-            android:gravity="start"
-            android:hint="@string/news_description"
-            android:inputType="textCapSentences|textMultiLine"
-            android:minHeight="@dimen/size_120"
-            android:padding="@dimen/size_10"
-            tools:ignore="Autofill,MissingConstraints" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorMainWhite"
+            android:elevation="@dimen/size_50"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
 
-        <info.hoang8f.widget.FButton
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorMainDark"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/news_title_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:background="@color/colorMainWhite"
+                    android:fontFamily="@font/catorze27_style_1"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="14dp"
+                    android:paddingRight="14dp"
+                    android:text="@string/news_title_desc"
+                    android:textColor="@color/colorVioletBlue"
+                    android:textSize="@dimen/text_20"
+                    tools:ignore="LabelFor,TextFields" />
+
+                <EditText
+                    android:id="@+id/news_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:background="@color/colorMainWhite"
+                    android:minHeight="48dp"
+                    android:paddingLeft="14dp"
+                    android:paddingTop="1dp"
+                    android:paddingRight="14dp"
+                    android:paddingBottom="12dp"
+                    android:text=""
+                    android:textColor="@color/colorMainBlack"
+                    android:textSize="@dimen/text_16"
+                    tools:ignore="HardcodedText,LabelFor,TextFields,SpeakableTextPresentCheck" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <soup.neumorphism.NeumorphButton
             android:id="@+id/btn_news_add"
-            style="@style/Widget.MaterialComponents.Button"
+            style="@style/Widget.Neumorph.Button"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_50"
-            android:layout_marginLeft="@dimen/size_12"
-            android:layout_marginTop="@dimen/size_10"
-            android:layout_marginRight="@dimen/size_12"
-            android:background="@drawable/btn_selector"
-            android:backgroundTint="@color/colorMainYellow"
-            android:clickable="true"
-            android:foreground="?attr/selectableItemBackground"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/size_15"
+            android:gravity="center"
             android:text="@string/news_add"
-            android:textColor="@color/colorMainBlack"
-            tools:ignore="KeyboardInaccessibleWidget,MissingConstraints,UnusedAttribute" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:neumorph_backgroundColor="@color/colorAccent"
+            app:neumorph_shadowColorDark="@color/colorShadowDark"
+            app:neumorph_shadowColorLight="@color/colorMainWhite"
+            app:neumorph_shapeType="flat"
+            tools:ignore="TextContrastCheck" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.presentation.ui.owner.post;
+package ru.mobile.beerhoven.presentation.ui.admin.post;
 
 import static android.provider.MediaStore.Images.Media.getBitmap;
 import static java.util.Objects.requireNonNull;
@@ -7,11 +7,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -21,7 +19,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -38,39 +35,32 @@ import java.io.IOException;
 import java.util.Date;
 
 import es.dmoral.toasty.Toasty;
-import info.hoang8f.widget.FButton;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.databinding.FragmentAddNewsBinding;
 import ru.mobile.beerhoven.domain.model.News;
+import ru.mobile.beerhoven.utils.Constants;
+import soup.neumorphism.NeumorphButton;
 
 public class AddNewsFragment extends Fragment {
-
-   // Permissions constants
-   private static final int CAMERA_REQUEST_CODE = 100;
-   private static final int STORAGE_REQUEST_CODE = 200;
-
-   // Image pick constants
-   private static final int IMAGE_PICK_CAMERA_CODE = 300;
-   private static final int IMAGE_PICK_GALLERY_CODE = 400;
-
    private Activity mActivity;
    private AddNewsViewModel mViewModel;
    private AlertDialog mAlertDialog;
    private EditText mTitle, mDescription;
-   private FButton mAddPostButton;
    private ImageView mPostImage;
+   private NeumorphButton mAddPostButton;
    private News mDataModel;
    private Uri mUriImage;
    private String[] cameraPermissions;
    private String[] storagePermissions;
    private String title, description, time;
+
    private static final String TAG = "AddNewsFragment";
 
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
       FragmentAddNewsBinding mFragmentBind = FragmentAddNewsBinding.inflate(inflater, container, false);
       mTitle = mFragmentBind.newsTitle;
-      mDescription = mFragmentBind.newsDescription;
+      mDescription = mFragmentBind.newsDesc;
       mPostImage = mFragmentBind.newsImage;
       mAddPostButton = mFragmentBind.btnNewsAdd;
       cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -79,15 +69,9 @@ public class AddNewsFragment extends Fragment {
    }
 
    @Override
-   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-      super.onActivityCreated(savedInstanceState);
-      mViewModel = new AddNewsViewModel(getActivity());
-   }
-
-   @Override
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-
+      mViewModel = new AddNewsViewModel(getActivity());
       Date currentDate = new Date();
 
       mPostImage.setOnClickListener(v -> showImagePickDialog());
@@ -135,8 +119,6 @@ public class AddNewsFragment extends Fragment {
          }
       });
 
-      view.findViewById(R.id.btn_add_default).setOnClickListener(v -> pickDefaultImage());
-
       view.findViewById(R.id.btn_cancel_container).setOnClickListener(v -> mAlertDialog.cancel());
 
       if (mAlertDialog.getWindow() != null) {
@@ -152,21 +134,14 @@ public class AddNewsFragment extends Fragment {
       File photo = new File(requireNonNull(mActivity).getExternalFilesDir(null), "test.jpg");
       mUriImage = FileProvider.getUriForFile(mActivity, mActivity.getPackageName() + ".provider", photo);
       intent.putExtra(MediaStore.EXTRA_OUTPUT, mUriImage);
-      startActivityForResult(intent, IMAGE_PICK_CAMERA_CODE);
+      startActivityForResult(intent, Constants.IMAGE_PICK_CAMERA_CODE);
       mAlertDialog.dismiss();
    }
 
    private void pickFromGallery() {
       Intent intent = new Intent(Intent.ACTION_PICK);
       intent.setType("image/*");
-      startActivityForResult(intent, IMAGE_PICK_GALLERY_CODE);
-      mAlertDialog.dismiss();
-   }
-
-   private void pickDefaultImage() {
-      Resources res = getResources();
-      Drawable drawable = ResourcesCompat.getDrawable(res, R.drawable.logo, null);
-      mPostImage.setImageDrawable(drawable);
+      startActivityForResult(intent, Constants.IMAGE_PICK_GALLERY_CODE);
       mAlertDialog.dismiss();
    }
 
@@ -175,7 +150,7 @@ public class AddNewsFragment extends Fragment {
    }
 
    private void requestStoragePermission() {
-      ActivityCompat.requestPermissions(mActivity, storagePermissions, STORAGE_REQUEST_CODE);
+      ActivityCompat.requestPermissions(mActivity, storagePermissions, Constants.STORAGE_REQUEST_CODE);
    }
 
    private boolean checkCameraPermission() {
@@ -184,7 +159,7 @@ public class AddNewsFragment extends Fragment {
    }
 
    private void requestCameraPermission() {
-      ActivityCompat.requestPermissions(mActivity, cameraPermissions, CAMERA_REQUEST_CODE);
+      ActivityCompat.requestPermissions(mActivity, cameraPermissions, Constants.CAMERA_REQUEST_CODE);
    }
 
    @Override
@@ -200,7 +175,7 @@ public class AddNewsFragment extends Fragment {
    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
       super.onActivityResult(requestCode, resultCode, data);
       switch (requestCode) {
-         case IMAGE_PICK_GALLERY_CODE:
+         case Constants.IMAGE_PICK_GALLERY_CODE:
             if (data != null) {
                mUriImage = data.getData();
                try {
@@ -212,7 +187,7 @@ public class AddNewsFragment extends Fragment {
                }
                break;
             }
-         case IMAGE_PICK_CAMERA_CODE:
+         case Constants.IMAGE_PICK_CAMERA_CODE:
             Bitmap bitmap = BitmapFactory.decodeFile(requireNonNull(getActivity()).getExternalFilesDir(null) + "/test.jpg");
             mPostImage.setImageBitmap(bitmap);
             Toasty.success(requireActivity(), R.string.add_image_inside, Toast.LENGTH_SHORT, true).show();

@@ -32,7 +32,8 @@
     <string name="menu_close">Закрыть меню</string>
     <string name="menu_details">Детали товара</string>
     <string name="menu_map">Карта</string>
-    <string name="menu_news">Новости магазина</string>
+    <string name="menu_news">Новости и акции</string>
+    <string name="menu_news_details">Детали</string>
     <string name="menu_notifications">Уведомления</string>
     <string name="menu_order">Мои заказы</string>
     <string name="menu_user_name">Имя пользователя</string>
@@ -52,6 +53,8 @@
     <string name="news_comment">Сделайте пост для уведомления пользователей приложения о новостях магазина</string>
     <string name="news_description">Описание</string>
     <string name="news_title">Заголовок</string>
+    <string name="news_title_post">Заголовок поста</string>
+    <string name="news_title_desc">Описание поста</string>
 
     <!-- News dialog alert -->
     <string name="dialog_btn_camera">Камера</string>

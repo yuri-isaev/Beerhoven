@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.presentation.ui.owner.post;
+package ru.mobile.beerhoven.presentation.ui.admin.post;
 
 import android.app.Activity;
 import android.util.Log;

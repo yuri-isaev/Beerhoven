@@ -22,7 +22,7 @@
         <item name="android:padding">@dimen/design_default_padding</item>
         <item name="android:stateListAnimator">@animator/button_state_list_anim_neumorph</item>
         <item name="neumorph_inset">@dimen/design_default_inset</item>
-        <item name="neumorph_shadowElevation">6dp</item>-->
+        <item name="neumorph_shadowElevation">6dp</item>
         <item name="neumorph_shadowColorLight">#FDF8F8</item>
         <item name="neumorph_shadowColorDark">#BBC1C1</item>
         <item name="neumorph_shapeType">flat</item>
