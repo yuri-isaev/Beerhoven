@@ -47,15 +47,15 @@ public class CartViewModel extends ViewModel {
       mRepository.onDeleteUserCartList();
    }
 
+   public int getCartCountFromStorage() {
+      return mStorage.onGetCartCountValue();
+   }
+
+   public void onSaveCartCounterToStorage(int counterValue) {
+      mStorage.onSaveCartCountValue(counterValue);
+   }
+
    public void onDeleteCartCounterToStorage() {
-      mStorage.onDeleteCounter();
-   }
-
-   public void onSetCartCountToStorage() {
-      mStorage.onSetIntCount();
-   }
-
-   public void onSaveCartCounterToStorage() {
-      mStorage.onSaveCounter();
+      mStorage.onDeleteCartCountValue();
    }
 }

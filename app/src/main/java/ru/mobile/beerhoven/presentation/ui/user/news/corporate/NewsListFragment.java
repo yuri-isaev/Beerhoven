@@ -48,7 +48,7 @@ public class NewsListFragment extends Fragment {
    private void initRecyclerView() {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-      mAdapter = new NewsListAdapter(requireNonNull(mViewModel.getNewsList().getValue()));
+      mAdapter = new NewsListAdapter(requireActivity(), requireNonNull(mViewModel.getNewsList().getValue()));
       mRecyclerView.setAdapter(mAdapter);
       mAdapter.notifyDataSetChanged();
    }

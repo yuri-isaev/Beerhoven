@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,43 +28,61 @@ import com.google.android.material.navigation.NavigationView;
 
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.CartRepository;
+import ru.mobile.beerhoven.data.remote.NewsRepository;
+import ru.mobile.beerhoven.presentation.authentication.AuthViewModel;
+import ru.mobile.beerhoven.presentation.ui.user.news.corporate.NewsListViewModel;
 import ru.mobile.beerhoven.utils.TypeFaceSpan;
 import ru.mobile.beerhoven.presentation.ui.cart.CartViewModel;
 
 public class MainActivity extends AppCompatActivity {
    private AppBarConfiguration mAppBarConfiguration;
-   private CartViewModel viewModel;
+   private CartViewModel mCartViewModel;
+   private NewsListViewModel mNewsListViewModel;
+   private int mCartCounterValue;
    private ImageView mIcon;
-   private int mCounterValue;
+   private int mNewsCounterValue;
    private NavController mNavController;
    private NavigationView mNavigationView;
-   private TextView mCounterText;
+
+   private TextView mBadgeCounter;
+   private TextView mNewsCounter;
+   private TextView mNews;
+   private TextView mCartCounter;
+   private TextView mCart;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
-
       setContentView(R.layout.activity_main);
-
       Toolbar toolbar = findViewById(R.id.toolbar);
       setSupportActionBar(toolbar);
 
-      // Set cart count value by shared preferences
-      viewModel = new CartViewModel(new CartRepository(), (Application) getApplicationContext());
-      viewModel.onSetCartCountToStorage();
-
-      DrawerLayout drawer = findViewById(R.id.drawer_layout);
+      DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
       mNavigationView = findViewById(R.id.nav_view);
 
-      mAppBarConfiguration = new AppBarConfiguration
-          .Builder(R.id.nav_news, R.id.nav_store, R.id.nav_order, R.id.nav_cart, R.id.nav_map, R.id.nav_add_product, R.id.nav_add_news)
-          .setDrawerLayout(drawer).build();
+      mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_news_list, R.id.nav_store, R.id.nav_order, R.id.nav_cart, R.id.nav_map, R.id.nav_add_product, R.id.nav_add_news)
+          .setDrawerLayout(mDrawerLayout).build();
+
+      mNews = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.nav_news_list));
+      mCart = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.nav_cart));
 
       mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
       NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
       NavigationUI.setupWithNavController(mNavigationView, mNavController);
 
+      mCartViewModel = new CartViewModel(new CartRepository(), (Application) getApplicationContext());
+      mNewsListViewModel = new NewsListViewModel(new NewsRepository(), (Application) getApplicationContext());
+
+      setNavHeaderUserName();
       setFontToMenuItem();
+   }
+
+   public void setNavHeaderUserName() {
+      AuthViewModel model = new AuthViewModel(getApplicationContext());
+      String userName = model.getUserNameToStorage();
+      View headerView = mNavigationView.getHeaderView(0);
+      TextView navUserName = headerView.findViewById(R.id.nav_user_name);
+      navUserName.setText(String.format(" Hello,  %s", userName));
    }
 
    @Override
@@ -81,57 +101,132 @@ public class MainActivity extends AppCompatActivity {
       return NavigationUI.navigateUp(mNavController, mAppBarConfiguration) || super.onSupportNavigateUp();
    }
 
-   // Cart badge counter
    @Override
    public boolean onPrepareOptionsMenu(final Menu menu) {
-      initBadgeCounter(menu);
+      initBadgeCartCounter(menu);
+      initCartCountDrawer();
+      initNewsCountDrawer();
       return super.onPrepareOptionsMenu(menu);
    }
 
-   private void initBadgeCounter(Menu menu) {
+   private void initBadgeCartCounter(Menu menu) {
       MenuItem menuItem = menu.findItem(R.id.cart_counter_bar);
       View counter = menuItem.getActionView();
-
       mIcon = counter.findViewById(R.id.badge_cart);
-      mCounterText = counter.findViewById(R.id.badge_counter_cart);
-
+      mBadgeCounter = counter.findViewById(R.id.badge_counter_cart);
       counter.setOnClickListener(v -> onOptionsItemSelected(menuItem));
-      updateCounter(mCounterValue);
-   }
+      updateCartCounter(mCartCounterValue);
 
-   public void onIncreaseCounterClick() {
-      updateCounter(++mCounterValue);
-   }
+      int cartCount = mCartViewModel.getCartCountFromStorage();
+      int newsCount = mNewsListViewModel.getNewsCountFromStorage();
 
-   public void onDecreaseCounterClick() {
-      if (mCounterValue <= 0) {
-         mCounterValue = 0;
+      if (newsCount <= 0) {
+         mNews.setVisibility(View.GONE);
       } else {
-         updateCounter(--mCounterValue);
+         mNews.setVisibility(View.VISIBLE);
+         String value = Integer.toString(mNewsListViewModel.getNewsCountFromStorage());
+         mNews.setText(value);
+         mNewsCounterValue = mNewsListViewModel.getNewsCountFromStorage();
       }
-   }
 
-   // Save cart count value by shared preferences
-   public void onCounterSave() {
-      viewModel.onSaveCartCounterToStorage();
-   }
-
-   public void updateCounter(int newCounterValue) {
-      if (mIcon == null || mCounterText == null) {
-         return;
-      }
-      if (newCounterValue == 0) {
-         mCounterText.setVisibility(View.GONE);
+      if (cartCount <= 0) {
+         mCart.setVisibility(View.GONE);
+         mBadgeCounter.setVisibility(View.GONE);
       } else {
-         mCounterText.setVisibility(View.VISIBLE);
-         mCounterText.setText(String.valueOf(newCounterValue));
-         onCounterSave();
+         mCart.setVisibility(View.VISIBLE);
+         String value = Integer.toString(mCartViewModel.getCartCountFromStorage());
+         mCart.setText(value);
+         mBadgeCounter.setVisibility(View.VISIBLE);
+         mBadgeCounter.setText(value);
+         mCartCounterValue = mCartViewModel.getCartCountFromStorage();
       }
    }
 
    public void onUpdateCounterFromFragment(int data) {
-      mCounterValue = data;
-      updateCounter(data);
+      updateCartCounter(data);
+   }
+
+   @SuppressLint("UseCompatLoadingForDrawables")
+   private void initCartCountDrawer() {
+      mCart.setGravity(Gravity.CENTER);
+      mCart.setTypeface(null, Typeface.BOLD);
+      mCart.setTextColor(getResources().getColor(R.color.colorAccent));
+      mCart.setTextSize(24);
+      mCart.setBackground(getDrawable(R.drawable.circle_white_transparent));
+      mCartCounter = mCart;
+   }
+
+   private void onSaveCartCounter(int counterValue) {
+      mCartViewModel.onSaveCartCounterToStorage(counterValue);
+   }
+
+   public void onIncreaseCartCounter() {
+      updateCartCounter(++mCartCounterValue);
+   }
+
+   public void onDecreaseCartDrawerCounter() {
+      if (mCartCounterValue <= 0) {
+         mCartCounterValue = 0;
+      } else {
+         updateCartCounter(--mCartCounterValue);
+      }
+   }
+
+   private void updateCartCounter(int counterValue) {
+      if (mIcon == null || mBadgeCounter == null || mCartCounter == null) {
+         return;
+      }
+      if (counterValue == 0) {
+         mCartCounter.setVisibility(View.GONE);
+         mBadgeCounter.setVisibility(View.GONE);
+         onSaveCartCounter(counterValue);
+      } else {
+         mCartCounter.setVisibility(View.VISIBLE);
+         mCartCounter.setText(String.valueOf(counterValue));
+         mBadgeCounter.setVisibility(View.VISIBLE);
+         mBadgeCounter.setText(String.valueOf(counterValue));
+         onSaveCartCounter(counterValue);
+      }
+   }
+
+   @SuppressLint("UseCompatLoadingForDrawables")
+   private void initNewsCountDrawer() {
+      mNews.setGravity(Gravity.CENTER);
+      mNews.setTypeface(null, Typeface.BOLD);
+      mNews.setTextColor(getResources().getColor(R.color.colorAccent));
+      mNews.setTextSize(24);
+      mNews.setBackground(getDrawable(R.drawable.circle_white_transparent));
+      mNewsCounter = mNews;
+   }
+
+   private void updateNewsCounter(int counterValue) {
+      if (mNewsCounter == null) {
+         return;
+      }
+      if (counterValue == 0) {
+         mNewsCounter.setVisibility(View.GONE);
+         onSaveNewsCount(counterValue);
+      } else {
+         mNewsCounter.setVisibility(View.VISIBLE);
+         mNewsCounter.setText(String.valueOf(counterValue));
+         onSaveNewsCount(counterValue);
+      }
+   }
+
+   private void onSaveNewsCount(int counterValue) {
+      mNewsListViewModel.onSaveNewsCounterToStorage(counterValue);
+   }
+
+   public void onIncreaseNewsCounter() {
+      updateNewsCounter(++mNewsCounterValue);
+   }
+
+   public void onDecreaseNewsCounter() {
+      if (mNewsCounterValue <= 0) {
+         mNewsCounterValue = 0;
+      } else {
+         updateNewsCounter(--mNewsCounterValue);
+      }
    }
 
    // Menu item font
@@ -165,10 +260,10 @@ public class MainActivity extends AppCompatActivity {
       super.onDestroy();
 
       // Delete cart list values when destroy
-      viewModel.onDeleteCartListToRepository();
+      mCartViewModel.onDeleteCartListToRepository();
 
       // Delete shared preferences values when destroy
       // Delete cart counter when destroy
-      viewModel.onDeleteCartCounterToStorage();
+      mCartViewModel.onDeleteCartCounterToStorage();
    }
 }

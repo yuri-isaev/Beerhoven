@@ -10,8 +10,12 @@ import ru.mobile.beerhoven.domain.model.User;
 import ru.mobile.beerhoven.domain.repository.IAuthRepository;
 
 public class AuthViewModel extends ViewModel {
-   private final IAuthRepository mRepository;
+   private IAuthRepository mRepository;
    private PreferencesStorage mStorage;
+
+   public AuthViewModel(Context context) {
+      this.mStorage = new PreferencesStorage((Application) context);
+   }
 
    public AuthViewModel(IAuthRepository repository) {
       this.mRepository = repository;
@@ -28,6 +32,10 @@ public class AuthViewModel extends ViewModel {
 
    public Object getCurrentUserToRepository() {
       return mRepository.getCurrentUser();
+   }
+
+   public String getUserNameToStorage() {
+      return mStorage.getUserNameToStorage();
    }
 
    public void onSaveNameToStorage(String name) {

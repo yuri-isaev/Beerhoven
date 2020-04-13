@@ -107,10 +107,9 @@ public class ProductDetailFragment extends Fragment {
    @RequiresApi(api = Build.VERSION_CODES.N)
    public void addProductToCartList() {
       mFragmentBind.btnAddProductToCart.setOnClickListener(v -> {
-         // Counter value control
          if (!MapStorage.productMap.containsValue(productId)) {
-            ((MainActivity) requireActivity()).onIncreaseCounterClick();
             MapStorage.productMap.put("productID", productId);
+            ((MainActivity) requireActivity()).onIncreaseCartCounter();
          }
 
          double cartPrice = Double.parseDouble(price);

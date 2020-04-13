@@ -38,6 +38,7 @@ import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.databinding.FragmentAddNewsBinding;
 import ru.mobile.beerhoven.domain.model.News;
+import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.utils.Constants;
 import soup.neumorphism.NeumorphButton;
 
@@ -81,8 +82,9 @@ public class AddNewsFragment extends Fragment {
          description = mDescription.getText().toString().trim();
          title = mTitle.getText().toString().trim();
          time = String.valueOf(currentDate);
-
          mDataModel = new News(description, time, title, mUriImage != null ? mUriImage.toString() : null);
+
+         ((MainActivity) requireActivity()).onIncreaseNewsCounter();
 
          // Add news
          mViewModel.onAddPostResponse(mDataModel).observe(getViewLifecycleOwner(), res -> {

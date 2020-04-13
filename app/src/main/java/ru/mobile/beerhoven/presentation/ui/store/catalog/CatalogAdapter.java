@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -26,7 +25,6 @@ import com.bumptech.glide.Glide;
 import java.util.HashMap;
 import java.util.List;
 
-import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.databinding.ItemCatalogBinding;
 import ru.mobile.beerhoven.domain.model.Product;
@@ -92,36 +90,16 @@ public class CatalogAdapter extends Adapter<CatalogViewHolder> implements OnMenu
          navController.navigate(action);
       });
 
-      // Navigate action for click product catalog card
-      holder.binding.cardSelector.setOnClickListener(v -> {
-         PopupMenu popupMenu = new PopupMenu(v.getContext(), v);
-         popupMenu.inflate(R.menu.popup_menu);
-         popupMenu.show();
-         popupMenu.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-               case R.id.action_context_open:
-                  NavController navController = Navigation.findNavController(v);
-                  navController.navigate(action);
-                  break;
-               case R.id.action_context_delete:
-                  MapStorage.productMap.put("productID", productId);
-                  MapStorage.productMap.put("image", productImage);
-                  // Delete product list position from cart
-                  mListener.onInteractionDelete(mAdapterList.get(position));
-                  break;
-            }
-            return true;
-         });
-      });
-
       // Add product to cart when click catalog card element
       holder.binding.cardAddProduct.setOnClickListener(v -> {
-         int defaultCountValue = 1;
+         int productQuantity = 1;
 
          // Counter value control
          if (mContext instanceof MainActivity && !MapStorage.productMap.containsValue(productId)) {
-            ((MainActivity) mContext).onIncreaseCounterClick();
             MapStorage.productMap.put("productID", productId);
+            ((MainActivity) mContext).onIncreaseCartCounter();
+         } else {
+            productQuantity += 1;
          }
 
          MapStorage.priceMap.put("total", product.getPrice());
@@ -135,7 +113,7 @@ public class CatalogAdapter extends Adapter<CatalogViewHolder> implements OnMenu
          map.put("density", product.getDensity());
          map.put("description", product.getDescription());
          map.put("url", product.getUrl());
-         map.put("quantity", String.valueOf(defaultCountValue));
+         map.put("quantity", String.valueOf(productQuantity));
 
          // Add product list position to cart
          mListener.onInteractionAdd(mAdapterList.get(position));

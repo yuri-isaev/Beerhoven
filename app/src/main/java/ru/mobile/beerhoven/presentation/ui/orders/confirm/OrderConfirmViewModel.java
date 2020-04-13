@@ -26,6 +26,6 @@ public class OrderConfirmViewModel extends ViewModel {
    }
 
    public void onDeleteCartCounterToStorage() {
-      mStorage.onDeleteCounter();
+      mStorage.onDeleteCartCountValue();
    }
 }

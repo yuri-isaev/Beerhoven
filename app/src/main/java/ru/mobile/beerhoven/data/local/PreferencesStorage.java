@@ -10,28 +10,43 @@ import ru.mobile.beerhoven.utils.Constants;
  * Class accessing SharedPreferences, used to save the value of the counter.
  */
 public class PreferencesStorage {
-   private final SharedPreferences mSharedPref;
+   private final SharedPreferences mSettings;
    private final SharedPreferences.Editor mEditor;
-   private int mCounterValue;
 
    public PreferencesStorage(Application context) {
-      this.mSharedPref = context.getSharedPreferences(Constants.SHARED_PREF, Context.MODE_PRIVATE);
-      this.mEditor = mSharedPref.edit();
+      this.mSettings = context.getSharedPreferences(Constants.SHARED_PREF, Context.MODE_PRIVATE);
+      this.mEditor = mSettings.edit();
    }
 
-   public void onSetIntCount() {
-      this.mCounterValue = mSharedPref.getInt(Constants.COUNTER_VALUE, 0);
+   public String getUserNameToStorage() {
+      return mSettings.getString(Constants.CURRENT_USER_NAME, "");
    }
 
-   public void onSaveCounter() {
-      mEditor.putInt(Constants.COUNTER_VALUE, mCounterValue).apply();
+   public int onGetNewsCountValue() {
+      return mSettings.getInt(Constants.COUNTER_NEWS_VALUE, 0);
    }
 
-   public void onDeleteCounter() {
-      mEditor.remove(Constants.COUNTER_VALUE).apply();
+   public void onSaveNewsCountValue(int value) {
+      mEditor.putInt(Constants.COUNTER_NEWS_VALUE, value).apply();
+   }
+
+   public void onDeleteNewsCountValue() {
+      mEditor.remove(Constants.COUNTER_NEWS_VALUE).apply();
+   }
+
+   public void onSaveCartCountValue(int value) {
+      mEditor.putInt(Constants.COUNTER_CART_VALUE, value).apply();
    }
 
    public void onSaveUserName(String name) {
       mEditor.putString(Constants.CURRENT_USER_NAME, name).apply();
+   }
+
+   public int onGetCartCountValue() {
+      return mSettings.getInt(Constants.COUNTER_CART_VALUE, 0);
+   }
+
+   public void onDeleteCartCountValue() {
+      mEditor.remove(Constants.COUNTER_CART_VALUE).apply();
    }
 }

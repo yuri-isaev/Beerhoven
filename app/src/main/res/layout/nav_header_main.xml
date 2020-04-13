@@ -11,8 +11,7 @@
     android:paddingLeft="@dimen/size_16"
     android:paddingTop="@dimen/size_16"
     android:paddingRight="@dimen/size_16"
-    android:paddingBottom="@dimen/size_16"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:paddingBottom="@dimen/size_16">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/logo_image"

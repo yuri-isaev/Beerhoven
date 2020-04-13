@@ -1,6 +1,7 @@
 package ru.mobile.beerhoven.presentation.ui.user.news.corporate;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -18,12 +19,15 @@ import java.util.List;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.databinding.ItemNewsBinding;
 import ru.mobile.beerhoven.domain.model.News;
+import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.utils.CurrentDateTime;
 
 public class NewsListAdapter extends Adapter<NewsListAdapter.NewsListViewHolder> {
+   private final Activity mActivity;
    private final List<News> mAdapterList;
 
-   public NewsListAdapter(@NonNull List<News> list) {
+   public NewsListAdapter(Activity activity, @NonNull List<News> list) {
+      this.mActivity = activity;
       this.mAdapterList = list;
    }
 
@@ -62,6 +66,8 @@ public class NewsListAdapter extends Adapter<NewsListAdapter.NewsListViewHolder>
              .setExitAnim(R.anim.fade_out)
              .setPopExitAnim(R.anim.fade_out)
              .build();
+
+            ((MainActivity) mActivity).onDecreaseNewsCounter();
 
          NavController navController = Navigation.findNavController(v);
          navController.navigate(action, options);

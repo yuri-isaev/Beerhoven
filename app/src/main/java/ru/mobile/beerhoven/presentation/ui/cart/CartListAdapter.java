@@ -78,7 +78,7 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
          mCartViewModel.onDeleteCartListItemToRepository(productId);
 
          // Decrease counter when delete product from cart and database
-         ((MainActivity) mContext).onDecreaseCounterClick();
+         ((MainActivity) mContext).onDecreaseCartDrawerCounter();
 
          // Update total price of the entire cart after decrease counter
          double dif = 0.0;

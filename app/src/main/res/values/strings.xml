@@ -26,6 +26,7 @@
     <string name="form_fill">Заполните форму</string>
 
     <!-- Menu -->
+    <string name="menu_admin">Администратор</string>
     <string name="menu_add_news">Добавление новостей</string>
     <string name="menu_add_product">Добавление товара</string>
     <string name="menu_cart">Корзина заказа</string>
