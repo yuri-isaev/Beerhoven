@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_store">
+    app:startDestination="@+id/nav_product_list">
 
     <fragment
-        android:id="@+id/nav_store"
-        android:name="ru.mobile.beerhoven.presentation.ui.store.sections.StoreFragment"
+        android:id="@+id/nav_product_list"
+        android:name="ru.mobile.beerhoven.presentation.ui.user.store.sections.StoreFragment"
         android:label="@string/menu_store"
-        tools:layout="@layout/fragment_store">
+        tools:layout="@layout/fragment_product_list">
         <action
-            android:id="@+id/action_nav_store_to_nav_details"
-            app:destination="@id/nav_details" />
+            android:id="@+id/action_nav_product_list_to_nav_product_details"
+            app:destination="@id/nav_product_details" />
     </fragment>
 
     <fragment
-        android:id="@+id/nav_details"
+        android:id="@+id/nav_product_details"
         android:name="ru.mobile.beerhoven.presentation.ui.store.details.ProductDetailFragment"
         android:label="@string/menu_details"
-        tools:layout="@layout/fragment_details">
+        tools:layout="@layout/fragment_product_detail">
         <argument
-            android:name="productID"
+            android:name="productId"
             android:defaultValue="default"
             app:argType="string" />
         <argument
@@ -71,7 +71,7 @@
         tools:layout="@layout/fragment_cart">
         <action
             android:id="@+id/action_nav_cart_to_nav_details"
-            app:destination="@id/nav_details" />
+            app:destination="@+id/nav_product_details" />
         <action
             android:id="@+id/action_nav_cart_to_nav_order_confirm"
             app:destination="@id/nav_order_confirm" />
@@ -83,8 +83,8 @@
         tools:layout="@layout/fragment_order">
         <argument
             android:name="ID"
-            app:argType="string"
-            android:defaultValue="default" />
+            android:defaultValue="default"
+            app:argType="string" />
         <action
             android:id="@+id/action_nav_order_to_nav_order_details"
             app:destination="@id/nav_order_details" />
@@ -104,7 +104,7 @@
             app:argType="string" />
         <action
             android:id="@+id/action_nav_order_details_to_nav_details"
-            app:destination="@id/nav_details" />
+            app:destination="@+id/nav_product_details" />
     </fragment>
     <fragment
         android:id="@+id/nav_add_product"
@@ -128,16 +128,16 @@
         android:id="@+id/nav_order_notify"
         android:name="ru.mobile.beerhoven.presentation.ui.orders.notify.OrderNotifyFragment"
         android:label="@string/nav_order_notify"
-        tools:layout="@layout/fragment_order_notify" >
+        tools:layout="@layout/fragment_order_notify">
         <action
             android:id="@+id/action_nav_order_notify_to_nav_store"
-            app:destination="@id/nav_store" />
+            app:destination="@id/nav_product_list" />
     </fragment>
     <fragment
         android:id="@+id/nav_notifications"
         android:name="ru.mobile.beerhoven.presentation.ui.notifications.notification.NotificationFragment"
         android:label="@string/menu_notifications"
-        tools:layout="@layout/fragment_notification" >
+        tools:layout="@layout/fragment_notification">
         <action
             android:id="@+id/action_nav_notifications_to_nav_order"
             app:destination="@id/nav_order" />
@@ -155,7 +155,7 @@
         tools:layout="@layout/fragment_news_list" />
     <fragment
         android:id="@+id/nav_add_news"
-        android:name="ru.mobile.beerhoven.presentation.ui.owner.post.AddNewsFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.admin.post.AddNewsFragment"
         android:label="@string/menu_add_news"
         tools:layout="@layout/fragment_add_news" />
     <fragment

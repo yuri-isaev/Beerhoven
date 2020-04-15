@@ -23,6 +23,7 @@ allprojects {
         maven { url 'https://jitpack.io' }
         //noinspection JcenterRepositoryObsolete
         jcenter()
+        mavenCentral()
     }
 
     gradle.projectsEvaluated {

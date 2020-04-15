@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.presentation.ui.store.catalog;
+package ru.mobile.beerhoven.presentation.ui.user.store.catalog;
 
 import static java.util.Objects.requireNonNull;
 
@@ -24,14 +24,14 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.data.remote.CatalogRepository;
-import ru.mobile.beerhoven.presentation.interfaces.InteractionListener;
+import ru.mobile.beerhoven.data.remote.ProductRepository;
+import ru.mobile.beerhoven.presentation.interfaces.IAdapterPositionListener;
 import ru.mobile.beerhoven.domain.model.Product;
 
-public class CatalogFragment extends Fragment {
+public class ProductListFragment extends Fragment {
    private RecyclerView mRecyclerView;
-   private CatalogAdapter mCatalogAdapter;
-   private CatalogViewModel mViewModel;
+   private ProductListAdapter mProductListAdapter;
+   private ProductListViewModel mViewModel;
 
    @Override
    public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,18 +43,18 @@ public class CatalogFragment extends Fragment {
    @SuppressLint("NotifyDataSetChanged")
    @Override
    public View onCreateView(LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
-      mViewModel = new CatalogViewModel(new CatalogRepository());
-
-      View view = inflater.inflate(R.layout.fragment_catalog, container, false);
+      View view = inflater.inflate(R.layout.fragment_product_list, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view);
-
-      // Catalog adapter observer
-      mViewModel.getCatalogList().observe(getViewLifecycleOwner(), res ->
-          mCatalogAdapter.notifyDataSetChanged());
-
-      initRecyclerView();
-
       return view;
+   }
+
+   @SuppressLint("NotifyDataSetChanged")
+   @Override
+   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+      super.onViewCreated(view, savedInstanceState);
+      mViewModel = new ProductListViewModel(new ProductRepository());
+      mViewModel.getCatalogList().observe(getViewLifecycleOwner(), list -> mProductListAdapter.notifyDataSetChanged());
+      initRecyclerView();
    }
 
    @SuppressWarnings("unchecked")
@@ -63,35 +63,30 @@ public class CatalogFragment extends Fragment {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
-      // Store cart observer
-      mCatalogAdapter = new CatalogAdapter((List<Product>) mViewModel.getCatalogList().getValue(),
-          getContext(),
-          new InteractionListener() {
+      mProductListAdapter = new ProductListAdapter(mViewModel.getCatalogList().getValue(), getContext(), new IAdapterPositionListener() {
          @Override
          public void onInteractionAdd(Product product) {
-            mViewModel.addProductToCartToRepository().observe(getViewLifecycleOwner(), s ->
-                Toasty.success(requireActivity(), R.string.product_add_cart, Toast.LENGTH_SHORT, true).show());
+            mViewModel.addProductCartToRepository(product).observe(getViewLifecycleOwner(), s -> Toasty.success(requireActivity(), R.string.product_add_cart, Toast.LENGTH_SHORT, true).show());
          }
 
          @SuppressLint("NotifyDataSetChanged")
          @Override
          public void onInteractionDelete(Product product) {
-            mViewModel.removeProductFromCartToRepository().observe(getViewLifecycleOwner(), s -> {
+            mViewModel.deleteProductFromRepository(product).observe(getViewLifecycleOwner(), s -> {
                Toasty.success(requireActivity(), R.string.product_catalog_delete, Toast.LENGTH_SHORT, true).show();
-               mCatalogAdapter.notifyDataSetChanged();
+               mProductListAdapter.notifyDataSetChanged();
             });
          }
       });
-      mRecyclerView.setAdapter(mCatalogAdapter);
-      mCatalogAdapter.notifyDataSetChanged();
+
+      mRecyclerView.setAdapter(mProductListAdapter);
+      mProductListAdapter.notifyDataSetChanged();
    }
 
    @Override
    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
       inflater.inflate(R.menu.search_main, menu);
       MenuItem menuItem = menu.findItem(R.id.action_search);
-
       SearchView searchView = (SearchView) menuItem.getActionView();
       searchView.setQueryHint("Поиск ...");
 
@@ -124,7 +119,7 @@ public class CatalogFragment extends Fragment {
    @SuppressLint("NotifyDataSetChanged")
    private void onItemSearch(String searchText) {
       List<Product> searchList = new ArrayList<>();
-      List<Product> products = (List<Product>) requireNonNull(mViewModel.getCatalogList().getValue());
+      List<Product> products = requireNonNull(mViewModel.getCatalogList().getValue());
 
       for (Product product : products) {
          if (product.getName() != null && !product.getName().isEmpty())
@@ -133,21 +128,19 @@ public class CatalogFragment extends Fragment {
             }
       }
 
-      mCatalogAdapter = new CatalogAdapter(searchList, getContext(), new InteractionListener() {
+      mProductListAdapter = new ProductListAdapter(searchList, getContext(), new IAdapterPositionListener() {
          @Override
-         public void onInteractionDelete(Product model) {
-            mViewModel.removeProductFromCartToRepository().observe(getViewLifecycleOwner(), s -> {
+         public void onInteractionAdd(Product product) {
+            mViewModel.addProductCartToRepository(product).observe(getViewLifecycleOwner(), s -> Toasty.success(requireActivity(), R.string.product_add_cart, Toast.LENGTH_SHORT, true).show());
+         }
+         @Override
+         public void onInteractionDelete(Product product) {
+            mViewModel.deleteProductFromRepository(product).observe(getViewLifecycleOwner(), s -> {
                Toasty.success(requireActivity(), R.string.product_catalog_delete, Toast.LENGTH_SHORT, true).show();
-               mCatalogAdapter.notifyDataSetChanged();
+               mProductListAdapter.notifyDataSetChanged();
             });
          }
-
-         @Override
-         public void onInteractionAdd(Product model) {
-            mViewModel.addProductToCartToRepository().observe(getViewLifecycleOwner(), s ->
-               Toasty.success(requireActivity(), R.string.product_add_cart, Toast.LENGTH_SHORT, true).show());
-         }
       });
-      mRecyclerView.setAdapter(mCatalogAdapter);
+      mRecyclerView.setAdapter(mProductListAdapter);
    }
 }

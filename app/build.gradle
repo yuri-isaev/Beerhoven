@@ -108,4 +108,7 @@ dependencies {
 
     // Design
     implementation 'com.github.fornewid:neumorphism:0.3.0'
+
+    compileOnly 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
 }

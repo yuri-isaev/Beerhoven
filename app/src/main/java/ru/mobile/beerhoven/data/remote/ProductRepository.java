@@ -20,17 +20,17 @@ import java.util.List;
 
 import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.domain.model.Product;
-import ru.mobile.beerhoven.domain.repository.ICatalogRepository;
+import ru.mobile.beerhoven.domain.repository.IProductRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
-public class CatalogRepository implements ICatalogRepository {
+public class ProductRepository implements IProductRepository {
    private final DatabaseReference mFirebaseRef;
    private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
    private final MutableLiveData<String> mMutableData;
    private final String mUserPhoneId;
 
-   public CatalogRepository() {
+   public ProductRepository() {
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
       this.mProductList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
@@ -38,9 +38,8 @@ public class CatalogRepository implements ICatalogRepository {
       this.mUserPhoneId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
-   // Read store catalog
    @Override
-   public MutableLiveData<List<Product>> readProductList() {
+   public MutableLiveData<List<Product>> getProductList() {
       if (mProductList.size() == 0) {
          readCatalogList();
       }
@@ -92,52 +91,31 @@ public class CatalogRepository implements ICatalogRepository {
       });
    }
 
-   // Create store catalog item
    @Override
-   public MutableLiveData<String> addProductToCart() {
-      addCatalogItem();
+   public MutableLiveData<String> addProductToRepository(Product product) {
+      addCatalogItem(product);
       mMutableData.setValue(null);
       return mMutableData;
    }
 
-   private void addCatalogItem() {
-      HashMap<String, String> catalog = MapStorage.productMap;
+   private void addCatalogItem(Product product) {
       HashMap<String, Double> price = MapStorage.priceMap;
-
-      Product post = new Product();
-      post.setName(catalog.get("name"));
-      post.setCountry(catalog.get("country"));
-      post.setManufacture(catalog.get("manufacture"));
-      post.setStyle(catalog.get("style"));
-      post.setFortress(catalog.get("fortress"));
-      post.setDensity(catalog.get("density"));
-      post.setDescription(catalog.get("description"));
-      post.setUrl(catalog.get("url"));
-      post.setQuantity(catalog.get("quantity"));
-      post.setPrice(price.get("price"));
-      post.setTotal(price.get("total"));
+      product.setTotal(price.get("total"));
 
       assert mUserPhoneId != null;
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId)
-          .child(requireNonNull(MapStorage.productMap.get("productID"))).setValue(post);
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).child(product.getId()).setValue(product);
    }
 
    // Delete store catalog item
    @Override
-   public MutableLiveData<String> deleteProductFromCart() {
-      deleteCatalogItem();
+   public MutableLiveData<String> deleteProductFromRepository(Product product) {
+      onDeleteProductById(product);
       mMutableData.setValue(null);
       return mMutableData;
    }
 
-   private void deleteCatalogItem() {
-      HashMap<String, String> map = MapStorage.productMap;
-
-      mFirebaseRef.child(Constants.NODE_PRODUCTS)
-          .child(requireNonNull(map.get("productID")))
-          .removeValue();
-      FirebaseStorage.getInstance()
-          .getReferenceFromUrl(requireNonNull(map.get("image")))
-          .delete();
+   private void onDeleteProductById(Product product) {
+      mFirebaseRef.child(Constants.NODE_PRODUCTS).child(product.getId()).removeValue();
+      FirebaseStorage.getInstance().getReferenceFromUrl(product.getUrl()).delete();
    }
 }

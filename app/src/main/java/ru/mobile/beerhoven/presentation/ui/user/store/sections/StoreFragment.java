@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.presentation.ui.store.sections;
+package ru.mobile.beerhoven.presentation.ui.user.store.sections;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,10 +13,9 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.presentation.ui.store.catalog.CatalogFragment;
+import ru.mobile.beerhoven.presentation.ui.user.store.catalog.ProductListFragment;
 
 public class StoreFragment extends Fragment {
-
    private ViewPager mViewPager;
    private TabLayout mTabLayout;
 
@@ -30,10 +29,8 @@ public class StoreFragment extends Fragment {
    @Override
    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
       super.onActivityCreated(savedInstanceState);
-
       mTabLayout.setupWithViewPager(mViewPager);
       setUpViewPager(mViewPager);
-
       mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
          @Override
          public void onTabSelected(TabLayout.Tab tab) {}
@@ -48,7 +45,7 @@ public class StoreFragment extends Fragment {
 
    private void setUpViewPager(ViewPager viewPager) {
       SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
-      adapter.addFragment(new CatalogFragment(), "Каталог");
+      adapter.addFragment(new ProductListFragment(), "Каталог");
       viewPager.setAdapter(adapter);
    }
 }

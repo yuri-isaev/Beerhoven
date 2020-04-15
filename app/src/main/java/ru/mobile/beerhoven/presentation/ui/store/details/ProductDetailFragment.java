@@ -20,15 +20,15 @@ import java.util.HashMap;
 
 import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.databinding.FragmentProductDetailBinding;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.data.local.MapStorage;
-import ru.mobile.beerhoven.databinding.FragmentDetailsBinding;
 import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.CurrentDateTime;
 
 public class ProductDetailFragment extends Fragment {
    private double total;
-   private FragmentDetailsBinding mFragmentBind;
+   private FragmentProductDetailBinding mFragmentBind;
    private int mValue = 1;
    private String productId;
    private String name;
@@ -47,7 +47,7 @@ public class ProductDetailFragment extends Fragment {
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       mViewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
-      mFragmentBind = FragmentDetailsBinding.inflate(inflater, container, false);
+      mFragmentBind = FragmentProductDetailBinding.inflate(inflater, container, false);
       countListener();
       addProductToCartList();
       return mFragmentBind.getRoot();
@@ -61,7 +61,7 @@ public class ProductDetailFragment extends Fragment {
       if (getActivity() != null) {
          assert getArguments() != null;
          ProductDetailFragmentArgs args = ProductDetailFragmentArgs.fromBundle(getArguments());
-         productId = args.getProductID();
+         productId = args.getProductId();
          name = args.getName();
          country = args.getCountry();
          manufacture = args.getManufacture();

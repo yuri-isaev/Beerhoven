@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.presentation.ui.store.sections;
+package ru.mobile.beerhoven.presentation.ui.user.store.sections;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

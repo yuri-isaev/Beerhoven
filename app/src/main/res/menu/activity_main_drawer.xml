@@ -11,8 +11,8 @@
             android:title="@string/menu_news"
             app:actionViewClass="android.widget.TextView" />
         <item
-            android:id="@+id/nav_store"
-            android:icon="@drawable/ic_baseline_shop_24"
+            android:id="@+id/nav_product_list"
+            android:icon="@drawable/ic_shop"
             android:title="@string/menu_store" />
         <item
             android:id="@+id/nav_order"
