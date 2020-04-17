@@ -36,20 +36,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/cart_image"
                     android:layout_width="91dp"
                     android:layout_height="93dp"
                     android:layout_marginEnd="52dp"
-                    android:background="@drawable/circle_shadow"
-                    android:elevation="2mm"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:ignore="ContentDescription,
-                    InOrMmUsage,
-                    MissingConstraints,
-                    ObsoleteLayoutParam,
-                    UnusedAttribute,
-                    VectorDrawableCompat,ImageContrastCheck,ImageContrastCheck"
                     tools:layout_editor_absoluteY="4dp" />
 
                 <LinearLayout
@@ -102,7 +94,7 @@
                     android:id="@+id/cart_product_delete"
                     android:layout_width="29dp"
                     android:layout_height="28dp"
-                    android:background="@drawable/circle_shadow"
+                    android:background="@drawable/circle_red"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -129,7 +121,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
                         android:text="15"
-                        android:textColor="@color/colorBlue"
+                        android:textColor="@color/colorMainBlue"
                         android:textSize="@dimen/size_15"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText,SpUsage" />
@@ -140,7 +132,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/product_price"
-                        android:textColor="@color/colorBlue"
+                        android:textColor="@color/colorMainBlue"
                         android:textSize="@dimen/size_12"
                         tools:ignore="SpUsage" />
                 </LinearLayout>
@@ -149,7 +141,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/size_15"
-                    android:layout_marginLeft="@dimen/size_15"
                     android:src="@drawable/split"
                     tools:ignore="ContentDescription" />
 
@@ -157,7 +148,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_10"
-                    android:layout_marginLeft="@dimen/size_10"
                     android:orientation="vertical">
 
                     <TextView
@@ -167,7 +157,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
                         android:text="2"
-                        android:textColor="@color/colorBlue"
+                        android:textColor="@color/colorMainBlue"
                         android:textSize="@dimen/size_15"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText,SpUsage" />
@@ -178,7 +168,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/product_quantity"
-                        android:textColor="@color/colorBlue"
+                        android:textColor="@color/colorMainBlue"
                         android:textSize="@dimen/size_15"
                         tools:ignore="HardcodedText,SpUsage" />
                 </LinearLayout>
@@ -187,7 +177,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="@dimen/size_15"
-                    android:layout_marginLeft="@dimen/size_15"
                     android:src="@drawable/split"
                     tools:ignore="ContentDescription" />
 
@@ -195,7 +184,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_10"
-                    android:layout_marginLeft="@dimen/size_10"
                     android:orientation="vertical">
 
                     <TextView
@@ -205,7 +193,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
                         android:text="150"
-                        android:textColor="@color/colorBlue"
+                        android:textColor="@color/colorMainBlue"
                         android:textSize="@dimen/size_15"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText,SpUsage" />
@@ -217,7 +205,7 @@
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/product_total"
                         android:textAlignment="center"
-                        android:textColor="@color/colorBlue"
+                        android:textColor="@color/colorMainBlue"
                         android:textSize="@dimen/size_15"
                         tools:ignore="HardcodedText,SpUsage" />
                 </LinearLayout>

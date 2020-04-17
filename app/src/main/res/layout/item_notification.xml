@@ -43,8 +43,6 @@
                     android:layout_width="84dp"
                     android:layout_height="95dp"
                     android:layout_marginEnd="48dp"
-                    android:layout_marginRight="48dp"
-                    android:background="@drawable/circle_shape"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_map_pin_active"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +76,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.082"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDataOrder"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDateOrder"
                     tools:ignore="SpUsage" />
 
                 <TextView

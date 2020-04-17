@@ -77,7 +77,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.082"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDataOrder"
+                    app:layout_constraintTop_toBottomOf="@+id/order_date"
                     tools:ignore="SpUsage" />
 
                 <TextView
@@ -91,7 +91,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.13"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTimeOrder"
+                    app:layout_constraintTop_toBottomOf="@+id/order_time"
                     tools:ignore="SpUsage" />
 
                 <TextView
@@ -105,7 +105,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.13"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvNameOrder"
+                    app:layout_constraintTop_toBottomOf="@+id/order_name"
                     tools:ignore="SpUsage" />
 
                 <TextView
@@ -121,7 +121,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.129"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPhoneOrder"
+                    app:layout_constraintTop_toBottomOf="@+id/order_phone"
                     app:layout_constraintVertical_bias="0.0"
                     tools:ignore="SpUsage" />
 
@@ -129,7 +129,6 @@
                     android:id="@+id/img_order_delete"
                     android:layout_width="29dp"
                     android:layout_height="28dp"
-                    android:background="@drawable/circle_shadow"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -155,7 +154,6 @@
                         android:layout_width="140dp"
                         android:layout_height="26dp"
                         android:layout_marginStart="16dp"
-                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="@dimen/size_6"
                         android:fontFamily="@font/catorze27_style_1"
                         android:text="@string/order_total"
@@ -172,7 +170,7 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_bold"
                         android:text="2222"
-                        android:textColor="@color/colorBlue"
+                        android:textColor="@color/colorMainBlue"
                         android:textSize="@dimen/text_20"
                         tools:ignore="HardcodedText"
                         tools:layout_editor_absoluteX="126dp"

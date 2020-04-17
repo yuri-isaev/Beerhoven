@@ -91,7 +91,7 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
          CartFragmentDirections.ActionNavCartToNavDetails action = CartFragmentDirections
              .actionNavCartToNavDetails()
              .setChange(Constants.OBJECT_RENAME)
-             .setProductID(productId)
+             .setProductId(productId)
              .setCountry(product.getCountry())
              .setManufacture(product.getManufacture())
              .setName(product.getName())

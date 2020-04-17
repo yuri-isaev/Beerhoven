@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="Name order"
             android:textAlignment="center"
-            android:textColor="@color/colorGreyDark"
+            android:textColor="@color/colorGrey"
             android:textSize="25sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText,RtlCompat" />
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Address order"
             android:textAlignment="center"
-            android:textColor="@color/colorGreyDark"
+            android:textColor="@color/colorGrey"
             android:textSize="10sp"
             tools:ignore="HardcodedText,RtlCompat,SmallSp" />
     </LinearLayout>

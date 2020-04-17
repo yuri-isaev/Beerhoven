@@ -220,15 +220,14 @@
                 android:layout_height="wrap_content"
                 tools:ignore="RedundantNamespace">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/image"
                     android:layout_width="90dp"
                     android:layout_height="86dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/size_24"
                     android:layout_marginTop="@dimen/size_35"
-                    android:layout_marginRight="@dimen/size_24"
-                    android:background="@drawable/circle_img" />
+                    android:layout_marginRight="@dimen/size_24" />
 
                 <com.github.clans.fab.FloatingActionMenu
                     android:id="@+id/material_design_android_floating_action_menu"
@@ -239,7 +238,7 @@
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="10dp"
-                    fab:menu_backgroundColor="@color/colorGrey"
+                    fab:menu_backgroundColor="@color/colorMainGrey"
                     fab:menu_fab_label="@string/menu_close"
                     fab:menu_labels_ellipsize="end"
                     fab:menu_labels_singleLine="true"

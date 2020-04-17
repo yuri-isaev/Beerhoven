@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
       mCart.setTypeface(null, Typeface.BOLD);
       mCart.setTextColor(getResources().getColor(R.color.colorAccent));
       mCart.setTextSize(24);
-      mCart.setBackground(getDrawable(R.drawable.circle_white_transparent));
+      mCart.setBackground(getDrawable(R.drawable.circle_violet));
       mCartCounter = mCart;
    }
 
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
       mNews.setTypeface(null, Typeface.BOLD);
       mNews.setTextColor(getResources().getColor(R.color.colorAccent));
       mNews.setTextSize(24);
-      mNews.setBackground(getDrawable(R.drawable.circle_white_transparent));
+      mNews.setBackground(getDrawable(R.drawable.circle_violet));
       mNewsCounter = mNews;
    }
 

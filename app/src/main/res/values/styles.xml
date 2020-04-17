@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorMainGrey</item>
-        <item name="colorPrimaryDark">@color/colorMainBlack</item>
+        <item name="colorPrimary">@color/colorMainBlack</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorMainYellow</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:textSize">@dimen/text_14</item>

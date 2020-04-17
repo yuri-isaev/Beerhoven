@@ -111,7 +111,7 @@ public class AddProductFragment extends Fragment {
       mFragmentBind.btnCamera.setOnClickListener(v -> {
          Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
          intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-         File photo = new File(requireNonNull(getActivity()).getExternalFilesDir(null), "test.jpg");
+         File photo = new File(requireActivity().getExternalFilesDir(null), "test.jpg");
 
          mUriImage = FileProvider.getUriForFile(getActivity(), getActivity().getPackageName() + ".provider", photo);
          intent.putExtra(MediaStore.EXTRA_OUTPUT, mUriImage);
@@ -147,7 +147,7 @@ public class AddProductFragment extends Fragment {
                   }
                });
                try {
-                  Bitmap bitmap = getBitmap(requireNonNull(getActivity()).getContentResolver(), mUriImage);
+                  Bitmap bitmap = getBitmap(requireActivity().getContentResolver(), mUriImage);
                   mFragmentBind.image.setImageBitmap(bitmap);
                } catch (IOException e) {
                   e.printStackTrace();
@@ -155,7 +155,7 @@ public class AddProductFragment extends Fragment {
             }
             break;
          case CODE_CAMERA:
-            Bitmap bitmap = BitmapFactory.decodeFile(requireNonNull(getActivity()).getExternalFilesDir(null) + "/test.jpg");
+            Bitmap bitmap = BitmapFactory.decodeFile(requireActivity().getExternalFilesDir(null) + "/test.jpg");
             mFragmentBind.image.setImageBitmap(bitmap);
             break;
       }

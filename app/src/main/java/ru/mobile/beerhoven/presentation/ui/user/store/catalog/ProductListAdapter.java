@@ -22,7 +22,7 @@ import java.util.List;
 
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.local.MapStorage;
-import ru.mobile.beerhoven.databinding.ItemCatalogBinding;
+import ru.mobile.beerhoven.databinding.ItemProductBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.presentation.interfaces.IAdapterPositionListener;
@@ -43,7 +43,7 @@ public class ProductListAdapter extends Adapter<ProductListViewHolder> {
    @NonNull
    @Override
    public ProductListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      ItemCatalogBinding binding = ItemCatalogBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+      ItemProductBinding binding = ItemProductBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
       return new ProductListViewHolder(binding);
    }
 
@@ -56,7 +56,7 @@ public class ProductListAdapter extends Adapter<ProductListViewHolder> {
       String productImage = item.getUrl();
 
       // Binding view fields
-      Glide.with(holder.binding.tvImageProduct.getContext()).load(item.getUrl()).into(holder.binding.tvImageProduct);
+      Glide.with(holder.binding.productImage.getContext()).load(item.getUrl()).into(holder.binding.productImage);
       holder.binding.productName.setText(item.getName());
       holder.binding.productPrice.setText((item.getPrice() + " руб."));
       holder.binding.productStyle.setText(item.getStyle());
@@ -114,9 +114,9 @@ public class ProductListAdapter extends Adapter<ProductListViewHolder> {
    }
 
    public static class ProductListViewHolder extends ViewHolder {
-      ItemCatalogBinding binding;
+      ItemProductBinding binding;
 
-      public ProductListViewHolder(@NonNull ItemCatalogBinding recyclerBinding) {
+      public ProductListViewHolder(@NonNull ItemProductBinding recyclerBinding) {
          super(recyclerBinding.getRoot());
          this.binding = recyclerBinding;
       }

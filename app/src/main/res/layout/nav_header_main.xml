@@ -13,7 +13,7 @@
     android:paddingRight="@dimen/size_16"
     android:paddingBottom="@dimen/size_16">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/logo_image"
         android:layout_width="@dimen/size_98"
         android:layout_height="@dimen/size_83"

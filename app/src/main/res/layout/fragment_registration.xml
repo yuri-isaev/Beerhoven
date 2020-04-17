@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlack"
+    android:background="@color/colorMainBlack"
     android:theme="@style/AppTheme"
     tools:context="ru.mobile.beerhoven.presentation.activity.SplashActivity">
 
@@ -29,7 +29,7 @@
             android:layout_marginTop="@dimen/size_35"
             android:layout_marginRight="@dimen/size_24"
             android:fontFamily="@font/catorze27_style_1"
-            android:text="@string/registration"
+            android:text="@string/reg_description"
             android:textColor="@color/colorMainYellow"
             android:textSize="@dimen/text_18" />
 

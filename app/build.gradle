@@ -3,14 +3,14 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'androidx.navigation.safeargs'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     viewBinding.enabled = true
     dataBinding.enabled = true
 
     defaultConfig {
         applicationId 'ru.mobile.beerhoven'
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -49,7 +49,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.2.0'
     implementation 'androidx.navigation:navigation-fragment:2.2.0'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.google.android.material:material:1.2.0'
 
     // Test libraries
@@ -108,6 +107,7 @@ dependencies {
 
     // Design
     implementation 'com.github.fornewid:neumorphism:0.3.0'
+    implementation 'com.mikhaellopez:circularimageview:4.3.1'
 
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'

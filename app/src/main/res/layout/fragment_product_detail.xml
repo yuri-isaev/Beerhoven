@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:clipChildren="false"
-
     android:orientation="vertical"
-    tools:context=".presentation.ui.store.details.ProductDetailFragment">
+    tools:context=".presentation.ui.user.news.details.NewsDetailFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -54,12 +53,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/product_name"
                 tools:ignore="HardcodedText,MissingConstraints" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/product_item_frame"
                 android:layout_width="101dp"
                 android:layout_height="100dp"
                 android:layout_marginEnd="44dp"
-                android:background="@drawable/circle_shadow"
                 android:elevation="2mm"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.104"
@@ -316,7 +314,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="@dimen/size_25"
-                        android:text="15.00"
+                        android:text="    15.00"
                         android:textColor="@color/colorMainBlack"
                         android:textSize="@dimen/text_24"
                         android:textStyle="bold"

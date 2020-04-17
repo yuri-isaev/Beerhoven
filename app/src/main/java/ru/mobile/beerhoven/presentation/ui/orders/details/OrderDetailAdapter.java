@@ -62,7 +62,7 @@ public class OrderDetailAdapter extends Adapter<OrderDetailsViewHolder> {
          OrderDetailFragmentDirections.ActionNavOrderDetailsToNavDetails action = OrderDetailFragmentDirections
              .actionNavOrderDetailsToNavDetails()
              .setChange(Constants.OBJECT_INVISIBLE)
-             .setProductID(productId)
+             .setProductId(productId)
              .setCountry(product.getCountry())
              .setManufacture(product.getManufacture())
              .setName(product.getName())
