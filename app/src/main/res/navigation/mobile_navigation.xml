@@ -14,10 +14,9 @@
             android:id="@+id/action_nav_product_list_to_nav_product_details"
             app:destination="@id/nav_product_details" />
     </fragment>
-
     <fragment
         android:id="@+id/nav_product_details"
-        android:name="ru.mobile.beerhoven.presentation.ui.store.details.ProductDetailFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.user.store.details.ProductDetailFragment"
         android:label="@string/menu_details"
         tools:layout="@layout/fragment_product_detail">
         <argument

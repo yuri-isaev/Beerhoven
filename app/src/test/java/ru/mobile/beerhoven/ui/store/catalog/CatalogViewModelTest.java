@@ -1,6 +1,7 @@
 package ru.mobile.beerhoven.ui.store.catalog;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import org.junit.Before;
@@ -15,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.mobile.beerhoven.common.FakeContent;
-import ru.mobile.beerhoven.domain.repository.ICatalogRepository;
+import ru.mobile.beerhoven.domain.repository.IProductRepository;
 import ru.mobile.beerhoven.domain.model.Product;
-import ru.mobile.beerhoven.presentation.ui.store.catalog.CatalogViewModel;
+import ru.mobile.beerhoven.presentation.ui.user.store.catalog.ProductListViewModel;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -28,11 +29,11 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CatalogViewModelTest {
-   private CatalogViewModel mViewModel;
+   private ProductListViewModel mViewModel;
    private MutableLiveData mMutableList;
 
    @Mock
-   private ICatalogRepository mMockRepo;
+   private IProductRepository mMockRepo;
 
    @Mock
    private List<String> mMockList;
@@ -43,9 +44,9 @@ public class CatalogViewModelTest {
    @Before
    public void setUp() {
       mMutableList = new MutableLiveData<>();
-      mMockRepo = mock(ICatalogRepository.class);
-      mViewModel = new CatalogViewModel(mMockRepo);
-      Mockito.when(mMockRepo.readProductList()).thenReturn(mMutableList);
+      mMockRepo = mock(IProductRepository.class);
+      mViewModel = new ProductListViewModel(mMockRepo);
+      Mockito.when(mMockRepo.getProductList()).thenReturn(mMutableList);
       setFakeItems();
    }
 
@@ -67,7 +68,7 @@ public class CatalogViewModelTest {
    @Test
    public void viewModel_getCatalogList_returns_what_not_null() {
       // Act
-      MutableLiveData result = mViewModel.getCatalogList();
+      LiveData<List<Product>> result = mViewModel.getCatalogList();
       // Assert
       assertNotNull(result);
    }
@@ -75,7 +76,7 @@ public class CatalogViewModelTest {
    @Test
    public void viewModel_getCatalogList_returns_what_repository_readList() {
       // Act
-      MutableLiveData result = mViewModel.getCatalogList();
+      LiveData<List<Product>> result = mViewModel.getCatalogList();
       // Assert
       assertEquals(mMutableList, result);
    }
@@ -85,6 +86,6 @@ public class CatalogViewModelTest {
       // Act
       mViewModel.getCatalogList();
       // Assert
-      verify(mMockRepo, times(1)).readProductList();
+      verify(mMockRepo, times(1)).getProductList();
    }
 }

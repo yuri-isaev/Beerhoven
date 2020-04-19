@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<soup.neumorphism.NeumorphCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/AppTheme.Neumorph.CardView"
-    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.MaterialComponents.CardView"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/size_5"
-    android:layout_marginRight="@dimen/size_5"
+    android:layout_marginLeft="@dimen/size_10"
+    android:layout_marginTop="@dimen/size_15"
+    android:layout_marginRight="@dimen/size_10"
+    app:cardCornerRadius="@dimen/size_17"
+    app:cardElevation="10dp"
     tools:context=".presentation.ui.user.news.corporate.NewsListFragment">
 
     <RelativeLayout
@@ -63,7 +67,7 @@
 
         <TextView
             android:id="@+id/item_news_title"
-            android:layout_width="371dp"
+            android:layout_width="376dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/item_news_image"
             android:layout_marginLeft="16dp"
@@ -77,4 +81,4 @@
             android:textStyle="bold"
             tools:ignore="HardcodedText" />
     </RelativeLayout>
-</soup.neumorphism.NeumorphCardView>
+</androidx.cardview.widget.CardView>

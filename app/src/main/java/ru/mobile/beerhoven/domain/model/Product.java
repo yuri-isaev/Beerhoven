@@ -19,7 +19,6 @@ public class Product {
    private String fortress;
    private String manufacture;
    private String name;
-   private String phone;
    private double price;
    private double total;
    private String quantity;

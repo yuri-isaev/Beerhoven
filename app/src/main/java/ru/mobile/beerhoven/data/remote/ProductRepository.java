@@ -15,10 +15,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IProductRepository;
 import ru.mobile.beerhoven.utils.Constants;
@@ -54,7 +52,6 @@ public class ProductRepository implements IProductRepository {
             Product product = snapshot.getValue(Product.class);
             assert product != null;
             product.setId(snapshot.getKey());
-
             if (!mProductList.contains(product)) {
                mProductList.add(product);
             }
@@ -77,9 +74,7 @@ public class ProductRepository implements IProductRepository {
             Product product = snapshot.getValue(Product.class);
             assert product != null;
             product.setId(snapshot.getKey());
-            if (mProductList.contains(product)) {
-               mProductList.remove(product);
-            }
+            mProductList.remove(product);
             mMutableList.postValue(mProductList);
          }
 
@@ -92,21 +87,17 @@ public class ProductRepository implements IProductRepository {
    }
 
    @Override
-   public MutableLiveData<String> addProductToRepository(Product product) {
+   public MutableLiveData<String> addCartProductToRepository(Product product) {
       addCatalogItem(product);
       mMutableData.setValue(null);
       return mMutableData;
    }
 
-   private void addCatalogItem(Product product) {
-      HashMap<String, Double> price = MapStorage.priceMap;
-      product.setTotal(price.get("total"));
-
+   private void addCatalogItem(@NonNull Product product) {
       assert mUserPhoneId != null;
       mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).child(product.getId()).setValue(product);
    }
 
-   // Delete store catalog item
    @Override
    public MutableLiveData<String> deleteProductFromRepository(Product product) {
       onDeleteProductById(product);
@@ -114,7 +105,7 @@ public class ProductRepository implements IProductRepository {
       return mMutableData;
    }
 
-   private void onDeleteProductById(Product product) {
+   private void onDeleteProductById(@NonNull Product product) {
       mFirebaseRef.child(Constants.NODE_PRODUCTS).child(product.getId()).removeValue();
       FirebaseStorage.getInstance().getReferenceFromUrl(product.getUrl()).delete();
    }
