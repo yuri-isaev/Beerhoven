@@ -96,7 +96,7 @@
     <string name="product_name">название товара</string>
     <string name="product_manufacture">мануфактура</string>
     <string name="product_price">цена товара</string>
-    <string name="product_price_colon">Цена товара:  </string>
+    <string name="product_price_line">Цена товара: </string>
     <string name="product_special">специализация</string>
     <string name="product_style">Стиль</string>
     <string name="product_title">название товара</string>

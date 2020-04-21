@@ -27,7 +27,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/size_15"
             android:layout_marginTop="@dimen/size_10"
-            android:fontFamily="@font/catorze27_style_1"
+            android:fontFamily="@font/catorze27_style1_semibold"
             android:text="@string/order_details"
             android:textAlignment="center"
             android:textColor="@color/colorMainYellow"

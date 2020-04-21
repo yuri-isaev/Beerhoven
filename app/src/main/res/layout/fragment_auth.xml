@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_100"
             android:layout_marginTop="@dimen/size_2"
-            android:fontFamily="@font/tt_bluescreens_round_bold"
+            android:fontFamily="@font/tt_bluescreens_round_regular"
             android:gravity="center_horizontal"
             android:text="@string/auth_input_code_confirm"
             android:textColor="@color/colorMainYellow"

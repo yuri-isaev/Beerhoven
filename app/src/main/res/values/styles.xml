@@ -1,12 +1,12 @@
 <resources>
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.MaterialComponents">
-        <!-- Primary brand color. -->
+        <item name="android:textColor">@color/colorMainGrey</item>
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="colorPrimary">@color/colorMainBlack</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorMainYellow</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:textSize">@dimen/text_14</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -18,14 +18,12 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="AppTheme.Neumorph.CardView" parent="Widget.Neumorph.CardView">
-        <item name="android:padding">@dimen/design_default_padding</item>
-        <item name="android:stateListAnimator">@animator/button_state_list_anim_neumorph</item>
-        <item name="neumorph_inset">@dimen/design_default_inset</item>
-        <item name="neumorph_shadowElevation">6dp</item>
-        <item name="neumorph_shadowColorLight">#FDF8F8</item>
-        <item name="neumorph_shadowColorDark">#BBC1C1</item>
-        <item name="neumorph_shapeType">flat</item>
-        <item name="neumorph_shapeAppearance">@style/ShapeAppearance.Neumorph.CardView</item>
+    <style name="AppTheme.Neumorph.Button" parent="Widget.Neumorph.Button">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/text_22</item>
+        <item name="fontFamily">@font/catorze27_style1_bold</item>
+        <item name="neumorph_backgroundColor">@color/colorAccent</item>
+        <item name="neumorph_shadowColorDark">@color/colorShadowDark</item>
+        <item name="neumorph_shadowColorLight">@color/colorMainWhite</item>
     </style>
 </resources>

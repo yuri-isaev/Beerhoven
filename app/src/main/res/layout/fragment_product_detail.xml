@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    android:clipChildren="false"
     android:orientation="vertical"
     tools:context=".presentation.ui.user.news.details.NewsDetailFragment">
 
@@ -18,95 +17,44 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/size_5"
+            android:paddingBottom="5dp"
             tools:ignore="ScrollViewSize">
 
             <TextView
                 android:id="@+id/product_name"
-                android:layout_width="190dp"
-                android:layout_height="41dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/tt_bluescreens_round_bold"
+                android:layout_width="344dp"
+                android:layout_height="32dp"
+                android:fontFamily="@font/roboto_regular"
                 android:text="@string/product_name"
-                android:textAllCaps="true"
-                android:textColor="@color/colorMainYellow"
-                android:textSize="@dimen/text_36"
-                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.14"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText,MissingConstraints" />
-
-            <TextView
-                android:id="@+id/product_special"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/tt_bluescreens_round_bold"
-                android:text="@string/product_special"
-                android:textColor="@color/colorRed"
-                android:textSize="@dimen/text_24"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.106"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_name"
-                tools:ignore="HardcodedText,MissingConstraints" />
-
-            <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/product_item_frame"
-                android:layout_width="101dp"
-                android:layout_height="100dp"
-                android:layout_marginEnd="44dp"
-                android:elevation="2mm"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.104"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_special"
-                tools:ignore="InOrMmUsage,MissingConstraints,UnusedAttribute,ImageContrastCheck" />
-
-            <TextView
-                android:id="@+id/product_manufacture"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_24"
-                android:fontFamily="@font/catorze27_style_1"
-                android:text="@string/product_manufacture"
-                android:textColor="@color/colorMainBlack"
-                android:textSize="@dimen/text_20"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toRightOf="@+id/product_item_frame"
-                app:layout_constraintTop_toTopOf="@+id/product_item_frame"
-                tools:ignore="RtlHardcoded" />
+                tools:ignore="HardcodedText,MissingConstraints,TextContrastCheck" />
 
             <TextView
                 android:id="@+id/product_country"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_24"
-                android:layout_marginTop="@dimen/size_6"
-                android:layout_marginRight="@dimen/size_24"
-                android:fontFamily="@font/catorze27_style_1"
+                android:layout_width="182dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/catorze27_style1_semibold"
                 android:text="@string/product_country"
-                android:textColor="@color/colorMainBlack"
-                android:textSize="@dimen/text_16"
-                app:layout_constraintLeft_toRightOf="@+id/product_item_frame"
-                app:layout_constraintTop_toBottomOf="@+id/product_manufacture" />
+                app:layout_constraintStart_toEndOf="@+id/product_item_frame"
+                app:layout_constraintTop_toBottomOf="@+id/product_name"
+                tools:ignore="MissingConstraints" />
 
             <TextView
                 android:id="@+id/product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="12dp"
-                android:fontFamily="@font/catorze27_style_1"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/catorze27_style1_bold"
                 android:text="15.00"
-                android:textColor="@color/colorMainBlack"
-                android:textSize="@dimen/text_24"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/product_item_frame"
-                app:layout_constraintLeft_toRightOf="@+id/product_item_frame"
-                tools:ignore="HardcodedText,RtlHardcoded" />
+                android:textSize="24sp"
+                app:layout_constraintStart_toEndOf="@+id/product_item_frame"
+                app:layout_constraintTop_toBottomOf="@+id/product_manufacture"
+                tools:ignore="HardcodedText,MissingConstraints,RtlHardcoded" />
 
             <TextView
                 android:id="@+id/tvProductUnit"
@@ -114,56 +62,104 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_2"
                 android:layout_marginTop="@dimen/size_3"
-                android:fontFamily="@font/catorze27_style_1"
+                android:fontFamily="@font/catorze27_style1_semibold"
                 android:text="  рублей"
-                android:textColor="@color/colorMainBlack"
-                android:textSize="@dimen/text_14"
+                android:textSize="14sp"
                 app:layout_constraintLeft_toRightOf="@+id/product_price"
                 app:layout_constraintTop_toTopOf="@+id/product_price"
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/product_item_frame"
+                android:layout_width="101dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:elevation="5mm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/product_name"
+                tools:ignore="InOrMmUsage,MissingConstraints,UnusedAttribute,ImageContrastCheck" />
+
+            <TextView
+                android:id="@+id/product_manufacture"
+                android:layout_width="122dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/catorze27_style1_semibold"
+                android:text="@string/product_manufacture"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toEndOf="@+id/product_item_frame"
+                app:layout_constraintTop_toBottomOf="@+id/product_country"
+                tools:ignore="MissingConstraints,RtlHardcoded" />
+
             <View
-                android:id="@+id/separator1"
+                android:id="@+id/separator"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/size_1"
-                android:layout_marginTop="8dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
                 android:background="@color/colorMainGrey"
                 app:layout_constraintTop_toBottomOf="@+id/product_item_frame"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="0dp" />
+                tools:ignore="MissingConstraints" />
 
             <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="341dp"
-                android:layout_height="27dp"
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.69"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separator1"
+                app:layout_constraintTop_toBottomOf="@+id/separator"
                 tools:ignore="MissingConstraints">
 
                 <TextView
-                    android:id="@+id/item_style1"
-                    android:layout_width="155dp"
+                    android:id="@+id/item_style"
+                    android:layout_width="119dp"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/catorze27_style1_semibold"
                     android:text="@string/product_style"
-                    android:textColor="@color/colorMainGrey"
-                    android:textSize="@dimen/size_15"
                     tools:ignore="HardcodedText,SpUsage"
                     tools:layout_editor_absoluteX="214dp"
                     tools:layout_editor_absoluteY="241dp" />
 
                 <TextView
                     android:id="@+id/product_style"
-                    android:layout_width="match_parent"
+                    android:layout_width="216dp"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Лагерь"
-                    android:textColor="@color/colorMainGrey"
-                    android:textSize="@dimen/size_15"
+                    tools:ignore="HardcodedText,SpUsage"
+                    tools:layout_editor_absoluteX="27dp"
+                    tools:layout_editor_absoluteY="245dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:orientation="horizontal"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.703"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/item_fortress"
+                    android:layout_width="118dp"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/catorze27_style1_semibold"
+                    android:text="@string/product_fortress" />
+
+                <TextView
+                    android:id="@+id/product_fortress"
+                    android:layout_width="216dp"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="7%"
                     tools:ignore="HardcodedText,SpUsage"
                     tools:layout_editor_absoluteX="27dp"
                     tools:layout_editor_absoluteY="245dp" />
@@ -171,178 +167,113 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout4"
-                android:layout_width="339dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
                 android:orientation="horizontal"
-                android:textColor="@color/colorMainBlack"
-                android:textSize="@dimen/text_16"
-                app:layout_constraintBottom_toTopOf="@+id/separator2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.708"
+                app:layout_constraintHorizontal_bias="0.698"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-                app:layout_constraintVertical_bias="0.127"
+                app:layout_constraintVertical_bias="0.0"
                 tools:ignore="MissingConstraints">
 
                 <TextView
-                    android:id="@+id/item_des1"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="@string/product_fortress"
-                    android:textColor="@color/colorMainGrey"
-                    android:textSize="@dimen/size_15"
-                    tools:ignore="HardcodedText,SpUsage"
-                    tools:layout_editor_absoluteX="214dp"
-                    tools:layout_editor_absoluteY="241dp" />
-
-                <TextView
-                    android:id="@+id/product_fortress"
-                    android:layout_width="match_parent"
+                    android:id="@+id/item_density"
+                    android:layout_width="119dp"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="7%"
-                    android:textColor="@color/colorMainGrey"
-                    android:textSize="@dimen/size_15"
-                    tools:ignore="HardcodedText,SpUsage"
-                    tools:layout_editor_absoluteX="27dp"
-                    tools:layout_editor_absoluteY="245dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="339dp"
-                android:layout_height="24dp"
-                android:orientation="horizontal"
-                android:textColor="@color/colorMainBlack"
-                android:textSize="@dimen/text_16"
-                app:layout_constraintBottom_toTopOf="@+id/separator2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.708"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-                app:layout_constraintVertical_bias="0.291"
-                tools:ignore="MissingConstraints">
-
-                <TextView
-                    android:id="@+id/item_des3"
-                    android:layout_width="155dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/catorze27_style1_semibold"
                     android:text="@string/product_density"
-                    android:textColor="@color/colorMainGrey"
-                    android:textSize="@dimen/size_15"
-                    tools:ignore="HardcodedText,SpUsage"
-                    tools:layout_editor_absoluteX="214dp"
-                    tools:layout_editor_absoluteY="241dp" />
+                    tools:ignore="HardcodedText,SpUsage" />
 
                 <TextView
                     android:id="@+id/product_density"
-                    android:layout_width="match_parent"
+                    android:layout_width="216dp"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="12%"
-                    android:textColor="@color/colorMainGrey"
-                    android:textSize="@dimen/size_15"
-                    tools:ignore="HardcodedText,SpUsage"
-                    tools:layout_editor_absoluteX="27dp"
-                    tools:layout_editor_absoluteY="245dp" />
+                    tools:ignore="HardcodedText,SpUsage" />
             </LinearLayout>
 
-            <View
-                android:id="@+id/separator2"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/size_1"
-                android:layout_marginTop="@dimen/size_100"
-                android:background="@color/colorMainGrey"
-                app:layout_constraintTop_toBottomOf="@+id/product_item_frame"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="0dp" />
-
-            <TextView
-                android:id="@+id/product_description"
-                android:layout_width="333dp"
-                android:layout_height="73dp"
-                android:fontFamily="@font/catorze27_style_1"
-                android:orientation="horizontal"
-                android:text="@string/product_description"
-                android:textColor="@color/colorMainBlack"
-                android:textSize="@dimen/text_16"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.666"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separator2"
-                tools:ignore="HardcodedText,MissingConstraints" />
-
             <LinearLayout
-                android:id="@+id/product_price_counter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout5"
+                android:layout_width="362dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="16dp"
                 android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.679"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_description"
-                tools:ignore="MissingConstraints">
-
-                <include
-                    android:id="@+id/include_fragment_counter"
-                    layout="@layout/fragment_counter"
-                    android:layout_width="match_parent"
-                    android:layout_height="119dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.67"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvFullDescription" />
+                app:layout_constraintBottom_toTopOf="@+id/btn_add_product_to_cart"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="26dp">
 
                 <LinearLayout
+                    android:id="@+id/linearLayout6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="@dimen/size_253"
+                        android:layout_width="243dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/product_price_colon"
+                        android:fontFamily="@font/catorze27_style1_bold"
+                        android:paddingEnd="10dp"
+                        android:text="@string/product_price_line"
                         android:textAlignment="textEnd"
-                        android:textColor="@color/colorMainBlack"
-                        tools:ignore="InefficientWeight,RtlCompat" />
+                        tools:ignore="RtlSymmetry" />
 
                     <TextView
                         android:id="@+id/product_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="@dimen/size_25"
-                        android:text="    15.00"
-                        android:textColor="@color/colorMainBlack"
-                        android:textSize="@dimen/text_24"
+                        android:paddingRight="15dp"
+                        android:text="15.00"
+                        android:textSize="24sp"
                         android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.916"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/include2"
                         tools:ignore="HardcodedText,MissingConstraints,RtlHardcoded,RtlSymmetry" />
                 </LinearLayout>
             </LinearLayout>
 
-            <Button
+            <include
+                android:id="@+id/include_fragment_counter"
+                layout="@layout/fragment_counter"
+                android:layout_width="match_parent"
+                android:layout_height="119dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout5" />
+
+            <soup.neumorphism.NeumorphButton
                 android:id="@+id/btn_add_product_to_cart"
-                style="@style/Widget.MaterialComponents.Button"
-                android:layout_width="@dimen/size_300"
-                android:layout_height="56dp"
-                android:layout_marginTop="@dimen/size_10"
-                android:layout_marginBottom="50dp"
-                android:background="@drawable/btn_selector"
+                style="@style/AppTheme.Neumorph.Button"
+                android:layout_width="332dp"
+                android:layout_height="74dp"
+                android:layout_marginBottom="36dp"
                 android:text="@string/cart_add"
-                app:backgroundTint="@null"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.666"
+                app:layout_constraintHorizontal_bias="0.536"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/product_price_counter"
-                app:layout_constraintVertical_bias="0.213"
-                tools:ignore="MissingConstraints,MissingPrefix" />
+                tools:ignore="TextContrastCheck" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="335dp"
+                android:layout_height="128dp"
+                android:layout_marginTop="88dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.676"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/separator"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/product_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="128dp"
+                    android:fontFamily="@font/catorze27_style1_semibold"
+                    android:text="@string/product_description"
+                    android:textColor="@color/colorMainBlack"
+                    android:textSize="@dimen/text_size"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </LinearLayout>

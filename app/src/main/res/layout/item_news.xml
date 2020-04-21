@@ -74,7 +74,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="16dp"
             android:background="@color/colorBackground"
-            android:fontFamily="@font/catorze27_style_1"
+            android:fontFamily="@font/catorze27_style1_semibold"
             android:text="Title"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="30sp"

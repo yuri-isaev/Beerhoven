@@ -83,7 +83,7 @@
                     android:id="@+id/tvPhoneOrder"
                     android:layout_width="229dp"
                     android:layout_height="30dp"
-                    android:fontFamily="@font/catorze27_style_1"
+                    android:fontFamily="@font/catorze27_style1_semibold"
                     android:text="@string/order_phone"
                     android:textColor="@color/colorMainGrey"
                     android:textSize="@dimen/size_25"

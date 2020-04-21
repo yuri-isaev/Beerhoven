@@ -32,7 +32,7 @@
                 android:layout_marginLeft="@dimen/size_24"
                 android:layout_marginTop="@dimen/size_10"
                 android:layout_marginRight="@dimen/size_24"
-                android:fontFamily="@font/catorze27_style_1"
+                android:fontFamily="@font/catorze27_style1_semibold"
                 android:gravity="center_horizontal"
                 android:text="@string/add_product_card"
                 android:textAlignment="center"

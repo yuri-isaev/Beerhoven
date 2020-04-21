@@ -54,7 +54,7 @@
                 android:text="@string/cart_total"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textSize="@dimen/text_20"
+                android:textSize="@dimen/text_size"
                 app:layout_constraintBottom_toTopOf="@+id/placeConfirmButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.494"

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
    }
 
    @Override
-   public boolean onPrepareOptionsMenu(final Menu menu) {
+   public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
       initBadgeCartCounter(menu);
       initCartCountDrawer();
       initNewsCountDrawer();
@@ -232,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
    // Menu item font
    private void applyFontToMenuItem(MenuItem mi) {
-      Typeface font = ResourcesCompat.getFont(this, R.font.catorze27_style_1);
+      Typeface font = ResourcesCompat.getFont(this, R.font.catorze27_style1_semibold);
       SpannableString title = new SpannableString(mi.getTitle());
       title.setSpan(new TypeFaceSpan("", font), 0, title.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
       mi.setTitle(title);

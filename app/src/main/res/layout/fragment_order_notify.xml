@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/tt_bluescreens_round_bold"
+                android:fontFamily="@font/tt_bluescreens_round_regular"
                 android:shadowColor="@color/colorMainBlack"
                 android:shadowDx="2"
                 android:shadowDy="2"
@@ -49,7 +49,7 @@
                 android:shadowRadius="5"
                 android:text="@string/order_waiting"
                 android:textAlignment="center"
-                android:textSize="@dimen/text_20" />
+                android:textSize="@dimen/text_size" />
         </LinearLayout>
 
         <ProgressBar

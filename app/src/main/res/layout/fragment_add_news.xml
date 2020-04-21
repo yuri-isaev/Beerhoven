@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.13"
+        app:layout_constraintVertical_bias="0.078"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -27,11 +27,11 @@
             android:layout_marginTop="@dimen/size_10"
             android:layout_marginRight="@dimen/size_16"
             android:layout_marginBottom="@dimen/size_10"
-            android:fontFamily="@font/catorze27_style_1"
+            android:fontFamily="@font/catorze27_style1_bold"
             android:gravity="center"
             android:text="@string/news_comment"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/text_22"
+            android:textSize="22sp"
             android:textStyle="bold" />
 
         <androidx.cardview.widget.CardView
@@ -39,7 +39,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:elevation="100dp"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true">
 
@@ -47,7 +46,7 @@
                 android:id="@+id/news_wrap"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:background="@color/colorBackground"
+                android:background="@color/colorWhite"
                 android:clickable="true"
                 android:focusable="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -90,11 +89,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/catorze27_style_1"
+                    android:fontFamily="@font/catorze27_style1_semibold"
                     android:gravity="center"
                     android:text="@string/news_add_image"
                     android:textColor="@color/colorVioletBlue"
-                    android:textSize="@dimen/text_20"
+                    android:textSize="@dimen/text_size"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -107,14 +106,13 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@color/colorMainWhite"
-            android:elevation="@dimen/size_25"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorMainDark"
+                android:background="@color/colorWhite"
                 android:orientation="vertical">
 
                 <TextView
@@ -122,13 +120,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorMainWhite"
-                    android:fontFamily="@font/catorze27_style_1"
+                    android:fontFamily="@font/catorze27_style1_semibold"
                     android:paddingLeft="14dp"
                     android:paddingTop="14dp"
                     android:paddingRight="14dp"
                     android:text="@string/news_title_post"
                     android:textColor="@color/colorVioletBlue"
-                    android:textSize="@dimen/text_20" />
+                    android:textSize="@dimen/text_size" />
 
                 <EditText
                     android:id="@+id/news_title"
@@ -154,14 +152,14 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@color/colorMainWhite"
-            android:elevation="@dimen/size_50"
+            android:elevation="10dp"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorMainDark"
+                android:background="@color/colorWhite"
                 android:orientation="vertical">
 
                 <TextView
@@ -170,13 +168,13 @@
                     android:layout_height="wrap_content"
                     android:autofillHints=""
                     android:background="@color/colorMainWhite"
-                    android:fontFamily="@font/catorze27_style_1"
+                    android:fontFamily="@font/catorze27_style1_semibold"
                     android:paddingLeft="14dp"
                     android:paddingTop="14dp"
                     android:paddingRight="14dp"
                     android:text="@string/news_title_desc"
                     android:textColor="@color/colorVioletBlue"
-                    android:textSize="@dimen/text_20"
+                    android:textSize="@dimen/text_size"
                     tools:ignore="LabelFor,TextFields" />
 
                 <EditText
@@ -192,26 +190,19 @@
                     android:paddingBottom="12dp"
                     android:text=""
                     android:textColor="@color/colorMainBlack"
-                    android:textSize="@dimen/text_16"
+                    android:textSize="16sp"
                     tools:ignore="HardcodedText,LabelFor,TextFields,SpeakableTextPresentCheck" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <soup.neumorphism.NeumorphButton
             android:id="@+id/btn_news_add"
-            style="@style/Widget.Neumorph.Button"
+            style="@style/AppTheme.Neumorph.Button"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/size_15"
             android:gravity="center"
-            android:text="@string/news_add"
-            android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            app:neumorph_backgroundColor="@color/colorAccent"
-            app:neumorph_shadowColorDark="@color/colorShadowDark"
-            app:neumorph_shadowColorLight="@color/colorMainWhite"
-            app:neumorph_shapeType="flat"
-            tools:ignore="TextContrastCheck" />
+            android:text="@string/news_add" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.constraintlayout.widget.ConstraintLayout>

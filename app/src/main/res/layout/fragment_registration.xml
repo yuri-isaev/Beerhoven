@@ -28,7 +28,7 @@
             android:layout_marginLeft="@dimen/size_24"
             android:layout_marginTop="@dimen/size_35"
             android:layout_marginRight="@dimen/size_24"
-            android:fontFamily="@font/catorze27_style_1"
+            android:fontFamily="@font/catorze27_style1_semibold"
             android:text="@string/reg_description"
             android:textColor="@color/colorMainYellow"
             android:textSize="@dimen/text_18" />
