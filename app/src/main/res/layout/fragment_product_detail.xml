@@ -22,11 +22,12 @@
 
             <TextView
                 android:id="@+id/product_name"
-                android:layout_width="344dp"
-                android:layout_height="32dp"
-                android:fontFamily="@font/roboto_regular"
+                android:layout_width="316dp"
+                android:layout_height="35dp"
+                android:fontFamily="@font/catorze27_style1_bold"
                 android:text="@string/product_name"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorMainBlack"
+                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="HardcodedText,MissingConstraints,TextContrastCheck" />
@@ -242,8 +243,6 @@
             <soup.neumorphism.NeumorphButton
                 android:id="@+id/btn_add_product_to_cart"
                 style="@style/AppTheme.Neumorph.Button"
-                android:layout_width="332dp"
-                android:layout_height="74dp"
                 android:layout_marginBottom="36dp"
                 android:text="@string/cart_add"
                 app:layout_constraintBottom_toBottomOf="parent"

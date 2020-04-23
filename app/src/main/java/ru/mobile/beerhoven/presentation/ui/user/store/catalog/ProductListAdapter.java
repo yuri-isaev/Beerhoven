@@ -63,7 +63,8 @@ public class ProductListAdapter extends Adapter<ProductListViewHolder> {
       holder.binding.productFortress.setText((item.getFortress() + "%"));
 
       // Set navigate action args
-      StoreFragmentDirections.ActionNavProductListToNavProductDetails action = StoreFragmentDirections.actionNavProductListToNavProductDetails()
+      StoreFragmentDirections.ActionNavProductListToNavProductDetails action = StoreFragmentDirections
+          .actionNavProductListToNavProductDetails()
           .setChange(Constants.OBJECT_VISIBLE)
           .setProductId(productId)
           .setCountry(item.getCountry())

@@ -36,63 +36,59 @@ public class CartRepository implements ICartRepository {
    @Override
    public MutableLiveData<List<Product>> getCartMutableList() {
       if (mProductList.size() == 0) {
-         readCartList();
+         onGetCartList();
       }
       mMutableList.setValue(mProductList);
       return mMutableList;
    }
 
    // Read cart product list
-   private void readCartList() {
+   private void onGetCartList() {
       assert mUserPhoneId != null;
       mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            Product order = dataSnapshot.getValue(Product.class);
-            assert order != null;
-            order.setId(dataSnapshot.getKey());
-            if (!mProductList.contains(order)) {
-               mProductList.add(order);
+            Product product = dataSnapshot.getValue(Product.class);
+            requireNonNull(product).setId(dataSnapshot.getKey());
+            if (!mProductList.contains(product)) {
+               mProductList.add(product);
             }
             mMutableList.postValue(mProductList);
          }
 
          @Override
          public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            Product order = dataSnapshot.getValue(Product.class);
-            assert order != null;
-            order.setId(dataSnapshot.getKey());
-            if (mProductList.contains(order)) {
-               mProductList.set(mProductList.indexOf(order), order);
+            Product product = dataSnapshot.getValue(Product.class);
+            requireNonNull(product).setId(dataSnapshot.getKey());
+            if (mProductList.contains(product)) {
+               mProductList.set(mProductList.indexOf(product), product);
             }
             mMutableList.postValue(mProductList);
          }
 
          @Override
          public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-            Product order = dataSnapshot.getValue(Product.class);
-            assert order != null;
-            order.setId(dataSnapshot.getKey());
-            mProductList.remove(order);
+            Product product = dataSnapshot.getValue(Product.class);
+            requireNonNull(product).setId(dataSnapshot.getKey());
+            mProductList.remove(product);
             mMutableList.postValue(mProductList);
          }
 
          @Override
-         public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
+         public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+         }
 
          @Override
-         public void onCancelled(@NonNull DatabaseError databaseError) {}
+         public void onCancelled(@NonNull DatabaseError databaseError) {
+         }
       });
    }
 
-   // Delete cart list item by position
    @Override
-   public void onDeleteCartItem(String position) {
-      assert mUserPhoneId != null;
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).child(position).removeValue();
+   public void onDeleteCartItem(String item) {
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).child(item).removeValue();
    }
 
-   // Delete user cart list
    @Override
    public void onDeleteUserCartList() {
       mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).removeValue();

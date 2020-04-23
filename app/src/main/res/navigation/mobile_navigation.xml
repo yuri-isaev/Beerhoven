@@ -65,9 +65,9 @@
     </fragment>
     <fragment
         android:id="@+id/nav_cart"
-        android:name="ru.mobile.beerhoven.presentation.ui.cart.CartFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.user.cart.CartListFragment"
         android:label="@string/menu_cart"
-        tools:layout="@layout/fragment_cart">
+        tools:layout="@layout/fragment_cart_list">
         <action
             android:id="@+id/action_nav_cart_to_nav_details"
             app:destination="@+id/nav_product_details" />
@@ -145,8 +145,7 @@
         android:id="@+id/nav_map"
         android:name="ru.mobile.beerhoven.presentation.ui.map.ClientMapFragment"
         android:label="@string/menu_map"
-        tools:layout="@layout/fragment_client_map" >
-    </fragment>
+        tools:layout="@layout/fragment_client_map" />
     <fragment
         android:id="@+id/nav_news"
         android:name="ru.mobile.beerhoven.presentation.ui.user.news.corporate.NewsListFragment"

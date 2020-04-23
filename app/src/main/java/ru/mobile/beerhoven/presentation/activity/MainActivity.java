@@ -1,5 +1,7 @@
 package ru.mobile.beerhoven.presentation.activity;
 
+import static androidx.core.view.MenuItemCompat.getActionView;
+
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.graphics.Typeface;
@@ -18,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.core.view.MenuItemCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -31,13 +32,13 @@ import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.CartRepository;
 import ru.mobile.beerhoven.data.remote.NewsRepository;
 import ru.mobile.beerhoven.presentation.authentication.AuthViewModel;
+import ru.mobile.beerhoven.presentation.ui.user.cart.CartListViewModel;
 import ru.mobile.beerhoven.presentation.ui.user.news.corporate.NewsListViewModel;
 import ru.mobile.beerhoven.utils.TypeFaceSpan;
-import ru.mobile.beerhoven.presentation.ui.cart.CartViewModel;
 
 public class MainActivity extends AppCompatActivity {
    private AppBarConfiguration mAppBarConfiguration;
-   private CartViewModel mCartViewModel;
+   private CartListViewModel mCartViewModel;
    private NewsListViewModel mNewsListViewModel;
    private int mCartCounterValue;
    private ImageView mIcon;
@@ -65,14 +66,14 @@ public class MainActivity extends AppCompatActivity {
           R.id.nav_order, R.id.nav_cart, R.id.nav_map, R.id.nav_add_product, R.id.nav_add_news)
           .setDrawerLayout(mDrawerLayout).build();
 
-      mNews = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.nav_news_list));
-      mCart = (TextView) MenuItemCompat.getActionView(mNavigationView.getMenu().findItem(R.id.nav_cart));
+      mNews = (TextView) getActionView(mNavigationView.getMenu().findItem(R.id.nav_news_list));
+      mCart = (TextView) getActionView(mNavigationView.getMenu().findItem(R.id.nav_cart));
 
       mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
       NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
       NavigationUI.setupWithNavController(mNavigationView, mNavController);
 
-      mCartViewModel = new CartViewModel(new CartRepository(), (Application) getApplicationContext());
+      mCartViewModel = new CartListViewModel(new CartRepository(), (Application) getApplicationContext());
       mNewsListViewModel = new NewsListViewModel(new NewsRepository(), (Application) getApplicationContext());
 
       setNavHeaderUserName();
@@ -88,13 +89,13 @@ public class MainActivity extends AppCompatActivity {
    }
 
    @Override
-   public boolean onCreateOptionsMenu(Menu menu) {
+   public boolean onCreateOptionsMenu(@NonNull Menu menu) {
       getMenuInflater().inflate(R.menu.cart_counter, menu);
       return true;
    }
 
    @Override
-   public boolean onOptionsItemSelected(MenuItem item) {
+   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
       return NavigationUI.onNavDestinationSelected(item, mNavController) || super.onOptionsItemSelected(item);
    }
 
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
    }
 
    private void initBadgeCartCounter(Menu menu) {
-      MenuItem menuItem = menu.findItem(R.id.cart_counter_bar);
+      MenuItem menuItem = menu.findItem(R.id.nav_cart);
       View counter = menuItem.getActionView();
       mIcon = counter.findViewById(R.id.badge_cart);
       mBadgeCounter = counter.findViewById(R.id.badge_counter_cart);

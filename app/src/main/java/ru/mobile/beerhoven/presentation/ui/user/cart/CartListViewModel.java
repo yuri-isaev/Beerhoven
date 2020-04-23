@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.presentation.ui.cart;
+package ru.mobile.beerhoven.presentation.ui.user.cart;
 
 import android.app.Application;
 
@@ -12,16 +12,16 @@ import ru.mobile.beerhoven.data.local.PreferencesStorage;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.ICartRepository;
 
-public class CartViewModel extends ViewModel {
+public class CartListViewModel extends ViewModel {
    private final ICartRepository mRepository;
    private LiveData<List<Product>> mCartList;
    private PreferencesStorage mStorage;
 
-   public CartViewModel(ICartRepository repository) {
+   public CartListViewModel(ICartRepository repository) {
       this.mRepository = repository;
    }
 
-   public CartViewModel(ICartRepository repository, Application applicationContext) {
+   public CartListViewModel(ICartRepository repository, Application applicationContext) {
       this.mRepository = repository;
       this.mCartList = new MutableLiveData<>();
       this.mStorage = new PreferencesStorage(applicationContext);
@@ -39,8 +39,8 @@ public class CartViewModel extends ViewModel {
       return mCartList;
    }
 
-   public void onDeleteCartListItemToRepository(String position) {
-      mRepository.onDeleteCartItem(position);
+   public void onDeleteCartItemFromRepository(String item) {
+      mRepository.onDeleteCartItem(item);
    }
 
    public void onDeleteCartListToRepository() {

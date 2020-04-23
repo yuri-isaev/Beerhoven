@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".presentation.ui.user.cart.CartListFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_cart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="MissingConstraints"
+                tools:itemCount="1"
+                tools:layout_editor_absoluteX="2dp"
+                tools:listitem="@layout/item_cart" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/colorMainYellow"
+
+                app:layout_constraintTop_toBottomOf="@+id/recycler_view_cart"
+                tools:ignore="MissingConstraints,UnusedAttribute" />
+
+            <TextView
+                android:id="@+id/cart_total"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_marginTop="@dimen/size_5"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:text="@string/cart_total" />
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/btn_confirm"
+                style="@style/AppTheme.Neumorph.Button"
+                android:layout_gravity="center"
+                android:text="@string/order_form"
+                tools:ignore="TextContrastCheck" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,6 @@
-package ru.mobile.beerhoven.presentation.ui.cart;
+package ru.mobile.beerhoven.presentation.ui.user.cart;
 
-import static java.util.Objects.*;
+import static java.util.Objects.requireNonNull;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,53 +13,40 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
-import info.hoang8f.widget.FButton;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.CartRepository;
-import ru.mobile.beerhoven.domain.model.Product;
+import soup.neumorphism.NeumorphButton;
 
-public class CartFragment extends Fragment implements CartListAdapter.Callback {
+public class CartListFragment extends Fragment implements CartListAdapter.Callback {
+   private CartListAdapter mAdapter;
+   private CartListViewModel mViewModel;
+   private NeumorphButton mConfirmButton;
    private RecyclerView mRecyclerView;
-   private CartListAdapter mCartListAdapter;
-   private CartViewModel mCartViewModel;
-   private TextView mOrderTotal;
-   private FButton mCartAddConfirmButton;
    private String mTotal;
+   private TextView mOrderTotal;
 
    @SuppressLint("NotifyDataSetChanged")
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      mCartViewModel = new CartViewModel(new CartRepository());
-      View view = inflater.inflate(R.layout.fragment_cart, container, false);
+      mViewModel = new CartListViewModel(new CartRepository());
+      View view = inflater.inflate(R.layout.fragment_cart_list, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view_cart);
+      mConfirmButton = view.findViewById(R.id.btn_confirm);
+      mOrderTotal = view.findViewById(R.id.cart_total);
 
       // Custom layout params
       ViewGroup.LayoutParams layoutParams = mRecyclerView.getLayoutParams();
       layoutParams.height = (int) (container.getHeight() * 0.8);
       mRecyclerView.setLayoutParams(layoutParams);
 
-      mCartAddConfirmButton = view.findViewById(R.id.placeConfirmButton);
-      mOrderTotal = view.findViewById(R.id.tvTotalCart);
-
-      // Default cart value
-      mOrderTotal.setText("Сумма корзины: 0.0");
-
-      // Initialize cart list from database
-      mCartViewModel.initCartList();
-
-      // Cart list adapter observer
-      mCartViewModel.getCartList().observe(getViewLifecycleOwner(),
-          (List<Product> list) -> mCartListAdapter.notifyDataSetChanged());
-
-      // Initialize cart list adapter
+      mViewModel.initCartList();
+      mViewModel.getCartList().observe(getViewLifecycleOwner(), (list) -> mAdapter.notifyDataSetChanged());
       initRecyclerView();
-
       return view;
    }
 
@@ -74,28 +61,35 @@ public class CartFragment extends Fragment implements CartListAdapter.Callback {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-      mCartListAdapter = new CartListAdapter(requireNonNull(mCartViewModel.getCartList().getValue()), (String total) -> {
+      mAdapter = new CartListAdapter(requireNonNull(mViewModel.getCartList().getValue()), (String total) -> {
          mTotal = total;
          mOrderTotal.setText("Сумма корзины:  " + total + " руб.");
-      },
-          getContext());
+      }, getContext());
 
-      if (mCartViewModel.getCartList().getValue().size() == 0) {
-         mCartAddConfirmButton.setClickable(true);
+      if (mViewModel.getCartList().getValue().size() == 0) {
+         mConfirmButton.setClickable(true);
 
-         mCartAddConfirmButton.setOnClickListener(v -> {
+         mConfirmButton.setOnClickListener(v -> {
             NavController navController = Navigation.findNavController(v);
-            CartFragmentDirections.ActionNavCartToNavOrderConfirm action = CartFragmentDirections
+            CartListFragmentDirections.ActionNavCartToNavOrderConfirm action = CartListFragmentDirections
                 .actionNavCartToNavOrderConfirm()
                 .setTotal(mTotal);
-            navController.navigate(action);
+            
+            NavOptions options = new NavOptions.Builder()
+                .setLaunchSingleTop(true)
+                .setEnterAnim(R.anim.fade_in)
+                .setExitAnim(R.anim.fade_out)
+                .setPopExitAnim(R.anim.fade_out)
+                .build();
+
+            navController.navigate(action, options);
          });
 
       } else {
-         mCartAddConfirmButton.setClickable(false);
+         mConfirmButton.setClickable(false);
       }
 
-      mRecyclerView.setAdapter(mCartListAdapter);
+      mRecyclerView.setAdapter(mAdapter);
    }
 
    @Override

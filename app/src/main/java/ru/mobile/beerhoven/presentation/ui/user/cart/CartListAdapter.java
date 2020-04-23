@@ -1,17 +1,17 @@
-package ru.mobile.beerhoven.presentation.ui.cart;
+package ru.mobile.beerhoven.presentation.ui.user.cart;
 
-import static androidx.recyclerview.widget.RecyclerView.*;
-
-import static ru.mobile.beerhoven.presentation.ui.cart.CartListAdapter.*;
+import static androidx.recyclerview.widget.RecyclerView.Adapter;
+import static androidx.recyclerview.widget.RecyclerView.ViewHolder;
+import static ru.mobile.beerhoven.presentation.ui.user.cart.CartListAdapter.CartListViewHolder;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import java.util.EventListener;
 import java.util.List;
 
+import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.CartRepository;
 import ru.mobile.beerhoven.databinding.ItemCartBinding;
 import ru.mobile.beerhoven.domain.model.Product;
@@ -54,10 +55,6 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
       Product product = mCartList.get(position);
       String productId = product.getId();
 
-      Glide.with(holder.binding.cartName.getContext())
-          .load(product.getUrl())
-          .into(holder.binding.cartImage);
-
       // Binding view fields
       holder.binding.cartName.setText(product.getName());
       holder.binding.cartStyle.setText(product.getStyle());
@@ -65,6 +62,7 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
       holder.binding.cartQuantity.setText(product.getQuantity());
       holder.binding.cartPrice.setText(product.getPrice() + " руб.");
       holder.binding.cartTotal.setText(product.getTotal() + " руб.");
+      Glide.with(holder.binding.cartName.getContext()).load(product.getUrl()).into(holder.binding.cartImage);
 
       // The total price of the entire cart
       double oneTypeProductPrice = product.getTotal();
@@ -74,8 +72,8 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
 
       holder.binding.cartProductDelete.setOnClickListener(v -> {
          // Delete product from cart and database
-         CartViewModel mCartViewModel = new CartViewModel(new CartRepository());
-         mCartViewModel.onDeleteCartListItemToRepository(productId);
+         CartListViewModel mViewModel = new CartListViewModel(new CartRepository());
+         mViewModel.onDeleteCartItemFromRepository(productId);
 
          // Decrease counter when delete product from cart and database
          ((MainActivity) mContext).onDecreaseCartDrawerCounter();
@@ -88,7 +86,7 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
 
       holder.binding.cartContainer.setOnClickListener(v -> {
          NavController navController = Navigation.findNavController(v);
-         CartFragmentDirections.ActionNavCartToNavDetails action = CartFragmentDirections
+         CartListFragmentDirections.ActionNavCartToNavDetails action = CartListFragmentDirections
              .actionNavCartToNavDetails()
              .setChange(Constants.OBJECT_RENAME)
              .setProductId(productId)
@@ -101,7 +99,15 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
              .setDensity(product.getDensity())
              .setDescription(product.getDescription())
              .setImage(product.getUrl());
-         navController.navigate(action);
+
+         NavOptions options = new NavOptions.Builder()
+             .setLaunchSingleTop(true)
+             .setEnterAnim(R.anim.fade_in)
+             .setExitAnim(R.anim.fade_out)
+             .setPopExitAnim(R.anim.fade_out)
+             .build();
+
+         navController.navigate(action, options);
       });
    }
 
@@ -110,19 +116,12 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
       return mCartList.size();
    }
 
-
-   public static class CartListViewHolder extends ViewHolder implements OnClickListener {
+   public static class CartListViewHolder extends ViewHolder {
       private final ItemCartBinding binding;
 
-      public CartListViewHolder(ItemCartBinding recyclerBinding) {
+      public CartListViewHolder(@NonNull ItemCartBinding recyclerBinding) {
          super(recyclerBinding.getRoot());
          this.binding = recyclerBinding;
-      }
-
-      @Override
-      public void onClick(View v) {
-         binding.cartContainer.setOnClickListener(this);
-         binding.cartProductDelete.setOnClickListener(this);
       }
    }
 }

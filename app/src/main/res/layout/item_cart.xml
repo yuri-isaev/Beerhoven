@@ -5,58 +5,58 @@
     android:id="@+id/item_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/size_10"
-    android:layout_marginTop="@dimen/size_15"
-    android:layout_marginRight="@dimen/size_10"
-    android:background="?attr/selectableItemBackground"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="10dp"
     android:clickable="true"
     android:descendantFocusability="blocksDescendants"
     android:focusable="true"
     app:cardBackgroundColor="@color/colorWhite"
-    app:cardCornerRadius="@dimen/size_8"
-    app:cardElevation="@dimen/size_10"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="10dp"
     tools:ignore="KeyboardInaccessibleWidget,RedundantNamespace">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="@dimen/size_5">
+        android:padding="5dp">
 
         <LinearLayout
             android:id="@+id/cart_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:orientation="vertical"
             tools:ignore="MissingConstraints,Orientation">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="96dp">
 
                 <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/cart_image"
-                    android:layout_width="91dp"
-                    android:layout_height="93dp"
+                    android:layout_width="88dp"
+                    android:layout_height="87dp"
                     android:layout_marginEnd="52dp"
+                    android:elevation="3mm"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:layout_editor_absoluteY="4dp" />
+                    app:layout_constraintHorizontal_bias="0.967"
+                    app:layout_constraintStart_toEndOf="@+id/lyt_parent"
+                    tools:ignore="InOrMmUsage,ImageContrastCheck"
+                    tools:layout_editor_absoluteY="7dp" />
 
                 <LinearLayout
                     android:id="@+id/lyt_parent"
                     android:layout_width="178dp"
                     android:layout_height="75dp"
                     android:layout_marginStart="4dp"
-                    android:layout_marginLeft="4dp"
                     android:layout_marginTop="4dp"
-                    android:background="?attr/selectableItemBackground"
                     android:orientation="vertical"
-                    android:paddingLeft="@dimen/size_5"
+                    android:paddingStart="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints,RtlHardcoded,RtlSymmetry">
+                    tools:ignore="RtlSymmetry">
 
                     <TextView
                         android:id="@+id/cart_name"
@@ -65,8 +65,7 @@
                         android:fontFamily="@font/catorze27_style1_semibold"
                         android:text="@string/product_name"
                         android:textColor="@color/colorMainBlack"
-                        android:textSize="@dimen/size_25"
-                        android:textStyle="bold"
+                        android:textSize="25sp"
                         tools:ignore="SpUsage" />
 
                     <TextView
@@ -76,7 +75,7 @@
                         android:fontFamily="@font/catorze27_style1_semibold"
                         android:text="@string/product_style"
                         android:textColor="@color/colorMainBlack"
-                        android:textSize="@dimen/size_15"
+                        android:textSize="15sp"
                         tools:ignore="SpUsage" />
 
                     <TextView
@@ -86,7 +85,7 @@
                         android:fontFamily="@font/catorze27_style1_semibold"
                         android:text="@string/product_fortress"
                         android:textColor="@color/colorMainBlack"
-                        android:textSize="@dimen/size_15"
+                        android:textSize="15sp"
                         tools:ignore="SpUsage" />
                 </LinearLayout>
 
@@ -106,7 +105,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/size_4"
+                android:layout_marginTop="10dp"
                 android:gravity="center">
 
                 <LinearLayout
@@ -121,8 +120,8 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
                         android:text="15"
-                        android:textColor="@color/colorMainBlue"
-                        android:textSize="@dimen/size_15"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText,SpUsage" />
 
@@ -132,22 +131,22 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/product_price"
-                        android:textColor="@color/colorMainBlue"
-                        android:textSize="@dimen/size_12"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="12sp"
                         tools:ignore="SpUsage" />
                 </LinearLayout>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/size_15"
+                    android:layout_marginStart="15dp"
                     android:src="@drawable/split"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/size_10"
+                    android:layout_marginStart="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -157,8 +156,8 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
                         android:text="2"
-                        android:textColor="@color/colorMainBlue"
-                        android:textSize="@dimen/size_15"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText,SpUsage" />
 
@@ -168,22 +167,22 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/product_quantity"
-                        android:textColor="@color/colorMainBlue"
-                        android:textSize="@dimen/size_15"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="15sp"
                         tools:ignore="HardcodedText,SpUsage" />
                 </LinearLayout>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/size_15"
+                    android:layout_marginStart="15dp"
                     android:src="@drawable/split"
-                    tools:ignore="ContentDescription" />
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/size_10"
+                    android:layout_marginStart="10dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -193,8 +192,8 @@
                         android:layout_gravity="center"
                         android:fontFamily="@font/roboto_regular"
                         android:text="150"
-                        android:textColor="@color/colorMainBlue"
-                        android:textSize="@dimen/size_15"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         tools:ignore="HardcodedText,SpUsage" />
 
@@ -205,8 +204,8 @@
                         android:fontFamily="@font/roboto_regular"
                         android:text="@string/product_total"
                         android:textAlignment="center"
-                        android:textColor="@color/colorMainBlue"
-                        android:textSize="@dimen/size_15"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="15sp"
                         tools:ignore="HardcodedText,SpUsage" />
                 </LinearLayout>
             </LinearLayout>

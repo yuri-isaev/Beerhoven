@@ -19,6 +19,8 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.Neumorph.Button" parent="Widget.Neumorph.Button">
+        <item name="android:layout_width">332dp</item>
+        <item name="android:layout_height">74dp</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textSize">@dimen/text_22</item>
         <item name="fontFamily">@font/catorze27_style1_bold</item>
