@@ -11,9 +11,7 @@ import java.util.Set;
 import ru.mobile.beerhoven.domain.model.DriverGeoModel;
 
 public final class MapStorage {
-   // Catalog
    public static HashMap<String, String> productMap = new HashMap<>();
-   public static HashMap<String, Double> priceMap = new HashMap<>();
    public static HashMap<String, Uri> uriMap = new HashMap<>();
 
    // Geo

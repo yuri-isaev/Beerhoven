@@ -1,7 +1,6 @@
 package ru.mobile.beerhoven.presentation.ui.adding;
 
 import static android.provider.MediaStore.Images.Media.getBitmap;
-import static java.util.Objects.*;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,7 +27,6 @@ import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.data.remote.AddProductRepository;
 import ru.mobile.beerhoven.databinding.FragmentAddProductBinding;
-import ru.mobile.beerhoven.utils.Validation;
 
 public class AddProductFragment extends Fragment {
    public static final int CODE_CAMERA = 21;
@@ -63,44 +61,38 @@ public class AddProductFragment extends Fragment {
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
 
-      mFragmentBind.btnAddDatabase.setOnClickListener(v -> {
-         if (!Validation.isValidNameField(mFragmentBind.productName) |
-             !Validation.isValidNameField(mFragmentBind.productCountry) |
-             !Validation.isValidNameField(mFragmentBind.productManufacture) |
-             !Validation.isValidNameField(mFragmentBind.productStyle) |
-             !Validation.isValidNameField(mFragmentBind.productFortress) |
-             !Validation.isValidNameField(mFragmentBind.productDensity) |
-             !Validation.isValidNameField(mFragmentBind.productDescription)) {
-            Toasty.error(requireActivity(), R.string.form_fill, Toast.LENGTH_LONG, true).show();
-         } else if (mUriImage == null) {
-            Toasty.error(requireActivity(), R.string.add_image, Toast.LENGTH_LONG, true).show();
-         } else {
-            country = requireNonNull(mFragmentBind.productCountry.getEditText()).getText().toString();
-            manufacture = requireNonNull(mFragmentBind.productManufacture.getEditText()).getText().toString();
-            name = requireNonNull(mFragmentBind.productName.getEditText()).getText().toString();
-            price = requireNonNull(mFragmentBind.productPrice.getEditText()).getText().toString();
-            style = requireNonNull(mFragmentBind.productStyle.getEditText()).getText().toString();
-            fortress = requireNonNull(mFragmentBind.productFortress.getEditText()).getText().toString();
-            density = requireNonNull(mFragmentBind.productDensity.getEditText()).getText().toString();
-            description = requireNonNull(mFragmentBind.productDescription.getEditText()).getText().toString();
-
-            MapStorage.productMap.put("name", name);
-            MapStorage.productMap.put("country", country);
-            MapStorage.productMap.put("manufacture", manufacture);
-            MapStorage.productMap.put("price", price);
-            MapStorage.productMap.put("style", style);
-            MapStorage.productMap.put("fortress", fortress);
-            MapStorage.productMap.put("density", density);
-            MapStorage.productMap.put("description", description);
-
-            mAddProductViewModel.onGetPostResponseToRepository().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-               @Override
-               public void onChanged(Boolean res) {
-                  Toasty.success(AddProductFragment.this.requireActivity(), R.string.product_add_database, Toast.LENGTH_SHORT, true).show();
-               }
-            });
-         }
-      });
+//      mFragmentBind.btnAddDatabase.setOnClickListener(v -> {
+//         if (Validation.isValidNameField(mFragmentBind.productName) | Validation.isValidNameField(mFragmentBind.productCountry) | Validation.isValidNameField(mFragmentBind.productManufacture) | Validation.isValidNameField(mFragmentBind.productStyle) | Validation.isValidNameField(mFragmentBind.productFortress) | Validation.isValidNameField(mFragmentBind.productDensity) | Validation.isValidNameField(mFragmentBind.productDescription)) {
+//            Toasty.error(requireActivity(), R.string.valid_form, Toast.LENGTH_LONG, true).show();
+//         } else if (mUriImage == null) {
+//            Toasty.error(requireActivity(), R.string.add_image, Toast.LENGTH_LONG, true).show();
+//         } else {
+//            country = requireNonNull(mFragmentBind.productCountry.getEditText()).getText().toString();
+//            manufacture = requireNonNull(mFragmentBind.productManufacture.getEditText()).getText().toString();
+//            name = requireNonNull(mFragmentBind.productName.getEditText()).getText().toString();
+//            price = requireNonNull(mFragmentBind.productPrice.getEditText()).getText().toString();
+//            style = requireNonNull(mFragmentBind.productStyle.getEditText()).getText().toString();
+//            fortress = requireNonNull(mFragmentBind.productFortress.getEditText()).getText().toString();
+//            density = requireNonNull(mFragmentBind.productDensity.getEditText()).getText().toString();
+//            description = requireNonNull(mFragmentBind.productDescription.getEditText()).getText().toString();
+//
+//            MapStorage.productMap.put("name", name);
+//            MapStorage.productMap.put("country", country);
+//            MapStorage.productMap.put("manufacture", manufacture);
+//            MapStorage.productMap.put("price", price);
+//            MapStorage.productMap.put("style", style);
+//            MapStorage.productMap.put("fortress", fortress);
+//            MapStorage.productMap.put("density", density);
+//            MapStorage.productMap.put("description", description);
+//
+//            mAddProductViewModel.onGetPostResponseToRepository().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+//               @Override
+//               public void onChanged(Boolean res) {
+//                  Toasty.success(AddProductFragment.this.requireActivity(), R.string.product_add_database, Toast.LENGTH_SHORT, true).show();
+//               }
+//            });
+//         }
+//      });
 
       mFragmentBind.btnGallery.setOnClickListener(v -> {
          Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);

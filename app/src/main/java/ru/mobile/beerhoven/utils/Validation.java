@@ -1,33 +1,36 @@
 package ru.mobile.beerhoven.utils;
 
-import static android.util.Patterns.*;
-import static java.util.Objects.*;
+import static android.util.Patterns.PHONE;
+import static java.util.Objects.requireNonNull;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
 public final class Validation {
+   private static final String notValidField = "Поле не должно быть пустым";
 
-   public static boolean isValidNameField(TextInputLayout field) {
+   public static boolean isValidName(@NonNull TextInputLayout field) {
       String name = requireNonNull(field.getEditText()).getText().toString();
 
-      if (name.isEmpty()) {
-         field.setError("Поле не должно быть пустым");
-         return false;
-      } else {
+      if (!name.isEmpty()) {
          field.setError(null);
          field.setErrorEnabled(false);
          return true;
+      } else {
+         field.setError(notValidField);
+         return false;
       }
    }
 
-   public static boolean isValidateEmail(TextInputLayout field) {
+   public static boolean isValidEmail(@NonNull TextInputLayout field) {
       String email = requireNonNull(field.getEditText()).getText().toString();
       String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
       if (email.isEmpty()) {
-         field.setError("Поле не должно быть пустым");
+         field.setError(notValidField);
          return false;
       } else if (!email.matches(emailPattern)) {
          field.setError("Неверный адрес электронной почты");
@@ -39,31 +42,29 @@ public final class Validation {
       }
    }
 
-   public static boolean isValidPhoneNumber(TextInputLayout field) {
+   public static boolean isValidPhoneNumber(@NonNull TextInputLayout field) {
       String number = requireNonNull(field.getEditText()).getText().toString();
 
-      if (number.isEmpty()) {
-         field.setError("Поле не должно быть пустым");
-         return false;
-      } else if (number.length() == 11) {
-         return true;
-      } else {
+      if (!number.isEmpty()) {
          field.setError(null);
          field.setErrorEnabled(false);
          return PHONE.matcher(number).matches();
+      } else {
+         field.setError(notValidField);
+         return false;
       }
    }
 
-   public static Boolean setValidateAddress(TextInputLayout field) {
+   public static boolean isValidAddress(@NonNull TextInputLayout field) {
       String address = Objects.requireNonNull(field.getEditText()).getText().toString();
 
-      if (address.isEmpty()) {
-         field.setError("Поле не должно быть пустым");
-         return false;
-      } else {
+      if (!address.isEmpty()) {
          field.setError(null);
          field.setErrorEnabled(false);
          return true;
+      } else {
+         field.setError(notValidField);
+         return false;
       }
    }
 }

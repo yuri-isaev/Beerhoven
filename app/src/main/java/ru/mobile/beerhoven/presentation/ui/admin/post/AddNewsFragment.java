@@ -12,6 +12,15 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,15 +29,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +40,6 @@ import ru.mobile.beerhoven.databinding.FragmentAddNewsBinding;
 import ru.mobile.beerhoven.domain.model.News;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.utils.Constants;
-import soup.neumorphism.NeumorphButton;
 
 public class AddNewsFragment extends Fragment {
    private Activity mActivity;
@@ -48,7 +47,7 @@ public class AddNewsFragment extends Fragment {
    private AlertDialog mAlertDialog;
    private EditText mTitle, mDescription;
    private ImageView mPostImage;
-   private NeumorphButton mAddPostButton;
+   private Button mAddPostButton;
    private News mDataModel;
    private Uri mUriImage;
    private String[] cameraPermissions;

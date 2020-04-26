@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
       return super.onPrepareOptionsMenu(menu);
    }
 
-   private void initBadgeCartCounter(Menu menu) {
+   private void initBadgeCartCounter(@NonNull Menu menu) {
       MenuItem menuItem = menu.findItem(R.id.nav_cart);
       View counter = menuItem.getActionView();
       mIcon = counter.findViewById(R.id.badge_cart);

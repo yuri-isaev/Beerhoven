@@ -1,7 +1,5 @@
 package ru.mobile.beerhoven.presentation.ui.user.store.catalog;
 
-import static ru.mobile.beerhoven.presentation.ui.user.store.catalog.ProductListAdapter.*;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
@@ -20,6 +18,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import lombok.var;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.databinding.ItemProductBinding;
@@ -29,7 +28,7 @@ import ru.mobile.beerhoven.presentation.interfaces.IAdapterPositionListener;
 import ru.mobile.beerhoven.presentation.ui.user.store.sections.StoreFragmentDirections;
 import ru.mobile.beerhoven.utils.Constants;
 
-public class ProductListAdapter extends Adapter<ProductListViewHolder> {
+public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListViewHolder> {
    private final List<Product> mAdapterList;
    private final Context mContext;
    private final IAdapterPositionListener mListener;
@@ -56,15 +55,14 @@ public class ProductListAdapter extends Adapter<ProductListViewHolder> {
       String productImage = item.getUrl();
 
       // Binding view fields
-      Glide.with(holder.binding.productImage.getContext()).load(item.getUrl()).into(holder.binding.productImage);
+      Glide.with(holder.binding.image.getContext()).load(item.getUrl()).into(holder.binding.image);
       holder.binding.productName.setText(item.getName());
       holder.binding.productPrice.setText((item.getPrice() + " руб."));
       holder.binding.productStyle.setText(item.getStyle());
       holder.binding.productFortress.setText((item.getFortress() + "%"));
 
       // Set navigate action args
-      StoreFragmentDirections.ActionNavProductListToNavProductDetails action = StoreFragmentDirections
-          .actionNavProductListToNavProductDetails()
+      var action = StoreFragmentDirections.actionNavProductListToNavProductDetails()
           .setChange(Constants.OBJECT_VISIBLE)
           .setProductId(productId)
           .setCountry(item.getCountry())
@@ -102,7 +100,7 @@ public class ProductListAdapter extends Adapter<ProductListViewHolder> {
          
          Product product = mAdapterList.get(position);
          product.setQuantity(String.valueOf(productQuantity));
-         MapStorage.priceMap.put("total", product.getPrice());
+         product.setTotal(Double.parseDouble(String.valueOf(product.getPrice())));
 
          // Add product list position to cart
          mListener.onInteractionAdd(product);

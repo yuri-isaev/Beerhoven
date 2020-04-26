@@ -4,16 +4,19 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.annotation.NonNull;
+
+import ru.mobile.beerhoven.domain.repository.IPreferencesStorage;
 import ru.mobile.beerhoven.utils.Constants;
 
 /**
  * Class accessing SharedPreferences, used to save the value of the counter.
  */
-public class PreferencesStorage {
+public class PreferencesStorage implements IPreferencesStorage {
    private final SharedPreferences mSettings;
    private final SharedPreferences.Editor mEditor;
 
-   public PreferencesStorage(Application context) {
+   public PreferencesStorage(@NonNull Application context) {
       this.mSettings = context.getSharedPreferences(Constants.SHARED_PREF, Context.MODE_PRIVATE);
       this.mEditor = mSettings.edit();
    }

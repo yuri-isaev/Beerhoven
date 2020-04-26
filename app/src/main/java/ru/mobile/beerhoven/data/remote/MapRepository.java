@@ -162,11 +162,11 @@ public class MapRepository implements IMapRepository, IFirebaseDriverInfoListene
    }
 
    @Override
-   public void onDriverInfoLoadSuccess(@NonNull DriverGeoModel driverGeoModel) {
-      MapStorage.markerList.put(driverGeoModel.getKey(), mGoogleMap.addMarker(new MarkerOptions()
-          .position(new LatLng(driverGeoModel.getGeoLocation().latitude, driverGeoModel.getGeoLocation().longitude))
-          .title(driverGeoModel.getDriverInfoModel().getName())
-          .snippet(driverGeoModel.getDriverInfoModel().getPhoneNo())
+   public void onDriverInfoLoadSuccess(@NonNull DriverGeoModel driver) {
+      MapStorage.markerList.put(driver.getKey(), mGoogleMap.addMarker(new MarkerOptions()
+          .position(new LatLng(driver.getGeoLocation().latitude, driver.getGeoLocation().longitude))
+          .title(driver.getDriverInfoModel().getName())
+          .snippet(driver.getDriverInfoModel().getPhoneNo())
           .icon(BitmapDescriptorFactory.fromResource(R.drawable.redcar))
           .flat(true))
       );
@@ -177,7 +177,7 @@ public class MapRepository implements IMapRepository, IFirebaseDriverInfoListene
 
    @SuppressLint("MissingPermission")
    @Override
-   public void onGetOrderLocation(FusedLocationProviderClient providerClient, Context context, Geocoder geocoder) {
+   public void onGetOrderLocation(@NonNull FusedLocationProviderClient providerClient, Context ctx, Geocoder geocoder) {
       List<Order> orderList = new ArrayList<>();
       final float[] orderColorMarker = new float[1];
       final String[] orderName = new String[1];
@@ -191,7 +191,7 @@ public class MapRepository implements IMapRepository, IFirebaseDriverInfoListene
                   orderList.add(order);
                   assert order != null;
                   orderName[0] = order.getName();
-                  orderColorMarker[0] = order.getColor();
+                  orderColorMarker[0] = Float.parseFloat(order.getColor());
                }
             }
          }

@@ -80,7 +80,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <service android:name=".data.network.service.PushMessagingService"
+        <service android:name=".data.network.PushMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
