@@ -46,14 +46,15 @@
                 android:id="@+id/cart_total"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
-                android:layout_marginTop="@dimen/size_5"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
                 android:text="@string/cart_total" />
 
-            <soup.neumorphism.NeumorphButton
+            <Button
+                style="@style/AppTheme.Button"
                 android:id="@+id/btn_confirm"
-                style="@style/AppTheme.Neumorph.Button"
                 android:layout_gravity="center"
                 android:text="@string/order_form"
                 tools:ignore="TextContrastCheck" />

@@ -1,10 +1,11 @@
 <resources>
     <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.MaterialComponents">
-        <item name="android:textColor">@color/colorMainGrey</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textCursorDrawable">@color/colorMainGrey</item>
         <item name="android:textSize">@dimen/text_size</item>
         <item name="android:windowFullscreen">true</item>
-        <item name="colorPrimary">@color/colorMainBlack</item>
+        <item name="colorPrimary">@color/colorAccent</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
@@ -18,14 +19,13 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="AppTheme.Neumorph.Button" parent="Widget.Neumorph.Button">
-        <item name="android:layout_width">332dp</item>
-        <item name="android:layout_height">74dp</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="android:textSize">@dimen/text_22</item>
+    <style name="AppTheme.Button">
+        <item name="android:background">@drawable/btn_selector</item>
+        <item name="android:elevation">5dp</item>
+        <item name="android:layout_width">330dp</item>
+        <item name="android:layout_height">49dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textSize">30sp</item>
         <item name="fontFamily">@font/catorze27_style1_bold</item>
-        <item name="neumorph_backgroundColor">@color/colorAccent</item>
-        <item name="neumorph_shadowColorDark">@color/colorShadowDark</item>
-        <item name="neumorph_shadowColorLight">@color/colorMainWhite</item>
     </style>
 </resources>

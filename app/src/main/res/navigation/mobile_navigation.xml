@@ -112,7 +112,7 @@
         tools:layout="@layout/fragment_add_product" />
     <fragment
         android:id="@+id/nav_order_confirm"
-        android:name="ru.mobile.beerhoven.presentation.ui.orders.confirm.OrderConfirmFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.user.orders.confirm.OrderConfirmFragment"
         android:label="@string/nav_order_confirm"
         tools:layout="@layout/fragment_order_confirm">
         <argument

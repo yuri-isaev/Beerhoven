@@ -240,9 +240,9 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout5" />
 
-            <soup.neumorphism.NeumorphButton
+            <Button
                 android:id="@+id/btn_add_product_to_cart"
-                style="@style/AppTheme.Neumorph.Button"
+                style="@style/AppTheme.Button"
                 android:layout_marginBottom="36dp"
                 android:text="@string/cart_add"
                 app:layout_constraintBottom_toBottomOf="parent"

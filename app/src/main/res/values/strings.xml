@@ -19,11 +19,9 @@
     <!-- Cart -->
     <string name="cart_add">Добавить в корзину</string>
     <string name="cart_add_success">Товар добавлен в корзину</string>
+    <string name="cart_empty">Корзина пуста</string>
     <string name="cart_total">Сумма корзины</string>
     <string name="cart_update">обновить данные товара</string>
-
-    <!-- Form -->
-    <string name="form_fill">Заполните форму</string>
 
     <!-- Menu -->
     <string name="menu_admin">Администратор</string>
@@ -68,7 +66,7 @@
     <string name="order_confirmation">Подтверждение заказа</string>
     <string name="order_clarification">Уточнить заказ</string>
     <string name="order_data">Дата заказа</string>
-    <string name="order_details">Детали</string>
+    <string name="order_details">Детали заказа</string>
     <string name="order_details_specify">Пожалуйста, уточните детали заказа</string>
     <string name="order_form">Подать заявку</string>
     <string name="order_make">сделать заказ</string>
@@ -78,7 +76,11 @@
     <string name="order_phone_number">Номер телефона</string>
     <string name="order_received">Заказ получен</string>
     <string name="order_received_already">Заказ получен</string>
+    <string name="order_recipient_name">Имя получателя заказа</string>
+    <string name="order_recipient_address">Адресс получателя заказа</string>
+    <string name="order_recipient_number">Телефон получателя заказа</string>
     <string name="order_sent_success">Ваш заказ успешно отправлен</string>
+    <string name="order_sent_failed">Ошибка отправки заказа</string>
     <string name="order_time">Время заказа</string>
     <string name="order_total">Общая стоимость заказа</string>
     <string name="order_waiting">Ваш заказ получен, ожидайте доставки…</string>
@@ -123,4 +125,8 @@
     <string name="reg_name">Ваше Имя</string>
     <string name="req_email">Email</string>
     <string name="reg_phone_number">Номер телефона</string>
+
+    <!-- Validation -->
+    <string name="valid_form">Заполните форму</string>
+    <string name="valid_field">Поле не должно быть пустым</string>
 </resources>
