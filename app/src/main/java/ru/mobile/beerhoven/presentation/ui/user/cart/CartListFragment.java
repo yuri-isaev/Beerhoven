@@ -14,14 +14,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import es.dmoral.toasty.Toasty;
-import lombok.var;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.CartRepository;
 
@@ -74,18 +72,9 @@ public class CartListFragment extends Fragment implements CartListAdapter.Callba
 
          mConfirmButton.setOnClickListener(v -> {
             try {
-               NavController navController = Navigation.findNavController(v);
-               var action = CartListFragmentDirections
-                   .actionNavCartToNavOrderConfirm()
+               NavDirections action = CartListFragmentDirections.actionNavCartToNavOrderConfirm()
                    .setTotal(mTotal);
-
-               NavOptions options = new NavOptions.Builder()
-                   .setLaunchSingleTop(true)
-                   .setEnterAnim(R.anim.fade_in)
-                   .setExitAnim(R.anim.fade_out)
-                   .setPopExitAnim(R.anim.fade_out)
-                   .build();
-               navController.navigate(action, options);
+               Navigation.findNavController(v).navigate(action);
             } catch (Exception e) {
                Toasty.warning(requireActivity(), R.string.cart_empty, LENGTH_LONG, true).show();
             }

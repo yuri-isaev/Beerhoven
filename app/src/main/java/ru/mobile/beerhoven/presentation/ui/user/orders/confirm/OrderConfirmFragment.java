@@ -20,14 +20,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavDirections;
-import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.data.local.PreferencesStorage;
 import ru.mobile.beerhoven.data.network.PushMessagingService;
 import ru.mobile.beerhoven.data.remote.OrderConfirmRepository;
 import ru.mobile.beerhoven.databinding.FragmentOrderConfirmBinding;
@@ -69,7 +67,10 @@ public class OrderConfirmFragment extends Fragment {
    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
 
-      mViewModel = new OrderConfirmViewModel(new OrderConfirmRepository(), new PushMessagingService(), new PreferencesStorage((Application) requireActivity().getApplicationContext()));
+      mViewModel = new OrderConfirmViewModel(
+          (Application) requireActivity().getApplicationContext(),
+          new OrderConfirmRepository(),
+          new PushMessagingService());
 
       mAddOrderButton.setOnClickListener(v -> {
          if (!isValidName(mNameText) | !isValidAddress(mAddressText) | !isValidPhoneNumber(mPhoneText)) {
@@ -77,14 +78,14 @@ public class OrderConfirmFragment extends Fragment {
             return;
          }
 
-         Order order = new Order();
-         order.setAddress(requireNonNull(mAddressText.getEditText()).getText().toString());
-         order.setColor(String.valueOf(Randomizer.getRandomColorMarker()));
-         order.setDate(CurrentDateTime.getCurrentDate());
-         order.setName(String.valueOf(requireNonNull(mNameText.getEditText()).getText()));
-         order.setPhone(String.valueOf(requireNonNull(mPhoneText.getEditText()).getText()));
-         order.setTime(CurrentDateTime.getCurrentTime());
-         order.setTotal(Double.parseDouble(String.valueOf(Double.parseDouble(mTotal))));
+         Order order = new Order()
+             .setAddress(requireNonNull(mAddressText.getEditText()).getText().toString())
+             .setColor(String.valueOf(Randomizer.getRandomColorMarker()))
+             .setDate(CurrentDateTime.getCurrentDate())
+             .setName(String.valueOf(requireNonNull(mNameText.getEditText()).getText()))
+             .setPhone(String.valueOf(requireNonNull(mPhoneText.getEditText()).getText()))
+             .setTime(CurrentDateTime.getCurrentTime())
+             .setTotal(Double.parseDouble(String.valueOf(Double.parseDouble(mTotal))));
 
          sendConfirmOnOrderList(order);
          toActivity(0);
@@ -93,34 +94,24 @@ public class OrderConfirmFragment extends Fragment {
       });
    }
 
+   @SuppressLint("CheckResult")
    public void sendConfirmOnOrderList(Order order) {
-      try {
          mViewModel.onCreateConfirmOrderToRepository(order);
          mViewModel.onDeleteConfirmOrderToRepository();
          mViewModel.onDeleteCartCounterToStorage();
-         Toasty.success(requireActivity(), R.string.order_sent_success, LENGTH_LONG, true).show();
-      } catch (Exception e) {
-         e.printStackTrace();
-         Toasty.error(requireActivity(), R.string.order_sent_failed, LENGTH_LONG, true).show();
-      }
+         Toasty.success(requireActivity(), R.string.order_sent_success, LENGTH_LONG).show();
    }
 
    public void toActivity(int data) {
       Activity activity = getActivity();
       if (activity != null && !activity.isFinishing() && activity instanceof MainActivity) {
-         ((MainActivity) activity).onUpdateCounterFromFragment(data);
+         ((MainActivity) activity).onGetDataFromFragment(data);
       }
    }
 
    public void navigateFragment(View view) {
       NavDirections action = OrderConfirmFragmentDirections.actionNavOrderConfirmToNavOrderNotify();
-      NavOptions options = new NavOptions.Builder()
-          .setLaunchSingleTop(true)
-          .setEnterAnim(R.anim.fade_in)
-          .setExitAnim(R.anim.fade_out)
-          .setPopExitAnim(R.anim.fade_out)
-          .build();
-      Navigation.findNavController(view).navigate(action, options);
+      Navigation.findNavController(view).navigate(action);
    }
 
    public void sendPushNotification(FragmentActivity activity) {

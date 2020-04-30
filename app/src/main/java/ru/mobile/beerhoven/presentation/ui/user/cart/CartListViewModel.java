@@ -21,10 +21,10 @@ public class CartListViewModel extends ViewModel {
       this.mRepository = repository;
    }
 
-   public CartListViewModel(ICartRepository repository, Application applicationContext) {
+   public CartListViewModel(Application context, ICartRepository repository) {
       this.mRepository = repository;
       this.mCartList = new MutableLiveData<>();
-      this.mStorage = new PreferencesStorage(applicationContext);
+      this.mStorage = new PreferencesStorage(context);
    }
 
    // Initialize adapter list when create fragment

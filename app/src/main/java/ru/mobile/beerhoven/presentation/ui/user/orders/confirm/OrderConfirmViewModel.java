@@ -1,8 +1,11 @@
 package ru.mobile.beerhoven.presentation.ui.user.orders.confirm;
 
+import android.app.Application;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModel;
 
+import ru.mobile.beerhoven.data.local.PreferencesStorage;
 import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.domain.repository.IOrderConfirmRepository;
 import ru.mobile.beerhoven.domain.repository.IPreferencesStorage;
@@ -13,12 +16,11 @@ public class OrderConfirmViewModel extends ViewModel {
    private final IPreferencesStorage mStorage;
    private final IPushMessagingService mService;
 
-   public OrderConfirmViewModel(IOrderConfirmRepository repository, IPushMessagingService service,
-       IPreferencesStorage storage)
-   {
+   public OrderConfirmViewModel(Application context, IOrderConfirmRepository repository,
+       IPushMessagingService service) {
       this.mRepository = repository;
       this.mService = service;
-      this.mStorage = storage;
+      this.mStorage = new PreferencesStorage(context);
    }
 
    public void onCreateConfirmOrderToRepository(Order order) {

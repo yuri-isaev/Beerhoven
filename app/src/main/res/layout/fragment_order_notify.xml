@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.orders.notify.OrderNotifyFragment">
+    tools:context=".presentation.ui.user.orders.notify.OrderNotifyFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorMainGrey"
-        android:theme="@style/AppTheme">
+        android:background="@color/colorMainGrey">
 
         <LinearLayout
-            android:id="@+id/linearLayout5"
+            android:id="@+id/linearLayout"
             android:layout_width="347dp"
             android:layout_height="275dp"
             android:layout_marginTop="132dp"
@@ -29,26 +28,21 @@
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/tt_bluescreens_round_regular"
                 android:shadowColor="@color/colorMainBlack"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="5"
                 android:text="@string/order_notification"
                 android:textAlignment="center"
                 android:textColor="@color/colorMainYellow"
-                android:textSize="@dimen/text_50" />
+                android:textSize="80sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/size_15"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
-                android:shadowColor="@color/colorMainBlack"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="5"
+                android:layout_margin="5dp"
                 android:text="@string/order_waiting"
                 android:textAlignment="center"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_size" />
         </LinearLayout>
 
@@ -57,12 +51,11 @@
             android:layout_width="62dp"
             android:layout_height="40dp"
             android:layout_marginBottom="36dp"
-            android:theme="?android:attr/progressBarStyleHorizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             app:layout_constraintVertical_bias="0.971"
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>

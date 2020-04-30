@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
       NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
       NavigationUI.setupWithNavController(mNavigationView, mNavController);
 
-      mCartViewModel = new CartListViewModel(new CartRepository(), (Application) getApplicationContext());
+      mCartViewModel = new CartListViewModel((Application) getApplicationContext(), new CartRepository());
       mNewsListViewModel = new NewsListViewModel(new NewsRepository(), (Application) getApplicationContext());
 
       setNavHeaderUserName();
@@ -145,6 +145,11 @@ public class MainActivity extends AppCompatActivity {
       }
    }
 
+   public void onGetDataFromFragment(int data) {
+      updateCartCounter(data);
+      mCartCounterValue = data;
+   }
+
    public void onUpdateCounterFromFragment(int data) {
       updateCartCounter(data);
    }
@@ -182,14 +187,13 @@ public class MainActivity extends AppCompatActivity {
       if (counterValue == 0) {
          mCartCounter.setVisibility(View.GONE);
          mBadgeCounter.setVisibility(View.GONE);
-         onSaveCartCounter(counterValue);
       } else {
          mCartCounter.setVisibility(View.VISIBLE);
          mCartCounter.setText(String.valueOf(counterValue));
          mBadgeCounter.setVisibility(View.VISIBLE);
          mBadgeCounter.setText(String.valueOf(counterValue));
-         onSaveCartCounter(counterValue);
       }
+      onSaveCartCounter(counterValue);
    }
 
    @SuppressLint("UseCompatLoadingForDrawables")
@@ -208,12 +212,11 @@ public class MainActivity extends AppCompatActivity {
       }
       if (counterValue == 0) {
          mNewsCounter.setVisibility(View.GONE);
-         onSaveNewsCount(counterValue);
       } else {
          mNewsCounter.setVisibility(View.VISIBLE);
          mNewsCounter.setText(String.valueOf(counterValue));
-         onSaveNewsCount(counterValue);
       }
+      onSaveCartCounter(counterValue);
    }
 
    private void onSaveNewsCount(int counterValue) {

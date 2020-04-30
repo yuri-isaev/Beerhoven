@@ -27,18 +27,13 @@ public class OrderConfirmRepository implements IOrderConfirmRepository {
    // Add order value to database
    public void onCreateConfirmOrder(Order order) {
       mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserId).push().setValue(order);
-      DatabaseReference databaseCartList = mFirebaseRef.child(Constants.NODE_CART).child(mUserId);
-      DatabaseReference databaseOrderList = mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserId).push();
-      onTransferNodeDataBase(databaseCartList, databaseOrderList, order);
-   }
-
-   // Emptying the user's cart
-   public void onRemoveConfirmOrder() {
-      mFirebaseRef.child(Constants.NODE_CART).removeValue();
+      DatabaseReference cartList = mFirebaseRef.child(Constants.NODE_CART).child(mUserId);
+      DatabaseReference orderList = mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserId).push();
+      onDatabaseNodeTransfer(cartList, orderList, order);
    }
 
    // Copying node from cart list to order list
-   private void onTransferNodeDataBase(@NonNull DatabaseReference fromPath, final DatabaseReference toPath, Order order) {
+   private void onDatabaseNodeTransfer(@NonNull DatabaseReference fromPath, final DatabaseReference toPath, Order order) {
       fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
          @Override
          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -49,5 +44,10 @@ public class OrderConfirmRepository implements IOrderConfirmRepository {
          @Override
          public void onCancelled(@NonNull DatabaseError databaseError) {}
       });
+   }
+
+   // Emptying the user's cart
+   public void onRemoveConfirmOrder() {
+      mFirebaseRef.child(Constants.NODE_CART).removeValue();
    }
 }

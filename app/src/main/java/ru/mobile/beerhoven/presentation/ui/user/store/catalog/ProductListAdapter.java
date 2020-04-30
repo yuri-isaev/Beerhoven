@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
@@ -18,8 +17,6 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import lombok.var;
-import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.databinding.ItemProductBinding;
 import ru.mobile.beerhoven.domain.model.Product;
@@ -42,7 +39,8 @@ public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListVi
    @NonNull
    @Override
    public ProductListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      ItemProductBinding binding = ItemProductBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+      ItemProductBinding binding = ItemProductBinding
+          .inflate(LayoutInflater.from(parent.getContext()), parent, false);
       return new ProductListViewHolder(binding);
    }
 
@@ -61,31 +59,20 @@ public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListVi
       holder.binding.productStyle.setText(item.getStyle());
       holder.binding.productFortress.setText((item.getFortress() + "%"));
 
-      // Set navigate action args
-      var action = StoreFragmentDirections.actionNavProductListToNavProductDetails()
-          .setChange(Constants.OBJECT_VISIBLE)
-          .setProductId(productId)
-          .setCountry(item.getCountry())
-          .setManufacture(item.getManufacture())
-          .setName(item.getName())
-          .setPrice(String.valueOf(item.getPrice()))
-          .setStyle(item.getStyle())
-          .setFortress(item.getFortress())
-          .setDensity(item.getDensity())
-          .setDescription(item.getDescription())
-          .setImage(productImage);
-
-      NavOptions options = new NavOptions.Builder()
-          .setLaunchSingleTop(true)
-          .setEnterAnim(R.anim.fade_in)
-          .setExitAnim(R.anim.fade_out)
-          .setPopExitAnim(R.anim.fade_out)
-          .build();
-
-      // Navigate action for click product catalog card
       holder.binding.productContainer.setOnClickListener(v -> {
-         NavController navController = Navigation.findNavController(v);
-         navController.navigate(action, options);
+         NavDirections action  = StoreFragmentDirections.actionNavProductListToNavProductDetails()
+             .setChange(Constants.OBJECT_VISIBLE)
+             .setProductId(productId)
+             .setCountry(item.getCountry())
+             .setManufacture(item.getManufacture())
+             .setName(item.getName())
+             .setPrice(String.valueOf(item.getPrice()))
+             .setStyle(item.getStyle())
+             .setFortress(item.getFortress())
+             .setDensity(item.getDensity())
+             .setDescription(item.getDescription())
+             .setImage(productImage);
+         Navigation.findNavController(v).navigate(action);
       });
 
       // Add product to cart when click catalog card element
