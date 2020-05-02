@@ -5,10 +5,10 @@
     style="@style/Widget.MaterialComponents.CardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/size_10"
-    android:layout_marginTop="@dimen/size_15"
-    android:layout_marginRight="@dimen/size_10"
-    app:cardCornerRadius="@dimen/size_17"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginRight="10dp"
+    app:cardCornerRadius="17dp"
     app:cardElevation="10dp"
     tools:context=".presentation.ui.user.store.catalog.ProductListFragment">
 

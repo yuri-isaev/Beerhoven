@@ -2,14 +2,9 @@ package ru.mobile.beerhoven.data.remote;
 
 import static java.util.Objects.requireNonNull;
 
-import androidx.annotation.NonNull;
-
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.domain.repository.IOrderConfirmRepository;
@@ -24,30 +19,14 @@ public class OrderConfirmRepository implements IOrderConfirmRepository {
       this.mUserId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
-   // Add order value to database
-   public void onCreateConfirmOrder(Order order) {
-      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserId).push().setValue(order);
-      DatabaseReference cartList = mFirebaseRef.child(Constants.NODE_CART).child(mUserId);
-      DatabaseReference orderList = mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserId).push();
-      onDatabaseNodeTransfer(cartList, orderList, order);
+   public void onCreateOrderConfirm(Order order) {
+      DatabaseReference confirm = mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserId).push();
+      confirm.setValue(order);
+      String key = confirm.getKey();
+      mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserId).child(requireNonNull(key));
    }
 
-   // Copying node from cart list to order list
-   private void onDatabaseNodeTransfer(@NonNull DatabaseReference fromPath, final DatabaseReference toPath, Order order) {
-      fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
-         @Override
-         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            toPath
-                .setValue(dataSnapshot.getValue(Boolean.parseBoolean(order.getId())))
-                .addOnCompleteListener(task -> {});
-         }
-         @Override
-         public void onCancelled(@NonNull DatabaseError databaseError) {}
-      });
-   }
-
-   // Emptying the user's cart
-   public void onRemoveConfirmOrder() {
+   public void onDeleteOrderCart() {
       mFirebaseRef.child(Constants.NODE_CART).removeValue();
    }
 }

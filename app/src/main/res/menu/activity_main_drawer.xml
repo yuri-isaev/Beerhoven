@@ -6,16 +6,16 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_news_list"
-            android:icon="@drawable/ic_baseline_house_24"
+            android:id="@+id/nav_news"
+            android:icon="@drawable/ic_nav_store"
             android:title="@string/menu_news"
             app:actionViewClass="android.widget.TextView" />
         <item
-            android:id="@+id/nav_product_list"
+            android:id="@+id/nav_products"
             android:icon="@drawable/ic_shop"
             android:title="@string/menu_store" />
         <item
-            android:id="@+id/nav_order"
+            android:id="@+id/nav_orders"
             android:icon="@drawable/ic_baseline_checklist_24"
             android:title="@string/menu_order"
             app:actionViewClass="android.widget.TextView" />

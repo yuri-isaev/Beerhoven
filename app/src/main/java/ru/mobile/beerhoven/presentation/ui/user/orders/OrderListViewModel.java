@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.presentation.ui.orders.order;
+package ru.mobile.beerhoven.presentation.ui.user.orders;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,12 +9,11 @@ import java.util.List;
 import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.domain.repository.IOrderRepository;
 
-public class OrderViewModel extends ViewModel {
+public class OrderListViewModel extends ViewModel {
    private final IOrderRepository mRepository;
    private MutableLiveData<List<Order>> mOrderList;
-   private String mOrderData;
 
-   public OrderViewModel(IOrderRepository repository) {
+   public OrderListViewModel(IOrderRepository repository) {
       this.mRepository = repository;
    }
 
@@ -25,22 +24,11 @@ public class OrderViewModel extends ViewModel {
       mOrderList = mRepository.getOrderMutableList();
    }
 
-   public String getCurrentOrderIdToRepository() {
-      if (mOrderData != null) {
-         return "error";
-      }
-       return mOrderData = mRepository.getOrderMutableData().getValue();
-   }
-
    public LiveData<List<Order>> getOrderList() {
       return mOrderList;
    }
 
    public void onDeleteOrderByIdToRepository(String key) {
       mRepository.onDeleteOrderById(key);
-   }
-
-   public String getCurrentUserPhoneToRepository() {
-      return mRepository.getCurrentUserPhoneNumber();
    }
 }

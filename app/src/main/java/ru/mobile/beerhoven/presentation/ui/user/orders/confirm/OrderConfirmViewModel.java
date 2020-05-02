@@ -24,11 +24,11 @@ public class OrderConfirmViewModel extends ViewModel {
    }
 
    public void onCreateConfirmOrderToRepository(Order order) {
-      mRepository.onCreateConfirmOrder(order);
+      mRepository.onCreateOrderConfirm(order);
    }
 
-   public void onDeleteConfirmOrderToRepository() {
-      mRepository.onRemoveConfirmOrder();
+   public void onDeleteOrderCartToRepository() {
+      mRepository.onDeleteOrderCart();
    }
 
    public void onDeleteCartCounterToStorage() {

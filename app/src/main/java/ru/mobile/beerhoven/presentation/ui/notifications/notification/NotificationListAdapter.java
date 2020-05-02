@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
@@ -41,9 +42,8 @@ public class NotificationListAdapter extends Adapter<NotificationViewHolder> {
       holder.binding.tvPhoneOrder.setText(confirmID);
       holder.itemView.setOnClickListener(v -> {
          NavController navController = Navigation.findNavController(v);
-         NotificationFragmentDirections.ActionNavNotificationsToNavOrder action = NotificationFragmentDirections
-             .actionNavNotificationsToNavOrder()
-             .setID(confirmID);
+         NavDirections action = NotificationFragmentDirections.actionNavNotificationsToNavOrders()
+             .setId(confirmID);;
          navController.navigate(action);
       });
    }

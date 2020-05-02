@@ -1,6 +1,6 @@
 package ru.mobile.beerhoven.data.remote;
 
-import static java.util.Objects.*;
+import static java.util.Objects.requireNonNull;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IOrderDetailRepository;
 import ru.mobile.beerhoven.domain.repository.IUserRepository;
@@ -26,38 +25,36 @@ public class OrderDetailRepository implements IOrderDetailRepository, IUserRepos
    private final DatabaseReference mFirebaseRef;
    private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
-   private final String mUserPhoneId;
+   private final String mUserId;
 
    public OrderDetailRepository() {
-      this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
+      this.mFirebaseRef = FirebaseDatabase.getInstance().getReference(Constants.NODE_ORDERS);
       this.mProductList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
-      this.mUserPhoneId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mUserId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    @Override
    public String getCurrentUserPhoneNumber() {
-      return mUserPhoneId;
+      return mUserId;
    }
 
    @Override
-   public MutableLiveData<List<Product>> getOrderDetailsList() {
+   public MutableLiveData<List<Product>> getOrderDetailList(String orderKey) {
       if (mProductList.size() == 0) {
-         String push = MapStorage.productMap.get("push_id");
-         readOrderList(push);
+         getOrderList(orderKey);
       }
       mMutableList.setValue(mProductList);
       return mMutableList;
    }
 
-   private void readOrderList(String pushID) {
-      mFirebaseRef.child(Constants.NODE_ORDERS).child(mUserPhoneId).child(pushID).addChildEventListener(new ChildEventListener() {
+   private void getOrderList(String orderKey) {
+      mFirebaseRef.child(mUserId).child(orderKey).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             Product order = snapshot.getValue(Product.class);
             assert order != null;
             order.setId(snapshot.getKey());
-
             if (!mProductList.contains(order)) {
                mProductList.add(order);
             }
@@ -69,7 +66,6 @@ public class OrderDetailRepository implements IOrderDetailRepository, IUserRepos
             Product order = snapshot.getValue(Product.class);
             assert order != null;
             order.setId(snapshot.getKey());
-
             if (mProductList.contains(order)) {
                mProductList.set(mProductList.indexOf(order), order);
             }

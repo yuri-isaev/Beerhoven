@@ -97,7 +97,7 @@ public class OrderConfirmFragment extends Fragment {
    @SuppressLint("CheckResult")
    public void sendConfirmOnOrderList(Order order) {
          mViewModel.onCreateConfirmOrderToRepository(order);
-         mViewModel.onDeleteConfirmOrderToRepository();
+         mViewModel.onDeleteOrderCartToRepository();
          mViewModel.onDeleteCartCounterToStorage();
          Toasty.success(requireActivity(), R.string.order_sent_success, LENGTH_LONG).show();
    }

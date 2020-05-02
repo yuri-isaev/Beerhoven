@@ -1,15 +1,14 @@
-package ru.mobile.beerhoven.presentation.ui.orders.order;
+package ru.mobile.beerhoven.presentation.ui.user.orders;
 
 import static java.util.Objects.requireNonNull;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
@@ -37,11 +36,10 @@ public class OrderListAdapter extends Adapter<OrderListAdapter.OrderViewHolder> 
    @SuppressLint("SetTextI18n")
    @Override
    public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-      OrderViewModel orderViewModel = new OrderViewModel(new OrderRepository());
+      OrderListViewModel viewModel = new OrderListViewModel(new OrderRepository());
       Order order = mOrderList.get(position);
-
-      // Get phone number current user aka user id from database
-      String userPhoneID = orderViewModel.getCurrentUserPhoneToRepository();
+      String orderId = order.getId();
+      String userId = order.getPhone();
 
       holder.binding.orderAddress.setText(order.getAddress());
       holder.binding.orderDate.setText(order.getDate());
@@ -49,24 +47,16 @@ public class OrderListAdapter extends Adapter<OrderListAdapter.OrderViewHolder> 
       holder.binding.orderPhone.setText(order.getPhone());
       holder.binding.orderTime.setText(order.getTime());
       holder.binding.orderTotal.setText(order.getTotal() + " руб.");
-
-      // Get order key from database
-      orderViewModel.getCurrentOrderIdToRepository();
-
-      holder.itemView.setOnClickListener(v -> {
-         NavController navController = Navigation.findNavController(v);
-         OrderFragmentDirections.ActionNavOrderToNavOrderDetails action = OrderFragmentDirections
-             .actionNavOrderToNavOrderDetails()
-             .setUserID(requireNonNull(userPhoneID))
-             .setOrderKey(requireNonNull(orderViewModel.getCurrentOrderIdToRepository()));
-         navController.navigate(action);
-      });
-
       holder.binding.imgOrderDelete.setVisibility(View.INVISIBLE);
-
-      // Remove order from on click delete button
-      holder.binding.imgOrderDelete.setOnClickListener(v ->
-          orderViewModel.onDeleteOrderByIdToRepository(order.getId()));
+      holder.binding.imgOrderDelete.setOnClickListener(v -> {
+         viewModel.onDeleteOrderByIdToRepository(userId);
+      });
+      holder.itemView.setOnClickListener(v -> {
+         NavDirections action = OrderListFragmentDirections.actionNavOrdersToNavOrderDetails()
+             .setUserId(requireNonNull(userId))
+             .setOrderKey(requireNonNull(orderId));
+         Navigation.findNavController(v).navigate(action);
+      });
    }
 
    @Override
@@ -74,19 +64,12 @@ public class OrderListAdapter extends Adapter<OrderListAdapter.OrderViewHolder> 
       return mOrderList.size();
    }
 
-
-   public static class OrderViewHolder extends ViewHolder implements OnClickListener {
+   public static class OrderViewHolder extends ViewHolder {
       ItemOrderBinding binding;
 
-      public OrderViewHolder(ItemOrderBinding recyclerBinding) {
+      public OrderViewHolder(@NonNull ItemOrderBinding recyclerBinding) {
          super(recyclerBinding.getRoot());
          this.binding = recyclerBinding;
-      }
-
-      @Override
-      public void onClick(View v) {
-         binding.imgOrderDelete.setOnClickListener(this);
-         itemView.setOnClickListener(this);
       }
    }
 }

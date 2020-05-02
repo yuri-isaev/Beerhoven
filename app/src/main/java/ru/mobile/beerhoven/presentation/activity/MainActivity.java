@@ -56,17 +56,24 @@ public class MainActivity extends AppCompatActivity {
    protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_main);
+
       Toolbar toolbar = findViewById(R.id.toolbar);
       setSupportActionBar(toolbar);
 
       DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
       mNavigationView = findViewById(R.id.nav_view);
 
-      mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_news_list, R.id.nav_product_list,
-          R.id.nav_order, R.id.nav_cart, R.id.nav_map, R.id.nav_add_product, R.id.nav_add_news)
+      mAppBarConfiguration = new AppBarConfiguration.Builder(
+          R.id.nav_news,
+          R.id.nav_products,
+          R.id.nav_orders,
+          R.id.nav_cart,
+          R.id.nav_map,
+          R.id.nav_add_product,
+          R.id.nav_add_news)
           .setDrawerLayout(mDrawerLayout).build();
 
-      mNews = (TextView) getActionView(mNavigationView.getMenu().findItem(R.id.nav_news_list));
+      mNews = (TextView) getActionView(mNavigationView.getMenu().findItem(R.id.nav_news));
       mCart = (TextView) getActionView(mNavigationView.getMenu().findItem(R.id.nav_cart));
 
       mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
