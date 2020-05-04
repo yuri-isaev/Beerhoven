@@ -10,8 +10,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
@@ -19,7 +18,6 @@ import com.bumptech.glide.Glide;
 import java.util.EventListener;
 import java.util.List;
 
-import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.CartRepository;
 import ru.mobile.beerhoven.databinding.ItemCartBinding;
 import ru.mobile.beerhoven.domain.model.Product;
@@ -85,29 +83,19 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
       });
 
       holder.binding.cartContainer.setOnClickListener(v -> {
-         NavController navController = Navigation.findNavController(v);
-         CartListFragmentDirections.ActionNavCartToNavDetails action = CartListFragmentDirections
-             .actionNavCartToNavDetails()
-             .setChange(Constants.OBJECT_RENAME)
-             .setProductId(productId)
+         NavDirections action = CartListFragmentDirections.actionNavCartToNavDetails()
              .setCountry(product.getCountry())
-             .setManufacture(product.getManufacture())
-             .setName(product.getName())
-             .setPrice(String.valueOf(product.getPrice()))
-             .setStyle(product.getStyle())
-             .setFortress(product.getFortress())
              .setDensity(product.getDensity())
              .setDescription(product.getDescription())
-             .setImage(product.getUrl());
-
-         NavOptions options = new NavOptions.Builder()
-             .setLaunchSingleTop(true)
-             .setEnterAnim(R.anim.fade_in)
-             .setExitAnim(R.anim.fade_out)
-             .setPopExitAnim(R.anim.fade_out)
-             .build();
-
-         navController.navigate(action, options);
+             .setFortress(product.getFortress())
+             .setImage(product.getUrl())
+             .setName(product.getName())
+             .setManufacture(product.getManufacture())
+             .setProductId(productId)
+             .setPrice(String.valueOf(product.getPrice()))
+             .setStyle(product.getStyle())
+             .setVisible(Constants.OBJECT_RENAME);
+         Navigation.findNavController(v).navigate(action);
       });
    }
 

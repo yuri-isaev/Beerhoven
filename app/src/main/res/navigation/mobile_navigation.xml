@@ -62,7 +62,7 @@
             android:defaultValue="default"
             app:argType="string" />
         <argument
-            android:name="change"
+            android:name="visible"
             android:defaultValue="default"
             app:argType="string" />
     </fragment>
@@ -107,9 +107,9 @@
     </fragment>
     <fragment
         android:id="@+id/nav_order_details"
-        android:name="ru.mobile.beerhoven.presentation.ui.user.orders.details.OrderDetailFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.user.orders.details.OrderDetailListFragment"
         android:label="@string/order_details"
-        tools:layout="@layout/fragment_order_details">
+        tools:layout="@layout/fragment_order_detail_list">
         <argument
             android:name="userId"
             android:defaultValue="default"

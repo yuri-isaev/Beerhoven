@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.orders.details.OrderDetailFragment">
+    tools:context=".presentation.ui.user.orders.details.OrderDetailListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_cart"
+        android:id="@+id/recycler_view_products"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBackground"
         tools:itemCount="3"
         tools:listitem="@layout/item_cart" />
 </FrameLayout>

@@ -40,14 +40,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/circle_red"
-            app:srcCompat="@drawable/ic_baseline_clear_24"
+            app:srcCompat="@drawable/ic_clear"
             tools:ignore="ContentDescription,MissingConstraints,ImageContrastCheck" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/dialog_desc"
         android:layout_width="286dp"
-        android:layout_height="25dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
@@ -63,7 +63,7 @@
         android:id="@+id/btn_add_camera"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="144dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
@@ -83,7 +83,7 @@
         android:id="@+id/btn_add_gallery"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="151dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"

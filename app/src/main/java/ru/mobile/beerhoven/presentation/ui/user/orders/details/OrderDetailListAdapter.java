@@ -1,17 +1,15 @@
-package ru.mobile.beerhoven.presentation.ui.orders.details;
+package ru.mobile.beerhoven.presentation.ui.user.orders.details;
 
-import static android.view.View.*;
-import static androidx.recyclerview.widget.RecyclerView.*;
-
-import static ru.mobile.beerhoven.presentation.ui.orders.details.OrderDetailAdapter.*;
+import static android.view.View.INVISIBLE;
+import static androidx.recyclerview.widget.RecyclerView.Adapter;
+import static androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
@@ -22,17 +20,18 @@ import ru.mobile.beerhoven.databinding.ItemCartBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 
-public class OrderDetailAdapter extends Adapter<OrderDetailsViewHolder> {
+public class OrderDetailListAdapter extends Adapter<OrderDetailListAdapter.OrderDetailsViewHolder> {
    private final List<Product> mOrderDetails;
 
-   public OrderDetailAdapter(@NonNull List<Product> list) {
+   public OrderDetailListAdapter(@NonNull List<Product> list) {
       this.mOrderDetails = list;
    }
 
    @NonNull
    @Override
    public OrderDetailsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      ItemCartBinding binding = ItemCartBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+      ItemCartBinding binding = ItemCartBinding
+          .inflate(LayoutInflater.from(parent.getContext()), parent, false);
       return new OrderDetailsViewHolder(binding);
    }
 
@@ -41,12 +40,6 @@ public class OrderDetailAdapter extends Adapter<OrderDetailsViewHolder> {
    public void onBindViewHolder(@NonNull OrderDetailsViewHolder holder, int position) {
       Product product = mOrderDetails.get(position);
       String productId = product.getId();
-
-      Glide.with(holder.binding.cartImage.getContext())
-          .load(product.getUrl())
-          .into(holder.binding.cartImage);
-
-      // Binding view fields
       holder.binding.cartName.setText(product.getName());
       holder.binding.cartStyle.setText(product.getStyle());
       holder.binding.cartFortress.setText(product.getFortress() + "%");
@@ -55,24 +48,25 @@ public class OrderDetailAdapter extends Adapter<OrderDetailsViewHolder> {
       holder.binding.cartTotal.setText(product.getTotal() + " руб.");
       holder.binding.cartProductDelete.setVisibility(INVISIBLE);
 
-      // Navigate action on order details
+      Glide.with(holder.binding.cartImage.getContext())
+          .load(product.getUrl())
+          .into(holder.binding.cartImage);
+
       holder.binding.cartContainer.setOnClickListener(v -> {
-         NavController navController = Navigation.findNavController(v);
          assert productId != null;
-         OrderDetailFragmentDirections.ActionNavOrderDetailsToNavDetails action = OrderDetailFragmentDirections
-             .actionNavOrderDetailsToNavDetails()
-             .setChange(Constants.OBJECT_INVISIBLE)
-             .setProductId(productId)
+         NavDirections action = OrderDetailListFragmentDirections.actionNavOrderDetailsToNavProductDetails()
              .setCountry(product.getCountry())
-             .setManufacture(product.getManufacture())
-             .setName(product.getName())
-             .setPrice(String.valueOf(product.getPrice()))
-             .setStyle(product.getStyle())
-             .setFortress(product.getFortress())
              .setDensity(product.getDensity())
              .setDescription(product.getDescription())
-             .setImage(product.getUrl());
-         navController.navigate(action);
+             .setFortress(product.getFortress())
+             .setImage(product.getUrl())
+             .setManufacture(product.getManufacture())
+             .setName(product.getName())
+             .setProductId(productId)
+             .setPrice(String.valueOf(product.getPrice()))
+             .setStyle(product.getStyle())
+             .setVisible(Constants.OBJECT_INVISIBLE);
+         Navigation.findNavController(v).navigate(action);
       });
    }
 
@@ -81,19 +75,12 @@ public class OrderDetailAdapter extends Adapter<OrderDetailsViewHolder> {
       return mOrderDetails.size();
    }
 
-
-   public static class OrderDetailsViewHolder extends ViewHolder implements OnClickListener {
+   public static class OrderDetailsViewHolder extends ViewHolder {
       ItemCartBinding binding;
 
-      public OrderDetailsViewHolder(ItemCartBinding recyclerBinding) {
+      public OrderDetailsViewHolder(@NonNull ItemCartBinding recyclerBinding) {
          super(recyclerBinding.getRoot());
          this.binding = recyclerBinding;
-      }
-
-      @Override
-      public void onClick(View v) {
-         itemView.setOnClickListener(this);
-         binding.cartContainer.setOnClickListener(this);
       }
    }
 }

@@ -48,7 +48,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.722"
+                    app:layout_constraintVertical_bias="0.111"
                     tools:ignore="ContentDescription,VectorDrawableCompat" />
 
                 <TextView
@@ -129,11 +129,12 @@
                     android:id="@+id/img_order_delete"
                     android:layout_width="29dp"
                     android:layout_height="28dp"
+                    android:background="@drawable/circle_red"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"
-                    app:srcCompat="@drawable/ic_baseline_clear_24"
+                    app:srcCompat="@drawable/ic_clear"
                     tools:ignore="ContentDescription,MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
