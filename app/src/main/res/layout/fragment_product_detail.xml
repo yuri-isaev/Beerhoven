@@ -27,20 +27,21 @@
                 android:fontFamily="@font/catorze27_style1_bold"
                 android:text="@string/product_name"
                 android:textColor="@color/colorMainBlack"
-                android:textSize="30sp"
+                android:textSize="35sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="HardcodedText,MissingConstraints,TextContrastCheck" />
 
             <TextView
                 android:id="@+id/product_country"
-                android:layout_width="182dp"
-                android:layout_height="22dp"
+                android:layout_width="225dp"
+                android:layout_height="25dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/catorze27_style1_semibold"
                 android:text="@string/product_country"
-                app:layout_constraintStart_toEndOf="@+id/product_item_frame"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/product_image"
                 app:layout_constraintTop_toBottomOf="@+id/product_name"
                 tools:ignore="MissingConstraints" />
 
@@ -53,7 +54,7 @@
                 android:fontFamily="@font/catorze27_style1_bold"
                 android:text="15.00"
                 android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/product_item_frame"
+                app:layout_constraintStart_toEndOf="@+id/product_image"
                 app:layout_constraintTop_toBottomOf="@+id/product_manufacture"
                 tools:ignore="HardcodedText,MissingConstraints,RtlHardcoded" />
 
@@ -71,7 +72,7 @@
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
             <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/product_item_frame"
+                android:id="@+id/product_image"
                 android:layout_width="101dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="12dp"
@@ -89,8 +90,8 @@
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/catorze27_style1_semibold"
                 android:text="@string/product_manufacture"
-                android:textSize="@dimen/text_size"
-                app:layout_constraintStart_toEndOf="@+id/product_item_frame"
+                android:textSize="25sp"
+                app:layout_constraintStart_toEndOf="@+id/product_image"
                 app:layout_constraintTop_toBottomOf="@+id/product_country"
                 tools:ignore="MissingConstraints,RtlHardcoded" />
 
@@ -100,178 +101,196 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
                 android:background="@color/colorMainGrey"
-                app:layout_constraintTop_toBottomOf="@+id/product_item_frame"
+                app:layout_constraintTop_toBottomOf="@+id/product_image"
                 tools:ignore="MissingConstraints" />
 
             <LinearLayout
-                android:id="@+id/linearLayout2"
+                android:id="@+id/linearLayout8"
                 android:layout_width="wrap_content"
-                android:layout_height="26dp"
-                android:layout_marginTop="5dp"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.69"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/separator"
                 tools:ignore="MissingConstraints">
 
-                <TextView
-                    android:id="@+id/item_style"
-                    android:layout_width="119dp"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/catorze27_style1_semibold"
-                    android:text="@string/product_style"
-                    tools:ignore="HardcodedText,SpUsage"
-                    tools:layout_editor_absoluteX="214dp"
-                    tools:layout_editor_absoluteY="241dp" />
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.69"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/separator"
+                    tools:ignore="MissingConstraints">
 
-                <TextView
-                    android:id="@+id/product_style"
-                    android:layout_width="216dp"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Лагерь"
-                    tools:ignore="HardcodedText,SpUsage"
-                    tools:layout_editor_absoluteX="27dp"
-                    tools:layout_editor_absoluteY="245dp" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/item_style"
+                        android:layout_width="119dp"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:text="@string/product_style"
+                        android:textSize="25sp"
+                        tools:ignore="HardcodedText,SpUsage"
+                        tools:layout_editor_absoluteX="214dp"
+                        tools:layout_editor_absoluteY="241dp" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="wrap_content"
-                android:layout_height="26dp"
-                android:orientation="horizontal"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.703"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                tools:ignore="MissingConstraints">
-
-                <TextView
-                    android:id="@+id/item_fortress"
-                    android:layout_width="118dp"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/catorze27_style1_semibold"
-                    android:text="@string/product_fortress" />
-
-                <TextView
-                    android:id="@+id/product_fortress"
-                    android:layout_width="216dp"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="7%"
-                    tools:ignore="HardcodedText,SpUsage"
-                    tools:layout_editor_absoluteX="27dp"
-                    tools:layout_editor_absoluteY="245dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="wrap_content"
-                android:layout_height="26dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.698"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-                app:layout_constraintVertical_bias="0.0"
-                tools:ignore="MissingConstraints">
-
-                <TextView
-                    android:id="@+id/item_density"
-                    android:layout_width="119dp"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/catorze27_style1_semibold"
-                    android:text="@string/product_density"
-                    tools:ignore="HardcodedText,SpUsage" />
-
-                <TextView
-                    android:id="@+id/product_density"
-                    android:layout_width="216dp"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="12%"
-                    tools:ignore="HardcodedText,SpUsage" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout5"
-                android:layout_width="362dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/btn_add_product_to_cart"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="26dp">
+                    <TextView
+                        android:id="@+id/product_style"
+                        android:layout_width="216dp"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Лагерь"
+                        tools:ignore="HardcodedText,SpUsage"
+                        tools:layout_editor_absoluteX="27dp"
+                        tools:layout_editor_absoluteY="245dp" />
+                </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linearLayout6"
+                    android:id="@+id/linearLayout3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="26dp"
+                    android:orientation="horizontal"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.703"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                    tools:ignore="MissingConstraints">
 
                     <TextView
-                        android:layout_width="243dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/catorze27_style1_bold"
-                        android:paddingEnd="10dp"
-                        android:text="@string/product_price_line"
-                        android:textAlignment="textEnd"
-                        tools:ignore="RtlSymmetry" />
+                        android:id="@+id/item_fortress"
+                        android:layout_width="118dp"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:text="@string/product_fortress"
+                        android:textSize="25sp" />
 
                     <TextView
-                        android:id="@+id/product_total"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="15dp"
-                        android:text="15.00"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText,MissingConstraints,RtlHardcoded,RtlSymmetry" />
+                        android:id="@+id/product_fortress"
+                        android:layout_width="216dp"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="7%"
+                        tools:ignore="HardcodedText,SpUsage"
+                        tools:layout_editor_absoluteX="27dp"
+                        tools:layout_editor_absoluteY="245dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.698"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="MissingConstraints">
+
+                    <TextView
+                        android:id="@+id/item_density"
+                        android:layout_width="119dp"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:text="@string/product_density"
+                        android:textSize="25sp"
+                        tools:ignore="HardcodedText,SpUsage" />
+
+                    <TextView
+                        android:id="@+id/product_density"
+                        android:layout_width="216dp"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="12%"
+                        tools:ignore="HardcodedText,SpUsage" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout7"
+                    android:layout_width="335dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                    <TextView
+                        android:id="@+id/product_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="68dp"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:text="@string/product_description"
+                        android:textColor="@color/colorMainBlack"
+                        android:textSize="25sp"
+                        tools:ignore="HardcodedText,MissingConstraints" />
                 </LinearLayout>
             </LinearLayout>
 
-            <include
-                android:id="@+id/include_fragment_counter"
-                layout="@layout/fragment_counter"
-                android:layout_width="match_parent"
-                android:layout_height="119dp"
-                android:layout_marginBottom="5dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout5" />
-
-            <Button
-                android:id="@+id/btn_add_product_to_cart"
-                style="@style/AppTheme.Button"
-                android:layout_marginBottom="36dp"
-                android:text="@string/cart_add"
+            <LinearLayout
+                android:id="@+id/btn_container"
+                android:layout_width="367dp"
+                android:layout_height="265dp"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.536"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="TextContrastCheck" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout7"
-                android:layout_width="335dp"
-                android:layout_height="128dp"
-                android:layout_marginTop="88dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.676"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/separator"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
+                app:layout_constraintVertical_bias="0.176"
                 tools:ignore="MissingConstraints">
 
-                <TextView
-                    android:id="@+id/product_description"
+                <include
+                    android:id="@+id/include_fragment_counter"
+                    layout="@layout/fragment_counter"
                     android:layout_width="match_parent"
-                    android:layout_height="128dp"
-                    android:fontFamily="@font/catorze27_style1_semibold"
-                    android:text="@string/product_description"
-                    android:textColor="@color/colorMainBlack"
-                    android:textSize="@dimen/text_size"
-                    tools:ignore="HardcodedText,MissingConstraints" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/linearLayout5" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="26dp">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="243dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/catorze27_style1_bold"
+                            android:paddingEnd="10dp"
+                            android:text="@string/product_price_line"
+                            android:textAlignment="textEnd"
+                            tools:ignore="RtlSymmetry" />
+
+                        <TextView
+                            android:id="@+id/product_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingRight="15dp"
+                            android:text="15.00"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText,MissingConstraints,RtlHardcoded,RtlSymmetry" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_add_product_to_cart"
+                    style="@style/AppTheme.Button"
+                    android:layout_width="334dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="18dp"
+                    android:text="@string/cart_add"
+                    tools:ignore="TextContrastCheck" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

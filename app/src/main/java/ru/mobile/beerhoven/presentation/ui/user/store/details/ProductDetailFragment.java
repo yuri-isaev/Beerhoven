@@ -6,32 +6,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 
-import java.util.HashMap;
-
-import es.dmoral.toasty.Toasty;
-import ru.mobile.beerhoven.R;
+import ru.mobile.beerhoven.data.remote.ProductRepository;
 import ru.mobile.beerhoven.databinding.FragmentProductDetailBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
-import ru.mobile.beerhoven.data.local.MapStorage;
+import ru.mobile.beerhoven.presentation.ui.user.cart.CartSet;
 import ru.mobile.beerhoven.utils.Constants;
-import ru.mobile.beerhoven.utils.CurrentDateTime;
+import ru.mobile.beerhoven.utils.Toasty;
 
 public class ProductDetailFragment extends Fragment {
    private double total;
    private FragmentProductDetailBinding mBinding;
    private int mValue = 1;
-   private String id;
+   private String productId;
    private String name;
    private String country;
    private String manufacture;
@@ -51,18 +46,18 @@ public class ProductDetailFragment extends Fragment {
       if (getActivity() != null) {
          assert getArguments() != null;
          ProductDetailFragmentArgs args = ProductDetailFragmentArgs.fromBundle(getArguments());
-         id = args.getProductId();
-         name = args.getName();
          country = args.getCountry();
-         manufacture = args.getManufacture();
-         price = args.getPrice();
-         total = Double.parseDouble(args.getPrice());
-         style = args.getStyle();
-         fortress = args.getFortress();
          density = args.getDensity();
          description = args.getDescription();
+         fortress = args.getFortress();
          image = args.getImage();
-         visible = args.getChange();
+         manufacture = args.getManufacture();
+         name = args.getName();
+         price = args.getPrice();
+         productId = args.getProductId();
+         style = args.getStyle();
+         total = Double.parseDouble(args.getPrice());
+         visible = args.getVisible();
       }
    }
 
@@ -70,27 +65,28 @@ public class ProductDetailFragment extends Fragment {
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       mBinding = FragmentProductDetailBinding.inflate(inflater, container, false);
-      mBinding.productName.setText(name);
       mBinding.productCountry.setText(country);
-      mBinding.productManufacture.setText(manufacture);
-      mBinding.productPrice.setText(String.valueOf(price));
-      mBinding.productTotal.setText(String.valueOf(total));
-      mBinding.productStyle.setText(style);
-      mBinding.productFortress.setText(fortress + "%");
       mBinding.productDensity.setText(density + "%");
       mBinding.productDescription.setText(description);
-      Glide.with(mBinding.productItemFrame.getContext()).load(image).into(mBinding.productItemFrame);
+      mBinding.productFortress.setText(fortress + "%");
+      mBinding.productName.setText(name);
+      mBinding.productManufacture.setText(manufacture);
+      mBinding.productPrice.setText(String.valueOf(price));
+      mBinding.productStyle.setText(style);
+      mBinding.productTotal.setText(String.valueOf(total));
+
+      Glide.with(mBinding.productImage.getContext()).load(image).into(mBinding.productImage);
 
       switch (visible) {
          case Constants.OBJECT_VISIBLE:
-            mBinding.btnAddProductToCart.setVisibility(View.VISIBLE);
+            mBinding.btnContainer.setVisibility(View.VISIBLE);
             break;
          case Constants.OBJECT_RENAME:
             mBinding.btnAddProductToCart.setVisibility(View.VISIBLE);
             mBinding.btnAddProductToCart.setText("Обновить данные товара");
             break;
          case Constants.OBJECT_INVISIBLE:
-            mBinding.btnAddProductToCart.setVisibility(View.INVISIBLE);
+            mBinding.btnContainer.setVisibility(View.INVISIBLE);
             break;
       }
       return mBinding.getRoot();
@@ -100,29 +96,26 @@ public class ProductDetailFragment extends Fragment {
    @Override
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      mViewModel = new ViewModelProvider(this).get(ProductDetailViewModel.class);
+      mViewModel = new ProductDetailViewModel(new ProductRepository());
       countListener();
       addProductToCart();
-      }
+   }
 
    @RequiresApi(api = Build.VERSION_CODES.N)
    public void addProductToCart() {
       mBinding.btnAddProductToCart.setOnClickListener(v -> {
-         if (!MapStorage.productMap.containsValue(id)) {
-            MapStorage.productMap.put("productId", id);
+         if (!CartSet.cartProducts.contains(productId)) {
+            CartSet.cartProducts.add(productId);
             ((MainActivity) requireActivity()).onIncreaseCartCounter();
+            Toasty.success(requireActivity(), "Товар добавлен в корзину");
          }
-
          double cartPrice = Double.parseDouble(price);
          quantity = String.valueOf(mValue);
-         HashMap<String, String> map = MapStorage.productMap;
-         map.put("date", CurrentDateTime.getCurrentDate());
-         map.put("time", CurrentDateTime.getCurrentTime());
 
-         Product product = new Product(id, country, description, density, fortress, manufacture, name, cartPrice, total, quantity, style, image);
+         Product product = new Product(productId, country, description, density, fortress,
+             manufacture, name, cartPrice, total, quantity, style, image);
 
-         mViewModel.addCartProductToRepository(product).observe(getViewLifecycleOwner(), s ->
-             Toasty.success(requireActivity(), R.string.cart_add_success, Toast.LENGTH_SHORT, true).show());
+         mViewModel.addCartProductToRepository(product).observe(getViewLifecycleOwner(), s -> {});
 
          v.setClickable(false);
       });
