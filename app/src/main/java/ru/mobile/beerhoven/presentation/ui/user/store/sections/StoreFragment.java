@@ -27,8 +27,8 @@ public class StoreFragment extends Fragment {
    }
 
    @Override
-   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-      super.onActivityCreated(savedInstanceState);
+   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+      super.onViewCreated(view, savedInstanceState);
       mTabLayout.setupWithViewPager(mViewPager);
       setUpViewPager(mViewPager);
       mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -43,9 +43,9 @@ public class StoreFragment extends Fragment {
       });
    }
 
-   private void setUpViewPager(ViewPager viewPager) {
+   private void setUpViewPager(@NonNull ViewPager viewPager) {
       SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
-      adapter.addFragment(new ProductListFragment(), "Каталог");
+      adapter.addFragment(new ProductListFragment(), "Все товары");
       viewPager.setAdapter(adapter);
    }
 }

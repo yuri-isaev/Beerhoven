@@ -17,20 +17,20 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import ru.mobile.beerhoven.data.local.MapStorage;
 import ru.mobile.beerhoven.databinding.ItemProductBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
-import ru.mobile.beerhoven.presentation.interfaces.IAdapterPositionListener;
+import ru.mobile.beerhoven.presentation.interfaces.AdapterPositionListener;
+import ru.mobile.beerhoven.presentation.ui.user.cart.CartSet;
 import ru.mobile.beerhoven.presentation.ui.user.store.sections.StoreFragmentDirections;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListViewHolder> {
-   private final List<Product> mAdapterList;
    private final Context mContext;
-   private final IAdapterPositionListener mListener;
+   private final List<Product> mAdapterList;
+   private final AdapterPositionListener mListener;
 
-   public ProductListAdapter(List<Product> list, Context context, IAdapterPositionListener mListener) {
+   public ProductListAdapter(List<Product> list, Context context, AdapterPositionListener mListener) {
       this.mAdapterList = list;
       this.mContext = context;
       this.mListener = mListener;
@@ -48,46 +48,47 @@ public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListVi
    @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
    @Override
    public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
-      Product item = mAdapterList.get(position);
-      String productId = item.getId();
-      String productImage = item.getUrl();
+      Product product = mAdapterList.get(position);
+      String productId = product.getId();
+      String productImage = product.getUrl();
 
-      // Binding view fields
-      Glide.with(holder.binding.image.getContext()).load(item.getUrl()).into(holder.binding.image);
-      holder.binding.productName.setText(item.getName());
-      holder.binding.productPrice.setText((item.getPrice() + " руб."));
-      holder.binding.productStyle.setText(item.getStyle());
-      holder.binding.productFortress.setText((item.getFortress() + "%"));
-
+      Glide.with(holder.binding.image.getContext())
+          .load(product.getUrl())
+          .into(holder.binding.image);
+      
+      holder.binding.productName.setText(product.getName());
+      holder.binding.productPrice.setText((product.getPrice() + " руб."));
+      holder.binding.productStyle.setText(product.getStyle());
+      holder.binding.productFortress.setText((product.getFortress() + "%"));
       holder.binding.productContainer.setOnClickListener(v -> {
-         NavDirections action  = StoreFragmentDirections.actionNavProductListToNavProductDetails()
-             .setChange(Constants.OBJECT_VISIBLE)
+         NavDirections action = StoreFragmentDirections.actionNavProductListToNavProductDetails()
              .setProductId(productId)
-             .setCountry(item.getCountry())
-             .setManufacture(item.getManufacture())
-             .setName(item.getName())
-             .setPrice(String.valueOf(item.getPrice()))
-             .setStyle(item.getStyle())
-             .setFortress(item.getFortress())
-             .setDensity(item.getDensity())
-             .setDescription(item.getDescription())
-             .setImage(productImage);
+             .setCountry(product.getCountry())
+             .setManufacture(product.getManufacture())
+             .setName(product.getName())
+             .setPrice(String.valueOf(product.getPrice()))
+             .setStyle(product.getStyle())
+             .setFortress(product.getFortress())
+             .setDensity(product.getDensity())
+             .setDescription(product.getDescription())
+             .setImage(productImage)
+             .setVisible(Constants.OBJECT_VISIBLE);
          Navigation.findNavController(v).navigate(action);
       });
 
-      // Add product to cart when click catalog card element
-      holder.binding.cardAddProduct.setOnClickListener(v -> {
+      // Add product to cart when click on selector
+      holder.binding.selectorAddProduct.setOnClickListener(v -> {
          int productQuantity = 1;
 
          // Counter value control
-         if (mContext instanceof MainActivity && !MapStorage.productMap.containsValue(productId)) {
-            MapStorage.productMap.put("id", productId);
+         if (mContext instanceof MainActivity && !CartSet.cartProducts.contains(productId)) {
+            CartSet.cartProducts.add(productId);
             ((MainActivity) mContext).onIncreaseCartCounter();
          } 
          
-         Product product = mAdapterList.get(position);
-         product.setQuantity(String.valueOf(productQuantity));
-         product.setTotal(Double.parseDouble(String.valueOf(product.getPrice())));
+         Product item = mAdapterList.get(position);
+         item.setQuantity(String.valueOf(productQuantity));
+         item.setTotal(Double.parseDouble(String.valueOf(item.getPrice())));
 
          // Add product list position to cart
          mListener.onInteractionAdd(product);

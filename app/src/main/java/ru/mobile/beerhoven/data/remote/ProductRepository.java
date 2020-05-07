@@ -26,14 +26,14 @@ public class ProductRepository implements IProductRepository {
    private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
    private final MutableLiveData<String> mMutableData;
-   private final String mUserPhoneId;
+   private final String mUserPhoneNumber;
 
    public ProductRepository() {
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
       this.mProductList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
       this.mMutableData = new MutableLiveData<>();
-      this.mUserPhoneId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mUserPhoneNumber = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    @Override
@@ -88,14 +88,14 @@ public class ProductRepository implements IProductRepository {
 
    @Override
    public MutableLiveData<String> addCartProductToRepository(Product product) {
-      addCatalogItem(product);
+      addCartItem(product);
       mMutableData.setValue(null);
       return mMutableData;
    }
 
-   private void addCatalogItem(@NonNull Product product) {
-      assert mUserPhoneId != null;
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).child(product.getId()).setValue(product);
+   private void addCartItem(@NonNull Product product) {
+      assert mUserPhoneNumber != null;
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneNumber).child(product.getId()).setValue(product);
    }
 
    @Override
