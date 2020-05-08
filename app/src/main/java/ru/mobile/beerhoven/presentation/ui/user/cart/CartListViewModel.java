@@ -11,11 +11,12 @@ import java.util.List;
 import ru.mobile.beerhoven.data.local.PreferencesStorage;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.ICartRepository;
+import ru.mobile.beerhoven.domain.repository.IPreferencesStorage;
 
 public class CartListViewModel extends ViewModel {
    private final ICartRepository mRepository;
+   private IPreferencesStorage mStorage;
    private LiveData<List<Product>> mCartList;
-   private PreferencesStorage mStorage;
 
    public CartListViewModel(ICartRepository repository) {
       this.mRepository = repository;
@@ -27,7 +28,6 @@ public class CartListViewModel extends ViewModel {
       this.mStorage = new PreferencesStorage(context);
    }
 
-   // Initialize adapter list when create fragment
    public void initCartList() {
       if (mCartList != null) {
          return;

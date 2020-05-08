@@ -1,6 +1,5 @@
 package ru.mobile.beerhoven.presentation.ui.user.cart;
 
-import static android.widget.Toast.LENGTH_LONG;
 import static java.util.Objects.requireNonNull;
 
 import android.annotation.SuppressLint;
@@ -19,16 +18,16 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.CartRepository;
+import ru.mobile.beerhoven.utils.Toasty;
 
 public class CartListFragment extends Fragment implements CartListAdapter.Callback {
    private CartListAdapter mAdapter;
    private CartListViewModel mViewModel;
    private Button mConfirmButton;
    private RecyclerView mRecyclerView;
-   private String mTotal;
+   private String mTotal = "0.0";
    private TextView mOrderTotal;
 
    @Override
@@ -42,7 +41,6 @@ public class CartListFragment extends Fragment implements CartListAdapter.Callba
       ViewGroup.LayoutParams layoutParams = mRecyclerView.getLayoutParams();
       layoutParams.height = (int) (container.getHeight() * 0.8);
       mRecyclerView.setLayoutParams(layoutParams);
-
       return view;
    }
 
@@ -69,20 +67,18 @@ public class CartListFragment extends Fragment implements CartListAdapter.Callba
 
       if (mViewModel.getCartList().getValue().size() == 0) {
          mConfirmButton.setClickable(true);
-
          mConfirmButton.setOnClickListener(v -> {
-            try {
+            if (!(mTotal.equals("0.0"))) {
                NavDirections action = CartListFragmentDirections.actionNavCartToNavOrderConfirm()
                    .setTotal(mTotal);
                Navigation.findNavController(v).navigate(action);
-            } catch (Exception e) {
-               Toasty.warning(requireActivity(), R.string.cart_empty, LENGTH_LONG, true).show();
+            } else {
+               Toasty.error(requireActivity(), "Корзина пуста");
             }
          });
       } else {
          mConfirmButton.setClickable(false);
       }
-
       mRecyclerView.setAdapter(mAdapter);
    }
 

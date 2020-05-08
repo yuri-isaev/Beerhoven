@@ -24,13 +24,13 @@ public class CartRepository implements ICartRepository {
    private final DatabaseReference mFirebaseRef;
    private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
-   private final String mUserPhoneId;
+   private final String mUserPhoneNumber;
 
    public CartRepository() {
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
       this.mProductList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
-      this.mUserPhoneId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
+      this.mUserPhoneNumber = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    @Override
@@ -42,10 +42,9 @@ public class CartRepository implements ICartRepository {
       return mMutableList;
    }
 
-   // Read cart product list
    private void onGetCartList() {
-      assert mUserPhoneId != null;
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).addChildEventListener(new ChildEventListener() {
+      assert mUserPhoneNumber != null;
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneNumber).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
             Product product = dataSnapshot.getValue(Product.class);
@@ -86,11 +85,11 @@ public class CartRepository implements ICartRepository {
 
    @Override
    public void onDeleteCartItem(String item) {
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).child(item).removeValue();
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneNumber).child(item).removeValue();
    }
 
    @Override
    public void onDeleteUserCartList() {
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneId).removeValue();
+      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneNumber).removeValue();
    }
 }

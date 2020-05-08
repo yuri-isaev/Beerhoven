@@ -43,7 +43,8 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
    @NonNull
    @Override
    public CartListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      ItemCartBinding binding = ItemCartBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+      ItemCartBinding binding = ItemCartBinding
+          .inflate(LayoutInflater.from(parent.getContext()), parent, false);
       return new CartListViewHolder(binding);
    }
 
@@ -52,34 +53,37 @@ public class CartListAdapter extends Adapter<CartListViewHolder> {
    public void onBindViewHolder(@NonNull CartListViewHolder holder, int position) {
       Product product = mCartList.get(position);
       String productId = product.getId();
-
-      // Binding view fields
       holder.binding.cartName.setText(product.getName());
       holder.binding.cartStyle.setText(product.getStyle());
       holder.binding.cartFortress.setText(product.getFortress() + "%");
       holder.binding.cartQuantity.setText(product.getQuantity());
       holder.binding.cartPrice.setText(product.getPrice() + " руб.");
       holder.binding.cartTotal.setText(product.getTotal() + " руб.");
-      Glide.with(holder.binding.cartName.getContext()).load(product.getUrl()).into(holder.binding.cartImage);
 
-      // The total price of the entire cart
+      Glide.with(holder.binding.cartName.getContext())
+          .load(product.getUrl())
+          .into(holder.binding.cartImage);
+
+      // The total price of the entire products cart
       double oneTypeProductPrice = product.getTotal();
       double sum = mOverTotalPrice + oneTypeProductPrice;
       mOverTotalPrice = Math.round(sum * 100.0) / 100.0;
       mCallback.onPassData(String.valueOf(mOverTotalPrice));
 
       holder.binding.cartProductDelete.setOnClickListener(v -> {
-         // Delete product from cart and database
+         // Delete product from database
          CartListViewModel mViewModel = new CartListViewModel(new CartRepository());
          mViewModel.onDeleteCartItemFromRepository(productId);
 
-         // Decrease counter when delete product from cart and database
+         // Decrease counter when delete product from cart
          ((MainActivity) mContext).onDecreaseCartDrawerCounter();
 
-         // Update total price of the entire cart after decrease counter
-         double dif = 0.0;
-         mOverTotalPrice = Math.round(dif * 100.0) / 100.0;
+         // Update total price of the entire cart after delete product
+         mOverTotalPrice = Math.round(0 * 100.0) / 100.0;
          mCallback.onPassData(String.valueOf(mOverTotalPrice));
+
+         // Delete product from cart set
+         CartSet.cartProducts.remove(productId);
       });
 
       holder.binding.cartContainer.setOnClickListener(v -> {
