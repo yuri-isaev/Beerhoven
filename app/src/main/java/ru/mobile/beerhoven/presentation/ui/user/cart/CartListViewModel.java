@@ -1,6 +1,6 @@
 package ru.mobile.beerhoven.presentation.ui.user.cart;
 
-import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -22,7 +22,7 @@ public class CartListViewModel extends ViewModel {
       this.mRepository = repository;
    }
 
-   public CartListViewModel(Application context, ICartRepository repository) {
+   public CartListViewModel(Context context, ICartRepository repository) {
       this.mRepository = repository;
       this.mCartList = new MutableLiveData<>();
       this.mStorage = new PreferencesStorage(context);

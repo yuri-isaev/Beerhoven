@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container_catalog"
+    android:id="@+id/container_notification"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGrey"
     android:theme="@style/Theme.MaterialComponents"
-    tools:context=".presentation.ui.notifications.notification.NotificationFragment">
+    tools:context=".presentation.ui.admin.notifications.NotificationListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_notification"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBackground"
         tools:itemCount="3"
         tools:listitem="@layout/item_notification" />
 </FrameLayout>

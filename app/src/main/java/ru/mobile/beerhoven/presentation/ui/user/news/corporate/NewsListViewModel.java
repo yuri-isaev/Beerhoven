@@ -1,6 +1,6 @@
 package ru.mobile.beerhoven.presentation.ui.user.news.corporate;
 
-import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -20,9 +20,9 @@ public class NewsListViewModel extends ViewModel {
       this.mRepository = repository;
    }
 
-   public NewsListViewModel(INewsRepository repository, Application applicationContext) {
+   public NewsListViewModel(Context context, INewsRepository repository) {
       this.mRepository = repository;
-      this.mStorage = new PreferencesStorage(applicationContext);
+      this.mStorage = new PreferencesStorage(context);
    }
 
    public void initNewsList() {

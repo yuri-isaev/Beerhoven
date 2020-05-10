@@ -1,9 +1,6 @@
 package ru.mobile.beerhoven.presentation.activity;
 
-import static androidx.core.view.MenuItemCompat.getActionView;
-
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -31,26 +28,34 @@ import com.google.android.material.navigation.NavigationView;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.CartRepository;
 import ru.mobile.beerhoven.data.remote.NewsRepository;
+import ru.mobile.beerhoven.data.remote.NotificationRepository;
 import ru.mobile.beerhoven.presentation.authentication.AuthViewModel;
+import ru.mobile.beerhoven.presentation.ui.admin.notifications.NotificationListViewModel;
 import ru.mobile.beerhoven.presentation.ui.user.cart.CartListViewModel;
 import ru.mobile.beerhoven.presentation.ui.user.news.corporate.NewsListViewModel;
 import ru.mobile.beerhoven.utils.TypeFaceSpan;
 
 public class MainActivity extends AppCompatActivity {
    private AppBarConfiguration mAppBarConfiguration;
-   private CartListViewModel mCartViewModel;
-   private NewsListViewModel mNewsListViewModel;
-   private int mCartCounterValue;
-   private ImageView mIcon;
-   private int mNewsCounterValue;
    private NavController mNavController;
    private NavigationView mNavigationView;
 
-   private TextView mBadgeCounter;
-   private TextView mNewsCounter;
-   private TextView mNews;
-   private TextView mCartCounter;
-   private TextView mCart;
+   // NewsList fragment activity counter
+   private NewsListViewModel mNewsListViewModel;
+   private int mNewsCounterValue;
+   private TextView mNewsView;
+
+   // CartList fragment activity counter
+   private CartListViewModel mCartViewModel;
+   private TextView mCartBadgeCounter;
+   private TextView mCartView;
+   private ImageView mCartBadgeIcon;
+   private int mCartCounterValue;
+
+   // NotificationList fragment activity counter
+   private NotificationListViewModel mNotificationListViewModel;
+   private TextView mNotificationView;
+   private int mNotificationCounterValue;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -70,28 +75,44 @@ public class MainActivity extends AppCompatActivity {
           R.id.nav_cart,
           R.id.nav_map,
           R.id.nav_add_product,
-          R.id.nav_add_news)
+          R.id.nav_add_news,
+          R.id.nav_notifications)
           .setDrawerLayout(mDrawerLayout).build();
 
-      mNews = (TextView) getActionView(mNavigationView.getMenu().findItem(R.id.nav_news));
-      mCart = (TextView) getActionView(mNavigationView.getMenu().findItem(R.id.nav_cart));
+      mNewsView = (TextView) mNavigationView.getMenu()
+          .findItem(R.id.nav_news)
+          .getActionView();
+
+      mCartView = (TextView) mNavigationView.getMenu()
+          .findItem(R.id.nav_cart)
+          .getActionView();
+
+      mNotificationView = (TextView) mNavigationView.getMenu()
+          .findItem(R.id.nav_notifications)
+          .getActionView();
+
+      mCartViewModel = new CartListViewModel(getApplicationContext(),
+          new CartRepository());
+
+      mNewsListViewModel = new NewsListViewModel(getApplicationContext(),
+          new NewsRepository());
+
+      mNotificationListViewModel = new NotificationListViewModel(getApplicationContext(),
+          new NotificationRepository());
 
       mNavController = Navigation.findNavController(this, R.id.nav_host_fragment);
       NavigationUI.setupActionBarWithNavController(this, mNavController, mAppBarConfiguration);
       NavigationUI.setupWithNavController(mNavigationView, mNavController);
 
-      mCartViewModel = new CartListViewModel((Application) getApplicationContext(), new CartRepository());
-      mNewsListViewModel = new NewsListViewModel(new NewsRepository(), (Application) getApplicationContext());
-
-      setNavHeaderUserName();
-      setFontToMenuItem();
+      onSetNavHeaderUserName();
+      onSetMenuItemFont();
    }
 
-   public void setNavHeaderUserName() {
-      AuthViewModel model = new AuthViewModel(getApplicationContext());
-      String userName = model.getUserNameToStorage();
+   public void onSetNavHeaderUserName() {
       View headerView = mNavigationView.getHeaderView(0);
       TextView navUserName = headerView.findViewById(R.id.nav_user_name);
+      AuthViewModel model = new AuthViewModel(getApplicationContext());
+      String userName = model.getUserNameToStorage();
       navUserName.setText(String.format(" Hello,  %s", userName));
    }
 
@@ -111,68 +132,96 @@ public class MainActivity extends AppCompatActivity {
       return NavigationUI.navigateUp(mNavController, mAppBarConfiguration) || super.onSupportNavigateUp();
    }
 
+   // Menu item font
+   private void onApplyMenuItemFont(@NonNull MenuItem item) {
+      Typeface font = ResourcesCompat.getFont(this, R.font.catorze27_style1_semibold);
+      SpannableString title = new SpannableString(item.getTitle());
+      title.setSpan(new TypeFaceSpan("", font), 0, title.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+      item.setTitle(title);
+   }
+
+   // Set menu item font
+   private void onSetMenuItemFont() {
+      Menu menu = mNavigationView.getMenu();
+      for (int i = 0; i < menu.size(); i++) {
+         MenuItem menuItem = menu.getItem(i);
+         // Applying a font to submenu
+         SubMenu subMenu = menuItem.getSubMenu();
+         if (subMenu != null && subMenu.size() > 0) {
+            for (int j = 0; j < subMenu.size(); j++) {
+               MenuItem subMenuItem = subMenu.getItem(j);
+               onApplyMenuItemFont(subMenuItem);
+            }
+         }
+         onApplyMenuItemFont(menuItem);
+      }
+   }
+
    @Override
    public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
-      initBadgeCartCounter(menu);
+      initCounterMenu(menu);
       initCartCountDrawer();
       initNewsCountDrawer();
+      initNotificationCountDrawer();
       return super.onPrepareOptionsMenu(menu);
    }
 
-   private void initBadgeCartCounter(@NonNull Menu menu) {
+   private void initCounterMenu(@NonNull Menu menu) {
       MenuItem menuItem = menu.findItem(R.id.nav_cart);
       View counter = menuItem.getActionView();
-      mIcon = counter.findViewById(R.id.badge_cart);
-      mBadgeCounter = counter.findViewById(R.id.badge_counter_cart);
+      mCartBadgeIcon = counter.findViewById(R.id.badge_cart);
+      mCartBadgeCounter = counter.findViewById(R.id.badge_counter_cart);
+
       counter.setOnClickListener(v -> onOptionsItemSelected(menuItem));
       updateCartCounter(mCartCounterValue);
 
       int cartCount = mCartViewModel.getCartCountFromStorage();
       int newsCount = mNewsListViewModel.getNewsCountFromStorage();
+      int notificationCount = mNotificationListViewModel.getNotificationCountFromStorage();
 
       if (newsCount <= 0) {
-         mNews.setVisibility(View.GONE);
+         mNewsView.setVisibility(View.GONE);
       } else {
-         mNews.setVisibility(View.VISIBLE);
+         mNewsView.setVisibility(View.VISIBLE);
          String value = Integer.toString(mNewsListViewModel.getNewsCountFromStorage());
-         mNews.setText(value);
+         mNewsView.setText(value);
          mNewsCounterValue = mNewsListViewModel.getNewsCountFromStorage();
       }
 
       if (cartCount <= 0) {
-         mCart.setVisibility(View.GONE);
-         mBadgeCounter.setVisibility(View.GONE);
+         mCartView.setVisibility(View.GONE);
+         mCartBadgeCounter.setVisibility(View.GONE);
       } else {
-         mCart.setVisibility(View.VISIBLE);
+         mCartView.setVisibility(View.VISIBLE);
          String value = Integer.toString(mCartViewModel.getCartCountFromStorage());
-         mCart.setText(value);
-         mBadgeCounter.setVisibility(View.VISIBLE);
-         mBadgeCounter.setText(value);
+         mCartView.setText(value);
+         mCartBadgeCounter.setVisibility(View.VISIBLE);
+         mCartBadgeCounter.setText(value);
          mCartCounterValue = mCartViewModel.getCartCountFromStorage();
+      }
+
+      if (notificationCount <= 0) {
+         mNotificationView.setVisibility(View.GONE);
+      } else {
+         mNotificationView.setVisibility(View.VISIBLE);
+         String value = Integer.toString(mNotificationListViewModel.getNotificationCountFromStorage());
+         mNotificationView.setText(value);
+         mNotificationCounterValue = mNotificationListViewModel.getNotificationCountFromStorage();
       }
    }
 
-   public void onGetDataFromFragment(int data) {
+   public void onUpdateActivityCounter(int data) {
       updateCartCounter(data);
       mCartCounterValue = data;
    }
 
-   public void onUpdateCounterFromFragment(int data) {
-      updateCartCounter(data);
-   }
-
    @SuppressLint("UseCompatLoadingForDrawables")
    private void initCartCountDrawer() {
-      mCart.setGravity(Gravity.CENTER);
-      mCart.setTypeface(null, Typeface.BOLD);
-      mCart.setTextColor(getResources().getColor(R.color.colorAccent));
-      mCart.setTextSize(24);
-      mCart.setBackground(getDrawable(R.drawable.circle_violet));
-      mCartCounter = mCart;
-   }
-
-   private void onSaveCartCounter(int counterValue) {
-      mCartViewModel.onSaveCartCounterToStorage(counterValue);
+      mCartView.setBackground(getDrawable(R.drawable.circle_violet));
+      mCartView.setGravity(Gravity.CENTER);
+      mCartView.setTextColor(getResources().getColor(R.color.colorAccent));
+      mCartView.setTypeface(null, Typeface.BOLD);
+      mCartView.setTextSize(24);
    }
 
    public void onIncreaseCartCounter() {
@@ -188,46 +237,28 @@ public class MainActivity extends AppCompatActivity {
    }
 
    private void updateCartCounter(int counterValue) {
-      if (mIcon == null || mBadgeCounter == null || mCartCounter == null) {
+      if (mCartBadgeIcon == null || mCartBadgeCounter == null || mCartView == null) {
          return;
       }
       if (counterValue == 0) {
-         mCartCounter.setVisibility(View.GONE);
-         mBadgeCounter.setVisibility(View.GONE);
+         mCartView.setVisibility(View.GONE);
+         mCartBadgeCounter.setVisibility(View.GONE);
       } else {
-         mCartCounter.setVisibility(View.VISIBLE);
-         mCartCounter.setText(String.valueOf(counterValue));
-         mBadgeCounter.setVisibility(View.VISIBLE);
-         mBadgeCounter.setText(String.valueOf(counterValue));
+         mCartView.setVisibility(View.VISIBLE);
+         mCartView.setText(String.valueOf(counterValue));
+         mCartBadgeCounter.setVisibility(View.VISIBLE);
+         mCartBadgeCounter.setText(String.valueOf(counterValue));
       }
-      onSaveCartCounter(counterValue);
+      mCartViewModel.onSaveCartCounterToStorage(counterValue);
    }
 
    @SuppressLint("UseCompatLoadingForDrawables")
    private void initNewsCountDrawer() {
-      mNews.setGravity(Gravity.CENTER);
-      mNews.setTypeface(null, Typeface.BOLD);
-      mNews.setTextColor(getResources().getColor(R.color.colorAccent));
-      mNews.setTextSize(24);
-      mNews.setBackground(getDrawable(R.drawable.circle_violet));
-      mNewsCounter = mNews;
-   }
-
-   private void updateNewsCounter(int counterValue) {
-      if (mNewsCounter == null) {
-         return;
-      }
-      if (counterValue == 0) {
-         mNewsCounter.setVisibility(View.GONE);
-      } else {
-         mNewsCounter.setVisibility(View.VISIBLE);
-         mNewsCounter.setText(String.valueOf(counterValue));
-      }
-      onSaveCartCounter(counterValue);
-   }
-
-   private void onSaveNewsCount(int counterValue) {
-      mNewsListViewModel.onSaveNewsCounterToStorage(counterValue);
+      mNewsView.setBackground(getDrawable(R.drawable.circle_violet));
+      mNewsView.setGravity(Gravity.CENTER);
+      mNewsView.setTextColor(getResources().getColor(R.color.colorAccent));
+      mNewsView.setTextSize(24);
+      mNewsView.setTypeface(null, Typeface.BOLD);
    }
 
    public void onIncreaseNewsCounter() {
@@ -242,29 +273,51 @@ public class MainActivity extends AppCompatActivity {
       }
    }
 
-   // Menu item font
-   private void applyFontToMenuItem(MenuItem mi) {
-      Typeface font = ResourcesCompat.getFont(this, R.font.catorze27_style1_semibold);
-      SpannableString title = new SpannableString(mi.getTitle());
-      title.setSpan(new TypeFaceSpan("", font), 0, title.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-      mi.setTitle(title);
+   private void updateNewsCounter(int counterValue) {
+      if (mNewsView == null) {
+         return;
+      }
+      if (counterValue == 0) {
+         mNewsView.setVisibility(View.GONE);
+      } else {
+         mNewsView.setVisibility(View.VISIBLE);
+         mNewsView.setText(String.valueOf(counterValue));
+      }
+      mNewsListViewModel.onSaveNewsCounterToStorage(counterValue);
    }
 
-   // Set menu item font
-   private void setFontToMenuItem() {
-      Menu menu = mNavigationView.getMenu();
-      for (int i = 0; i < menu.size(); i++) {
-         MenuItem menuItem = menu.getItem(i);
-         // Applying a font to submenu
-         SubMenu subMenu = menuItem.getSubMenu();
-         if (subMenu != null && subMenu.size() > 0) {
-            for (int j = 0; j < subMenu.size(); j++) {
-               MenuItem subMenuItem = subMenu.getItem(j);
-               applyFontToMenuItem(subMenuItem);
-            }
-         }
-         applyFontToMenuItem(menuItem);
+   @SuppressLint("UseCompatLoadingForDrawables")
+   private void initNotificationCountDrawer() {
+      mNotificationView.setBackground(getDrawable(R.drawable.circle_violet));
+      mNotificationView.setGravity(Gravity.CENTER);
+      mNotificationView.setTextColor(getResources().getColor(R.color.colorAccent));
+      mNotificationView.setTextSize(24);
+      mNotificationView.setTypeface(null, Typeface.BOLD);
+   }
+
+   public void onIncreaseNotificationCounter() {
+      updateNotificationCounter(++mNotificationCounterValue);
+   }
+
+   public void onDecreaseNotificationCounter() {
+      if (mNotificationCounterValue <= 0) {
+         mNotificationCounterValue = 0;
+      } else {
+         updateNotificationCounter(--mNotificationCounterValue);
       }
+   }
+
+   private void updateNotificationCounter(int counterValue) {
+      if (mNotificationView == null) {
+         return;
+      }
+      if (counterValue == 0) {
+         mNotificationView.setVisibility(View.GONE);
+      } else {
+         mNotificationView.setVisibility(View.VISIBLE);
+         mNotificationView.setText(String.valueOf(counterValue));
+      }
+      mNotificationListViewModel.onSaveNotificationCounterToStorage(counterValue);
    }
 
    @SuppressLint("CommitPrefEdits")

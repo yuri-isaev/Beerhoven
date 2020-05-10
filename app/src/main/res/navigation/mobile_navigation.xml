@@ -91,7 +91,7 @@
         android:label="@string/menu_order"
         tools:layout="@layout/fragment_order_list">
         <argument
-            android:name="Id"
+            android:name="orderId"
             android:defaultValue="default"
             app:argType="string" />
         <argument
@@ -162,12 +162,15 @@
     </fragment>
     <fragment
         android:id="@+id/nav_notifications"
-        android:name="ru.mobile.beerhoven.presentation.ui.notifications.notification.NotificationFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.admin.notifications.NotificationListFragment"
         android:label="@string/menu_notifications"
-        tools:layout="@layout/fragment_notification">
+        tools:layout="@layout/fragment_notification_list">
         <action
             android:id="@+id/action_nav_notifications_to_nav_orders"
-            app:destination="@id/nav_orders" />
+            app:destination="@id/nav_orders"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/nav_map"

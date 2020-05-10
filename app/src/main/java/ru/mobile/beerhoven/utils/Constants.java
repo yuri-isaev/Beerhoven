@@ -1,11 +1,12 @@
 package ru.mobile.beerhoven.utils;
 
 public final class Constants {
-   // Shared preference
-   public static final String SHARED_PREF = "SHARED_PREF";
-   public static final String COUNTER_CART_VALUE = "COUNTER_CART_VALUE";
-   public static final String COUNTER_NEWS_VALUE = "COUNTER_NEWS_VALUE";
-   public static final String CURRENT_USER_NAME = "CURRENT_USER_NAME";
+   // Shared preference keys
+   public static final String SHARED_PREF = "shared_pref";
+   public static final String KEY_CART_COUNT = "cart_counter_value";
+   public static final String KEY_NEWS_COUNT = "news_counter_value";
+   public static final String KEY_USER_NAME = "current_user_name";
+   public static final String KEY_NOTIFICATION_COUNT = "notification_counter_value";
 
    // Database state node
    public static final String ADMIN_CHANNEL_ID = "admin_channel";
@@ -34,9 +35,6 @@ public final class Constants {
    public static final String GOOGLE_API = "https://fcm.googleapis.com/fcm/send";
    public static final String APP_LOGO = "gs://beerhoven-app.appspot.com/NEWS_IMG/logo.png";
    public static final String URI_LOGO = "https://firebasestorage.googleapis.com/v0/b/beerhoven-app.appspot.com/o/NEWS_IMG%2FSat%20Jan%2028%2022%3A36%3A21%20GMT%2B02%3A00%202023?alt=media&token=394b75f7-7dac-4b80-95d5-ab2a53516987";
-
-   // Display delay
-   public static final long SPLASH_DISPLAY_LENGTH = 3000;
 
    // Geo
    public static final String DRIVER_INFO_REFERENCES = "DriverInfo";

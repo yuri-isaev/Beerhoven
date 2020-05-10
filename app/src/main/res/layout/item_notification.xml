@@ -3,95 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_container"
-    style="@style/Widget.MaterialComponents.CardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/size_10"
-    android:layout_marginTop="@dimen/size_15"
-    android:layout_marginRight="@dimen/size_10"
-    android:background="?attr/selectableItemBackground"
-    android:clickable="true"
-    android:descendantFocusability="blocksDescendants"
-    android:focusable="true"
+    android:layout_marginStart="@dimen/size_layout_margin_left"
+    android:layout_marginTop="@dimen/size_layout_margin_top"
+    android:layout_marginEnd="@dimen/size_layout_margin_right"
     app:cardBackgroundColor="@color/colorWhite"
-    app:cardCornerRadius="@dimen/size_10"
-    app:cardElevation="@dimen/size_10"
-    tools:ignore="KeyboardInaccessibleWidget,RedundantNamespace">
+    app:cardCornerRadius="@dimen/size_radius_corner"
+    app:cardElevation="@dimen/size_card_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="@dimen/size_5">
+        android:padding="@dimen/size_layout_padding">
 
         <LinearLayout
-            android:id="@+id/tvContainer"
+            android:id="@+id/card_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/selectableItemBackground"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteY="0dp">
+            android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/tvImageOrder"
+                    android:id="@+id/notification_order_image"
                     android:layout_width="84dp"
                     android:layout_height="95dp"
-                    android:layout_marginEnd="48dp"
+                    android:layout_marginEnd="35dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_map_pin_active"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="ContentDescription,ObsoleteLayoutParam,UnusedAttribute,VectorDrawableCompat" />
+                    tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/tvDateOrder"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="@string/order_data"
-                    android:textColor="@color/colorMainGrey"
-                    android:textSize="@dimen/size_10"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.082"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="SpUsage" />
-
-                <TextView
-                    android:id="@+id/tvTimeOrder"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="@string/order_phone"
-                    android:textColor="@color/colorMainGrey"
-                    android:textSize="@dimen/size_15"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.082"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDateOrder"
-                    tools:ignore="SpUsage" />
-
-                <TextView
-                    android:id="@+id/tvPhoneOrder"
-                    android:layout_width="229dp"
-                    android:layout_height="30dp"
+                    android:id="@+id/notification_order_phone"
+                    android:layout_width="174dp"
+                    android:layout_height="33dp"
                     android:fontFamily="@font/catorze27_style1_semibold"
                     android:text="@string/order_phone"
                     android:textColor="@color/colorMainGrey"
-                    android:textSize="@dimen/size_25"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.13"
+                    android:textSize="@dimen/text_size_big"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/notification_order_image"
+                    app:layout_constraintHorizontal_bias="0.181"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTimeOrder"
-                    tools:ignore="SpUsage" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.258" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

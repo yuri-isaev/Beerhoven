@@ -1,6 +1,6 @@
 package ru.mobile.beerhoven.presentation.ui.user.orders.confirm;
 
-import android.app.Application;
+import android.content.Context;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModel;
@@ -16,7 +16,7 @@ public class OrderConfirmViewModel extends ViewModel {
    private final IPreferencesStorage mStorage;
    private final IPushMessagingService mService;
 
-   public OrderConfirmViewModel(Application context, IOrderConfirmRepository repository,
+   public OrderConfirmViewModel(Context context, IOrderConfirmRepository repository,
        IPushMessagingService service) {
       this.mRepository = repository;
       this.mService = service;

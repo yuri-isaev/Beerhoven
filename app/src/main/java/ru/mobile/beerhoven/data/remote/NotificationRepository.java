@@ -30,13 +30,13 @@ public class NotificationRepository implements INotificationRepository {
 
    public MutableLiveData<List<Order>> getNotificationList() {
       if (mOrderList.size() == 0) {
-         readOrderList();
+         getConfirmList();
       }
       mMutableList.setValue(mOrderList);
       return mMutableList;
    }
 
-   private void readOrderList() {
+   private void getConfirmList() {
       mFirebaseRef.child(Constants.NODE_CONFIRMS).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -66,7 +66,6 @@ public class NotificationRepository implements INotificationRepository {
             assert order != null;
             order.setId(snapshot.getKey());
             mOrderList.remove(order);
-            mMutableList.postValue(mOrderList);
          }
 
          @Override

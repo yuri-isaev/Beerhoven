@@ -8,7 +8,6 @@ import static ru.mobile.beerhoven.utils.Validation.isValidPhoneNumber;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Application;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,10 +66,8 @@ public class OrderConfirmFragment extends Fragment {
    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
 
-      mViewModel = new OrderConfirmViewModel(
-          (Application) requireActivity().getApplicationContext(),
-          new OrderConfirmRepository(),
-          new PushMessagingService());
+      mViewModel = new OrderConfirmViewModel(requireActivity().getApplicationContext(),
+          new OrderConfirmRepository(), new PushMessagingService());
 
       mAddOrderButton.setOnClickListener(v -> {
          if (!isValidName(mNameText) | !isValidAddress(mAddressText) | !isValidPhoneNumber(mPhoneText)) {
@@ -82,7 +79,7 @@ public class OrderConfirmFragment extends Fragment {
              .setAddress(requireNonNull(mAddressText.getEditText()).getText().toString())
              .setColor(String.valueOf(Randomizer.getRandomColorMarker()))
              .setDate(CurrentDateTime.getCurrentDate())
-             .setName(String.valueOf(requireNonNull(mNameText.getEditText()).getText()))
+             .setContactName(String.valueOf(requireNonNull(mNameText.getEditText()).getText()))
              .setPhone(String.valueOf(requireNonNull(mPhoneText.getEditText()).getText()))
              .setTime(CurrentDateTime.getCurrentTime())
              .setTotal(Double.parseDouble(String.valueOf(Double.parseDouble(mTotal))));
@@ -105,7 +102,7 @@ public class OrderConfirmFragment extends Fragment {
    public void toActivity(int data) {
       Activity activity = getActivity();
       if (activity != null && !activity.isFinishing() && activity instanceof MainActivity) {
-         ((MainActivity) activity).onGetDataFromFragment(data);
+         ((MainActivity) activity).onUpdateActivityCounter(data);
       }
    }
 
@@ -116,5 +113,6 @@ public class OrderConfirmFragment extends Fragment {
 
    public void sendPushNotification(FragmentActivity activity) {
       mViewModel.onSendPushNotificationToService(activity);
+      ((MainActivity) activity).onIncreaseNotificationCounter();
    }
 }
