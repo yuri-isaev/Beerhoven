@@ -1,11 +1,15 @@
 package ru.mobile.beerhoven.domain.model;
 
+/**
+ * Order Id    == user phone number
+ * Order phone == user phone number to confirm
+ */
 public class Order {
-   private String id;
    private String address;
    private String color;
+   private String contactName;
    private String date;
-   private String name;
+   private String id;
    private String phone;
    private String time;
    private double total;
@@ -46,12 +50,12 @@ public class Order {
       return this;
    }
 
-   public String getName() {
-      return name;
+   public String getContactName() {
+      return contactName;
    }
 
-   public Order setName(String name) {
-      this.name = name;
+   public Order setContactName(String contactName) {
+      this.contactName = contactName;
       return this;
    }
 

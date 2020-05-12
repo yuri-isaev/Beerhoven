@@ -1,35 +1,12 @@
 package ru.mobile.beerhoven.domain.model;
 
-public class User {
-    private String name, email, phone;
-
-    public User(String name, String email, String phone) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+public abstract class User {
+   public abstract String getId();
+   public abstract void setId(String Id);
+   public abstract String getEmail();
+   public abstract void setEmail(String email);
+   public abstract String getName();
+   public abstract void setName(String name);
+   public abstract String getPhone();
+   public abstract void setPhone(String phone);
 }

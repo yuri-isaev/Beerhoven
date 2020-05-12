@@ -1,7 +1,6 @@
 package ru.mobile.beerhoven.utils;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.view.Gravity;
 import android.view.View;
@@ -13,23 +12,33 @@ import ru.mobile.beerhoven.R;
 
 public final class Toasty {
 
-   @SuppressLint("ResourceType")
-   public static void success(Activity ctx, String message) {
-      Toast toast = Toast.makeText(ctx, message, Toast.LENGTH_SHORT);
+   public static void success(Context ctx, int resId) {
+      Toast toast = Toast.makeText(ctx, resId, Toast.LENGTH_SHORT);
       View view = toast.getView();
-      view.getBackground()
-          .setColorFilter(ContextCompat.getColor(ctx, R.color.colorGreen), PorterDuff.Mode.SRC_OVER);
-      toast.setGravity(Gravity.FILL_HORIZONTAL | Gravity.TOP, 0, 90);
+      view.getBackground().setColorFilter(
+          ContextCompat.getColor(ctx, R.color.colorGreen),
+          PorterDuff.Mode.SRC_OVER);
+      toast.setGravity(Gravity.FILL_HORIZONTAL | Gravity.TOP, 0, 0);
       toast.show();
    }
 
-   @SuppressLint("ResourceType")
-   public static void error(Activity ctx, String message) {
-      Toast toast = Toast.makeText(ctx, message, Toast.LENGTH_SHORT);
+   public static void warning(Context ctx, int resId) {
+      Toast toast = Toast.makeText(ctx, resId, Toast.LENGTH_SHORT);
       View view = toast.getView();
-      view.getBackground()
-          .setColorFilter(ContextCompat.getColor(ctx, R.color.colorRed), PorterDuff.Mode.SRC_OVER);
-      toast.setGravity(Gravity.FILL_HORIZONTAL | Gravity.TOP, 0, 90);
+      view.getBackground().setColorFilter(
+          ContextCompat.getColor(ctx, R.color.colorOrange),
+          PorterDuff.Mode.SRC_OVER);
+      toast.setGravity(Gravity.FILL_HORIZONTAL | Gravity.TOP, 0, 0);
+      toast.show();
+   }
+
+   public static void error(Context ctx, int resId) {
+      Toast toast = Toast.makeText(ctx, resId, Toast.LENGTH_SHORT);
+      View view = toast.getView();
+      view.getBackground().setColorFilter(
+          ContextCompat.getColor(ctx, R.color.colorRed),
+          PorterDuff.Mode.SRC_OVER);
+      toast.setGravity(Gravity.FILL_HORIZONTAL | Gravity.TOP, 0, 0);
       toast.show();
    }
 }

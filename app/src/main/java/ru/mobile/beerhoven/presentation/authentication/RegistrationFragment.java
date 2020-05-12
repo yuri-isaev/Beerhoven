@@ -9,42 +9,46 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.databinding.FragmentRegistrationBinding;
+import ru.mobile.beerhoven.utils.Toasty;
+import ru.mobile.beerhoven.utils.Validation;
 
 public class RegistrationFragment extends Fragment {
-   private FragmentRegistrationBinding mFragmentBind;
 
-   @Nullable
    @Override
-   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      mFragmentBind = FragmentRegistrationBinding.inflate(inflater, container, false);
-
-      TextInputLayout regName = mFragmentBind.regName;
-      TextInputLayout regEmail = mFragmentBind.reqEmail;
-      TextInputLayout regPhoneNumber = mFragmentBind.regPhoneNumber;
-      Button btnRegister = mFragmentBind.regBtn;
+   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+      FragmentRegistrationBinding binding = FragmentRegistrationBinding.inflate(inflater, container, false);
+      Button btnRegister = binding.regBtn;
+      TextInputLayout inputName = binding.regName;
+      TextInputLayout inputEmail = binding.reqEmail;
+      TextInputLayout inputPhoneNumber = binding.regPhoneNumber;
 
       btnRegister.setOnClickListener(v -> {
-//         if (Validation.isValidNameField(regName) | !Validation.isValidateEmail(regEmail) | Validation.isValidPhoneNumber(regPhoneNumber)) {
-//            Toasty.error(requireActivity(), R.string.valid_field, Toast.LENGTH_LONG, true).show();
-//            return;
-//         }
-         String name = requireNonNull(regName.getEditText()).getText().toString();
-         String email = requireNonNull(regEmail.getEditText()).getText().toString();
-         String phoneNumber = requireNonNull(regPhoneNumber.getEditText()).getText().toString();
+         if (!Validation.isValidName(inputName) |
+             !Validation.isValidEmail(inputEmail) |
+             !Validation.isValidPhoneNumber(inputPhoneNumber)) {
+            Toasty.error(requireActivity(), R.string.valid_field);
+            return;
+         }
+
+         String name = requireNonNull(inputName.getEditText()).getText().toString();
+         String email = requireNonNull(inputEmail.getEditText()).getText().toString();
+         String phoneNumber = requireNonNull(inputPhoneNumber.getEditText()).getText().toString();
 
          NavDirections action = RegistrationFragmentDirections.actionNavRegToNavAuth()
-             .setName(name).setEmail(email).setPhone(phoneNumber);
+             .setName(name)
+             .setEmail(email)
+             .setPhone(phoneNumber);
          Navigation.findNavController(v).navigate(action);
       });
 
-      return mFragmentBind.getRoot();
+      return binding.getRoot();
    }
 }
