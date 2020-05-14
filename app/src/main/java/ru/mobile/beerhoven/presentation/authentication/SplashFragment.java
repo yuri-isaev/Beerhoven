@@ -17,12 +17,10 @@ import androidx.navigation.NavDirections;
 
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.AuthRepository;
-import ru.mobile.beerhoven.domain.model.User;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
-import ru.mobile.beerhoven.utils.Toasty;
 
 public class SplashFragment extends Fragment {
-   private User mCurrentUser;
+   private String mUserId;
 
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,22 +31,18 @@ public class SplashFragment extends Fragment {
    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
       AuthViewModel mViewModel = new AuthViewModel(new AuthRepository());
-      mViewModel.getCurrentUserToRepository().observe(getViewLifecycleOwner(), (user) -> {
-         mCurrentUser = user;
-      });
+      mViewModel.getCurrentUser().observe(getViewLifecycleOwner(), (user) -> mUserId = user.getId());
+
       new Handler().postDelayed(() -> {
-         if (!mCurrentUser.getId().equals("")) {
-        // if (!token) {
+         if (!mUserId.equals("null")) {
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
             requireActivity().finish();
-            Toasty.success(requireActivity(), "Вход выполнен успешно");
          } else {
             if ((requireNonNull(findNavController(view).getCurrentDestination()).getId()) == R.id.nav_splash) {
                NavDirections action = SplashFragmentDirections.actionNavSplashToNavReg();
                findNavController(view).navigate(action);
             }
-            Toasty.error(requireActivity(), "Пройдите регистрацию");
          }
       }, 3000);
    }

@@ -10,7 +10,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Objects;
 
 public final class Validation {
-   private static final String notValidField = "Поле не должно быть пустым";
+   private static final String inValidField = "Поле не должно быть пустым";
 
    public static boolean isValidName(@NonNull TextInputLayout field) {
       String name = requireNonNull(field.getEditText()).getText().toString();
@@ -20,7 +20,7 @@ public final class Validation {
          field.setErrorEnabled(false);
          return true;
       } else {
-         field.setError(notValidField);
+         field.setError(inValidField);
          return false;
       }
    }
@@ -30,7 +30,7 @@ public final class Validation {
       String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
       if (email.isEmpty()) {
-         field.setError(notValidField);
+         field.setError(inValidField);
          return false;
       } else if (!email.matches(emailPattern)) {
          field.setError("Неверный адрес электронной почты");
@@ -50,7 +50,7 @@ public final class Validation {
          field.setErrorEnabled(false);
          return PHONE.matcher(number).matches();
       } else {
-         field.setError(notValidField);
+         field.setError(inValidField);
          return false;
       }
    }
@@ -63,7 +63,7 @@ public final class Validation {
          field.setErrorEnabled(false);
          return true;
       } else {
-         field.setError(notValidField);
+         field.setError(inValidField);
          return false;
       }
    }

@@ -10,11 +10,11 @@
 
     <!-- Authentication -->
     <string name="auth_failed">Проверка подлинности не удалась</string>
-    <string name="auth_input_code_confirm">Дождитесь подтверждения</string>
+    <string name="auth_text_confirm">Дождитесь подтверждения</string>
     <string name="auth_phone_number_wrong">Неверный номер телефона</string>
     <string name="auth_quota_exceeded">Превышение квоты доступа</string>
-    <string name="auth_user_success">Пользователь аутентифицирован</string>
-    <string name="auth_user_failed">Пользователь не существует</string>
+<!--    <string name="auth_user_success">Пользователь аутентифицирован</string>-->
+<!--    <string name="auth_user_failed">Пользователь не существует</string>-->
 
     <!-- Cart -->
     <string name="cart_add">Добавить в корзину</string>
@@ -65,7 +65,7 @@
     <string name="order_address">Адресс заказа</string>
     <string name="order_confirmation">Подтверждение заказа</string>
     <string name="order_clarification">Уточнить заказ</string>
-    <string name="order_data">Дата заказа</string>
+    <string name="order_date">Дата заказа</string>
     <string name="order_details">Заявка на заказ</string>
     <string name="order_details_specify">Пожалуйста, уточните детали заказа</string>
     <string name="order_form">Подать заявку</string>
@@ -119,7 +119,7 @@
 
     <!-- Registration -->
     <string name="reg_description">Для полноценного использования приложения необходимо пройти регистрацию</string>
-    <string name="reg">Регистрация</string>
+    <string name="registration">Регистрация</string>
     <string name="reg_success">Регистрация прошла успешно</string>
     <string name="reg_account_success">Ваш аккаунт успешно создан</string>
     <string name="reg_name">Ваше Имя</string>
@@ -128,5 +128,5 @@
 
     <!-- Validation -->
     <string name="valid_form">Заполните форму</string>
-    <string name="valid_field">Поле не должно быть пустым</string>
+    <string name="invalid_field">Поле не должно быть пустым</string>
 </resources>

@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
       if (savedInstanceState == null) {
          getSupportFragmentManager()
              .beginTransaction()
-             .replace(R.id.container, new SplashFragment())
+             .replace(R.id.fragment_container, new SplashFragment())
              .commitNow();
       }
    }

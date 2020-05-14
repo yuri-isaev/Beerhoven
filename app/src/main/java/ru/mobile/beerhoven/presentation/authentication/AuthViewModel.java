@@ -8,12 +8,12 @@ import androidx.lifecycle.ViewModel;
 import ru.mobile.beerhoven.data.local.PreferencesStorage;
 import ru.mobile.beerhoven.domain.model.User;
 import ru.mobile.beerhoven.domain.repository.IAuthRepository;
-import ru.mobile.beerhoven.domain.repository.IAuthVerificationService;
+import ru.mobile.beerhoven.domain.repository.IAuthService;
 import ru.mobile.beerhoven.domain.repository.IPreferencesStorage;
 
 public class AuthViewModel extends ViewModel {
    private IAuthRepository mRepository;
-   private IAuthVerificationService mService;
+   private IAuthService mService;
    private IPreferencesStorage mStorage;
 
    public AuthViewModel(Context context) {
@@ -24,7 +24,7 @@ public class AuthViewModel extends ViewModel {
       this.mRepository = repository;
    }
 
-   public AuthViewModel(Context context, IAuthRepository repository, IAuthVerificationService service) {
+   public AuthViewModel(Context context, IAuthRepository repository, IAuthService service) {
       this.mRepository = repository;
       this.mStorage = new PreferencesStorage(context);
       this.mService = service;
@@ -34,7 +34,7 @@ public class AuthViewModel extends ViewModel {
       mRepository.onCreateUser(customer);
    }
 
-   public LiveData<User> getCurrentUserToRepository() {
+   public LiveData<User> getCurrentUser() {
       return mRepository.getCurrentUserObject();
    }
 
@@ -46,7 +46,7 @@ public class AuthViewModel extends ViewModel {
       mStorage.onSaveUserName(name);
    }
 
-   public LiveData<Boolean> onSendVerificationCodeToUser(String phoneNumber) {
+   public LiveData<Boolean> onAuthenticationConfirm(String phoneNumber) {
       return mService.sendVerificationCodeToUser(phoneNumber);
    }
 }

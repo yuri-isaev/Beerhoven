@@ -4,62 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:theme="@style/AppTheme"
+    android:background="@color/colorGreyDark"
     tools:context="ru.mobile.beerhoven.presentation.activity.SplashActivity">
 
-    <ImageView
-        android:id="@+id/image_logo"
-        android:layout_width="@dimen/size_243"
-        android:layout_height="@dimen/size_243"
-        android:layout_marginTop="@dimen/size_124"
-        android:background="@drawable/shape_et_reg_normal"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints">
 
-    <TextView
-        android:id="@+id/text_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_44"
-        android:fontFamily="@font/catorze27_style1_semibold"
-        android:text="@string/app"
-        android:textColor="@color/colorMainYellow"
-        android:textSize="@dimen/text_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_logo"
-        tools:ignore="UnusedAttribute" />
+        <ImageView
+            android:id="@+id/app_logo"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:background="@drawable/rectangle_splash"
+            app:srcCompat="@drawable/logo"
+            tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/text_about_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_12"
-        android:fontFamily="@font/catorze27_style1_semibold"
-        android:text="@string/app_about"
-        android:textColor="@color/colorMainYellow"
-        android:textSize="@dimen/text_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_logo"
-        tools:ignore="MissingConstraints,UnusedAttribute" />
+        <TextView
+            android:id="@+id/app_text"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginTop="44dp"
+            android:fontFamily="@font/catorze27_style1_semibold"
+            android:gravity="center"
+            android:text="@string/app"
+            android:textColor="@color/colorMainYellow"
+            android:textSize="@dimen/text_size_ex" />
+
+        <TextView
+            android:id="@+id/app_about"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/catorze27_style1_semibold"
+            android:text="@string/app_about"
+            android:textColor="@color/colorMainYellow"
+            android:textSize="23sp" />
+    </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/progress_bar_logo"
-        android:layout_width="@dimen/size_60"
-        android:layout_height="@dimen/size_40"
-        android:theme="?android:attr/progressBarStyleHorizontal"
+        android:id="@+id/progressBar"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_about_logo"
-        app:layout_constraintVertical_bias="0.856" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

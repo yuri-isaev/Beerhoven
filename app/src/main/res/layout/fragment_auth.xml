@@ -1,49 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMainBlack"
-    tools:context=".presentation.authentication.SplashFragment">
+    android:background="@color/colorGreyDark"
+    tools:context=".presentation.authentication.AuthFragment">
 
     <LinearLayout
         android:id="@+id/layout_auth"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/size_170"
-        android:layout_margin="@dimen/size_20"
+        android:layout_width="364dp"
+        android:layout_height="295dp"
+        android:layout_margin="20dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingTop="55dp"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.142"
         tools:ignore="MissingConstraints,RtlHardcoded">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_100"
-            android:layout_marginTop="@dimen/size_2"
+            android:layout_height="100dp"
+            android:layout_marginTop="2dp"
             android:fontFamily="@font/tt_bluescreens_round_regular"
             android:gravity="center_horizontal"
-            android:text="@string/auth_input_code_confirm"
-            android:textColor="@color/colorMainYellow"
-            android:textSize="@dimen/text_50" />
+            android:shadowColor="@color/colorMainBlack"
+            android:text="@string/auth_text_confirm"
+            android:textColor="@color/colorAccent"
+            android:textSize="75sp" />
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/progress_bar_auth"
-        android:layout_width="@dimen/size_60"
-        android:layout_height="@dimen/size_40"
-        android:layout_marginBottom="@dimen/size_36"
-        android:theme="?android:attr/progressBarStyleHorizontal"
+        android:id="@+id/progressBar2"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="40dp"
+        android:indeterminateOnly="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_auth"
-        app:layout_constraintVertical_bias="0.971"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

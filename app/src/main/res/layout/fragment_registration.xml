@@ -1,118 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMainBlack"
-    android:theme="@style/AppTheme"
+    android:background="@color/colorBackground"
     tools:context="ru.mobile.beerhoven.presentation.activity.SplashActivity">
 
     <LinearLayout
-        android:layout_width="@dimen/size_359"
-        android:layout_height="@dimen/size_494"
-        android:layout_margin="@dimen/size_20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.142"
-        tools:ignore="MissingConstraints,RtlHardcoded">
+        app:layout_constraintVertical_bias="0.078">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size_24"
-            android:layout_marginTop="@dimen/size_35"
-            android:layout_marginRight="@dimen/size_24"
-            android:fontFamily="@font/catorze27_style1_semibold"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/catorze27_style1_bold"
+            android:gravity="center"
+            android:textColor="@color/colorGreyDark"
             android:text="@string/reg_description"
-            android:textColor="@color/colorMainYellow"
-            android:textSize="@dimen/text_18" />
+            android:textSize="22sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/reg_name"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size_16"
-            android:layout_marginTop="@dimen/size_14"
-            android:layout_marginRight="@dimen/size_16"
-            android:hint="@string/reg_name"
-            tools:ignore="MissingConstraints">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorMainWhite"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_53"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="textPersonName"
-                android:text=""
-                android:textColor="@color/colorMainWhite"
-                android:textColorHint="@color/colorMainYellow" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/req_email"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size_16"
-            android:layout_marginTop="@dimen/size_14"
-            android:layout_marginRight="@dimen/size_16"
-            android:hint="@string/req_email"
-            tools:ignore="MissingConstraints">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/size_53"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="textEmailAddress"
-                android:text=""
-                android:textColor="@color/colorMainWhite" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/reg_phone_number"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/size_16"
-            android:layout_marginTop="@dimen/size_14"
-            android:layout_marginRight="@dimen/size_16"
-            android:hint="@string/reg_phone_number"
-            tools:ignore="MissingConstraints">
-
-            <br.com.sapereaude.maskedEditText.MaskedEditText
-                android:id="@+id/number"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:digits="+() 1234567890-"
-                android:imeOptions="actionDone"
-                android:importantForAutofill="no"
-                android:inputType="phone"
-                android:maxLength="17"
-                android:text=""
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_14"
-                app:mask="+7 ### ### ####"
-                tools:ignore="MissingPrefix" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/input_name_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorMainWhite"
+                    android:fontFamily="@font/catorze27_style1_semibold"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/reg_name"
+                    android:textColor="@color/colorVioletBlue"
+                    android:textSize="@dimen/text_size" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="15dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorMainWhite"
+                        android:imeOptions="actionDone"
+                        android:importantForAutofill="no"
+                        android:inputType="textPersonName"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/colorMainBlack"
+                        android:textSize="@dimen/text_size_large"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorMainWhite"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/input_email_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorMainWhite"
+                    android:fontFamily="@font/catorze27_style1_semibold"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/req_email"
+                    android:textColor="@color/colorVioletBlue"
+                    android:textSize="@dimen/text_size" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="15dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints=""
+                        android:background="@color/colorMainWhite"
+                        android:imeOptions="actionDone"
+                        android:importantForAutofill="no"
+                        android:inputType="textEmailAddress"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/colorMainBlack"
+                        android:textSize="@dimen/text_size_large"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorMainWhite"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/input_phone_number_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorMainWhite"
+                    android:fontFamily="@font/catorze27_style1_semibold"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/reg_phone_number"
+                    android:textColor="@color/colorVioletBlue"
+                    android:textSize="@dimen/text_size" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="15dp">
+
+                    <br.com.sapereaude.maskedEditText.MaskedEditText                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorMainWhite"
+                        android:digits="+() 1234567890-"
+                        android:imeOptions="actionDone"
+                        android:importantForAutofill="no"
+                        android:inputType="phone"
+                        android:maxLength="17"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/colorGreyDark"
+                        android:textSize="@dimen/text_size_large"
+                        app:mask="+7 ### ### ####"
+                        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <Button
-            android:id="@+id/reg_btn"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_50"
-            android:layout_marginLeft="@dimen/size_16"
-            android:layout_marginTop="@dimen/size_25"
-            android:layout_marginRight="@dimen/size_16"
-            android:background="@drawable/btn_selector"
-            android:text="@string/reg"
-            android:textColor="@color/colorMainBlack" />
+            android:id="@+id/btn_registration"
+            style="@style/AppTheme.Button"
+            app:cornerRadius="20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/registration"
+            android:textColor="@color/colorGreyDark" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
