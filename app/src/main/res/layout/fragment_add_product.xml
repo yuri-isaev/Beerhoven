@@ -4,277 +4,497 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMainBlack"
-    android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+    android:background="@color/colorBackground"
+    tools:context="ru.mobile.beerhoven.presentation.ui.adding.AddProductFragment">
 
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/size_15"
-        android:layout_marginTop="@dimen/size_20"
-        android:layout_marginEnd="@dimen/size_15"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="15dp"
         tools:ignore="ScrollViewSize,UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/size_1"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="174dp">
+            tools:ignore="MissingConstraints">
 
             <TextView
                 android:id="@+id/main_title"
-                android:layout_width="304dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_24"
-                android:layout_marginTop="@dimen/size_10"
-                android:layout_marginRight="@dimen/size_24"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:fontFamily="@font/catorze27_style1_semibold"
-                android:gravity="center_horizontal"
+                android:gravity="center"
+                android:paddingBottom="10dp"
                 android:text="@string/add_product_card"
                 android:textAlignment="center"
-                android:textColor="@color/colorMainYellow"
-                android:textSize="@dimen/text_24" />
+                android:textColor="@color/colorGreyDark"
+                android:textSize="@dimen/text_size_ex" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_country"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/size_16"
-                android:layout_marginTop="@dimen/size_14"
-                android:layout_marginRight="@dimen/size_16"
-                android:hint="@string/product_country"
-                android:textColorHint="@color/colorMainGrey"
-                tools:ignore="MissingConstraints">
+                android:background="@color/colorMainWhite"
+                fab:cardCornerRadius="10dp"
+                fab:cardUseCompatPadding="true">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="53dp"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="textMultiLine"
-                    android:text=""
-                    android:textColor="@color/colorWhite" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_manufacture"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/size_16"
-                android:layout_marginTop="@dimen/size_14"
-                android:layout_marginRight="@dimen/size_16"
-                android:hint="@string/product_manufacture"
-                android:textColorHint="@color/colorMainGrey"
-                tools:ignore="MissingConstraints">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="53dp"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="textMultiLine"
-                    android:text=""
-                    android:textColor="@color/colorWhite" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_16"
-                android:layout_marginTop="@dimen/size_14"
-                android:layout_marginRight="@dimen/size_16"
-                android:hint="@string/product_name"
-                android:textColorHint="@color/colorMainGrey"
-                tools:ignore="MissingConstraints">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="53dp"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="textMultiLine"
-                    android:text=""
-                    android:textColor="@color/colorMainYellow" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_price"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_16"
-                android:layout_marginTop="@dimen/size_14"
-                android:layout_marginRight="@dimen/size_16"
-                android:hint="@string/product_price"
-                android:textColorHint="@color/colorMainGrey"
-                tools:ignore="MissingConstraints">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="53dp"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="numberDecimal"
-                    android:text=""
-                    android:textColor="@color/colorMainYellow" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_style"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_16"
-                android:layout_marginTop="@dimen/size_14"
-                android:layout_marginRight="@dimen/size_16"
-                android:hint="@string/product_style"
-                android:textColorHint="@color/colorMainGrey"
-                tools:ignore="MissingConstraints">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="53dp"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="textMultiLine"
-                    android:text=""
-                    android:textColor="@color/colorMainYellow" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_fortress"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_16"
-                android:layout_marginTop="@dimen/size_14"
-                android:layout_marginRight="@dimen/size_16"
-                android:hint="@string/product_fortress"
-                android:textColorHint="@color/colorMainGrey"
-                tools:ignore="MissingConstraints">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="53dp"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="numberDecimal"
-                    android:text=""
-                    android:textColor="@color/colorMainYellow" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_density"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_16"
-                android:layout_marginTop="@dimen/size_14"
-                android:layout_marginRight="@dimen/size_16"
-                android:hint="@string/product_density"
-                android:textColorHint="@color/colorMainGrey"
-                tools:ignore="MissingConstraints">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="53dp"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="number"
-                    android:text=""
-                    android:textColor="@color/colorMainYellow" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/product_description"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_16"
-                android:layout_marginTop="@dimen/size_14"
-                android:layout_marginRight="@dimen/size_16"
-                android:hint="@string/product_description"
-                android:textColorHint="@color/colorMainGrey"
-                tools:ignore="MissingConstraints">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="53dp"
-                    android:imeOptions="actionDone"
-                    android:importantForAutofill="no"
-                    android:inputType="textMultiLine"
-                    android:text=""
-                    android:textColor="@color/colorMainYellow" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:ignore="RedundantNamespace">
-
-                <com.mikhaellopez.circularimageview.CircularImageView
-                    android:id="@+id/image"
-                    android:layout_width="90dp"
-                    android:layout_height="86dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/size_24"
-                    android:layout_marginTop="@dimen/size_35"
-                    android:layout_marginRight="@dimen/size_24" />
-
-                <com.github.clans.fab.FloatingActionMenu
-                    android:id="@+id/material_design_android_floating_action_menu"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    fab:menu_backgroundColor="@color/colorMainGrey"
-                    fab:menu_fab_label="@string/menu_close"
-                    fab:menu_labels_ellipsize="end"
-                    fab:menu_labels_singleLine="true"
-                    tools:ignore="RtlHardcoded">
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
 
-                    <com.github.clans.fab.FloatingActionButton
-                        android:id="@+id/btn_camera"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/input_name_hint"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_add_a_photo_24"
-                        fab:fab_label="@string/add_camera_photo"
-                        fab:fab_shadowColor="@color/colorMainBlack"
-                        fab:fab_size="mini"
-                        tools:ignore="VectorDrawableCompat" />
+                        android:background="@color/colorMainWhite"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/product_country"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="@dimen/text_size" />
 
-                    <com.github.clans.fab.FloatingActionButton
-                        android:id="@+id/btn_gallery"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_add_photo_alternate_24"
-                        fab:fab_label="@string/add_gallery_image"
-                        fab:fab_shadowColor="@color/colorMainBlack"
-                        fab:fab_size="mini"
-                        tools:ignore="VectorDrawableCompat" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/product_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="15dp">
 
-                    <com.github.clans.fab.FloatingActionButton
-                        android:id="@+id/btn_add_database"
-                        android:layout_width="wrap_content"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorMainWhite"
+                            android:imeOptions="actionDone"
+                            android:importantForAutofill="no"
+                            android:inputType="textMultiLine"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/colorGreyDark"
+                            android:textSize="@dimen/text_size_large"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorMainWhite"
+                fab:cardCornerRadius="10dp"
+                fab:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_post_add_24"
-                        fab:fab_label="@string/add_data_base"
-                        fab:fab_shadowColor="@color/colorMainBlack"
-                        fab:fab_size="mini"
-                        tools:ignore="VectorDrawableCompat" />
-                </com.github.clans.fab.FloatingActionMenu>
-            </RelativeLayout>
+                        android:background="@color/colorMainWhite"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/product_manufacture"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="@dimen/text_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/product_manufacture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="15dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorMainWhite"
+                            android:imeOptions="actionDone"
+                            android:importantForAutofill="no"
+                            android:inputType="textMultiLine"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/colorGreyDark"
+                            android:textSize="@dimen/text_size_large"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorMainWhite"
+                fab:cardCornerRadius="10dp"
+                fab:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorMainWhite"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/product_name"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="@dimen/text_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/product_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="15dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorMainWhite"
+                            android:imeOptions="actionDone"
+                            android:importantForAutofill="no"
+                            android:inputType="textMultiLine"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/colorGreyDark"
+                            android:textSize="@dimen/text_size_large"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorMainWhite"
+                fab:cardCornerRadius="10dp"
+                fab:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorMainWhite"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/product_price"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="@dimen/text_size"
+                        tools:ignore="TextContrastCheck" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/product_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="15dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorMainWhite"
+                            android:imeOptions="actionDone"
+                            android:importantForAutofill="no"
+                            android:inputType="numberDecimal"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/colorGreyDark"
+                            android:textSize="@dimen/text_size_large"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorMainWhite"
+                fab:cardCornerRadius="10dp"
+                fab:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorMainWhite"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/product_style"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="@dimen/text_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/product_style"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="15dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorMainWhite"
+                            android:imeOptions="actionDone"
+                            android:importantForAutofill="no"
+                            android:inputType="textMultiLine"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/colorGreyDark"
+                            android:textSize="@dimen/text_size_large"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorMainWhite"
+                fab:cardCornerRadius="10dp"
+                fab:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorMainWhite"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/product_fortress"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="@dimen/text_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/product_fortress"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="15dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorMainWhite"
+                            android:imeOptions="actionDone"
+                            android:importantForAutofill="no"
+                            android:inputType="numberDecimal"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/colorGreyDark"
+                            android:textSize="@dimen/text_size_large"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorMainWhite"
+                fab:cardCornerRadius="10dp"
+                fab:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorMainWhite"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/product_density"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="@dimen/text_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/product_density"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="15dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorMainWhite"
+                            android:imeOptions="actionDone"
+                            android:importantForAutofill="no"
+                            android:inputType="numberDecimal"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/colorGreyDark"
+                            android:textSize="@dimen/text_size_large"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorMainWhite"
+                fab:cardCornerRadius="10dp"
+                fab:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorMainWhite"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/product_description"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="@dimen/text_size" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/product_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="15dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorMainWhite"
+                            android:imeOptions="actionDone"
+                            android:importantForAutofill="no"
+                            android:inputType="textMultiLine"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/colorGreyDark"
+                            android:textSize="@dimen/text_size_large"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                fab:cardCornerRadius="10dp"
+                fab:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorMainWhite"
+                        android:fontFamily="@font/catorze27_style1_semibold"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/news_add_image"
+                        android:textColor="@color/colorVioletBlue"
+                        android:textSize="@dimen/text_size" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorWhite">
+
+                        <com.mikhaellopez.circularimageview.CircularImageView
+                            android:id="@+id/product_image"
+                            android:layout_width="134dp"
+                            android:layout_height="130dp"
+                            android:layout_gravity="center"
+                            android:paddingBottom="@dimen/size_5"
+                            android:src="@drawable/ic_camera_photo"
+                            fab:civ_border_color="@color/colorGrey"
+                            fab:civ_border_width="5dp"
+                            fab:layout_constraintBottom_toBottomOf="parent"
+                            fab:layout_constraintEnd_toEndOf="parent"
+                            fab:layout_constraintStart_toStartOf="parent"
+                            fab:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/selector_product_add"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="bottom|right"
+                            fab:layout_constraintBottom_toBottomOf="parent"
+                            fab:layout_constraintEnd_toEndOf="parent"
+                            fab:srcCompat="@drawable/ic_cross_add"
+                            tools:ignore="ContentDescription,RtlHardcoded" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                style="@style/AppTheme.Button"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/add_data_base"
+                android:textColor="@color/colorGreyDark"
+                fab:cornerRadius="20dp" />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

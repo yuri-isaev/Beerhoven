@@ -25,7 +25,6 @@
     <dimen name="size_83">83dp</dimen>
     <dimen name="size_98">98dp</dimen>
     <dimen name="size_100">100dp</dimen>
-    <dimen name="size_120">120dp</dimen>
     <dimen name="size_124">124dp</dimen>
     <dimen name="size_150">150dp</dimen>
     <dimen name="size_170">170dp</dimen>
@@ -35,7 +34,6 @@
     <dimen name="size_300">300dp</dimen>
     <dimen name="size_359">359dp</dimen>
     <dimen name="size_379">379dp</dimen>
-    <dimen name="size_494">494dp</dimen>
     <dimen name="size_layout_padding">5dp</dimen>
     <dimen name="size_layout_margin_left">10dp</dimen>
     <dimen name="size_layout_margin_top">15dp</dimen>
