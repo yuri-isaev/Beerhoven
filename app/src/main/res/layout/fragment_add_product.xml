@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context="ru.mobile.beerhoven.presentation.ui.adding.AddProductFragment">
+    tools:context="ru.mobile.beerhoven.presentation.ui.admin.post.product.AddProductFragment">
 
     <ScrollView
         android:id="@+id/scroll_view"
@@ -473,7 +473,7 @@
                             fab:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
-                            android:id="@+id/selector_product_add"
+                            android:id="@+id/selector_add_image"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="bottom|right"
@@ -486,6 +486,7 @@
             </androidx.cardview.widget.CardView>
 
             <Button
+                android:id="@+id/btn_add_database"
                 style="@style/AppTheme.Button"
                 android:layout_gravity="center"
                 android:layout_marginLeft="15dp"

@@ -127,7 +127,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_add_product"
-        android:name="ru.mobile.beerhoven.presentation.ui.adding.AddProductFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.admin.post.product.AddProductFragment"
         android:label="@string/menu_add_product"
         tools:layout="@layout/fragment_add_product" />
     <fragment

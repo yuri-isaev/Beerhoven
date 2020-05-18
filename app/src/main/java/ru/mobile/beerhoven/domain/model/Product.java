@@ -6,22 +6,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Product {
-   private String id;
    private String country;
-   private String description;
    private String density;
+   private String description;
    private String fortress;
+   private String id;
    private String manufacture;
    private String name;
    private double price;
-   private double total;
    private String quantity;
    private String style;
-   private String url;
+   private double total;
+   private String uri;
 }

@@ -127,6 +127,6 @@
     <string name="reg_phone_number">Номер телефона</string>
 
     <!-- Validation -->
-    <string name="valid_form">Заполните форму</string>
+    <string name="invalid_form">Заполните форму</string>
     <string name="invalid_field">Поле не должно быть пустым</string>
 </resources>
