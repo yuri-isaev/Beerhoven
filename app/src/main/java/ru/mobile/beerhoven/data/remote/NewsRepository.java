@@ -25,44 +25,45 @@ import ru.mobile.beerhoven.domain.repository.INewsRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class NewsRepository implements INewsRepository {
-   private final DatabaseReference mDatabaseRef;
-   private final StorageReference mStorageRef;
-   private final MutableLiveData<List<News>> mMutableList;
+   private final DatabaseReference mFirebaseRef;
    private final List<News> mNewsList;
+   private final MutableLiveData<List<News>> mMutableList;
+   private final StorageReference mStorageRef;
    private static final String TAG = "NewsRepository";
 
    public NewsRepository() {
-      this.mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+      this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
       this.mStorageRef = FirebaseStorage.getInstance().getReference();
       this.mMutableList = new MutableLiveData<>();
       this.mNewsList = new ArrayList<>();
    }
 
    @Override
-   public void addNewsDataToDatabase(News model) {
-      model.setUri(Constants.URI_LOGO);
-      mDatabaseRef.child(Constants.NODE_NEWS).push().setValue(model)
+   public void addNewsDataToDatabase(@NonNull News post) {
+      post.setImage(Constants.URI_LOGO);
+      mFirebaseRef.child(Constants.NODE_NEWS).push().setValue(post)
           .addOnSuccessListener(unused -> Log.i(TAG, "News data added to database"))
           .addOnFailureListener(e -> Log.i(TAG, e.getMessage()));
    }
 
    @Override
-   public void addNewsPostToDatabase(News model) {
+   public void addNewsPostToDatabase(@NonNull News post) {
       mStorageRef.child(Constants.FOLDER_NEWS_IMG).child(new Date().toString())
-          .putFile(Uri.parse(model.getUri()))
+          .putFile(Uri.parse(post.getImage()))
           .addOnSuccessListener((taskSnapshot) -> {
              Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-             while (!uriTask.isComplete());
-             Uri downloadUri = uriTask.getResult();
-             model.setUri(downloadUri.toString());
 
-             mDatabaseRef.child(Constants.NODE_NEWS).push().setValue(model)
-                 .addOnSuccessListener(unused -> Log.i(TAG, "News data added to database"))
-                 .addOnFailureListener(e -> Log.i(TAG, e.getMessage()));
+             uriTask.addOnSuccessListener(uri -> {
+                Uri downloadUri = uriTask.getResult();
+                post.setImage(downloadUri.toString());
 
-             Log.i(TAG, "News image added to database storage");
-      })
-          .addOnFailureListener(e -> Log.i(TAG, e.getMessage()));
+                mFirebaseRef.child(Constants.NODE_NEWS).push().setValue(post)
+                    .addOnSuccessListener(unused -> Log.i(TAG, "News data added to database"))
+                    .addOnFailureListener(e -> Log.i(TAG, e.getMessage()));
+                Log.i(TAG, "News image added to database storage");
+             })
+                 .addOnFailureListener(e -> Log.e(TAG, e.getMessage()));
+          });
    }
 
    @Override
@@ -75,7 +76,7 @@ public class NewsRepository implements INewsRepository {
    }
 
    private void onGetNewsListFromDatabase() {
-      mDatabaseRef.child(Constants.NODE_NEWS).addChildEventListener(new ChildEventListener() {
+         mFirebaseRef.child(Constants.NODE_NEWS).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             News post = snapshot.getValue(News.class);

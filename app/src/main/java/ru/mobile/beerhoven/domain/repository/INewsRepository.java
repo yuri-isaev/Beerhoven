@@ -7,7 +7,7 @@ import java.util.List;
 import ru.mobile.beerhoven.domain.model.News;
 
 public interface INewsRepository {
-   void addNewsDataToDatabase(News model);
-   void addNewsPostToDatabase(News model);
+   void addNewsDataToDatabase(News news);
+   void addNewsPostToDatabase(News news);
    MutableLiveData<List<News>> getNewsList();
 }

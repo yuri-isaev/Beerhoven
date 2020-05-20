@@ -1,6 +1,5 @@
-package ru.mobile.beerhoven.presentation.ui.admin.post;
+package ru.mobile.beerhoven.presentation.ui.admin.post.news;
 
-import android.app.Activity;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -14,20 +13,19 @@ import ru.mobile.beerhoven.domain.usecases.AddNewsUseCase;
 public class AddNewsViewModel extends ViewModel {
    private final AddNewsUseCase mAddNewsUseCase;
    private final MutableLiveData<Boolean> mResponse;
-
    private static final String TAG = "AddNewsViewModel";
 
-   public AddNewsViewModel(Activity activity) {
+   public AddNewsViewModel() {
       this.mResponse = new MutableLiveData<>();
-      this.mAddNewsUseCase = new AddNewsUseCase(activity, new NewsRepository());
+      this.mAddNewsUseCase = new AddNewsUseCase(new NewsRepository());
    }
 
-   public LiveData<Boolean> onAddPostResponse(News model) {
-      mResponse.setValue(Boolean.TRUE);
+   public LiveData<Boolean> onAddNewsToRepository(News news) {
+      mResponse.setValue(true);
       try {
-         mAddNewsUseCase.execute(model);
+         mAddNewsUseCase.execute(news);
       } catch (Exception e) {
-         mResponse.setValue(Boolean.FALSE);
+         mResponse.setValue(false);
          Log.e(TAG, e.getMessage());
       }
       return mResponse;
