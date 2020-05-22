@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_form"
-    tools:context=".presentation.ui.admin.post.AddNewsFragment">
+    tools:context=".presentation.ui.admin.post.news.AddNewsFragment">
 
     <ImageView
         android:id="@+id/dialog_image"

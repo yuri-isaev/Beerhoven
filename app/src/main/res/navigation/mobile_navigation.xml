@@ -179,7 +179,7 @@
         tools:layout="@layout/fragment_client_map" />
     <fragment
         android:id="@+id/nav_add_news"
-        android:name="ru.mobile.beerhoven.presentation.ui.admin.post.AddNewsFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.admin.post.news.AddNewsFragment"
         android:label="@string/menu_add_news"
         tools:layout="@layout/fragment_add_news" />
     <fragment
