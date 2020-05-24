@@ -51,6 +51,7 @@
     <string name="news_add_image_failed">Изображение не добавлено </string>
     <string name="news_comment">Сделайте пост для уведомления пользователей приложения о новостях магазина</string>
     <string name="news_description">Описание</string>
+    <string name="news_post_date">Дата новостей</string>
     <string name="news_post_desc">Описание поста</string>
     <string name="news_post_post">Заголовок поста</string>
     <string name="news_post_public">Опубликовать новость</string>

@@ -26,4 +26,12 @@
         <item name="android:textSize">@dimen/text_size_ex</item>
         <item name="fontFamily">@font/catorze27_style1_bold</item>
     </style>
+
+    <style name="AppTheme.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_marginStart">@dimen/size_layout_margin_left</item>
+        <item name="android:layout_marginTop">@dimen/size_layout_margin_top</item>
+        <item name="android:layout_marginEnd">@dimen/size_layout_margin_right</item>
+        <item name="cardCornerRadius">15dp</item>
+        <item name="cardElevation">20dp</item>
+    </style>
 </resources>

@@ -1,14 +1,16 @@
 package ru.mobile.beerhoven.utils;
 
-import static ru.mobile.beerhoven.utils.Constants.*;
 import static ru.mobile.beerhoven.utils.Constants.CURRENT_DATA;
+import static ru.mobile.beerhoven.utils.Constants.CURRENT_TIME;
 
 import android.annotation.SuppressLint;
 import android.icu.text.SimpleDateFormat;
+import android.icu.util.TimeZone;
+
+import androidx.annotation.NonNull;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
 
 @SuppressLint({"SimpleDateFormat", "NewApi"})
 public final class CurrentDateTime {
@@ -22,10 +24,11 @@ public final class CurrentDateTime {
       return new SimpleDateFormat(CURRENT_TIME).format(calForDate.getTime());
    }
 
-   public static String parseDataTime(String date) {
+   @NonNull
+   public static String parseDateTime(String date) {
       Date input = new Date(date);
-      java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("dd/MM/yyyy");
-      format.setTimeZone(TimeZone.getTimeZone("-5GMT"));
+      SimpleDateFormat format = new SimpleDateFormat("dd LLL yyyy");
+      format.setTimeZone(TimeZone.getTimeZone("UTC"));
       date = format.format(input);
       return date;
    }

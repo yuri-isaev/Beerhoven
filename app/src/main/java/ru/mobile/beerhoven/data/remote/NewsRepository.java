@@ -67,15 +67,15 @@ public class NewsRepository implements INewsRepository {
    }
 
    @Override
-   public MutableLiveData<List<News>> getNewsList() {
+   public MutableLiveData<List<News>> getNewsListFromDatabase() {
       if (mNewsList.size() == 0) {
-         onGetNewsListFromDatabase();
+         onGetNewsList();
       }
       mMutableList.setValue(mNewsList);
       return mMutableList;
    }
 
-   private void onGetNewsListFromDatabase() {
+   private void onGetNewsList() {
          mFirebaseRef.child(Constants.NODE_NEWS).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

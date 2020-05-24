@@ -9,5 +9,5 @@ import ru.mobile.beerhoven.domain.model.News;
 public interface INewsRepository {
    void addNewsDataToDatabase(News news);
    void addNewsPostToDatabase(News news);
-   MutableLiveData<List<News>> getNewsList();
+   MutableLiveData<List<News>> getNewsListFromDatabase();
 }

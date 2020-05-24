@@ -12,7 +12,7 @@ import lombok.Setter;
 public class News {
    private String description;
    private String id;
+   private String image;
    private String time;
    private String title;
-   private String image;
 }

@@ -189,7 +189,10 @@
         tools:layout="@layout/fragment_news_list">
         <action
             android:id="@+id/action_nav_news_list_to_nav_news_detail"
-            app:destination="@id/nav_news_detail" />
+            app:destination="@id/nav_news_detail"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/nav_news_detail"
@@ -197,11 +200,7 @@
         android:label="@string/menu_details"
         tools:layout="@layout/fragment_news_detail">
         <argument
-            android:name="newsId"
-            android:defaultValue="default"
-            app:argType="string" />
-        <argument
-            android:name="newsTitle"
+            android:name="newsDateTime"
             android:defaultValue="default"
             app:argType="string" />
         <argument
@@ -209,11 +208,15 @@
             android:defaultValue="default"
             app:argType="string" />
         <argument
-            android:name="newsDateTime"
+            android:name="newsImage"
             android:defaultValue="default"
             app:argType="string" />
         <argument
-            android:name="newsImage"
+            android:name="newsId"
+            android:defaultValue="default"
+            app:argType="string" />
+        <argument
+            android:name="newsTitle"
             android:defaultValue="default"
             app:argType="string" />
     </fragment>
