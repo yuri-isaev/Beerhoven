@@ -26,7 +26,7 @@
             app:actionViewClass="android.widget.TextView" />
         <item
             android:id="@+id/nav_map"
-            android:icon="@drawable/ic_baseline_add_location_24"
+            android:icon="@drawable/ic_nav_location_map"
             android:title="@string/menu_map" />
     </group>
 

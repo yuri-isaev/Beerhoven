@@ -1,11 +1,5 @@
 package ru.mobile.beerhoven.domain.usecases;
 
-import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
-import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-import static androidx.core.content.ContextCompat.checkSelfPermission;
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Address;
@@ -27,44 +21,42 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-import ru.mobile.beerhoven.data.remote.MapRepository;
 import ru.mobile.beerhoven.domain.repository.IMapRepository;
+import ru.mobile.beerhoven.utils.Permission;
 
 public class GetDriverLocationUseCase {
    private final Activity mActivity;
    private final Context mContext;
-   private String mCityName;
-   private static final String TAG = "GetDriverLocationUseCase";
-
    private final IMapRepository mRepository;
+   private String mCityName;
+   private static final String TAG = "DriverLocationUseCase";
 
    // Location
-   private boolean mArea = true;
-   private static final double LIMIT_RANGE = 10.0;
+   private boolean mArea;
    private Geocoder mGeocoder;
-   private final GoogleMap mGoogleMap;
    private Location mCurrentLocation;
    private Location mPreviousLocation;
    private LocationRequest mLocationRequest;
    private LocationCallback mLocationCallback;
+   private final GoogleMap mGoogleMap;
+   private final Permission mPermission;
 
-   public GetDriverLocationUseCase(Activity activity, Context context, GoogleMap map) {
+   public GetDriverLocationUseCase(Activity activity, Context ctx, GoogleMap map, IMapRepository repo) {
       this.mActivity = activity;
-      this.mContext = context;
+      this.mArea = true;
+      this.mContext = ctx;
       this.mGoogleMap = map;
-      this.mRepository = new MapRepository(map);
+      this.mPermission = new Permission(mActivity);
+      this.mRepository = repo;
    }
 
-   public void invoke() {
+   public void execute() {
       initCurrentLocation();
    }
 
-   @SuppressLint("LongLogTag")
    private void initCurrentLocation() {
-      if (checkSelfPermission(mContext, ACCESS_FINE_LOCATION) != PERMISSION_GRANTED &&
-          checkSelfPermission(mContext, ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED) {
-         Log.e(TAG, "permission r1");
-         return;
+      if (mPermission.checkLocationPermission()) {
+         mPermission.requestLocationPermission();
       }
 
       // Location display options
@@ -81,7 +73,8 @@ public class GetDriverLocationUseCase {
             super.onLocationResult(locationResult);
 
             // Approaching an object during location initialization
-            LatLng newPosition = new LatLng(locationResult.getLastLocation().getLatitude(), locationResult.getLastLocation().getLongitude());
+            LatLng newPosition = new LatLng(locationResult.getLastLocation().getLatitude(),
+                locationResult.getLastLocation().getLongitude());
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(newPosition, 18f));
 
             // If the user has changed the terrain, calculate and download the driver again
@@ -94,37 +87,31 @@ public class GetDriverLocationUseCase {
             }
 
             // Range limits
-            if (mPreviousLocation.distanceTo(mCurrentLocation) / 1000 <= LIMIT_RANGE)
-               loadDriverOnMap();
+            if (mPreviousLocation.distanceTo(mCurrentLocation) / 1000 <= 10.0)
+               onLoadDriverOnMap();
             else {
                Log.e(TAG, "display limit exceeded");
             }
          }
       };
 
-      if (checkSelfPermission(mContext, ACCESS_FINE_LOCATION) != PERMISSION_GRANTED &&
-          checkSelfPermission(mContext, ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED) {
-         Log.e(TAG, "permission r2");
-         return;
-      }
-
-      loadDriverOnMap();
+      onLoadDriverOnMap();
    }
 
-   @SuppressLint({"MissingPermission", "LongLogTag"})
-   private void loadDriverOnMap() {
-      FusedLocationProviderClient mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(mContext);
-      mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+
+   private void onLoadDriverOnMap() {
+      if (mPermission.checkLocationPermission()) mPermission.requestLocationPermission();
+      FusedLocationProviderClient providerClient = LocationServices.getFusedLocationProviderClient(mContext);
+      providerClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
       mGeocoder = new Geocoder(mActivity, Locale.getDefault());
 
-      mFusedLocationProviderClient.getLastLocation()
+      providerClient.getLastLocation()
           .addOnFailureListener(e -> Log.e(TAG, "error load driver"))
           .addOnSuccessListener(location -> {
              try {
                 List<Address> list = mGeocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                 if (list.size() > 0) {
                    mCityName = list.get(0).getLocality();
-
                    mRepository.onGetDriverLocation(location, mCityName);
                 }
              } catch (IOException e) {

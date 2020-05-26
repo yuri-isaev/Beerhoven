@@ -37,8 +37,8 @@ public final class Constants {
    public static final String URI_LOGO = "https://firebasestorage.googleapis.com/v0/b/beerhoven-app.appspot.com/o/NEWS_IMG%2FSat%20Jan%2028%2022%3A36%3A21%20GMT%2B02%3A00%202023?alt=media&token=394b75f7-7dac-4b80-95d5-ab2a53516987";
 
    // Geo
-   public static final String DRIVER_INFO_REFERENCES = "DriverInfo";
-   public static final String DRIVER_LOCATION_REFERENCES = "DriverLocation";
+   public static final String DRIVER_INFO_REF = "DriverInfo";
+   public static final String DRIVER_LOCATION_REF = "DriverLocation";
 
    // Permissions constants
    public static final int CAMERA_REQUEST_CODE = 100;

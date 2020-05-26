@@ -1,19 +1,16 @@
 package ru.mobile.beerhoven.data.remote;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.MutableLiveData;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
 import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -25,53 +22,91 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.data.local.MapStorage;
+import ru.mobile.beerhoven.data.listeners.FirebaseDriverInfoListener;
+import ru.mobile.beerhoven.data.listeners.FirebaseFailedListener;
 import ru.mobile.beerhoven.domain.model.DriverGeoModel;
 import ru.mobile.beerhoven.domain.model.DriverInfoModel;
 import ru.mobile.beerhoven.domain.model.GeoQueryModel;
 import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.domain.repository.IMapRepository;
-import ru.mobile.beerhoven.presentation.interfaces.IFirebaseDriverInfoListener;
-import ru.mobile.beerhoven.presentation.interfaces.IFirebaseFailedListener;
 import ru.mobile.beerhoven.utils.Constants;
 
-public class MapRepository implements IMapRepository, IFirebaseDriverInfoListener, IFirebaseFailedListener {
+public class MapRepository implements IMapRepository, FirebaseFailedListener, FirebaseDriverInfoListener {
    private double mDistance = 1.0;
-   private static final double LIMIT_RANGE = 10.0;
    private final DatabaseReference mFirebaseRef;
+   private final FirebaseDriverInfoListener iFirebaseDriverInfoListener;
+   private final FirebaseFailedListener iFirebaseFailedListener;
    private final GoogleMap mGoogleMap;
-
-   private final IFirebaseDriverInfoListener iFirebaseDriverInfoListener;
-   private final IFirebaseFailedListener iFirebaseFailedListener;
-
+   private final List<Order> mOrderList;
+   private final MutableLiveData<List<Order>> mMutableList;
+   private static final double LIMIT_RANGE = 10.0;
    private static final String TAG = "MapRepository";
+   private final Set<DriverGeoModel> driverSet;
 
    public MapRepository(GoogleMap map) {
-      this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
-      this.mGoogleMap = map;
       this.iFirebaseDriverInfoListener = this;
       this.iFirebaseFailedListener = this;
+      this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
+      this.mGoogleMap = map;
+      this.mOrderList = new ArrayList<>();
+      this.mMutableList = new MutableLiveData<>();
+      this.driverSet = new HashSet<>();
+   }
+
+   @Override
+   public MutableLiveData<List<Order>> getOrderLocationListFromDatabase() {
+      if (mOrderList.size() == 0) {
+         onGetOrderLocationList();
+      }
+      mMutableList.setValue(mOrderList);
+      return mMutableList;
+   }
+
+   public void onGetOrderLocationList() {
+      mFirebaseRef.child(Constants.NODE_CONFIRMS).addValueEventListener(new ValueEventListener() {
+         @Override
+         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+               for (DataSnapshot snapshot : noteDataSnapshot.getChildren()) {
+                  Order order = snapshot.getValue(Order.class);
+                  assert order != null;
+                  if (!mOrderList.contains(order)) {
+                     mOrderList.add(order);
+                  }
+                  mMutableList.postValue(mOrderList);
+               }
+            }
+         }
+
+         @Override
+         public void onCancelled(@NonNull DatabaseError error) {
+            Log.e(TAG, error.getMessage());
+         }
+      });
    }
 
    @Override
    public void onGetDriverLocation(@NonNull Location location, String cityName) {
-      DatabaseReference driverLocationRef = mFirebaseRef.child(Constants.DRIVER_LOCATION_REFERENCES).child(cityName);
+      DatabaseReference driverLocationRef = mFirebaseRef.child(Constants.DRIVER_LOCATION_REF).child(cityName);
       GeoFire geoFire = new GeoFire(driverLocationRef);
-      GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(location.getLatitude(), location.getLongitude()), mDistance);
+      GeoQuery geoQuery = geoFire.queryAtLocation(
+          new GeoLocation(location.getLatitude(), location.getLongitude()), mDistance);
 
       geoQuery.removeAllListeners();
+
       geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
          @Override
          public void onKeyEntered(String key, GeoLocation location) {
-            MapStorage.driverSet.add(new DriverGeoModel(key, location));
+            driverSet.add(new DriverGeoModel(key, location));
          }
 
          @Override
@@ -97,7 +132,6 @@ public class MapRepository implements IMapRepository, IFirebaseDriverInfoListene
          }
       });
 
-      // Firebase listener adding new driver
       driverLocationRef.addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -105,13 +139,15 @@ public class MapRepository implements IMapRepository, IFirebaseDriverInfoListene
             assert geoQueryModel != null;
             GeoLocation geoLocation = new GeoLocation(geoQueryModel.getL().get(0), geoQueryModel.getL().get(1));
             DriverGeoModel driverGeoModel = new DriverGeoModel(snapshot.getKey(), geoLocation);
-            Location newDriverLocation = new Location(" ");
+            Location newDriverLocation = new Location("");
             newDriverLocation.setLatitude(geoLocation.latitude);
             newDriverLocation.setLongitude(geoLocation.longitude);
             float newDistance = location.distanceTo(newDriverLocation) / 1000;
 
-            if (newDistance <= LIMIT_RANGE) // If the driver is in the coverage area, add him to the map
+            // If the driver is in the coverage area, add him to the map
+            if (newDistance <= LIMIT_RANGE) {
                onFindDriverByKey(driverGeoModel);
+            }
          }
 
          @Override
@@ -130,8 +166,8 @@ public class MapRepository implements IMapRepository, IFirebaseDriverInfoListene
 
    @Override
    public void onAddDriverMarker() {
-      if (MapStorage.driverSet.size() > 0) {
-         Observable.fromIterable(MapStorage.driverSet)  // Observable from it with individual set items
+      if (driverSet.size() > 0) {
+         Observable.fromIterable(driverSet)             // Observable from it with individual set items
              .subscribeOn(Schedulers.newThread())       // the thread on which the operation is being performed
              .observeOn(AndroidSchedulers.mainThread()) // the thread where the result of the operation is returned
              .subscribe(this::onFindDriverByKey,
@@ -142,95 +178,38 @@ public class MapRepository implements IMapRepository, IFirebaseDriverInfoListene
    }
 
    @Override
-   public void onFindDriverByKey(@NonNull DriverGeoModel driverGeoModel) {
-      mFirebaseRef.child(Constants.DRIVER_INFO_REFERENCES).child(driverGeoModel.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+   public void onFindDriverByKey(@NonNull DriverGeoModel geo) {
+      mFirebaseRef.child(Constants.DRIVER_INFO_REF).child(geo.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
          @Override
          public void onDataChange(@NonNull DataSnapshot snapshot) {
             if (snapshot.hasChildren()) {
-               driverGeoModel.setDriverInfoModel(snapshot.getValue(DriverInfoModel.class));
-               iFirebaseDriverInfoListener.onDriverInfoLoadSuccess(driverGeoModel);
+               geo.setDriverInfoModel(snapshot.getValue(DriverInfoModel.class));
+               iFirebaseDriverInfoListener.onDriverInfoLoadSuccess(geo);
             } else {
-               iFirebaseFailedListener.onFirebaseLoadFailed("key not found" + driverGeoModel.getKey());
+               iFirebaseFailedListener.onFirebaseLoadFailed("key not found" + geo.getKey());
             }
          }
 
          @Override
          public void onCancelled(@NonNull DatabaseError error) {
-            iFirebaseFailedListener.onFirebaseLoadFailed("key not found" + driverGeoModel.getKey());
+            iFirebaseFailedListener.onFirebaseLoadFailed("key not found" + geo.getKey());
          }
       });
    }
 
    @Override
    public void onDriverInfoLoadSuccess(@NonNull DriverGeoModel driver) {
-      MapStorage.markerList.put(driver.getKey(), mGoogleMap.addMarker(new MarkerOptions()
+      MarkerOptions orderOptions = new MarkerOptions()
           .position(new LatLng(driver.getGeoLocation().latitude, driver.getGeoLocation().longitude))
           .title(driver.getDriverInfoModel().getName())
           .snippet(driver.getDriverInfoModel().getPhoneNo())
           .icon(BitmapDescriptorFactory.fromResource(R.drawable.redcar))
-          .flat(true))
-      );
+          .flat(true);
+      mGoogleMap.addMarker(orderOptions);
    }
 
    @Override
    public void onOrderInfoLoadSuccess(DriverGeoModel driverGeoModel) {}
-
-   @SuppressLint("MissingPermission")
-   @Override
-   public void onGetOrderLocation(@NonNull FusedLocationProviderClient providerClient, Context ctx, Geocoder geocoder) {
-      List<Order> orderList = new ArrayList<>();
-      final float[] orderColorMarker = new float[1];
-      final String[] orderName = new String[1];
-
-      mFirebaseRef.child(Constants.NODE_CONFIRMS).addValueEventListener(new ValueEventListener() {
-         @Override
-         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-               for (DataSnapshot snapshot : noteDataSnapshot.getChildren()) {
-                  Order order = snapshot.getValue(Order.class);
-                  orderList.add(order);
-                  assert order != null;
-                  orderName[0] = order.getName();
-                  orderColorMarker[0] = Float.parseFloat(order.getColor());
-               }
-            }
-         }
-
-         @Override
-         public void onCancelled(@NonNull DatabaseError error) {
-            Log.e(TAG, error.getMessage());
-         }
-      });
-
-      providerClient.getLastLocation()
-          .addOnFailureListener(error -> Log.e(TAG, "error load order", error))
-          .addOnSuccessListener(location -> {
-             for (int i = 0; i < orderList.size(); i++) {
-                List<Address> addressList = null;
-                try {
-                   addressList = geocoder.getFromLocationName(orderList.get(i).getAddress(), 2);
-
-                   if (addressList.size() > 0) {
-                      // cityName = list.get(0).getLocality();
-                      Address address = addressList.get(0);
-                      LatLng orderPosition = new LatLng(address.getLatitude(), address.getLongitude());
-
-                  MarkerOptions markerOptions = new MarkerOptions()
-                      .position(orderPosition)
-                      .title(orderName[0])
-                      .snippet(address.getAddressLine(0))
-                      .icon(BitmapDescriptorFactory.defaultMarker(orderColorMarker[0]));
-
-                  // markerOptions.position(new LatLng(lat, lon));
-                  mGoogleMap.addMarker(markerOptions);
-               }
-
-            } catch (IOException e) {
-               e.printStackTrace();
-            }
-         }
-      });
-   }
 
    @Override
    public void onFirebaseLoadFailed(String message) {

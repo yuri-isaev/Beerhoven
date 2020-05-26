@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.presentation.interfaces;
+package ru.mobile.beerhoven.presentation.listeners;
 
 import ru.mobile.beerhoven.domain.model.Product;
 

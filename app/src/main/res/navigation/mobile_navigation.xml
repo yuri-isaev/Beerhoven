@@ -174,9 +174,13 @@
     </fragment>
     <fragment
         android:id="@+id/nav_map"
-        android:name="ru.mobile.beerhoven.presentation.ui.map.ClientMapFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.user.map.CustomerMapFragment"
         android:label="@string/menu_map"
-        tools:layout="@layout/fragment_client_map" />
+        tools:layout="@layout/fragment_customer_map" >
+        <action
+            android:id="@+id/action_nav_map_to_nav_orders"
+            app:destination="@id/nav_orders" />
+    </fragment>
     <fragment
         android:id="@+id/nav_add_news"
         android:name="ru.mobile.beerhoven.presentation.ui.admin.post.news.AddNewsFragment"
