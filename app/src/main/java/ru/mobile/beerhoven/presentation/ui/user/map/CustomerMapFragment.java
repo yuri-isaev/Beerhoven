@@ -56,9 +56,10 @@ import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.MapRepository;
 import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.utils.Permission;
+import ru.mobile.beerhoven.utils.Toasty;
 
 public class CustomerMapFragment extends Fragment implements OnMapReadyCallback, OnInfoWindowClickListener, InfoWindowAdapter {
-   private FusedLocationProviderClient mProviderClient;
+   private FusedLocationProviderClient mFusedLocationClient;
    private GoogleMap mGoogleMap;
    private List<Order> mOrderList;
    private Permission mPermission;
@@ -74,7 +75,7 @@ public class CustomerMapFragment extends Fragment implements OnMapReadyCallback,
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
       mPermission = new Permission(requireActivity());
-      this.mProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
+      this.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
       this.mSupportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
       if (mSupportMapFragment != null) {
          mSupportMapFragment.getMapAsync(this);
@@ -85,9 +86,9 @@ public class CustomerMapFragment extends Fragment implements OnMapReadyCallback,
    public void onMapReady(@NonNull GoogleMap googleMap) {
       this.mGoogleMap = googleMap;
       googleMap.setMapType(MAP_TYPE_NORMAL);
-      CustomerMapViewModel mViewModel = new CustomerMapViewModel(getActivity(),
+      CustomerMapViewModel viewModel = new CustomerMapViewModel(getActivity(),
           requireActivity().getApplicationContext(), mGoogleMap, new MapRepository(mGoogleMap));
-      mOrderList = requireNonNull(mViewModel.getOrderListFromRepository().getValue());
+      mOrderList = requireNonNull(viewModel.getOrderListFromRepository().getValue());
 
       // Request permission to add current location - pinpoint location using GPS
       Dexter.withContext(getActivity())
@@ -102,11 +103,21 @@ public class CustomerMapFragment extends Fragment implements OnMapReadyCallback,
                 // My location enable
                 mGoogleMap.setMyLocationEnabled(true);
                 mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
+                mGoogleMap.setOnMyLocationButtonClickListener(() -> {
+                   if (mPermission.checkLocationPermission()) {
+                      return false;
+                   }
+                   mFusedLocationClient.getLastLocation()
+                       .addOnFailureListener(e -> Toasty.error(requireActivity(), Integer.parseInt(requireNonNull(e.getMessage()))))
+                       .addOnSuccessListener(location -> {
+                          LatLng userLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                          mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 18f));
+                       });
+                   return true;
+                });
 
-                View locationButton = ((View) mSupportMapFragment
-                    .requireView()
-                    .findViewById(Integer.parseInt("1"))
-                    .getParent())
+                View locationButton = ((View) mSupportMapFragment.requireView()
+                    .findViewById(Integer.parseInt("1")).getParent())
                     .findViewById(Integer.parseInt("2"));
 
                 LayoutParams params = (LayoutParams) locationButton.getLayoutParams();
@@ -124,8 +135,10 @@ public class CustomerMapFragment extends Fragment implements OnMapReadyCallback,
           })
           .check();
 
+      mGoogleMap.setOnInfoWindowClickListener(this);
+      mGoogleMap.setInfoWindowAdapter(this);
       mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
-      mViewModel.onGetDriverLocationToUseCase();
+      viewModel.onGetDriverLocationToUseCase();
       onGetOrderLocationMarker();
    }
 
@@ -135,7 +148,7 @@ public class CustomerMapFragment extends Fragment implements OnMapReadyCallback,
          mPermission.requestLocationPermission();
       }
 
-      mProviderClient.getLastLocation()
+      mFusedLocationClient.getLastLocation()
           .addOnFailureListener(error -> Log.e(TAG, "error load order", error))
           .addOnSuccessListener(location -> {
              for (int i = 0; i < mOrderList.size(); i++) {
@@ -152,6 +165,7 @@ public class CustomerMapFragment extends Fragment implements OnMapReadyCallback,
                           .icon(BitmapDescriptorFactory.defaultMarker(Float.parseFloat(mOrderList.get(0).getColor())))
                           .position(orderPosition)
                           .snippet(address.getAddressLine(0))
+                          .snippet(mOrderList.get(i).getPhone())
                           .title(mOrderList.get(i).getContactName());
                       mGoogleMap.addMarker(orderOptions);
 
@@ -180,12 +194,12 @@ public class CustomerMapFragment extends Fragment implements OnMapReadyCallback,
    @Override
    public View getInfoContents(@NonNull Marker marker) {
       @SuppressLint("InflateParams")
-      View layout = requireActivity().getLayoutInflater().inflate(R.layout.window_info, null);
+      View layout = getLayoutInflater().inflate(R.layout.window_info, null);
       TextView locality = layout.findViewById(R.id.locality);
       TextView snippet = layout.findViewById(R.id.snippet);
       locality.setText(marker.getTitle());
       snippet.setText(marker.getSnippet());
-      return null;
+      return layout;
    }
 
    @NonNull
@@ -201,15 +215,20 @@ public class CustomerMapFragment extends Fragment implements OnMapReadyCallback,
    }
 
    @Override
-   public void onInfoWindowClick(Marker marker) {
-      NavDirections action = CustomerMapFragmentDirections.actionNavMapToNavOrders()
-          .setOrderId(new Order().getId());
-      Navigation.findNavController(requireView()).navigate(action);
-   }
+   public void onInfoWindowClick(@NonNull Marker marker) {
+      String orderName = marker.getTitle();
+      String orderId = null;
 
-   @Override
-   public void onDestroy() {
-      super.onDestroy();
-      //FusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
+      if (mOrderList.size() != 0) {
+         for (Order order : mOrderList) {
+            if (order.getContactName().equals(orderName)) {
+               orderId = order.getId();
+            }
+         }
+      }
+
+      NavDirections action = CustomerMapFragmentDirections.actionNavMapToNavOrderDetails()
+          .setOrderKey(orderId);
+      Navigation.findNavController(requireView()).navigate(action);
    }
 }

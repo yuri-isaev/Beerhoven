@@ -1,20 +1,16 @@
 package ru.mobile.beerhoven.domain.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class DriverInfoModel {
-   private String name;
-   private String phoneNo;
    private String email;
-
-   public DriverInfoModel() {}
-
-   public DriverInfoModel(String name, String phoneNo, String email) {
-      this.name = name;
-      this.phoneNo = phoneNo;
-      this.email = email;
-   }
+   private String name;
+   private String phone;
 }

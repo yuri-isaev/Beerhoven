@@ -1,6 +1,5 @@
 package ru.mobile.beerhoven.presentation.ui.user.orders.confirm;
 
-import static android.widget.Toast.LENGTH_LONG;
 import static java.util.Objects.requireNonNull;
 import static ru.mobile.beerhoven.utils.Validation.isValidAddress;
 import static ru.mobile.beerhoven.utils.Validation.isValidName;
@@ -23,7 +22,6 @@ import androidx.navigation.Navigation;
 
 import com.google.android.material.textfield.TextInputLayout;
 
-import es.dmoral.toasty.Toasty;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.network.PushMessagingService;
 import ru.mobile.beerhoven.data.remote.OrderConfirmRepository;
@@ -32,6 +30,7 @@ import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.utils.CurrentDateTime;
 import ru.mobile.beerhoven.utils.Randomizer;
+import ru.mobile.beerhoven.utils.Toasty;
 
 public class OrderConfirmFragment extends Fragment {
    private Button mAddOrderButton;
@@ -71,20 +70,20 @@ public class OrderConfirmFragment extends Fragment {
 
       mAddOrderButton.setOnClickListener(v -> {
          if (!isValidName(mNameText) | !isValidAddress(mAddressText) | !isValidPhoneNumber(mPhoneText)) {
-            Toasty.error(requireActivity(), R.string.valid_form, LENGTH_LONG, true).show();
+            Toasty.error(requireActivity(), R.string.invalid_form);
             return;
          }
 
-         Order order = new Order()
-             .setAddress(requireNonNull(mAddressText.getEditText()).getText().toString())
-             .setColor(String.valueOf(Randomizer.getRandomColorMarker()))
-             .setDate(CurrentDateTime.getCurrentDate())
-             .setContactName(String.valueOf(requireNonNull(mNameText.getEditText()).getText()))
-             .setPhone(String.valueOf(requireNonNull(mPhoneText.getEditText()).getText()))
-             .setTime(CurrentDateTime.getCurrentTime())
-             .setTotal(Double.parseDouble(String.valueOf(Double.parseDouble(mTotal))));
+         Order order = new Order();
+         order.setAddress(requireNonNull(mAddressText.getEditText()).getText().toString());
+         order.setColor(String.valueOf(Randomizer.getRandomColorMarker()));
+         order.setDate(CurrentDateTime.getCurrentDate());
+         order.setContactName(String.valueOf(requireNonNull(mNameText.getEditText()).getText()));
+         order.setPhone(String.valueOf(requireNonNull(mPhoneText.getEditText()).getText()));
+         order.setTime(CurrentDateTime.getCurrentTime());
+         order.setTotal(Double.parseDouble(String.valueOf(Double.parseDouble(mTotal))));
 
-         sendConfirmOnOrderList(order);
+         onSendOrderConfirmList(order);
          toActivity(0);
          navigateFragment(view);
          sendPushNotification(requireActivity());
@@ -92,11 +91,11 @@ public class OrderConfirmFragment extends Fragment {
    }
 
    @SuppressLint("CheckResult")
-   public void sendConfirmOnOrderList(Order order) {
+   public void onSendOrderConfirmList(Order order) {
          mViewModel.onCreateConfirmOrderToRepository(order);
          mViewModel.onDeleteOrderCartToRepository();
          mViewModel.onDeleteCartCounterToStorage();
-         Toasty.success(requireActivity(), R.string.order_sent_success, LENGTH_LONG).show();
+         Toasty.success(requireActivity(), R.string.order_sent_success);
    }
 
    public void toActivity(int data) {

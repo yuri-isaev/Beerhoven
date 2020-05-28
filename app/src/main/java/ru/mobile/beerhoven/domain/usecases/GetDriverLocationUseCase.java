@@ -98,9 +98,10 @@ public class GetDriverLocationUseCase {
       onLoadDriverOnMap();
    }
 
-
    private void onLoadDriverOnMap() {
-      if (mPermission.checkLocationPermission()) mPermission.requestLocationPermission();
+      if (mPermission.checkLocationPermission()) {
+         mPermission.requestLocationPermission();
+      }
       FusedLocationProviderClient providerClient = LocationServices.getFusedLocationProviderClient(mContext);
       providerClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
       mGeocoder = new Geocoder(mActivity, Locale.getDefault());

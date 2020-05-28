@@ -18,25 +18,19 @@ import java.util.List;
 
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IOrderDetailRepository;
-import ru.mobile.beerhoven.domain.repository.IUserRepository;
 import ru.mobile.beerhoven.utils.Constants;
 
-public class OrderDetailRepository implements IOrderDetailRepository, IUserRepository {
+public class OrderDetailRepository implements IOrderDetailRepository {
    private final DatabaseReference mFirebaseRef;
    private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
-   private final String mUserId;
+   private final String mUserPhoneNumber;
 
    public OrderDetailRepository() {
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference(Constants.NODE_ORDERS);
       this.mProductList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
-      this.mUserId = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
-   }
-
-   @Override
-   public String getCurrentUserPhoneNumber() {
-      return mUserId;
+      this.mUserPhoneNumber = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    @Override
@@ -49,7 +43,7 @@ public class OrderDetailRepository implements IOrderDetailRepository, IUserRepos
    }
 
    private void getOrderList(String orderKey) {
-      mFirebaseRef.child(mUserId).child(orderKey).addChildEventListener(new ChildEventListener() {
+      mFirebaseRef.child(mUserPhoneNumber).child(orderKey).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             Product order = snapshot.getValue(Product.class);

@@ -48,9 +48,9 @@ public class MapRepository implements IMapRepository, FirebaseFailedListener, Fi
    private final GoogleMap mGoogleMap;
    private final List<Order> mOrderList;
    private final MutableLiveData<List<Order>> mMutableList;
+   private final Set<DriverGeoModel> driverSet;
    private static final double LIMIT_RANGE = 10.0;
    private static final String TAG = "MapRepository";
-   private final Set<DriverGeoModel> driverSet;
 
    public MapRepository(GoogleMap map) {
       this.iFirebaseDriverInfoListener = this;
@@ -178,21 +178,21 @@ public class MapRepository implements IMapRepository, FirebaseFailedListener, Fi
    }
 
    @Override
-   public void onFindDriverByKey(@NonNull DriverGeoModel geo) {
-      mFirebaseRef.child(Constants.DRIVER_INFO_REF).child(geo.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+   public void onFindDriverByKey(@NonNull DriverGeoModel driver) {
+      mFirebaseRef.child(Constants.DRIVER_INFO_REF).child(driver.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
          @Override
          public void onDataChange(@NonNull DataSnapshot snapshot) {
             if (snapshot.hasChildren()) {
-               geo.setDriverInfoModel(snapshot.getValue(DriverInfoModel.class));
-               iFirebaseDriverInfoListener.onDriverInfoLoadSuccess(geo);
+               driver.setDriverInfoModel(snapshot.getValue(DriverInfoModel.class));
+               iFirebaseDriverInfoListener.onDriverInfoLoadSuccess(driver);
             } else {
-               iFirebaseFailedListener.onFirebaseLoadFailed("key not found" + geo.getKey());
+               iFirebaseFailedListener.onFirebaseLoadFailed("key not found" + driver.getKey());
             }
          }
 
          @Override
          public void onCancelled(@NonNull DatabaseError error) {
-            iFirebaseFailedListener.onFirebaseLoadFailed("key not found" + geo.getKey());
+            iFirebaseFailedListener.onFirebaseLoadFailed("key not found" + driver.getKey());
          }
       });
    }
@@ -202,7 +202,7 @@ public class MapRepository implements IMapRepository, FirebaseFailedListener, Fi
       MarkerOptions orderOptions = new MarkerOptions()
           .position(new LatLng(driver.getGeoLocation().latitude, driver.getGeoLocation().longitude))
           .title(driver.getDriverInfoModel().getName())
-          .snippet(driver.getDriverInfoModel().getPhoneNo())
+          .snippet(driver.getDriverInfoModel().getPhone())
           .icon(BitmapDescriptorFactory.fromResource(R.drawable.redcar))
           .flat(true);
       mGoogleMap.addMarker(orderOptions);
