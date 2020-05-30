@@ -31,7 +31,6 @@ public class ProductRepository implements IProductRepository {
    private final DatabaseReference mFirebaseRef;
    private final List<Product> mProductList;
    private final MutableLiveData<List<Product>> mMutableList;
-   private final MutableLiveData<String> mMutableData;
    private final MutableLiveData<Boolean> mMutableResponse;
    private final StorageReference mStorageRef;
    private final String mUserPhoneNumber;
@@ -41,14 +40,13 @@ public class ProductRepository implements IProductRepository {
       this.mFirebaseRef = FirebaseDatabase.getInstance().getReference();
       this.mProductList = new ArrayList<>();
       this.mMutableList = new MutableLiveData<>();
-      this.mMutableData = new MutableLiveData<>();
       this.mMutableResponse = new MutableLiveData<>();
       this.mStorageRef = FirebaseStorage.getInstance().getReference();
       this.mUserPhoneNumber = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
    @Override
-   public MutableLiveData<List<Product>> getProductListFromToDatabase() {
+   public MutableLiveData<List<Product>> getProductListFromDatabase() {
       if (mProductList.size() == 0) {
          getProductList();
       }
@@ -100,27 +98,25 @@ public class ProductRepository implements IProductRepository {
    }
 
    @Override
-   public MutableLiveData<String> addCartProductToRepository(Product product) {
-      addCartItem(product);
-      mMutableData.setValue(null);
-      return mMutableData;
-   }
-
-   private void addCartItem(@NonNull Product product) {
+   public void onAddProductToCartDatabase(@NonNull Product product) {
       assert mUserPhoneNumber != null;
-      mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneNumber).child(product.getId()).setValue(product);
+      mFirebaseRef
+          .child(Constants.NODE_CART)
+          .child(mUserPhoneNumber)
+          .child(product.getId())
+          .setValue(product);
    }
 
    @Override
-   public MutableLiveData<String> deleteProductFromRepository(Product product) {
-      onDeleteProductById(product);
-      mMutableData.setValue(null);
-      return mMutableData;
-   }
+   public void onDeleteProductFromDatabase(@NonNull Product product) {
+      mFirebaseRef
+          .child(Constants.NODE_PRODUCTS)
+          .child(product.getId())
+          .removeValue();
 
-   private void onDeleteProductById(@NonNull Product product) {
-      mFirebaseRef.child(Constants.NODE_PRODUCTS).child(product.getId()).removeValue();
-      FirebaseStorage.getInstance().getReferenceFromUrl(product.getUri()).delete();
+      FirebaseStorage.getInstance()
+          .getReferenceFromUrl(product.getUri())
+          .delete();
    }
 
    public MutableLiveData<Boolean> onAddProductToDatabase(@NonNull Product product) {
@@ -129,7 +125,6 @@ public class ProductRepository implements IProductRepository {
           .putFile(Uri.parse(product.getUri()))
           .addOnSuccessListener((taskSnapshot) -> {
              Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-
              uriTask.addOnSuccessListener(uri -> {
                 Uri downloadUri = uriTask.getResult();
                 product.setUri(downloadUri.toString());
@@ -146,7 +141,6 @@ public class ProductRepository implements IProductRepository {
              mMutableResponse.setValue(false);
              Log.e(TAG, e.getMessage());
           });
-      
       return mMutableResponse;
    }
 }

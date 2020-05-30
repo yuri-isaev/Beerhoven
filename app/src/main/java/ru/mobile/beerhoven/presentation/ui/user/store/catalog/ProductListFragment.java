@@ -10,11 +10,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,25 +26,20 @@ import java.util.List;
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.ProductRepository;
 import ru.mobile.beerhoven.domain.model.Product;
-import ru.mobile.beerhoven.presentation.interfaces.AdapterPositionListener;
+import ru.mobile.beerhoven.presentation.listeners.AdapterPositionListener;
 
-public class ProductListFragment extends Fragment {
-   private ProductListAdapter mProductListAdapter;
+public class ProductListFragment extends Fragment implements MenuProvider {
+   private List<Product> mProductList;
+   private ProductListAdapter mAdapter;
    private ProductListViewModel mViewModel;
    private RecyclerView mRecyclerView;
 
+   @Nullable
    @Override
-   public void onCreate(@Nullable Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      setHasOptionsMenu(true);
-   }
-
-   @SuppressWarnings("unchecked")
-   @SuppressLint("NotifyDataSetChanged")
-   @Override
-   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, final Bundle savedInstanceState) {
+   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
       View view = inflater.inflate(R.layout.fragment_product_list, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view);
+      requireActivity().addMenuProvider(this, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
       return view;
    }
 
@@ -51,43 +48,37 @@ public class ProductListFragment extends Fragment {
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
       mViewModel = new ProductListViewModel(new ProductRepository());
-      mViewModel.getCatalogList().observe(getViewLifecycleOwner(), (List<Product> list) -> {
-         mProductListAdapter.notifyDataSetChanged();
-      });
+      mViewModel.getProductListToRepository().observe(getViewLifecycleOwner(),
+          list -> mAdapter.notifyDataSetChanged());
       initRecyclerView();
    }
 
-   @SuppressWarnings("unchecked")
    @SuppressLint("NotifyDataSetChanged")
    private void initRecyclerView() {
       mRecyclerView.setHasFixedSize(true);
-      mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-      List<Product> list = requireNonNull(mViewModel.getCatalogList().getValue());
-      mProductListAdapter = new ProductListAdapter(list, getContext(), new AdapterPositionListener() {
+      mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+      mProductList = requireNonNull(mViewModel.getProductListToRepository().getValue());
+      mAdapter = new ProductListAdapter(mProductList, requireActivity(), new AdapterPositionListener() {
          @Override
          public void onInteractionAdd(Product product) {
-            mViewModel.addProductCartToRepository(product).observe(getViewLifecycleOwner(), s -> {});
+            mViewModel.onAddProductToCartRepository(product);
          }
 
          @SuppressLint("NotifyDataSetChanged")
          @Override
          public void onInteractionDelete(Product product) {
-            mViewModel.deleteProductFromRepository(product).observe(getViewLifecycleOwner(), s -> {
-               mProductListAdapter.notifyDataSetChanged();
-            });
+            mViewModel.onDeleteProductFromRepository(product);
          }
       });
-
-      mRecyclerView.setAdapter(mProductListAdapter);
-      mProductListAdapter.notifyDataSetChanged();
+      mRecyclerView.setAdapter(mAdapter);
+      mAdapter.notifyDataSetChanged();
    }
 
    @Override
-   public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-      inflater.inflate(R.menu.search_main, menu);
+   public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+      menuInflater.inflate(R.menu.search_main, menu);
       MenuItem menuItem = menu.findItem(R.id.action_search);
       SearchView searchView = (SearchView) menuItem.getActionView();
-      searchView.setQueryHint("Поиск ...");
       searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
          @Override
          public boolean onQueryTextSubmit(String query) {
@@ -101,25 +92,17 @@ public class ProductListFragment extends Fragment {
             return false;
          }
       });
-      super.onCreateOptionsMenu(menu, inflater);
    }
 
    @Override
-   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-      int id = item.getItemId();
-      if (id == R.id.action_search) {
-         return true;
-      }
-      return super.onOptionsItemSelected(item);
+   public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+      return menuItem.getItemId() == R.id.action_search;
    }
 
-   @SuppressWarnings("unchecked")
    @SuppressLint("NotifyDataSetChanged")
    private void onItemSearch(String searchText) {
       List<Product> searchList = new ArrayList<>();
-      List<Product> products = requireNonNull(mViewModel.getCatalogList().getValue());
-
-      for (Product product : products) {
+      for (Product product : mProductList) {
          if (product.getName() != null && !product.getName().isEmpty()) {
             if (product.getName().toLowerCase().contains(searchText.toLowerCase())) {
                searchList.add(product);
@@ -127,18 +110,17 @@ public class ProductListFragment extends Fragment {
          }
       }
 
-      mProductListAdapter = new ProductListAdapter(searchList, getContext(), new AdapterPositionListener() {
+      mAdapter = new ProductListAdapter(searchList, getContext(), new AdapterPositionListener() {
          @Override
          public void onInteractionAdd(Product product) {
-            mViewModel.addProductCartToRepository(product).observe(getViewLifecycleOwner(), s -> {});
+            mViewModel.onAddProductToCartRepository(product);
          }
+
          @Override
          public void onInteractionDelete(Product product) {
-            mViewModel.deleteProductFromRepository(product).observe(getViewLifecycleOwner(), s -> {
-               mProductListAdapter.notifyDataSetChanged();
-            });
+            mViewModel.onDeleteProductFromRepository(product);
          }
       });
-      mRecyclerView.setAdapter(mProductListAdapter);
+      mRecyclerView.setAdapter(mAdapter);
    }
 }

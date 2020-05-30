@@ -115,7 +115,7 @@ public class ProductDetailFragment extends Fragment {
          Product product = new Product(productId, country, description, density, fortress,
              manufacture, name, cartPrice, total, quantity, style, image);
 
-         mViewModel.addCartProductToRepository(product).observe(getViewLifecycleOwner(), s -> {});
+         mViewModel.onAddCartProductToRepository(product);
 
          v.setClickable(false);
       });

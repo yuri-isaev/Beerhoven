@@ -1,19 +1,18 @@
 package ru.mobile.beerhoven.presentation.ui.user.store.details;
 
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IProductRepository;
 
 public class ProductDetailViewModel extends ViewModel {
-   private final IProductRepository mRepository;
+   private final IProductRepository iRepository;
 
-   public ProductDetailViewModel(IProductRepository repository) {
-      this.mRepository = repository;
+   public ProductDetailViewModel(IProductRepository repo) {
+      this.iRepository = repo;
    }
 
-   public MutableLiveData<String> addCartProductToRepository(Product product) {
-      return mRepository.addCartProductToRepository(product);
+   public void onAddCartProductToRepository(Product product) {
+      iRepository.onAddProductToCartDatabase(product);
    }
 }

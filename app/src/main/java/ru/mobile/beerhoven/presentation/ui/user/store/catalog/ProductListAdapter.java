@@ -2,12 +2,10 @@ package ru.mobile.beerhoven.presentation.ui.user.store.catalog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
@@ -20,7 +18,7 @@ import java.util.List;
 import ru.mobile.beerhoven.databinding.ItemProductBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
-import ru.mobile.beerhoven.presentation.interfaces.AdapterPositionListener;
+import ru.mobile.beerhoven.presentation.listeners.AdapterPositionListener;
 import ru.mobile.beerhoven.presentation.ui.user.cart.CartSet;
 import ru.mobile.beerhoven.presentation.ui.user.store.sections.StoreFragmentDirections;
 import ru.mobile.beerhoven.utils.Constants;
@@ -28,12 +26,12 @@ import ru.mobile.beerhoven.utils.Constants;
 public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListViewHolder> {
    private final Context mContext;
    private final List<Product> mAdapterList;
-   private final AdapterPositionListener mListener;
+   private final AdapterPositionListener iPositionListener;
 
-   public ProductListAdapter(List<Product> list, Context context, AdapterPositionListener mListener) {
+   public ProductListAdapter(List<Product> list, Context ctx, AdapterPositionListener listener) {
       this.mAdapterList = list;
-      this.mContext = context;
-      this.mListener = mListener;
+      this.mContext = ctx;
+      this.iPositionListener = listener;
    }
 
    @NonNull
@@ -44,23 +42,22 @@ public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListVi
       return new ProductListViewHolder(binding);
    }
 
-   @RequiresApi(api = Build.VERSION_CODES.N)
-   @SuppressLint({"NonConstantResourceId", "SetTextI18n"})
+   @SuppressLint("SetTextI18n")
    @Override
    public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
       Product product = mAdapterList.get(position);
       String productId = product.getId();
-      String productImage = product.getUrl();
+      String productImage = product.getUri();
 
-      Glide.with(holder.binding.image.getContext())
-          .load(product.getUrl())
-          .into(holder.binding.image);
+      Glide.with(holder.binding.ivProductImage.getContext())
+          .load(product.getUri())
+          .into(holder.binding.ivProductImage);
       
-      holder.binding.productName.setText(product.getName());
-      holder.binding.productPrice.setText((product.getPrice() + " руб."));
-      holder.binding.productStyle.setText(product.getStyle());
-      holder.binding.productFortress.setText((product.getFortress() + "%"));
-      holder.binding.productContainer.setOnClickListener(v -> {
+      holder.binding.tvProductName.setText(product.getName());
+      holder.binding.tvProductPrice.setText((product.getPrice() + " руб."));
+      holder.binding.tvProductStyle.setText(product.getStyle());
+      holder.binding.tvProductFortress.setText((product.getFortress() + "%"));
+      holder.binding.llProductContainer.setOnClickListener(v -> {
          NavDirections action = StoreFragmentDirections.actionNavProductListToNavProductDetails()
              .setProductId(productId)
              .setCountry(product.getCountry())
@@ -77,7 +74,7 @@ public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListVi
       });
 
       // Add product to cart when click on selector
-      holder.binding.selectorAddProduct.setOnClickListener(v -> {
+      holder.binding.ivSelectorAddProduct.setOnClickListener(v -> {
          int productQuantity = 1;
 
          // Counter value control
@@ -91,7 +88,7 @@ public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListVi
          item.setTotal(Double.parseDouble(String.valueOf(item.getPrice())));
 
          // Add product list position to cart
-         mListener.onInteractionAdd(product);
+         iPositionListener.onInteractionAdd(product);
       });
    }
 

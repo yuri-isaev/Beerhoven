@@ -19,7 +19,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:id="@+id/product_container"
+            android:id="@+id/llProductContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
@@ -32,7 +32,7 @@
                 android:layout_height="150dp">
 
                 <com.mikhaellopez.circularimageview.CircularImageView
-                    android:id="@+id/image"
+                    android:id="@+id/ivProductImage"
                     android:layout_width="107dp"
                     android:layout_height="116dp"
                     android:layout_marginEnd="36dp"
@@ -43,7 +43,7 @@
                     tools:ignore="ImageContrastCheck" />
 
                 <LinearLayout
-                    android:id="@+id/tvParent"
+                    android:id="@+id/llParent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -53,7 +53,7 @@
                     tools:layout_editor_absoluteY="0dp">
 
                     <TextView
-                        android:id="@+id/product_name"
+                        android:id="@+id/tvProductName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style1_bold"
@@ -63,7 +63,7 @@
                         tools:ignore="UnusedAttribute" />
 
                     <TextView
-                        android:id="@+id/product_style"
+                        android:id="@+id/tvProductStyle"
                         android:layout_width="182dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style1_semibold"
@@ -71,7 +71,7 @@
                         android:textColor="@color/colorMainGrey" />
 
                     <TextView
-                        android:id="@+id/product_fortress"
+                        android:id="@+id/tvProductFortress"
                         android:layout_width="182dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style1_semibold"
@@ -96,7 +96,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/product_price"
+                            android:id="@+id/tvProductPrice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -131,7 +131,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tvDeliveryTimeProduct"
+                            android:id="@+id/tvDeliveryTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -153,7 +153,7 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/selector_add_product"
+                    android:id="@+id/ivSelectorAddProduct"
                     android:layout_width="29dp"
                     android:layout_height="46dp"
                     android:layout_gravity="center"
