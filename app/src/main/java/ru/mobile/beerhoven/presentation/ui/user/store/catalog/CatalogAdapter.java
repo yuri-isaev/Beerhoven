@@ -23,12 +23,12 @@ import ru.mobile.beerhoven.presentation.ui.user.cart.CartSet;
 import ru.mobile.beerhoven.presentation.ui.user.store.sections.StoreFragmentDirections;
 import ru.mobile.beerhoven.utils.Constants;
 
-public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListViewHolder> {
+public class CatalogAdapter extends Adapter<CatalogAdapter.CatalogViewHolder> {
    private final Context mContext;
    private final List<Product> mAdapterList;
    private final AdapterPositionListener iPositionListener;
 
-   public ProductListAdapter(List<Product> list, Context ctx, AdapterPositionListener listener) {
+   public CatalogAdapter(List<Product> list, Context ctx, AdapterPositionListener listener) {
       this.mAdapterList = list;
       this.mContext = ctx;
       this.iPositionListener = listener;
@@ -36,15 +36,15 @@ public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListVi
 
    @NonNull
    @Override
-   public ProductListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+   public CatalogViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
       ItemProductBinding binding = ItemProductBinding
           .inflate(LayoutInflater.from(parent.getContext()), parent, false);
-      return new ProductListViewHolder(binding);
+      return new CatalogViewHolder(binding);
    }
 
    @SuppressLint("SetTextI18n")
    @Override
-   public void onBindViewHolder(@NonNull ProductListViewHolder holder, int position) {
+   public void onBindViewHolder(@NonNull CatalogViewHolder holder, int position) {
       Product product = mAdapterList.get(position);
       String productId = product.getId();
       String productImage = product.getUri();
@@ -97,10 +97,10 @@ public class ProductListAdapter extends Adapter<ProductListAdapter.ProductListVi
       return mAdapterList.size();
    }
 
-   public static class ProductListViewHolder extends ViewHolder {
+   public static class CatalogViewHolder extends ViewHolder {
       ItemProductBinding binding;
 
-      public ProductListViewHolder(@NonNull ItemProductBinding recyclerBinding) {
+      public CatalogViewHolder(@NonNull ItemProductBinding recyclerBinding) {
          super(recyclerBinding.getRoot());
          this.binding = recyclerBinding;
       }

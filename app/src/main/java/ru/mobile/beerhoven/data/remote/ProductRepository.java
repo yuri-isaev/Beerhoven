@@ -2,6 +2,7 @@ package ru.mobile.beerhoven.data.remote;
 
 import static java.util.Objects.requireNonNull;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.util.Log;
 
@@ -16,6 +17,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -45,17 +47,19 @@ public class ProductRepository implements IProductRepository {
       this.mUserPhoneNumber = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
+   @SuppressLint("NewApi")
    @Override
    public MutableLiveData<List<Product>> getProductListFromDatabase() {
       if (mProductList.size() == 0) {
-         getProductList();
+         onGetProductList();
       }
       mMutableList.setValue(mProductList);
       return mMutableList;
    }
 
-   private void getProductList() {
+   private void onGetProductList() {
       mFirebaseRef.child(Constants.NODE_PRODUCTS).addChildEventListener(new ChildEventListener() {
+         @SuppressLint("NewApi")
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             Product product = snapshot.getValue(Product.class);
@@ -64,6 +68,7 @@ public class ProductRepository implements IProductRepository {
             if (!mProductList.contains(product)) {
                mProductList.add(product);
             }
+
             mMutableList.postValue(mProductList);
          }
 
@@ -93,6 +98,40 @@ public class ProductRepository implements IProductRepository {
 
          @Override
          public void onCancelled(@NonNull DatabaseError error) {
+         }
+      });
+   }
+
+   @Override
+   public MutableLiveData<List<Product>> getProductListByCategoryFromDatabase(String category) {
+      if (mProductList.size() == 0) {
+         onGetProductListByCategory(category);
+      }
+      mMutableList.setValue(mProductList);
+      return mMutableList;
+   }
+
+   public void onGetProductListByCategory(String category) {
+      mFirebaseRef.child(Constants.NODE_PRODUCTS).addValueEventListener(new ValueEventListener() {
+         @Override
+         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+
+               Product product = noteDataSnapshot.getValue(Product.class);
+                  assert product != null;
+                  if (!mProductList.contains(product)) {
+                     if(product.getCategory().equals(category)) {
+                     mProductList.add(product);
+                     }
+                  }
+                  mMutableList.postValue(mProductList);
+
+            }
+         }
+
+         @Override
+         public void onCancelled(@NonNull DatabaseError error) {
+            Log.e(TAG, error.getMessage());
          }
       });
    }

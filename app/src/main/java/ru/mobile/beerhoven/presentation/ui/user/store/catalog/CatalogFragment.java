@@ -1,7 +1,5 @@
 package ru.mobile.beerhoven.presentation.ui.user.store.catalog;
 
-import static java.util.Objects.requireNonNull;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,17 +26,17 @@ import ru.mobile.beerhoven.data.remote.ProductRepository;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.presentation.listeners.AdapterPositionListener;
 
-public class ProductListFragment extends Fragment implements MenuProvider {
-   private List<Product> mProductList;
-   private ProductListAdapter mAdapter;
-   private ProductListViewModel mViewModel;
+public class CatalogFragment extends Fragment implements MenuProvider {
+   private List<Product> mCatalog;
+   private CatalogAdapter mAdapter;
+   private CatalogViewModel mViewModel;
    private RecyclerView mRecyclerView;
 
-   @Nullable
+   @SuppressLint("MissingInflatedId")
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      View view = inflater.inflate(R.layout.fragment_product_list, container, false);
-      mRecyclerView = view.findViewById(R.id.recycler_view);
+      View view = inflater.inflate(R.layout.fragment_catalog, container, false);
+      mRecyclerView = view.findViewById(R.id.recycler_view_catalog);
       requireActivity().addMenuProvider(this, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
       return view;
    }
@@ -47,24 +45,23 @@ public class ProductListFragment extends Fragment implements MenuProvider {
    @Override
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      mViewModel = new ProductListViewModel(new ProductRepository());
+      mViewModel = new CatalogViewModel(new ProductRepository());
       mViewModel.getProductListToRepository().observe(getViewLifecycleOwner(),
           list -> mAdapter.notifyDataSetChanged());
-      initRecyclerView();
+      onInitRecyclerView();
    }
 
    @SuppressLint("NotifyDataSetChanged")
-   private void initRecyclerView() {
+   private void onInitRecyclerView() {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
-      mProductList = requireNonNull(mViewModel.getProductListToRepository().getValue());
-      mAdapter = new ProductListAdapter(mProductList, requireActivity(), new AdapterPositionListener() {
+      mCatalog = mViewModel.getProductListToRepository().getValue();
+      mAdapter = new CatalogAdapter(mCatalog, requireActivity(), new AdapterPositionListener() {
          @Override
          public void onInteractionAdd(Product product) {
             mViewModel.onAddProductToCartRepository(product);
          }
 
-         @SuppressLint("NotifyDataSetChanged")
          @Override
          public void onInteractionDelete(Product product) {
             mViewModel.onDeleteProductFromRepository(product);
@@ -102,7 +99,7 @@ public class ProductListFragment extends Fragment implements MenuProvider {
    @SuppressLint("NotifyDataSetChanged")
    private void onItemSearch(String searchText) {
       List<Product> searchList = new ArrayList<>();
-      for (Product product : mProductList) {
+      for (Product product : mCatalog) {
          if (product.getName() != null && !product.getName().isEmpty()) {
             if (product.getName().toLowerCase().contains(searchText.toLowerCase())) {
                searchList.add(product);
@@ -110,7 +107,7 @@ public class ProductListFragment extends Fragment implements MenuProvider {
          }
       }
 
-      mAdapter = new ProductListAdapter(searchList, getContext(), new AdapterPositionListener() {
+      mAdapter = new CatalogAdapter(searchList, getContext(), new AdapterPositionListener() {
          @Override
          public void onInteractionAdd(Product product) {
             mViewModel.onAddProductToCartRepository(product);

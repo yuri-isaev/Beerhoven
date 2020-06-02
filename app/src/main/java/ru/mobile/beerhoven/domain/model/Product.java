@@ -12,6 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Product {
+   private String category;
    private String country;
    private String density;
    private String description;

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import ru.mobile.beerhoven.R;
@@ -25,6 +26,8 @@ import ru.mobile.beerhoven.utils.Validation;
 public class AddProductFragment extends PostFragment {
    private Button mAddDatabaseButton;
    private ImageView mSelectorAddImage;
+   private ImageView mProductImage;
+   private TextInputEditText mInputCategory;
    private TextInputLayout mInputCountry;
    private TextInputLayout mInputDensity;
    private TextInputLayout mInputDescription;
@@ -33,7 +36,6 @@ public class AddProductFragment extends PostFragment {
    private TextInputLayout mInputName;
    private TextInputLayout mInputPrice;
    private TextInputLayout mInputStyle;
-   private ImageView mProductImage;
 
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class AddProductFragment extends PostFragment {
       mInputPrice = binding.productPrice;
       mInputStyle = binding.productStyle;
       mProductImage = binding.productImage;
+      mInputCategory = binding.etProductCategory;
       mSelectorAddImage = binding.selectorAddImage;
       return binding.getRoot();
    }
@@ -57,8 +60,13 @@ public class AddProductFragment extends PostFragment {
       super.onViewCreated(view, savedInstanceState);
       AddProductViewModel viewModel = new AddProductViewModel(new ProductRepository());
 
-      mSelectorAddImage.setOnClickListener(v -> super.onShowImagePickDialog()
-          .observe(getViewLifecycleOwner(), bitmap -> mProductImage.setImageBitmap(bitmap)));
+      mSelectorAddImage.setOnClickListener(v -> super
+          .onShowImagePickDialog()
+          .observe(getViewLifecycleOwner(), image -> mProductImage.setImageBitmap(image)));
+
+      mInputCategory.setOnClickListener(v -> super
+          .onShowCategoryPickDialog()
+          .observe(getViewLifecycleOwner(), s -> mInputCategory.setText(s)));
 
       mAddDatabaseButton.setOnClickListener(v -> {
          if (!Validation.isValidName(mInputCountry) |
@@ -72,6 +80,7 @@ public class AddProductFragment extends PostFragment {
          } else if (super.mUriImage == null) {
             Toasty.error(requireActivity(), R.string.add_image);
          } else {
+            String category = requireNonNull(mInputCategory.getText()).toString();
             String country = requireNonNull(mInputCountry.getEditText()).getText().toString();
             String density = requireNonNull(mInputDensity.getEditText()).getText().toString();
             String description = requireNonNull(mInputDescription.getEditText()).getText().toString();
@@ -82,6 +91,7 @@ public class AddProductFragment extends PostFragment {
             String style = requireNonNull(mInputStyle.getEditText()).getText().toString();
 
             Product product = new Product();
+            product.setCategory(category);
             product.setCountry(country);
             product.setDensity(density);
             product.setDescription(description);

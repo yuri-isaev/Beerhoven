@@ -13,8 +13,8 @@
     <string name="auth_text_confirm">Дождитесь подтверждения</string>
     <string name="auth_phone_number_wrong">Неверный номер телефона</string>
     <string name="auth_quota_exceeded">Превышение квоты доступа</string>
-<!--    <string name="auth_user_success">Пользователь аутентифицирован</string>-->
-<!--    <string name="auth_user_failed">Пользователь не существует</string>-->
+    <!--    <string name="auth_user_success">Пользователь аутентифицирован</string>-->
+    <!--    <string name="auth_user_failed">Пользователь не существует</string>-->
 
     <!-- Cart -->
     <string name="cart_add">Добавить в корзину</string>
@@ -91,19 +91,22 @@
     <string name="product_add">Добавить товара</string>
     <string name="product_add_cart">Товар добавлен в корзину</string>
     <string name="product_add_database">Товар добавлен в базу данных</string>
-    <string name="product_country">страна производитель</string>
+    <string name="product_category">Категория товара</string>
+    <string name="product_category_select">Выберите категорию товара</string>
+    <string name="product_country">Страна производитель</string>
     <string name="product_catalog_delete">Товар удален</string>
     <string name="product_density">Плотность</string>
     <string name="product_description">Описание</string>
     <string name="product_delivery_time">время доставки</string>
     <string name="product_fortress">Крепость</string>
-    <string name="product_name">название товара</string>
-    <string name="product_manufacture">мануфактура</string>
-    <string name="product_price">цена товара</string>
+    <string name="product_image">Загрузить изображение товара</string>
+    <string name="product_name">Название товара</string>
+    <string name="product_manufacture">Мануфактура</string>
+    <string name="product_price">Цена товара</string>
     <string name="product_price_line">Цена товара: </string>
-    <string name="product_special">специализация</string>
+    <string name="product_special">Специализация</string>
     <string name="product_style">Стиль</string>
-    <string name="product_title">название товара</string>
+    <string name="product_title">Название товара</string>
     <string name="product_total">общая цена</string>
     <string name="product_quantity">количество</string>
 

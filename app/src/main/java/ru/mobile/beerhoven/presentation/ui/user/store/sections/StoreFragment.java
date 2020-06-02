@@ -13,11 +13,13 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.presentation.ui.user.store.catalog.ProductListFragment;
+import ru.mobile.beerhoven.presentation.ui.user.store.catalog.CatalogFragment;
+import ru.mobile.beerhoven.presentation.ui.user.store.catalog.categories.AlcoListFragment;
+import ru.mobile.beerhoven.presentation.ui.user.store.catalog.categories.ProductListFragment;
 
 public class StoreFragment extends Fragment {
-   private ViewPager mViewPager;
    private TabLayout mTabLayout;
+   private ViewPager mViewPager;
 
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       View view = inflater.inflate(R.layout.fragment_store, container, false);
@@ -30,7 +32,7 @@ public class StoreFragment extends Fragment {
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
       mTabLayout.setupWithViewPager(mViewPager);
-      setUpViewPager(mViewPager);
+      onSetUpViewPager(mViewPager);
       mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
          @Override
          public void onTabSelected(TabLayout.Tab tab) {}
@@ -43,9 +45,11 @@ public class StoreFragment extends Fragment {
       });
    }
 
-   private void setUpViewPager(@NonNull ViewPager viewPager) {
+   private void onSetUpViewPager(@NonNull ViewPager viewPager) {
       SectionPagerAdapter adapter = new SectionPagerAdapter(getChildFragmentManager());
-      adapter.addFragment(new ProductListFragment(), "Все товары");
+      adapter.addFragment(new CatalogFragment(), "Все товары");
+      adapter.addFragment(new AlcoListFragment(), "Алкоголь");
+      adapter.addFragment(new ProductListFragment(), "Продукты");
       viewPager.setAdapter(adapter);
    }
 }
