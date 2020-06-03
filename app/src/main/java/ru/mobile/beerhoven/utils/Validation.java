@@ -12,9 +12,8 @@ import java.util.Objects;
 public final class Validation {
    private static final String inValidField = "Поле не должно быть пустым";
 
-   public static boolean isValidName(@NonNull TextInputLayout field) {
+   public static boolean isValidTextField(@NonNull TextInputLayout field) {
       String name = requireNonNull(field.getEditText()).getText().toString();
-
       if (!name.isEmpty()) {
          field.setError(null);
          field.setErrorEnabled(false);
@@ -25,10 +24,9 @@ public final class Validation {
       }
    }
 
-   public static boolean isValidEmail(@NonNull TextInputLayout field) {
+   public static boolean isValidEmailField(@NonNull TextInputLayout field) {
       String email = requireNonNull(field.getEditText()).getText().toString();
       String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-
       if (email.isEmpty()) {
          field.setError(inValidField);
          return false;
@@ -42,9 +40,8 @@ public final class Validation {
       }
    }
 
-   public static boolean isValidPhoneNumber(@NonNull TextInputLayout field) {
+   public static boolean isValidPhoneNumberField(@NonNull TextInputLayout field) {
       String number = requireNonNull(field.getEditText()).getText().toString();
-
       if (!number.isEmpty()) {
          field.setError(null);
          field.setErrorEnabled(false);
@@ -55,9 +52,8 @@ public final class Validation {
       }
    }
 
-   public static boolean isValidAddress(@NonNull TextInputLayout field) {
+   public static boolean isValidAddressField(@NonNull TextInputLayout field) {
       String address = Objects.requireNonNull(field.getEditText()).getText().toString();
-
       if (!address.isEmpty()) {
          field.setError(null);
          field.setErrorEnabled(false);

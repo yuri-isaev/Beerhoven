@@ -22,24 +22,24 @@ import ru.mobile.beerhoven.utils.Toasty;
 import ru.mobile.beerhoven.utils.Validation;
 
 public class RegistrationFragment extends Fragment {
-   Button btnRegistration;
-   TextInputLayout mInputEmail;
-   TextInputLayout mInputName;
-   TextInputLayout mInputPhoneNumber;
+   private Button mUserRegistrationButton;
+   private TextInputLayout mUserEmailInput;
+   private TextInputLayout mUserNameInput;
+   private TextInputLayout mUserPhoneNumberInput;
 
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       FragmentRegistrationBinding binding = FragmentRegistrationBinding.inflate(inflater, container, false);
-      btnRegistration = binding.btnRegistration;
-      mInputEmail = binding.inputEmail;
-      mInputName = binding.inputName;
-      mInputPhoneNumber = binding.inputPhoneNumber;
+      mUserRegistrationButton = binding.btnRegistration;
+      mUserEmailInput = binding.inputEmail;
+      mUserNameInput = binding.inputName;
+      mUserPhoneNumberInput = binding.inputPhoneNumber;
 
       // Set button alpha to zero.
-      btnRegistration.setAlpha(0f);
+      mUserRegistrationButton.setAlpha(0f);
 
       // Animate the alpha value to 1f and set duration as 800 ms.
-      btnRegistration.animate().alpha(1f).setDuration(800);
+      mUserRegistrationButton.animate().alpha(1f).setDuration(800);
 
       return binding.getRoot();
    }
@@ -48,16 +48,17 @@ public class RegistrationFragment extends Fragment {
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
 
-      btnRegistration.setOnClickListener(v -> {
-         if (!Validation.isValidEmail(mInputEmail) | !Validation.isValidName(mInputName) |
-             !Validation.isValidPhoneNumber(mInputPhoneNumber)) {
+      mUserRegistrationButton.setOnClickListener(v -> {
+         if (  !Validation.isValidEmailField(mUserEmailInput)
+             | !Validation.isValidTextField(mUserNameInput)
+             | !Validation.isValidPhoneNumberField(mUserPhoneNumberInput)) {
             Toasty.error(requireActivity(), R.string.invalid_field);
             return;
          }
 
-         String email = requireNonNull(mInputEmail.getEditText()).getText().toString();
-         String name = requireNonNull(mInputName.getEditText()).getText().toString();
-         String phoneNumber = requireNonNull(mInputPhoneNumber.getEditText()).getText().toString();
+         String email = requireNonNull(mUserEmailInput.getEditText()).getText().toString();
+         String name = requireNonNull(mUserNameInput.getEditText()).getText().toString();
+         String phoneNumber = requireNonNull(mUserPhoneNumberInput.getEditText()).getText().toString();
 
          NavDirections action = RegistrationFragmentDirections.actionNavRegToNavAuth()
              .setEmail(email)

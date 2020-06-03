@@ -26,19 +26,19 @@ import ru.mobile.beerhoven.utils.Validation;
 
 public class AddNewsFragment extends PostFragment {
    private Button mAddDatabaseButton;
-   private ImageView mSelectorAddImage;
    private ImageView mNewsImage;
-   private TextInputLayout mInputTitle;
-   private TextInputLayout mInputDescription;
+   private ImageView mAddImageSelector;
+   private TextInputLayout mTitleInput;
+   private TextInputLayout mDescriptionInput;
 
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
       FragmentAddNewsBinding binding = FragmentAddNewsBinding.inflate(inflater, container, false);
       mAddDatabaseButton = binding.btnAddDatabase;
-      mInputTitle = binding.newsTitle;
-      mInputDescription = binding.newsDescription;
+      mAddImageSelector = binding.selectorAddImage;
+      mTitleInput = binding.newsTitle;
+      mDescriptionInput = binding.newsDescription;
       mNewsImage = binding.newsImage;
-      mSelectorAddImage = binding.selectorAddImage;
       return binding.getRoot();
    }
 
@@ -48,18 +48,19 @@ public class AddNewsFragment extends PostFragment {
       AddNewsViewModel viewModel = new AddNewsViewModel();
       Date currentDate = new Date();
 
-      mSelectorAddImage.setOnClickListener(v -> super.onShowImagePickDialog()
+      mAddImageSelector.setOnClickListener(v -> super
+          .onShowImagePickDialog()
           .observe(getViewLifecycleOwner(), bitmap -> mNewsImage.setImageBitmap(bitmap)));
 
       mAddDatabaseButton.setOnClickListener(v -> {
-         if (!Validation.isValidName(mInputTitle) | !Validation.isValidName(mInputDescription)) {
+         if (!Validation.isValidTextField(mTitleInput) | !Validation.isValidTextField(mDescriptionInput)) {
             Toasty.error(requireActivity(), R.string.invalid_form);
          } else if (super.mUriImage == null) {
             Toasty.error(requireActivity(), R.string.add_image);
          } else {
-            String description = requireNonNull(mInputDescription.getEditText()).getText().toString();
+            String description = requireNonNull(mDescriptionInput.getEditText()).getText().toString();
             String time = String.valueOf(currentDate);
-            String title = requireNonNull(mInputTitle.getEditText()).getText().toString();
+            String title = requireNonNull(mTitleInput.getEditText()).getText().toString();
 
             News news = new News();
             news.setDescription(description);

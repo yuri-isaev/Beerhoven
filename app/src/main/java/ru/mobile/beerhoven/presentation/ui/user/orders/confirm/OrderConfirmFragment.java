@@ -1,9 +1,9 @@
 package ru.mobile.beerhoven.presentation.ui.user.orders.confirm;
 
 import static java.util.Objects.requireNonNull;
-import static ru.mobile.beerhoven.utils.Validation.isValidAddress;
-import static ru.mobile.beerhoven.utils.Validation.isValidName;
-import static ru.mobile.beerhoven.utils.Validation.isValidPhoneNumber;
+import static ru.mobile.beerhoven.utils.Validation.isValidAddressField;
+import static ru.mobile.beerhoven.utils.Validation.isValidPhoneNumberField;
+import static ru.mobile.beerhoven.utils.Validation.isValidTextField;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -36,9 +36,9 @@ public class OrderConfirmFragment extends Fragment {
    private Button mAddOrderButton;
    private OrderConfirmViewModel mViewModel;
    private String mTotal;
-   private TextInputLayout mNameText;
-   private TextInputLayout mPhoneText;
-   private TextInputLayout mAddressText;
+   private TextInputLayout mNameInput;
+   private TextInputLayout mPhoneInput;
+   private TextInputLayout mAddressInput;
 
    @Override
    public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,10 +53,10 @@ public class OrderConfirmFragment extends Fragment {
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       FragmentOrderConfirmBinding binding = FragmentOrderConfirmBinding.inflate(inflater, container, false);
-      mAddressText = binding.confirmAddress;
-      mNameText = binding.confirmName;
-      mPhoneText = binding.confirmNumber;
       mAddOrderButton = binding.btnConfirmOrder;
+      mAddressInput = binding.confirmAddress;
+      mNameInput = binding.confirmName;
+      mPhoneInput = binding.confirmNumber;
       return binding.getRoot();
    }
 
@@ -69,17 +69,17 @@ public class OrderConfirmFragment extends Fragment {
           new OrderConfirmRepository(), new PushMessagingService());
 
       mAddOrderButton.setOnClickListener(v -> {
-         if (!isValidName(mNameText) | !isValidAddress(mAddressText) | !isValidPhoneNumber(mPhoneText)) {
+         if (!isValidTextField(mNameInput) | !isValidAddressField(mAddressInput) | !isValidPhoneNumberField(mPhoneInput)) {
             Toasty.error(requireActivity(), R.string.invalid_form);
             return;
          }
 
          Order order = new Order();
-         order.setAddress(requireNonNull(mAddressText.getEditText()).getText().toString());
+         order.setAddress(requireNonNull(mAddressInput.getEditText()).getText().toString());
          order.setColor(String.valueOf(Randomizer.getRandomColorMarker()));
          order.setDate(CurrentDateTime.getCurrentDate());
-         order.setContactName(String.valueOf(requireNonNull(mNameText.getEditText()).getText()));
-         order.setPhone(String.valueOf(requireNonNull(mPhoneText.getEditText()).getText()));
+         order.setContactName(String.valueOf(requireNonNull(mNameInput.getEditText()).getText()));
+         order.setPhone(String.valueOf(requireNonNull(mPhoneInput.getEditText()).getText()));
          order.setTime(CurrentDateTime.getCurrentTime());
          order.setTotal(Double.parseDouble(String.valueOf(Double.parseDouble(mTotal))));
 

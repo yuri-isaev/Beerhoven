@@ -27,30 +27,32 @@ public class AddProductFragment extends PostFragment {
    private Button mAddDatabaseButton;
    private ImageView mSelectorAddImage;
    private ImageView mProductImage;
-   private TextInputEditText mInputCategory;
-   private TextInputLayout mInputCountry;
-   private TextInputLayout mInputDensity;
-   private TextInputLayout mInputDescription;
-   private TextInputLayout mInputFortress;
-   private TextInputLayout mInputManufacture;
-   private TextInputLayout mInputName;
-   private TextInputLayout mInputPrice;
-   private TextInputLayout mInputStyle;
+   private TextInputEditText mCategoryInputText;
+   private TextInputLayout mCategoryInput;
+   private TextInputLayout mCountryInput;
+   private TextInputLayout mDensityInput;
+   private TextInputLayout mDescriptionInput;
+   private TextInputLayout mFortressInput;
+   private TextInputLayout mManufactureInput;
+   private TextInputLayout mNameInput;
+   private TextInputLayout mPriceInput;
+   private TextInputLayout mStyleInput;
 
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       FragmentAddProductBinding binding = FragmentAddProductBinding.inflate(inflater, container, false);
       mAddDatabaseButton = binding.btnAddDatabase;
-      mInputCountry = binding.productCountry;
-      mInputDensity = binding.productDensity;
-      mInputDescription = binding.productDescription;
-      mInputFortress = binding.productFortress;
-      mInputManufacture = binding.productManufacture;
-      mInputName = binding.productName;
-      mInputPrice = binding.productPrice;
-      mInputStyle = binding.productStyle;
+      mCountryInput = binding.productCountry;
+      mDensityInput = binding.productDensity;
+      mDescriptionInput = binding.productDescription;
+      mFortressInput = binding.productFortress;
+      mManufactureInput = binding.productManufacture;
+      mNameInput = binding.productName;
+      mPriceInput = binding.productPrice;
+      mStyleInput = binding.productStyle;
       mProductImage = binding.productImage;
-      mInputCategory = binding.etProductCategory;
+      mCategoryInput = binding.productCategory;
+      mCategoryInputText = binding.etProductCategory;
       mSelectorAddImage = binding.selectorAddImage;
       return binding.getRoot();
    }
@@ -64,31 +66,33 @@ public class AddProductFragment extends PostFragment {
           .onShowImagePickDialog()
           .observe(getViewLifecycleOwner(), image -> mProductImage.setImageBitmap(image)));
 
-      mInputCategory.setOnClickListener(v -> super
+      mCategoryInputText.setOnClickListener(v -> super
           .onShowCategoryPickDialog()
-          .observe(getViewLifecycleOwner(), s -> mInputCategory.setText(s)));
+          .observe(getViewLifecycleOwner(), s -> mCategoryInputText.setText(s)));
 
       mAddDatabaseButton.setOnClickListener(v -> {
-         if (!Validation.isValidName(mInputCountry) |
-             !Validation.isValidName(mInputDensity) |
-             !Validation.isValidName(mInputDescription) |
-             !Validation.isValidName(mInputFortress) |
-             !Validation.isValidName(mInputManufacture) |
-             !Validation.isValidName(mInputName) |
-             !Validation.isValidName(mInputStyle)) {
+         if (  !Validation.isValidTextField(mCategoryInput)
+             | !Validation.isValidTextField(mCountryInput)
+             | !Validation.isValidTextField(mDensityInput)
+             | !Validation.isValidTextField(mDescriptionInput)
+             | !Validation.isValidTextField(mFortressInput)
+             | !Validation.isValidTextField(mManufactureInput)
+             | !Validation.isValidTextField(mNameInput)
+             | !Validation.isValidTextField(mPriceInput)
+             | !Validation.isValidTextField(mStyleInput)) {
             Toasty.error(requireActivity(), R.string.invalid_form);
          } else if (super.mUriImage == null) {
             Toasty.error(requireActivity(), R.string.add_image);
          } else {
-            String category = requireNonNull(mInputCategory.getText()).toString();
-            String country = requireNonNull(mInputCountry.getEditText()).getText().toString();
-            String density = requireNonNull(mInputDensity.getEditText()).getText().toString();
-            String description = requireNonNull(mInputDescription.getEditText()).getText().toString();
-            String fortress = requireNonNull(mInputFortress.getEditText()).getText().toString();
-            String manufacture = requireNonNull(mInputManufacture.getEditText()).getText().toString();
-            String name = requireNonNull(mInputName.getEditText()).getText().toString();
-            String price = requireNonNull(mInputPrice.getEditText()).getText().toString();
-            String style = requireNonNull(mInputStyle.getEditText()).getText().toString();
+            String category = requireNonNull(mCategoryInput.getEditText()).getText().toString();
+            String country = requireNonNull(mCountryInput.getEditText()).getText().toString();
+            String density = requireNonNull(mDensityInput.getEditText()).getText().toString();
+            String description = requireNonNull(mDescriptionInput.getEditText()).getText().toString();
+            String fortress = requireNonNull(mFortressInput.getEditText()).getText().toString();
+            String manufacture = requireNonNull(mManufactureInput.getEditText()).getText().toString();
+            String name = requireNonNull(mNameInput.getEditText()).getText().toString();
+            String price = requireNonNull(mPriceInput.getEditText()).getText().toString();
+            String style = requireNonNull(mStyleInput.getEditText()).getText().toString();
 
             Product product = new Product();
             product.setCategory(category);
