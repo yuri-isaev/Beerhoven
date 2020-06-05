@@ -39,30 +39,31 @@ public class NewsRepository implements INewsRepository {
    }
 
    @Override
-   public void addNewsDataToDatabase(@NonNull News post) {
-      post.setImage(Constants.URI_LOGO);
+   public void onAddNewsWithoutImageToDatabase(@NonNull News post) {
+      post.setImage(Constants.IMAGE_DEFAULT);
       mFirebaseRef.child(Constants.NODE_NEWS).push().setValue(post)
-          .addOnSuccessListener(unused -> Log.i(TAG, "News data added to database"))
-          .addOnFailureListener(e -> Log.i(TAG, e.getMessage()));
+          .addOnFailureListener(e -> Log.i(TAG, e.getMessage()))
+          .addOnSuccessListener(unused -> Log.i(TAG, "News data added to database"));
    }
 
    @Override
-   public void addNewsPostToDatabase(@NonNull News post) {
+   public void onAddNewsToDatabase(@NonNull News post) {
       mStorageRef.child(Constants.FOLDER_NEWS_IMG).child(new Date().toString())
           .putFile(Uri.parse(post.getImage()))
           .addOnSuccessListener((taskSnapshot) -> {
              Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+             uriTask
+                 .addOnFailureListener(e -> Log.e(TAG, e.getMessage()))
+                 .addOnSuccessListener(uri -> {
+                    Uri downloadUri = uriTask.getResult();
+                    post.setImage(downloadUri.toString());
 
-             uriTask.addOnSuccessListener(uri -> {
-                Uri downloadUri = uriTask.getResult();
-                post.setImage(downloadUri.toString());
+                    mFirebaseRef.child(Constants.NODE_NEWS).push().setValue(post)
+                        .addOnFailureListener(e -> Log.i(TAG, e.getMessage()))
+                        .addOnSuccessListener(unused -> Log.i(TAG, "News data added to database"));
 
-                mFirebaseRef.child(Constants.NODE_NEWS).push().setValue(post)
-                    .addOnSuccessListener(unused -> Log.i(TAG, "News data added to database"))
-                    .addOnFailureListener(e -> Log.i(TAG, e.getMessage()));
-                Log.i(TAG, "News image added to database storage");
-             })
-                 .addOnFailureListener(e -> Log.e(TAG, e.getMessage()));
+                    Log.i(TAG, "News image added to database storage");
+             });
           });
    }
 

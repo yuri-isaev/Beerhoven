@@ -1,6 +1,7 @@
 package ru.mobile.beerhoven.presentation.ui.admin.post.news;
 
 import static java.util.Objects.requireNonNull;
+import static ru.mobile.beerhoven.utils.Validation.isValidTextField;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -22,7 +23,6 @@ import ru.mobile.beerhoven.domain.model.News;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.presentation.ui.admin.post.PostFragment;
 import ru.mobile.beerhoven.utils.Toasty;
-import ru.mobile.beerhoven.utils.Validation;
 
 public class AddNewsFragment extends PostFragment {
    private Button mAddDatabaseButton;
@@ -35,10 +35,10 @@ public class AddNewsFragment extends PostFragment {
    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
       FragmentAddNewsBinding binding = FragmentAddNewsBinding.inflate(inflater, container, false);
       mAddDatabaseButton = binding.btnAddDatabase;
-      mAddImageSelector = binding.selectorAddImage;
-      mTitleInput = binding.newsTitle;
-      mDescriptionInput = binding.newsDescription;
-      mNewsImage = binding.newsImage;
+      mAddImageSelector = binding.ivSelectorAddImage;
+      mTitleInput = binding.ilNewsTitle;
+      mDescriptionInput = binding.ilNewsDescription;
+      mNewsImage = binding.ivNewsImage;
       return binding.getRoot();
    }
 
@@ -53,11 +53,12 @@ public class AddNewsFragment extends PostFragment {
           .observe(getViewLifecycleOwner(), bitmap -> mNewsImage.setImageBitmap(bitmap)));
 
       mAddDatabaseButton.setOnClickListener(v -> {
-         if (!Validation.isValidTextField(mTitleInput) | !Validation.isValidTextField(mDescriptionInput)) {
+         if (!isValidTextField(mTitleInput) | !isValidTextField(mDescriptionInput)) {
             Toasty.error(requireActivity(), R.string.invalid_form);
-         } else if (super.mUriImage == null) {
-            Toasty.error(requireActivity(), R.string.add_image);
-         } else {
+         }
+         // else if (super.mUriImage == null) {
+         // Toasty.error(requireActivity(), R.string.add_image);}
+         else {
             String description = requireNonNull(mDescriptionInput.getEditText()).getText().toString();
             String time = String.valueOf(currentDate);
             String title = requireNonNull(mTitleInput.getEditText()).getText().toString();
@@ -70,9 +71,7 @@ public class AddNewsFragment extends PostFragment {
             news.setImage(super.mUriImage != null ? super.mUriImage.toString() : "null");
 
             ((MainActivity) requireActivity()).onIncreaseNewsCounter();
-
-            viewModel.onAddNewsToRepository(news).observe(getViewLifecycleOwner(),
-                b -> Toasty.success(requireActivity(), R.string.product_add_database));
+            viewModel.onAddNewsToRepository(requireActivity(), news);
          }
       });
    }

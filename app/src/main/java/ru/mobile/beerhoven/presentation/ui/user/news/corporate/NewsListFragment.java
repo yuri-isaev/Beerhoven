@@ -37,9 +37,8 @@ public class NewsListFragment extends Fragment {
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       NewsListViewModel viewModel = new NewsListViewModel(requireContext(), new NewsRepository());
       viewModel.onDeleteNewsCounterToStorage();
-      viewModel.initNewsList();
       viewModel.getNewsListFromRepository().observe(getViewLifecycleOwner(),
-          (List<News> list) -> mAdapter.notifyDataSetChanged());
+          list -> mAdapter.notifyDataSetChanged());
       List<News> list = requireNonNull(viewModel.getNewsListFromRepository().getValue());
       initRecyclerView(list);
    }

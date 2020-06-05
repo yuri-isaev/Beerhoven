@@ -9,11 +9,11 @@
     tools:context=".presentation.ui.admin.post.news.AddNewsFragment">
 
     <ScrollView
-        android:id="@+id/scroll_view"
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="15dp"
         tools:ignore="ScrollViewSize,UselessParent">
 
@@ -24,22 +24,21 @@
             tools:ignore="MissingConstraints">
 
             <TextView
-                android:id="@+id/main_title"
+                android:id="@+id/tvMainTitle"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/catorze27_style1_semibold"
                 android:gravity="center"
-                android:paddingBottom="10dp"
                 android:text="@string/news_comment"
                 android:textAlignment="center"
                 android:textColor="@color/colorGreyDark"
-                android:textSize="@dimen/text_size_ex" />
+                android:textSize="28sp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorWhite"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="@dimen/size_corner_radius"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -58,7 +57,7 @@
                         android:paddingRight="10dp"
                         android:text="@string/news_add_image"
                         android:textColor="@color/colorVioletBlue"
-                        android:textSize="@dimen/text_size" />
+                        android:textSize="@dimen/text_size_m" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -66,21 +65,21 @@
                         android:background="@color/colorWhite">
 
                         <com.mikhaellopez.circularimageview.CircularImageView
-                            android:id="@+id/news_image"
-                            android:layout_width="134dp"
-                            android:layout_height="130dp"
+                            android:id="@+id/ivNewsImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:paddingBottom="5dp"
                             android:src="@drawable/ic_camera_photo"
                             app:civ_border_color="@color/colorGrey"
-                            app:civ_border_width="5dp"
+                            app:civ_border_width="2dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
-                            android:id="@+id/selector_add_image"
+                            android:id="@+id/ivSelectorAddImage"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="bottom|right"
@@ -96,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorMainWhite"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="@dimen/size_corner_radius"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -115,10 +114,10 @@
                         android:paddingRight="10dp"
                         android:text="@string/news_post_title"
                         android:textColor="@color/colorVioletBlue"
-                        android:textSize="@dimen/text_size" />
+                        android:textSize="@dimen/text_size_m" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/news_title"
+                        android:id="@+id/ilNewsTitle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
@@ -135,7 +134,7 @@
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
                             android:textColor="@color/colorGreyDark"
-                            android:textSize="@dimen/text_size_large"
+                            android:textSize="@dimen/text_size_l"
                             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -145,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorMainWhite"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="@dimen/size_corner_radius"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -164,10 +163,10 @@
                         android:paddingRight="10dp"
                         android:text="@string/news_post_desc"
                         android:textColor="@color/colorVioletBlue"
-                        android:textSize="@dimen/text_size" />
+                        android:textSize="@dimen/text_size_m" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/news_description"
+                        android:id="@+id/ilNewsDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
@@ -184,18 +183,18 @@
                             android:paddingTop="5dp"
                             android:paddingBottom="5dp"
                             android:textColor="@color/colorGreyDark"
-                            android:textSize="@dimen/text_size_large"
+                            android:textSize="@dimen/text_size_l"
                             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <Button
-                android:id="@+id/btn_add_database"
+                android:id="@+id/btnAddDatabase"
                 style="@style/AppTheme.Button"
                 android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginBottom="20dp"
                 android:text="@string/news_post_public"

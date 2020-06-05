@@ -12,24 +12,16 @@ import ru.mobile.beerhoven.domain.model.News;
 import ru.mobile.beerhoven.domain.repository.INewsRepository;
 
 public class NewsListViewModel extends ViewModel {
-   private final INewsRepository mRepository;
-   private LiveData<List<News>> mNewsList;
+   private final INewsRepository iRepository;
    private final PreferencesStorage mStorage;
 
    public NewsListViewModel(Context context, INewsRepository repository) {
-      this.mRepository = repository;
+      this.iRepository = repository;
       this.mStorage = new PreferencesStorage(context);
    }
 
-   public void initNewsList() {
-      if (mNewsList != null) {
-         return;
-      }
-      this.mNewsList = mRepository.getNewsListFromDatabase();
-   }
-
    public LiveData<List<News>> getNewsListFromRepository() {
-      return mNewsList;
+      return iRepository.getNewsListFromDatabase();
    }
 
    public int getNewsCountFromStorage() {

@@ -11,45 +11,45 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 
 public class Permission {
-   private final Activity activity;
-   private final String[] cameraPermissions;
-   private final String[] storagePermissions;
-   private final String[] locationPermissions;
+   private final Activity mActivity;
+   private final String[] mCameraPermissions;
+   private final String[] mLocationPermissions;
+   private final String[] mStoragePermissions;
 
 
    public Permission(Activity activity) {
-      this.activity = activity;
-      this.cameraPermissions = new String[]{permission.CAMERA, permission.WRITE_EXTERNAL_STORAGE};
-      this.storagePermissions = new String[]{permission.WRITE_EXTERNAL_STORAGE};
-      this.locationPermissions = new String[]{permission.ACCESS_FINE_LOCATION};
+      this.mActivity = activity;
+      this.mCameraPermissions = new String[]{permission.CAMERA, permission.WRITE_EXTERNAL_STORAGE};
+      this.mLocationPermissions = new String[]{permission.ACCESS_FINE_LOCATION};
+      this.mStoragePermissions = new String[]{permission.WRITE_EXTERNAL_STORAGE};
    }
 
    public boolean checkLocationPermission() {
-      return checkSelfPermission(activity, ACCESS_FINE_LOCATION) != PERMISSION_GRANTED &&
-          checkSelfPermission(activity, ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED;
+      return checkSelfPermission(mActivity, ACCESS_FINE_LOCATION) != PERMISSION_GRANTED &&
+          checkSelfPermission(mActivity, ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED;
    }
 
    public void requestLocationPermission() {
-      requestPermissions(activity, locationPermissions, Constants.STORAGE_REQUEST_CODE);
+      requestPermissions(mActivity, mLocationPermissions, Constants.STORAGE_REQUEST_CODE);
    }
 
    public boolean checkStoragePermission() {
-      return checkSelfPermission(activity,
+      return checkSelfPermission(mActivity,
           permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
    }
 
    public void requestStoragePermission() {
-      requestPermissions(activity, storagePermissions, Constants.STORAGE_REQUEST_CODE);
+      requestPermissions(mActivity, mStoragePermissions, Constants.STORAGE_REQUEST_CODE);
    }
 
    public boolean checkCameraPermission() {
-      return checkSelfPermission(activity,
+      return checkSelfPermission(mActivity,
           permission.CAMERA) == (PackageManager.PERMISSION_GRANTED) &&
-          checkSelfPermission(activity,
+          checkSelfPermission(mActivity,
               permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
    }
 
    public void requestCameraPermission() {
-      requestPermissions(activity, cameraPermissions, Constants.CAMERA_REQUEST_CODE);
+      requestPermissions(mActivity, mCameraPermissions, Constants.CAMERA_REQUEST_CODE);
    }
 }

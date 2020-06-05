@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import ru.mobile.beerhoven.domain.model.News;
 import ru.mobile.beerhoven.domain.repository.INewsRepository;
-import ru.mobile.beerhoven.utils.Constants;
 
 public class AddNewsUseCase {
    private final INewsRepository mRepository;
@@ -14,23 +13,22 @@ public class AddNewsUseCase {
    }
 
    public void execute(News news) {
-      onCheckPostUri(news);
+      onCheckNewsPostImage(news);
    }
 
-   private void onCheckPostUri(@NonNull News news) {
+   private void onCheckNewsPostImage(@NonNull News news) {
       if (news.getImage().equals("null")) {
-         news.setImage(Constants.APP_LOGO);
-         addNewsDataToRepository(news);
+         onAddNewsDataToRepository(news);
       } else {
-         uploadDataToRepository(news);
+         onUploadDataToRepository(news);
       }
    }
 
-   private void uploadDataToRepository(News news) {
-      mRepository.addNewsPostToDatabase(news);
+   private void onAddNewsDataToRepository(News news) {
+      mRepository.onAddNewsWithoutImageToDatabase(news);
    }
 
-   private void addNewsDataToRepository(News news) {
-      mRepository.addNewsDataToDatabase(news);
+   private void onUploadDataToRepository(News news) {
+      mRepository.onAddNewsToDatabase(news);
    }
 }

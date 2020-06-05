@@ -49,10 +49,9 @@ public class NewsListAdapter extends Adapter<NewsListAdapter.NewsListViewHolder>
           .load(postImage)
           .into(holder.binding.itemNewsImage);
 
-      holder.binding.itemNewsTitle.setText(postTitle);
+      holder.binding.tvNewsTitle.setText(postTitle);
       String postDateTime = CurrentDateTime.parseDateTime(post.getTime());
-      holder.binding.itemNewsPublishedAt.setText(postDateTime);
-
+      holder.binding.tvNewsPublishedAt.setText(postDateTime);
       holder.binding.itemNewsContainer.setOnClickListener(v -> {
          NavDirections action = NewsListFragmentDirections.actionNavNewsListToNavNewsDetail()
              .setNewsDateTime(postDateTime)
