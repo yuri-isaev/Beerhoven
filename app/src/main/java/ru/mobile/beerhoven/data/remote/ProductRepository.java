@@ -47,7 +47,6 @@ public class ProductRepository implements IProductRepository {
       this.mUserPhoneNumber = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
-   @SuppressLint("NewApi")
    @Override
    public MutableLiveData<List<Product>> getProductListFromDatabase() {
       if (mProductList.size() == 0) {
@@ -154,19 +153,19 @@ public class ProductRepository implements IProductRepository {
           .removeValue();
 
       FirebaseStorage.getInstance()
-          .getReferenceFromUrl(product.getUri())
+          .getReferenceFromUrl(product.getImage())
           .delete();
    }
 
    public MutableLiveData<Boolean> onAddProductToDatabase(@NonNull Product product) {
       mStorageRef.child(Constants.FOLDER_PRODUCT_IMG)
           .child(new Date().toString())
-          .putFile(Uri.parse(product.getUri()))
+          .putFile(Uri.parse(product.getImage()))
           .addOnSuccessListener((taskSnapshot) -> {
              Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
              uriTask.addOnSuccessListener(uri -> {
                 Uri downloadUri = uriTask.getResult();
-                product.setUri(downloadUri.toString());
+                product.setImage(downloadUri.toString());
 
                 mFirebaseRef.child(Constants.NODE_PRODUCTS).push().setValue(product)
                     .addOnSuccessListener(unused -> Log.i(TAG, "Product data added to database"))

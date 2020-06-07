@@ -1,7 +1,6 @@
 package ru.mobile.beerhoven.presentation.ui.user.store.details;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +8,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 
+import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.ProductRepository;
 import ru.mobile.beerhoven.databinding.FragmentProductDetailBinding;
 import ru.mobile.beerhoven.domain.model.Product;
@@ -23,21 +22,21 @@ import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.Toasty;
 
 public class ProductDetailFragment extends Fragment {
-   private double total;
+   private double mTotalPrice;
    private FragmentProductDetailBinding mBinding;
    private int mValue = 1;
-   private String productId;
-   private String name;
-   private String country;
-   private String manufacture;
-   private String style;
-   private String fortress;
-   private String density;
-   private String description;
-   private String image;
-   private String price;
-   private String quantity;
-   private String visible;
+   private String mProductCountry;
+   private String mProductDensity;
+   private String mProductDescription;
+   private String mProductFortress;
+   private String mProductId;
+   private String mProductImage;
+   private String mProductManufacture;
+   private String mProductName;
+   private String mProductPrice;
+   private String mProductQuantity;
+   private String mProductStyle;
+   private String mVisible;
    private ProductDetailViewModel mViewModel;
 
    @Override
@@ -46,44 +45,46 @@ public class ProductDetailFragment extends Fragment {
       if (getActivity() != null) {
          assert getArguments() != null;
          ProductDetailFragmentArgs args = ProductDetailFragmentArgs.fromBundle(getArguments());
-         country = args.getCountry();
-         density = args.getDensity();
-         description = args.getDescription();
-         fortress = args.getFortress();
-         image = args.getImage();
-         manufacture = args.getManufacture();
-         name = args.getName();
-         price = args.getPrice();
-         productId = args.getProductId();
-         style = args.getStyle();
-         total = Double.parseDouble(args.getPrice());
-         visible = args.getVisible();
+         mProductCountry = args.getCountry();
+         mProductDensity = args.getDensity();
+         mProductDescription = args.getDescription();
+         mProductFortress = args.getFortress();
+         mProductId = args.getProductId();
+         mProductImage = args.getImage();
+         mProductManufacture = args.getManufacture();
+         mProductName = args.getName();
+         mProductPrice = args.getPrice();
+         mProductStyle = args.getStyle();
+         mTotalPrice = Double.parseDouble(args.getPrice());
+         mVisible = args.getVisible();
       }
    }
 
-   @SuppressLint({"NewApi", "SetTextI18n"})
+   @SuppressLint("SetTextI18n")
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       mBinding = FragmentProductDetailBinding.inflate(inflater, container, false);
-      mBinding.productCountry.setText(country);
-      mBinding.productDensity.setText(density + "%");
-      mBinding.productDescription.setText(description);
-      mBinding.productFortress.setText(fortress + "%");
-      mBinding.productName.setText(name);
-      mBinding.productManufacture.setText(manufacture);
-      mBinding.productPrice.setText(String.valueOf(price));
-      mBinding.productStyle.setText(style);
-      mBinding.productTotal.setText(String.valueOf(total));
+      mBinding.tvProductCountry.setText(mProductCountry);
+      mBinding.tvProductDensity.setText(mProductDensity + "%");
+      mBinding.tvProductDescription.setText(mProductDescription);
+      mBinding.tvProductFortress.setText(mProductFortress + "%");
+      mBinding.tvProductName.setText(mProductName);
+      mBinding.tvProductManufacture.setText(mProductManufacture);
+      mBinding.tvProductPrice.setText(String.valueOf(mProductPrice));
+      mBinding.tvProductStyle.setText(mProductStyle);
+      mBinding.tvProductTotal.setText(String.valueOf(mTotalPrice));
 
-      Glide.with(mBinding.productImage.getContext()).load(image).into(mBinding.productImage);
+      Glide.with(mBinding.tvProductImage.getContext())
+          .load(mProductImage)
+          .into(mBinding.tvProductImage);
 
-      switch (visible) {
+      switch (mVisible) {
          case Constants.OBJECT_VISIBLE:
             mBinding.btnContainer.setVisibility(View.VISIBLE);
             break;
          case Constants.OBJECT_RENAME:
             mBinding.btnAddProductToCart.setVisibility(View.VISIBLE);
-            mBinding.btnAddProductToCart.setText("Обновить данные товара");
+            mBinding.btnAddProductToCart.setText(R.string.product_info_update);
             break;
          case Constants.OBJECT_INVISIBLE:
             mBinding.btnContainer.setVisibility(View.INVISIBLE);
@@ -92,42 +93,51 @@ public class ProductDetailFragment extends Fragment {
       return mBinding.getRoot();
    }
 
-   @SuppressLint({"SetTextI18n", "NewApi"})
    @Override
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
       mViewModel = new ProductDetailViewModel(new ProductRepository());
-      countListener();
-      addProductToCart();
+      onCountListener();
+      onAddProductToCart();
    }
 
-   @RequiresApi(api = Build.VERSION_CODES.N)
-   public void addProductToCart() {
+   public void onAddProductToCart() {
       mBinding.btnAddProductToCart.setOnClickListener(v -> {
-         if (!CartSet.cartProducts.contains(productId)) {
-            CartSet.cartProducts.add(productId);
+         if (!CartSet.cartProducts.contains(mProductId)) {
+            CartSet.cartProducts.add(mProductId);
             ((MainActivity) requireActivity()).onIncreaseCartCounter();
-            Toasty.success(requireActivity(), "Товар добавлен в корзину");
+            Toasty.success(requireActivity(), R.string.cart_add_success);
          }
-         double cartPrice = Double.parseDouble(price);
-         quantity = String.valueOf(mValue);
+         double cartPrice = Double.parseDouble(mProductPrice);
+         mProductQuantity = String.valueOf(mValue);
 
-         Product product = new Product(productId, country, description, density, fortress,
-             manufacture, name, cartPrice, total, quantity, style, image);
+         Product product = new Product();
+         product.setCategory("null");
+         product.setCountry(mProductCountry);
+         product.setDescription(mProductDescription);
+         product.setDensity(mProductDensity);
+         product.setFortress(mProductFortress);
+         product.setId(mProductId);
+         product.setManufacture(mProductManufacture);
+         product.setName(mProductName);
+         product.setPrice(cartPrice);
+         product.setQuantity(mProductQuantity);
+         product.setStyle(mProductStyle);
+         product.setTotal(mTotalPrice);
+         product.setImage(mProductImage);
 
          mViewModel.onAddCartProductToRepository(product);
-
          v.setClickable(false);
       });
    }
 
    // Product count constrains
-   private void countListener() {
+   private void onCountListener() {
       mBinding.includeFragmentCounter.iCounterPlus.setOnClickListener(v -> {
          if (mValue != 15) {
             mValue++;
          }
-         calculateValue();
+         onCalculateValue();
       });
 
       mBinding.includeFragmentCounter.iCounterMinus.setOnClickListener(v -> {
@@ -136,15 +146,15 @@ public class ProductDetailFragment extends Fragment {
          } else {
             mValue--;
          }
-         calculateValue();
+         onCalculateValue();
       });
    }
 
    // Calculate product total
-   private void calculateValue() {
+   private void onCalculateValue() {
       mBinding.includeFragmentCounter.iCounterValue.setText(String.valueOf(mValue));
-      double cost = (Double.parseDouble(price) * mValue);
-      total = Math.round(cost * 100.0) / 100.0;
-      mBinding.productTotal.setText(String.valueOf(total));
+      double cost = (Double.parseDouble(mProductPrice) * mValue);
+      mTotalPrice = Math.round(cost * 100.0) / 100.0;
+      mBinding.tvProductTotal.setText(String.valueOf(mTotalPrice));
    }
 }

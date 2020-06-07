@@ -105,7 +105,7 @@ public class AddProductFragment extends PostFragment {
             product.setName(name);
             product.setPrice(Double.parseDouble(price));
             product.setStyle(style);
-            product.setUri(String.valueOf(super.mUriImage));
+            product.setImage(String.valueOf(super.mUriImage));
 
             viewModel.onAddProductToRepository(product).observe(getViewLifecycleOwner(),
                 b -> Toasty.success(requireActivity(), R.string.product_add_database));

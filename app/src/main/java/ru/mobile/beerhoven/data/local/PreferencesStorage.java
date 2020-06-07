@@ -30,26 +30,32 @@ public class PreferencesStorage implements IPreferencesStorage {
       return mSettings.getString(Constants.KEY_USER_NAME, "user");
    }
 
+   @Override
    public int onGetNewsCountValue() {
       return mSettings.getInt(Constants.KEY_NEWS_COUNT, 0);
    }
 
+   @Override
    public void onSaveNewsCountValue(int value) {
       mEditor.putInt(Constants.KEY_NEWS_COUNT, value).apply();
    }
 
+   @Override
    public void onDeleteNewsCountValue() {
       mEditor.remove(Constants.KEY_NEWS_COUNT).apply();
    }
 
+   @Override
    public void onSaveCartCountValue(int value) {
       mEditor.putInt(Constants.KEY_CART_COUNT, value).apply();
    }
 
+   @Override
    public int onGetCartCountValue() {
       return mSettings.getInt(Constants.KEY_CART_COUNT, 0);
    }
 
+   @Override
    public void onDeleteCartCountValue() {
       mEditor.remove(Constants.KEY_CART_COUNT).apply();
    }
