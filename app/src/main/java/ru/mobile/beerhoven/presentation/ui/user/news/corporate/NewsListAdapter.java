@@ -1,10 +1,10 @@
 package ru.mobile.beerhoven.presentation.ui.user.news.corporate;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -21,10 +21,10 @@ import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.utils.CurrentDateTime;
 
 public class NewsListAdapter extends Adapter<NewsListAdapter.NewsListViewHolder> {
-   private final Activity mActivity;
+   private final FragmentActivity mActivity;
    private final List<News> mAdapterList;
 
-   public NewsListAdapter(Activity activity, @NonNull List<News> list) {
+   public NewsListAdapter(FragmentActivity activity, @NonNull List<News> list) {
       this.mActivity = activity;
       this.mAdapterList = list;
    }

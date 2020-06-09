@@ -18,6 +18,10 @@ public final class Constants {
    public static final String NODE_PRODUCTS = "PRODUCTS";
    public static final String NODE_USERS = "USERS";
 
+   // Geo
+   public static final String DRIVER_INFO_REF = "DriverInfo";
+   public static final String DRIVER_LOCATION_REF = "DriverLocation";
+
    // Database images storage
    public static final String FOLDER_NEWS_IMG = "NEWS_IMG";
    public static final String FOLDER_PRODUCT_IMG = "ITEMS_IMG";
@@ -36,12 +40,4 @@ public final class Constants {
    public static final String IMAGE_DEFAULT = "https://firebasestorage.googleapis.com/v0/b/" +
        "beerhoven-app.appspot.com/o/NEWS_IMG%2FFri%20Mar%2010%2004%3A34%3A47%20GMT%2B02%3A0" +
        "0%202023?alt=media&token=9dcd2ae4-06e8-47b7-ae16-ca3950161e03";
-
-   // Geo
-   public static final String DRIVER_INFO_REF = "DriverInfo";
-   public static final String DRIVER_LOCATION_REF = "DriverLocation";
-
-   // Permissions constants
-   public static final int CAMERA_REQUEST_CODE = 100;
-   public static final int STORAGE_REQUEST_CODE = 200;
 }

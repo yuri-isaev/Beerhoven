@@ -17,7 +17,7 @@ import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
 
 public class NotificationListAdapter extends Adapter<NotificationListAdapter.NotificationViewHolder> {
-   FragmentActivity mActivity;
+   private final FragmentActivity mActivity;
    private final List<Order> mAdapterList;
 
    public NotificationListAdapter(FragmentActivity activity, @NonNull List<Order> list) {

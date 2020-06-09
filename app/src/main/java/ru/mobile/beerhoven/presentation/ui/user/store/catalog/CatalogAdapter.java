@@ -47,10 +47,10 @@ public class CatalogAdapter extends Adapter<CatalogAdapter.CatalogViewHolder> {
    public void onBindViewHolder(@NonNull CatalogViewHolder holder, int position) {
       Product product = mAdapterList.get(position);
       String productId = product.getId();
-      String productImage = product.getUri();
+      String productImage = product.getImage();
 
       Glide.with(holder.binding.ivProductImage.getContext())
-          .load(product.getUri())
+          .load(product.getImage())
           .into(holder.binding.ivProductImage);
       
       holder.binding.tvProductName.setText(product.getName());

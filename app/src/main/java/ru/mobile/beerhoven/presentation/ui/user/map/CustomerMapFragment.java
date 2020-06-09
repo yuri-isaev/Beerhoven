@@ -86,7 +86,7 @@ public class CustomerMapFragment extends Fragment implements OnMapReadyCallback,
    public void onMapReady(@NonNull GoogleMap googleMap) {
       this.mGoogleMap = googleMap;
       googleMap.setMapType(MAP_TYPE_NORMAL);
-      CustomerMapViewModel viewModel = new CustomerMapViewModel(getActivity(),
+      CustomerMapViewModel viewModel = new CustomerMapViewModel(requireActivity(),
           requireActivity().getApplicationContext(), mGoogleMap, new MapRepository(mGoogleMap));
       mOrderList = requireNonNull(viewModel.getOrderListFromRepository().getValue());
 

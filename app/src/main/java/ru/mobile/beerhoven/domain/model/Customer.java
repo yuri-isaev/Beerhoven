@@ -6,12 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor
 @Setter
 public class Customer extends User {
-   private String id;
    private String email;
+   private String id;
    private String name;
    private String phone;
 }

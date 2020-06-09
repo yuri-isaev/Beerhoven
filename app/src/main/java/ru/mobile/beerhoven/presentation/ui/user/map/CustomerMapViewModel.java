@@ -15,16 +15,16 @@ import ru.mobile.beerhoven.domain.repository.IMapRepository;
 import ru.mobile.beerhoven.domain.usecases.GetDriverLocationUseCase;
 
 public class CustomerMapViewModel extends ViewModel {
-   private final IMapRepository mRepository;
+   private final IMapRepository iRepository;
    private final GetDriverLocationUseCase mGetDriverLocationUseCase;
 
    public CustomerMapViewModel(Activity activity, Context ctx, GoogleMap map, IMapRepository repo) {
       this.mGetDriverLocationUseCase = new GetDriverLocationUseCase(activity, ctx, map, repo);
-      this.mRepository = repo;
+      this.iRepository = repo;
    }
 
    public LiveData<List<Order>> getOrderListFromRepository() {
-      return mRepository.getOrderLocationListFromDatabase();
+      return iRepository.getOrderLocationListFromDatabase();
    }
 
    public void onGetDriverLocationToUseCase() {

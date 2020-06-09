@@ -25,7 +25,7 @@ public class OrderConfirmRepository implements IOrderConfirmRepository {
       this.mUserPhoneNumber = requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getPhoneNumber();
    }
 
-   public void onCreateOrderConfirm(@NonNull Order order) {
+   public void onCreateOrderConfirmToDatabase(@NonNull Order order) {
       DatabaseReference confirmRef = mFirebaseRef
           .child(Constants.NODE_CONFIRMS)
           .child(mUserPhoneNumber)
@@ -58,7 +58,7 @@ public class OrderConfirmRepository implements IOrderConfirmRepository {
       });
    }
 
-   public void onDeleteOrderCart() {
+   public void onDeleteOrderCartFromDatabase() {
       mFirebaseRef.child(Constants.NODE_CART).removeValue();
    }
 }

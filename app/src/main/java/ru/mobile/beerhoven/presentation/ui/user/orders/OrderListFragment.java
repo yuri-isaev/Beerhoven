@@ -22,7 +22,6 @@ import ru.mobile.beerhoven.domain.model.Order;
 
 public class OrderListFragment extends Fragment {
    private OrderListAdapter mOrderListAdapter;
-   private OrderListViewModel mViewModel;
    private RecyclerView mRecyclerView;
 
    @SuppressLint("NotifyDataSetChanged")
@@ -37,19 +36,17 @@ public class OrderListFragment extends Fragment {
    @Override
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      mViewModel = new OrderListViewModel(new OrderRepository());
-      mViewModel.initOrderList();
-      mViewModel.getOrderList().observe(getViewLifecycleOwner(), (List<Order> list) -> {
-         mOrderListAdapter.notifyDataSetChanged();
-      });
-      initRecyclerView();
+      OrderListViewModel viewModel = new OrderListViewModel(new OrderRepository());
+      viewModel.getOrderListFromRepository().observe(getViewLifecycleOwner(), list ->
+          mOrderListAdapter.notifyDataSetChanged());
+      List<Order> list = requireNonNull(viewModel.getOrderListFromRepository().getValue());
+      onInitRecyclerView(list);
    }
 
    @SuppressLint("NotifyDataSetChanged")
-   private void initRecyclerView() {
+   private void onInitRecyclerView(List<Order> list) {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-      List<Order> list = requireNonNull(mViewModel.getOrderList().getValue());
       mOrderListAdapter = new OrderListAdapter(requireNonNull(list));
       mRecyclerView.setAdapter(mOrderListAdapter);
       mOrderListAdapter.notifyDataSetChanged();

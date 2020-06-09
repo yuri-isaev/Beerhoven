@@ -35,8 +35,8 @@ public class NewsDetailFragment extends Fragment {
       FragmentNewsDetailBinding binding = FragmentNewsDetailBinding
           .inflate(inflater, container, false);
       
-      binding.tvTitle.setText(mNewsTitle);
-      binding.tvDesc.setText(mNewsDesc);
+      binding.tvNewsTitle.setText(mNewsTitle);
+      binding.tvNewsDesc.setText(mNewsDesc);
       binding.tvDate.setText(mNewsDateTime);
 
       Glide.with(binding.image.getContext())

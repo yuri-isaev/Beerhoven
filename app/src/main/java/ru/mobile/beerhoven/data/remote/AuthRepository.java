@@ -31,17 +31,17 @@ public class AuthRepository implements IAuthRepository {
    }
 
    @SuppressLint("NewApi")
-   public MutableLiveData<User> getCurrentUserObject() {
+   public MutableLiveData<User> getCurrentUserFromDatabase() {
       if (mCurrentUser == null) {
          mMutableData.postValue(new EmptyUser());
          return mMutableData;
       }
-      getCurrentUserData();
+      onGetCurrentUserObject();
       return mMutableData;
    }
 
    @SuppressLint("NewApi")
-   public void getCurrentUserData() {
+   public void onGetCurrentUserObject() {
       String uid = mCurrentUser.getPhoneNumber();
       assert uid != null;
       mFirebaseRef.child(uid);
@@ -60,7 +60,7 @@ public class AuthRepository implements IAuthRepository {
    }
 
    @Override
-   public void onCreateUser(@NonNull User customer) {
+   public void onCreateUserToDatabase(@NonNull User customer) {
       String key = mFirebaseRef.child(Constants.NODE_USERS).push().getKey();
       customer.setId(key);
       mFirebaseRef.child(customer.getPhone()).setValue(customer);

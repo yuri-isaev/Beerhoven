@@ -13,5 +13,5 @@ public interface IMapRepository {
    MutableLiveData<List<Order>> getOrderLocationListFromDatabase();
    void onAddDriverMarker();
    void onFindDriverByKey(DriverGeoModel driverGeoModel);
-   void onGetDriverLocation(Location location, String cityName);
+   void onGetDriverLocationFromDatabase(Location location, String cityName);
 }

@@ -5,12 +5,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Order Id    == user phone number
+ * Order Id == user phone number
  * Order phone == user phone number to confirm
  */
 @Getter
-@Setter
 @NoArgsConstructor
+@Setter
 public class Order {
    private String address;
    private String color;

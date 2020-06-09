@@ -1,7 +1,6 @@
 package ru.mobile.beerhoven.presentation.ui.user.orders;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
@@ -10,25 +9,17 @@ import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.domain.repository.IOrderRepository;
 
 public class OrderListViewModel extends ViewModel {
-   private final IOrderRepository mRepository;
-   private MutableLiveData<List<Order>> mOrderList;
+   private final IOrderRepository iRepository;
 
-   public OrderListViewModel(IOrderRepository repository) {
-      this.mRepository = repository;
+   public OrderListViewModel(IOrderRepository repo) {
+      this.iRepository = repo;
    }
 
-   public void initOrderList() {
-      if (mOrderList != null) {
-         return;
-      }
-      mOrderList = mRepository.getOrderMutableList();
-   }
-
-   public LiveData<List<Order>> getOrderList() {
-      return mOrderList;
+   public LiveData<List<Order>> getOrderListFromRepository() {
+      return iRepository.getOrderListFromDatabase();
    }
 
    public void onDeleteOrderByIdToRepository(String key) {
-      mRepository.onDeleteOrderById(key);
+      iRepository.onDeleteOrderByIdToDatabase(key);
    }
 }

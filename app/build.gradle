@@ -53,7 +53,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.2.0'
     implementation 'androidx.navigation:navigation-fragment:2.2.0'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'com.google.android.material:material:1.8.0'
 
     // Test libraries
     testImplementation 'junit:junit:4.12'
@@ -76,9 +76,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-storage:19.1.0'
 
-    // Custom Toast
-    implementation 'com.github.GrenderG:Toasty:1.4.2'
-
     // Glide Library
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
@@ -86,11 +83,8 @@ dependencies {
     // Mask for phone number
     implementation 'ru.egslava:MaskedEditText:1.0.5'
 
-    // Custom button library
-    implementation 'info.hoang8f:fbutton:1.0.5'
-
     // Networking support
-    implementation 'com.android.volley:volley:1.1.0'
+    implementation 'com.android.volley:volley:1.2.1'
 
     // Cloud messaging service
     implementation 'com.google.firebase:firebase-messaging:19.2.0'

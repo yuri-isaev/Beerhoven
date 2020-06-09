@@ -7,13 +7,13 @@ import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IProductRepository;
 
 public class AddProductViewModel extends ViewModel {
-   private final IProductRepository mRepository;
+   private final IProductRepository iRepository;
 
-   public AddProductViewModel(IProductRepository repository) {
-      this.mRepository = repository;
+   public AddProductViewModel(IProductRepository repo) {
+      this.iRepository = repo;
    }
 
    public LiveData<Boolean> onAddProductToRepository(Product product) {
-      return mRepository.onAddProductToDatabase(product);
+      return iRepository.onAddProductToDatabase(product);
    }
 }

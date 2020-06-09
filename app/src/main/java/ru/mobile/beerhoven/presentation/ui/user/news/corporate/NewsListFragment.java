@@ -37,14 +37,14 @@ public class NewsListFragment extends Fragment {
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       NewsListViewModel viewModel = new NewsListViewModel(requireContext(), new NewsRepository());
       viewModel.onDeleteNewsCounterToStorage();
-      viewModel.getNewsListFromRepository().observe(getViewLifecycleOwner(),
-          list -> mAdapter.notifyDataSetChanged());
+      viewModel.getNewsListFromRepository().observe(getViewLifecycleOwner(), list ->
+          mAdapter.notifyDataSetChanged());
       List<News> list = requireNonNull(viewModel.getNewsListFromRepository().getValue());
-      initRecyclerView(list);
+      onInitRecyclerView(list);
    }
 
    @SuppressLint("NotifyDataSetChanged")
-   private void initRecyclerView(List<News> list) {
+   private void onInitRecyclerView(List<News> list) {
       mRecyclerView.setHasFixedSize(true);
       LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
       layoutManager.setReverseLayout(true);

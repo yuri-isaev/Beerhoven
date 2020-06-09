@@ -5,10 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
 @AllArgsConstructor
+@Getter
 @NoArgsConstructor
+@Setter
 public class DriverInfoModel {
    private String email;
    private String name;

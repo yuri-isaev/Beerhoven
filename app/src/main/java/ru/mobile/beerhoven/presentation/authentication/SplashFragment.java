@@ -31,8 +31,7 @@ public class SplashFragment extends Fragment {
    public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
       AuthViewModel mViewModel = new AuthViewModel(new AuthRepository());
-      mViewModel.getCurrentUser().observe(getViewLifecycleOwner(), (user) -> mUserId = user.getId());
-
+      mViewModel.getCurrentUser().observe(getViewLifecycleOwner(), user -> mUserId = user.getId());
       new Handler().postDelayed(() -> {
          if (!mUserId.equals("null")) {
             Intent intent = new Intent(getActivity(), MainActivity.class);

@@ -12,30 +12,29 @@ import ru.mobile.beerhoven.domain.repository.IPreferencesStorage;
 import ru.mobile.beerhoven.domain.repository.IPushMessagingService;
 
 public class OrderConfirmViewModel extends ViewModel {
-   private final IOrderConfirmRepository mRepository;
-   private final IPreferencesStorage mStorage;
-   private final IPushMessagingService mService;
+   private final IOrderConfirmRepository iRepository;
+   private final IPreferencesStorage iStorage;
+   private final IPushMessagingService iService;
 
-   public OrderConfirmViewModel(Context context, IOrderConfirmRepository repository,
-       IPushMessagingService service) {
-      this.mRepository = repository;
-      this.mService = service;
-      this.mStorage = new PreferencesStorage(context);
+   public OrderConfirmViewModel(Context ctx, IOrderConfirmRepository repo, IPushMessagingService service) {
+      this.iRepository = repo;
+      this.iService = service;
+      this.iStorage = new PreferencesStorage(ctx);
    }
 
    public void onCreateConfirmOrderToRepository(Order order) {
-      mRepository.onCreateOrderConfirm(order);
+      iRepository.onCreateOrderConfirmToDatabase(order);
    }
 
    public void onDeleteOrderCartToRepository() {
-      mRepository.onDeleteOrderCart();
+      iRepository.onDeleteOrderCartFromDatabase();
    }
 
    public void onDeleteCartCounterToStorage() {
-      mStorage.onDeleteCartCountValue();
+      iStorage.onDeleteCartCountValue();
    }
 
    public void onSendPushNotificationToService(FragmentActivity activity) {
-      mService.onSendPushNotification(activity);
+      iService.onSendPushNotification(activity);
    }
 }

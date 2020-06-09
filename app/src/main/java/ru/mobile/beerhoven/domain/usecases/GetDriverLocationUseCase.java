@@ -113,7 +113,7 @@ public class GetDriverLocationUseCase {
                 List<Address> list = mGeocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
                 if (list.size() > 0) {
                    mCityName = list.get(0).getLocality();
-                   mRepository.onGetDriverLocation(location, mCityName);
+                   mRepository.onGetDriverLocationFromDatabase(location, mCityName);
                 }
              } catch (IOException e) {
                 e.printStackTrace();

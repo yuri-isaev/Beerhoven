@@ -12,41 +12,41 @@ import ru.mobile.beerhoven.domain.repository.IAuthService;
 import ru.mobile.beerhoven.domain.repository.IPreferencesStorage;
 
 public class AuthViewModel extends ViewModel {
-   private IAuthRepository mRepository;
-   private IAuthService mService;
-   private IPreferencesStorage mStorage;
+   private IAuthRepository iRepository;
+   private IAuthService iService;
+   private IPreferencesStorage iStorage;
 
    public AuthViewModel(Context context) {
-      this.mStorage = new PreferencesStorage(context);
+      this.iStorage = new PreferencesStorage(context);
    }
 
    public AuthViewModel(IAuthRepository repository) {
-      this.mRepository = repository;
+      this.iRepository = repository;
    }
 
    public AuthViewModel(Context context, IAuthRepository repository, IAuthService service) {
-      this.mRepository = repository;
-      this.mStorage = new PreferencesStorage(context);
-      this.mService = service;
+      this.iRepository = repository;
+      this.iStorage = new PreferencesStorage(context);
+      this.iService = service;
    }
 
    public void onCreateUserToRepository(User customer) {
-      mRepository.onCreateUser(customer);
+      iRepository.onCreateUserToDatabase(customer);
    }
 
    public LiveData<User> getCurrentUser() {
-      return mRepository.getCurrentUserObject();
+      return iRepository.getCurrentUserFromDatabase();
    }
 
    public String getUserNameToStorage() {
-      return mStorage.getUserNameToStorage();
+      return iStorage.getUserName();
    }
 
    public void onSaveNameToStorage(String name) {
-      mStorage.onSaveUserName(name);
+      iStorage.onSaveUserName(name);
    }
 
    public LiveData<Boolean> onAuthenticationConfirm(String phoneNumber) {
-      return mService.sendVerificationCodeToUser(phoneNumber);
+      return iService.sendVerificationCodeToUser(phoneNumber);
    }
 }

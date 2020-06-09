@@ -6,10 +6,10 @@ import ru.mobile.beerhoven.domain.model.News;
 import ru.mobile.beerhoven.domain.repository.INewsRepository;
 
 public class AddNewsUseCase {
-   private final INewsRepository mRepository;
+   private final INewsRepository iRepository;
 
-   public AddNewsUseCase(INewsRepository mRepository) {
-      this.mRepository = mRepository;
+   public AddNewsUseCase(INewsRepository repo) {
+      this.iRepository = repo;
    }
 
    public void execute(News news) {
@@ -25,10 +25,10 @@ public class AddNewsUseCase {
    }
 
    private void onAddNewsDataToRepository(News news) {
-      mRepository.onAddNewsWithoutImageToDatabase(news);
+      iRepository.onAddNewsWithoutImageToDatabase(news);
    }
 
    private void onUploadDataToRepository(News news) {
-      mRepository.onAddNewsToDatabase(news);
+      iRepository.onAddNewsToDatabase(news);
    }
 }

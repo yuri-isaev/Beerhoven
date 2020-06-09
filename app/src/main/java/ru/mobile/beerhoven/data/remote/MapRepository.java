@@ -95,7 +95,7 @@ public class MapRepository implements IMapRepository, FirebaseFailedListener, Fi
    }
 
    @Override
-   public void onGetDriverLocation(@NonNull Location location, String cityName) {
+   public void onGetDriverLocationFromDatabase(@NonNull Location location, String cityName) {
       DatabaseReference driverLocationRef = mFirebaseRef.child(Constants.DRIVER_LOCATION_REF).child(cityName);
       GeoFire geoFire = new GeoFire(driverLocationRef);
       GeoQuery geoQuery = geoFire.queryAtLocation(
@@ -119,7 +119,7 @@ public class MapRepository implements IMapRepository, FirebaseFailedListener, Fi
          public void onGeoQueryReady() {
             if (mDistance <= LIMIT_RANGE) {
                mDistance++;
-               onGetDriverLocation(location, cityName); // Continue searching at a new distance
+               onGetDriverLocationFromDatabase(location, cityName); // Continue searching at a new distance
             } else {
                mDistance = 1.0; // Reset
                onAddDriverMarker();

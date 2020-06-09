@@ -44,8 +44,7 @@ public class AuthService implements IAuthService {
    // Method is used for getting OTP on user phone number.
    @Override
    public MutableLiveData<Boolean> sendVerificationCodeToUser(String phoneNumber) {
-      PhoneAuthOptions options = PhoneAuthOptions
-          .newBuilder(mFirebaseAuth)
+      PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mFirebaseAuth)
           .setPhoneNumber(phoneNumber)
           .setTimeout(60L, TimeUnit.SECONDS)
           .setActivity(mActivity)

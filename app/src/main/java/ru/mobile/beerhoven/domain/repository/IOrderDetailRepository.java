@@ -7,5 +7,5 @@ import java.util.List;
 import ru.mobile.beerhoven.domain.model.Product;
 
 public interface IOrderDetailRepository {
-   MutableLiveData<List<Product>> getOrderDetailList(String orderKey);
+   MutableLiveData<List<Product>> getOrderDetailListFromDatabase(String orderKey);
 }

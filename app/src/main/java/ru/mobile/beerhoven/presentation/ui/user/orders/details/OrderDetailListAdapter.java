@@ -21,10 +21,10 @@ import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Constants;
 
 public class OrderDetailListAdapter extends Adapter<OrderDetailListAdapter.OrderDetailsViewHolder> {
-   private final List<Product> mOrderDetails;
+   private final List<Product> mAdapterList;
 
    public OrderDetailListAdapter(@NonNull List<Product> list) {
-      this.mOrderDetails = list;
+      this.mAdapterList = list;
    }
 
    @NonNull
@@ -38,28 +38,28 @@ public class OrderDetailListAdapter extends Adapter<OrderDetailListAdapter.Order
    @SuppressLint("SetTextI18n")
    @Override
    public void onBindViewHolder(@NonNull OrderDetailsViewHolder holder, int position) {
-      Product product = mOrderDetails.get(position);
+      Product product = mAdapterList.get(position);
       String productId = product.getId();
-      holder.binding.cartName.setText(product.getName());
-      holder.binding.cartStyle.setText(product.getStyle());
-      holder.binding.cartFortress.setText(product.getFortress() + "%");
-      holder.binding.cartQuantity.setText(product.getQuantity());
-      holder.binding.cartPrice.setText(product.getPrice() + " руб.");
-      holder.binding.cartTotal.setText(product.getTotal() + " руб.");
-      holder.binding.cartProductDelete.setVisibility(INVISIBLE);
+      holder.binding.tvCartItemName.setText(product.getName());
+      holder.binding.tvCartItemStyle.setText(product.getStyle());
+      holder.binding.tvCartItemFortress.setText(product.getFortress() + "%");
+      holder.binding.tvCartItemQuantity.setText(product.getQuantity());
+      holder.binding.tvCartItemPrice.setText(product.getPrice() + " руб.");
+      holder.binding.tvCartItemTotal.setText(product.getTotal() + " руб.");
+      holder.binding.ivCartItemDelete.setVisibility(INVISIBLE);
 
-      Glide.with(holder.binding.cartImage.getContext())
-          .load(product.getUrl())
-          .into(holder.binding.cartImage);
+      Glide.with(holder.binding.ivCartItemImage.getContext())
+          .load(product.getImage())
+          .into(holder.binding.ivCartItemImage);
 
-      holder.binding.cartContainer.setOnClickListener(v -> {
+      holder.binding.llCartItemContainer.setOnClickListener(v -> {
          assert productId != null;
          NavDirections action = OrderDetailListFragmentDirections.actionNavOrderDetailsToNavProductDetails()
              .setCountry(product.getCountry())
              .setDensity(product.getDensity())
              .setDescription(product.getDescription())
              .setFortress(product.getFortress())
-             .setImage(product.getUrl())
+             .setImage(product.getImage())
              .setManufacture(product.getManufacture())
              .setName(product.getName())
              .setProductId(productId)
@@ -72,7 +72,7 @@ public class OrderDetailListAdapter extends Adapter<OrderDetailListAdapter.Order
 
    @Override
    public int getItemCount() {
-      return mOrderDetails.size();
+      return mAdapterList.size();
    }
 
    public static class OrderDetailsViewHolder extends ViewHolder {

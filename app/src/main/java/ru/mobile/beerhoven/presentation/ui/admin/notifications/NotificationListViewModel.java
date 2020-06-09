@@ -3,7 +3,6 @@ package ru.mobile.beerhoven.presentation.ui.admin.notifications;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
@@ -14,36 +13,27 @@ import ru.mobile.beerhoven.domain.repository.INotificationRepository;
 import ru.mobile.beerhoven.domain.repository.IPreferencesStorage;
 
 public class NotificationListViewModel extends ViewModel {
-   //Context mContext;
-   private final INotificationRepository mRepository;
-   private IPreferencesStorage mStorage;
-   private MutableLiveData<List<Order>> mNotificationList;
+   private final INotificationRepository iRepository;
+   private IPreferencesStorage iStorage;
 
-   public NotificationListViewModel(INotificationRepository repository) {
-      this.mRepository = repository;
+   public NotificationListViewModel(INotificationRepository repo) {
+      this.iRepository = repo;
    }
 
-   public NotificationListViewModel(Context context, INotificationRepository repository) {
-      this.mRepository = repository;
-      this.mStorage = new PreferencesStorage(context);
+   public NotificationListViewModel(Context ctx, INotificationRepository repo) {
+      this.iRepository = repo;
+      this.iStorage = new PreferencesStorage(ctx);
    }
 
-   public void initNotificationList() {
-      if (mNotificationList != null) {
-         return;
-      }
-      mNotificationList = mRepository.getNotificationList();
-   }
-
-   public LiveData<List<Order>> getNotificationList() {
-      return mNotificationList;
+   public LiveData<List<Order>> getNotificationListFromRepository() {
+      return iRepository.getNotificationListFromDatabase();
    }
 
    public void onSaveNotificationCounterToStorage(int counterValue) {
-      mStorage.onSaveNotificationCountValue(counterValue);
+      iStorage.onSaveNotificationCountValue(counterValue);
    }
 
    public int getNotificationCountFromStorage() {
-      return mStorage.onGetNotificationCountValue();
+      return iStorage.onGetNotificationCountValue();
    }
 }

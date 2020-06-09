@@ -161,6 +161,10 @@ public class ProductRepository implements IProductRepository {
       mStorageRef.child(Constants.FOLDER_PRODUCT_IMG)
           .child(new Date().toString())
           .putFile(Uri.parse(product.getImage()))
+          .addOnFailureListener(e -> {
+             mMutableResponse.setValue(false);
+             Log.e(TAG, e.getMessage());
+          })
           .addOnSuccessListener((taskSnapshot) -> {
              Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
              uriTask.addOnSuccessListener(uri -> {
@@ -174,10 +178,6 @@ public class ProductRepository implements IProductRepository {
                 mMutableResponse.setValue(true);
                 Log.i(TAG, "Product image added to database storage");
              });
-          })
-          .addOnFailureListener(e -> {
-             mMutableResponse.setValue(false);
-             Log.e(TAG, e.getMessage());
           });
       return mMutableResponse;
    }

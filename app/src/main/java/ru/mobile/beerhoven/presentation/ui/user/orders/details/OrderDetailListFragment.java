@@ -48,18 +48,16 @@ public class OrderDetailListFragment extends Fragment {
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
       mViewModel = new OrderDetailListViewModel(new OrderDetailRepository());
-      mViewModel.initOrderDetailList(mOrderKey);
-      mViewModel.getOrderDetailList().observe(getViewLifecycleOwner(), (List<Product> list) -> {
-         mOrderDetailsAdapter.notifyDataSetChanged();
-      });
-      initRecyclerView();
+      mViewModel.getOrderDetailListFromRepository(mOrderKey).observe(getViewLifecycleOwner(), list ->
+         mOrderDetailsAdapter.notifyDataSetChanged());
+      List<Product> list = requireNonNull(mViewModel.getOrderDetailListFromRepository(mOrderKey).getValue());
+      initRecyclerView(list);
    }
 
    @SuppressLint("NotifyDataSetChanged")
-   private void initRecyclerView() {
+   private void initRecyclerView(List<Product> list) {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-      List<Product> list = requireNonNull(mViewModel.getOrderDetailList().getValue());
       mOrderDetailsAdapter = new OrderDetailListAdapter(list);
       mRecyclerView.setAdapter(mOrderDetailsAdapter);
       mOrderDetailsAdapter.notifyDataSetChanged();

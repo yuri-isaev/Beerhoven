@@ -5,8 +5,9 @@ import android.graphics.Typeface;
 import android.text.TextPaint;
 import android.text.style.TypefaceSpan;
 
-public class TypeFaceSpan extends TypefaceSpan {
+import androidx.annotation.NonNull;
 
+public class TypeFaceSpan extends TypefaceSpan {
    private final Typeface mNewType;
 
    public TypeFaceSpan(String family, Typeface type) {
@@ -24,7 +25,7 @@ public class TypeFaceSpan extends TypefaceSpan {
       applyCustomTypeFace(paint, mNewType);
    }
 
-   private static void applyCustomTypeFace(Paint paint, Typeface tf) {
+   private static void applyCustomTypeFace(@NonNull Paint paint, Typeface tf) {
       int oldStyle;
       Typeface old = paint.getTypeface();
       if (old == null) {

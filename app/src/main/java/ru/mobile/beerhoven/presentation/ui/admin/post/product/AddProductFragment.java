@@ -25,7 +25,7 @@ import ru.mobile.beerhoven.utils.Validation;
 
 public class AddProductFragment extends PostFragment {
    private Button mAddDatabaseButton;
-   private ImageView mSelectorAddImage;
+   private ImageView mAddImageSelector;
    private ImageView mProductImage;
    private TextInputEditText mCategoryInputText;
    private TextInputLayout mCategoryInput;
@@ -42,18 +42,18 @@ public class AddProductFragment extends PostFragment {
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       FragmentAddProductBinding binding = FragmentAddProductBinding.inflate(inflater, container, false);
       mAddDatabaseButton = binding.btnAddDatabase;
-      mCountryInput = binding.productCountry;
-      mDensityInput = binding.productDensity;
-      mDescriptionInput = binding.productDescription;
-      mFortressInput = binding.productFortress;
-      mManufactureInput = binding.productManufacture;
-      mNameInput = binding.productName;
-      mPriceInput = binding.productPrice;
-      mStyleInput = binding.productStyle;
-      mProductImage = binding.productImage;
-      mCategoryInput = binding.productCategory;
+      mCountryInput = binding.ilProductCountry;
+      mDensityInput = binding.ilProductDensity;
+      mDescriptionInput = binding.ilProductDescription;
+      mFortressInput = binding.ilProductFortress;
+      mManufactureInput = binding.ilProductManufacture;
+      mNameInput = binding.ilProductName;
+      mPriceInput = binding.ilProductPrice;
+      mStyleInput = binding.ilProductStyle;
+      mProductImage = binding.ivProductImage;
+      mCategoryInput = binding.ilProductCategory;
       mCategoryInputText = binding.etProductCategory;
-      mSelectorAddImage = binding.selectorAddImage;
+      mAddImageSelector = binding.ivSelectorAddImage;
       return binding.getRoot();
    }
 
@@ -62,9 +62,9 @@ public class AddProductFragment extends PostFragment {
       super.onViewCreated(view, savedInstanceState);
       AddProductViewModel viewModel = new AddProductViewModel(new ProductRepository());
 
-      mSelectorAddImage.setOnClickListener(v -> super
+      mAddImageSelector.setOnClickListener(v -> super
           .onShowImagePickDialog()
-          .observe(getViewLifecycleOwner(), image -> mProductImage.setImageBitmap(image)));
+          .observe(getViewLifecycleOwner(), bitmap -> mProductImage.setImageBitmap(bitmap)));
 
       mCategoryInputText.setOnClickListener(v -> super
           .onShowCategoryPickDialog()

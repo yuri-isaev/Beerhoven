@@ -53,10 +53,10 @@ public class OrderConfirmFragment extends Fragment {
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       FragmentOrderConfirmBinding binding = FragmentOrderConfirmBinding.inflate(inflater, container, false);
-      mAddOrderButton = binding.btnConfirmOrder;
-      mAddressInput = binding.confirmAddress;
-      mNameInput = binding.confirmName;
-      mPhoneInput = binding.confirmNumber;
+      mAddOrderButton = binding.btnAddDatabase;
+      mAddressInput = binding.ilConfirmAddress;
+      mNameInput = binding.ilConfirmName;
+      mPhoneInput = binding.ilConfirmNumber;
       return binding.getRoot();
    }
 
@@ -84,7 +84,7 @@ public class OrderConfirmFragment extends Fragment {
          order.setTotal(Double.parseDouble(String.valueOf(Double.parseDouble(mTotal))));
 
          onSendOrderConfirmList(order);
-         toActivity(0);
+         onFragmentActivity(0);
          navigateFragment(view);
          sendPushNotification(requireActivity());
       });
@@ -98,7 +98,7 @@ public class OrderConfirmFragment extends Fragment {
          Toasty.success(requireActivity(), R.string.order_sent_success);
    }
 
-   public void toActivity(int data) {
+   public void onFragmentActivity(int data) {
       Activity activity = getActivity();
       if (activity != null && !activity.isFinishing() && activity instanceof MainActivity) {
          ((MainActivity) activity).onUpdateActivityCounter(data);

@@ -43,7 +43,6 @@ public class OrderListAdapter extends Adapter<OrderListAdapter.OrderViewHolder> 
 
       holder.binding.orderAddress.setText(order.getAddress());
       holder.binding.orderDate.setText(order.getDate());
-      holder.binding.orderName.setText(order.getName());
       holder.binding.orderPhone.setText(order.getPhone());
       holder.binding.orderTime.setText(order.getTime());
       holder.binding.orderTotal.setText(order.getTotal() + " руб.");

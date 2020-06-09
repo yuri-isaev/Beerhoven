@@ -34,7 +34,7 @@ public class CartRepository implements ICartRepository {
    }
 
    @Override
-   public MutableLiveData<List<Product>> getCartMutableList() {
+   public MutableLiveData<List<Product>> getCartListFromDatabase() {
       if (mProductList.size() == 0) {
          onGetCartList();
       }
@@ -74,22 +74,20 @@ public class CartRepository implements ICartRepository {
          }
 
          @Override
-         public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-         }
+         public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
 
          @Override
-         public void onCancelled(@NonNull DatabaseError databaseError) {
-         }
+         public void onCancelled(@NonNull DatabaseError databaseError) {}
       });
    }
 
    @Override
-   public void onDeleteCartItem(String item) {
+   public void onDeleteCartItemFromDatabase(String item) {
       mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneNumber).child(item).removeValue();
    }
 
    @Override
-   public void onDeleteUserCartList() {
+   public void onDeleteUserCartListFromDatabase() {
       mFirebaseRef.child(Constants.NODE_CART).child(mUserPhoneNumber).removeValue();
    }
 }

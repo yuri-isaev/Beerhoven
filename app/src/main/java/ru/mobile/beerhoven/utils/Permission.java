@@ -11,6 +11,11 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 
 public class Permission {
+
+   // Permissions constants
+   public static final int CAMERA_REQUEST_CODE = 100;
+   public static final int STORAGE_REQUEST_CODE = 200;
+
    private final Activity mActivity;
    private final String[] mCameraPermissions;
    private final String[] mLocationPermissions;
@@ -30,7 +35,7 @@ public class Permission {
    }
 
    public void requestLocationPermission() {
-      requestPermissions(mActivity, mLocationPermissions, Constants.STORAGE_REQUEST_CODE);
+      requestPermissions(mActivity, mLocationPermissions, STORAGE_REQUEST_CODE);
    }
 
    public boolean checkStoragePermission() {
@@ -39,7 +44,7 @@ public class Permission {
    }
 
    public void requestStoragePermission() {
-      requestPermissions(mActivity, mStoragePermissions, Constants.STORAGE_REQUEST_CODE);
+      requestPermissions(mActivity, mStoragePermissions, STORAGE_REQUEST_CODE);
    }
 
    public boolean checkCameraPermission() {
@@ -50,6 +55,6 @@ public class Permission {
    }
 
    public void requestCameraPermission() {
-      requestPermissions(mActivity, mCameraPermissions, Constants.CAMERA_REQUEST_CODE);
+      requestPermissions(mActivity, mCameraPermissions, CAMERA_REQUEST_CODE);
    }
 }

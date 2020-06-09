@@ -34,15 +34,15 @@ public class OrderDetailRepository implements IOrderDetailRepository {
    }
 
    @Override
-   public MutableLiveData<List<Product>> getOrderDetailList(String orderKey) {
+   public MutableLiveData<List<Product>> getOrderDetailListFromDatabase(String orderKey) {
       if (mProductList.size() == 0) {
-         getOrderList(orderKey);
+         onGetOrderList(orderKey);
       }
       mMutableList.setValue(mProductList);
       return mMutableList;
    }
 
-   private void getOrderList(String orderKey) {
+   private void onGetOrderList(String orderKey) {
       mFirebaseRef.child(mUserPhoneNumber).child(orderKey).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

@@ -26,7 +26,7 @@ public class PreferencesStorage implements IPreferencesStorage {
    }
 
    @Override
-   public String getUserNameToStorage() {
+   public String getUserName() {
       return mSettings.getString(Constants.KEY_USER_NAME, "user");
    }
 

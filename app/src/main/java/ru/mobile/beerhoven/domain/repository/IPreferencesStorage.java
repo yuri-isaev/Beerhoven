@@ -1,7 +1,7 @@
 package ru.mobile.beerhoven.domain.repository;
 
 public interface IPreferencesStorage {
-   String getUserNameToStorage();
+   String getUserName();
    void onSaveUserName(String name);
    int onGetNewsCountValue();
    void onSaveNewsCountValue(int value);

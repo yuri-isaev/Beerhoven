@@ -22,7 +22,7 @@ public class AuthFragment extends Fragment {
    private AuthViewModel mViewModel;
    private String mEmail;
    private String mName;
-   private String mPhoneNumber;
+   private String mPhone;
 
    @Override
    public void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class AuthFragment extends Fragment {
          AuthFragmentArgs args = AuthFragmentArgs.fromBundle(getArguments());
          mEmail = args.getEmail();
          mName = args.getName();
-         mPhoneNumber = args.getPhone();
+         mPhone = args.getPhone();
       }
    }
 
@@ -46,12 +46,12 @@ public class AuthFragment extends Fragment {
       super.onViewCreated(view, savedInstanceState);
       mViewModel = new AuthViewModel(requireContext(), new AuthRepository(), new AuthService(requireActivity()));
       mViewModel.onSaveNameToStorage(mName);
-      mViewModel.onAuthenticationConfirm(mPhoneNumber).observe(getViewLifecycleOwner(), this::onSignIn);
+      mViewModel.onAuthenticationConfirm(mPhone).observe(getViewLifecycleOwner(), this::onSignIn);
    }
 
    private void onSignIn(@NonNull Boolean response) {
       if (response) {
-         User user = new Customer("null", mEmail, mName, mPhoneNumber);
+         User user = new Customer(mEmail, "null", mName, mPhone);
          mViewModel.onCreateUserToRepository(user);
          Intent intent = new Intent(requireContext(), MainActivity.class);
          intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

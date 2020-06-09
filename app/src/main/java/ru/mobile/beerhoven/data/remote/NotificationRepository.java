@@ -28,15 +28,16 @@ public class NotificationRepository implements INotificationRepository {
       this.mOrderList = new ArrayList<>();
    }
 
-   public MutableLiveData<List<Order>> getNotificationList() {
+   @Override
+   public MutableLiveData<List<Order>> getNotificationListFromDatabase() {
       if (mOrderList.size() == 0) {
-         getConfirmList();
+         onGetConfirmList();
       }
       mMutableList.setValue(mOrderList);
       return mMutableList;
    }
 
-   private void getConfirmList() {
+   private void onGetConfirmList() {
       mFirebaseRef.child(Constants.NODE_CONFIRMS).addChildEventListener(new ChildEventListener() {
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

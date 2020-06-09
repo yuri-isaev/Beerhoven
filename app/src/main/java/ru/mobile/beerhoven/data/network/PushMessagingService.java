@@ -58,16 +58,14 @@ public class PushMessagingService extends FirebaseMessagingService implements IP
       });
    }
 
+   @SuppressLint("NewApi")
    @Override
    public void onMessageReceived(@NonNull RemoteMessage message) {
       super.onMessageReceived(message);
       Intent intent = new Intent(this, MainActivity.class);
       NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
       int notificationID = Randomizer.getRandomInt();
-
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-         setupChannels(manager);
-
+      onSetupChannels(manager);
       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
       @SuppressLint("UnspecifiedImmutableFlag")
@@ -92,7 +90,7 @@ public class PushMessagingService extends FirebaseMessagingService implements IP
    }
 
    @RequiresApi(api = Build.VERSION_CODES.O)
-   public void setupChannels(@NonNull NotificationManager notificationManager) {
+   public void onSetupChannels(@NonNull NotificationManager notificationManager) {
       CharSequence adminChannelName = "New notification";
       String adminChannelDescription = "Device to device notification";
       NotificationChannel channel = new NotificationChannel(Constants.ADMIN_CHANNEL_ID,

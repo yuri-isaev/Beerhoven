@@ -6,9 +6,7 @@ import java.util.List;
 
 import ru.mobile.beerhoven.domain.model.Order;
 
-public interface IOrderRepository extends IUserRepository {
-   MutableLiveData<List<Order>> getOrderMutableList();
-   MutableLiveData<String> getOrderMutableData();
-   void onGetOrderConfirmList();
-   void onDeleteOrderById(String keyId);
+public interface IOrderRepository {
+   MutableLiveData<List<Order>> getOrderListFromDatabase();
+   void onDeleteOrderByIdToDatabase(String keyId);
 }

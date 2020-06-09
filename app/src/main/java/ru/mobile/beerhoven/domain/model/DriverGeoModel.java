@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
-@Setter
 @NoArgsConstructor
+@Setter
 public class DriverGeoModel {
    private String key;
    private GeoLocation geoLocation;

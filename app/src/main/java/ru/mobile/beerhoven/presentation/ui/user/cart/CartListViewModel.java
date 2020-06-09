@@ -3,7 +3,6 @@ package ru.mobile.beerhoven.presentation.ui.user.cart;
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.util.List;
@@ -14,48 +13,39 @@ import ru.mobile.beerhoven.domain.repository.ICartRepository;
 import ru.mobile.beerhoven.domain.repository.IPreferencesStorage;
 
 public class CartListViewModel extends ViewModel {
-   private final ICartRepository mRepository;
-   private IPreferencesStorage mStorage;
-   private LiveData<List<Product>> mCartList;
+   private final ICartRepository iRepository;
+   private IPreferencesStorage iStorage;
 
-   public CartListViewModel(ICartRepository repository) {
-      this.mRepository = repository;
+   public CartListViewModel(ICartRepository repo) {
+      this.iRepository = repo;
    }
 
-   public CartListViewModel(Context context, ICartRepository repository) {
-      this.mRepository = repository;
-      this.mCartList = new MutableLiveData<>();
-      this.mStorage = new PreferencesStorage(context);
+   public CartListViewModel(Context ctx, ICartRepository repo) {
+      this.iRepository = repo;
+      this.iStorage = new PreferencesStorage(ctx);
    }
 
-   public void initCartList() {
-      if (mCartList != null) {
-         return;
-      }
-      mCartList = mRepository.getCartMutableList();
-   }
-
-   public LiveData<List<Product>> getCartList() {
-      return mCartList;
+   public LiveData<List<Product>> getCartListFromRepository() {
+      return iRepository.getCartListFromDatabase();
    }
 
    public void onDeleteCartItemFromRepository(String item) {
-      mRepository.onDeleteCartItem(item);
+      iRepository.onDeleteCartItemFromDatabase(item);
    }
 
    public void onDeleteCartListToRepository() {
-      mRepository.onDeleteUserCartList();
+      iRepository.onDeleteUserCartListFromDatabase();
    }
 
    public int getCartCountFromStorage() {
-      return mStorage.onGetCartCountValue();
+      return iStorage.onGetCartCountValue();
    }
 
    public void onSaveCartCounterToStorage(int counterValue) {
-      mStorage.onSaveCartCountValue(counterValue);
+      iStorage.onSaveCartCountValue(counterValue);
    }
 
    public void onDeleteCartCounterToStorage() {
-      mStorage.onDeleteCartCountValue();
+      iStorage.onDeleteCartCountValue();
    }
 }

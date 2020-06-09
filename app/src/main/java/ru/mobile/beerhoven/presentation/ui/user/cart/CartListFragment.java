@@ -18,13 +18,15 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.CartRepository;
+import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.utils.Toasty;
 
 public class CartListFragment extends Fragment implements CartListAdapter.Callback {
    private CartListAdapter mAdapter;
-   private CartListViewModel mViewModel;
    private Button mConfirmButton;
    private RecyclerView mRecyclerView;
    private String mTotal = "0.0";
@@ -34,7 +36,7 @@ public class CartListFragment extends Fragment implements CartListAdapter.Callba
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       View view = inflater.inflate(R.layout.fragment_cart_list, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view_cart);
-      mConfirmButton = view.findViewById(R.id.btn_confirm);
+      mConfirmButton = view.findViewById(R.id.btnConfirm);
       mOrderTotal = view.findViewById(R.id.cart_total);
 
       // Custom layout params
@@ -48,32 +50,33 @@ public class CartListFragment extends Fragment implements CartListAdapter.Callba
    @Override
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      onPassData(mTotal);
-      mViewModel = new CartListViewModel(new CartRepository());
-      mViewModel.initCartList();
-      mViewModel.getCartList().observe(getViewLifecycleOwner(), (list) -> mAdapter.notifyDataSetChanged());
-      initRecyclerView();
+      CartListViewModel viewModel = new CartListViewModel(new CartRepository());
+      viewModel.getCartListFromRepository().observe(getViewLifecycleOwner(), list ->
+          mAdapter.notifyDataSetChanged());
+      List<Product> list = viewModel.getCartListFromRepository().getValue();
+      initRecyclerView(list);
    }
 
    @SuppressLint("SetTextI18n")
-   private void initRecyclerView() {
+   private void initRecyclerView(List<Product> list) {
       mRecyclerView.setHasFixedSize(true);
       mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-      mAdapter = new CartListAdapter(requireNonNull(mViewModel.getCartList().getValue()), (String total) -> {
+      mAdapter = new CartListAdapter(requireNonNull(list), total -> {
          mTotal = total;
          mOrderTotal.setText("Сумма корзины:  " + total + " руб.");
       }, getContext());
 
-      if (mViewModel.getCartList().getValue().size() == 0) {
+      if (list.size() == 0) {
          mConfirmButton.setClickable(true);
          mConfirmButton.setOnClickListener(v -> {
             if (!(mTotal.equals("0.0"))) {
-               NavDirections action = CartListFragmentDirections.actionNavCartToNavOrderConfirm()
+               NavDirections action = CartListFragmentDirections
+                   .actionNavCartToNavOrderConfirm()
                    .setTotal(mTotal);
                Navigation.findNavController(v).navigate(action);
             } else {
-               Toasty.error(requireActivity(), "Корзина пуста");
+               Toasty.error(requireActivity(), R.string.cart_empty);
             }
          });
       } else {
@@ -83,7 +86,7 @@ public class CartListFragment extends Fragment implements CartListAdapter.Callba
    }
 
    @Override
-   public void onPassData(String data) {
-      mTotal = data;
+   public void onPassData(String total) {
+      mTotal = total;
    }
 }

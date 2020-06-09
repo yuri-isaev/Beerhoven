@@ -7,7 +7,7 @@ import java.util.List;
 import ru.mobile.beerhoven.domain.model.Product;
 
 public interface ICartRepository {
-   MutableLiveData<List<Product>> getCartMutableList();
-   void onDeleteCartItem(String item);
-   void onDeleteUserCartList();
+   MutableLiveData<List<Product>> getCartListFromDatabase();
+   void onDeleteCartItemFromDatabase(String item);
+   void onDeleteUserCartListFromDatabase();
 }
