@@ -10,7 +10,7 @@
     android:layout_marginRight="10dp"
     app:cardCornerRadius="17dp"
     app:cardElevation="10dp"
-    tools:context=".presentation.ui.user.store.catalog.ProductListFragment">
+    tools:context=".presentation.ui.user.store.catalog.CatalogFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -112,7 +112,7 @@
                             android:fontFamily="@font/roboto_regular"
                             android:text="@string/product_price"
                             android:textColor="@color/colorVioletBlue"
-                            android:textSize="14sp" />
+                            android:textSize="@dimen/text_size_s" />
                     </LinearLayout>
 
                     <ImageView
@@ -148,7 +148,7 @@
                             android:fontFamily="@font/roboto_regular"
                             android:text="@string/product_delivery_time"
                             android:textColor="@color/colorVioletBlue"
-                            android:textSize="14sp" />
+                            android:textSize="@dimen/text_size_s" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -156,7 +156,6 @@
                     android:id="@+id/ivSelectorAddProduct"
                     android:layout_width="29dp"
                     android:layout_height="46dp"
-                    android:layout_gravity="center"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

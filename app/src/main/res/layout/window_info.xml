@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/size_50"
+    android:layout_width="50dp"
     android:layout_height="wrap_content"
     android:background="@color/colorWhite">
 
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="Name order"
             android:textAlignment="center"
-            android:textColor="@color/colorGrey"
+            android:textColor="@color/colorMainBlack"
             android:textSize="25sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText,RtlCompat" />
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Address order"
             android:textAlignment="center"
-            android:textColor="@color/colorGrey"
+            android:textColor="@color/colorGreyDark"
             android:textSize="10sp"
             tools:ignore="HardcodedText,RtlCompat,SmallSp" />
     </LinearLayout>

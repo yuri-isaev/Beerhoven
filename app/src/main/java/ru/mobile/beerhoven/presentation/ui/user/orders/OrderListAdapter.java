@@ -41,13 +41,13 @@ public class OrderListAdapter extends Adapter<OrderListAdapter.OrderViewHolder> 
       String orderId = order.getId();
       String userId = order.getPhone();
 
-      holder.binding.orderAddress.setText(order.getAddress());
-      holder.binding.orderDate.setText(order.getDate());
-      holder.binding.orderPhone.setText(order.getPhone());
-      holder.binding.orderTime.setText(order.getTime());
-      holder.binding.orderTotal.setText(order.getTotal() + " руб.");
-      holder.binding.imgOrderDelete.setVisibility(View.INVISIBLE);
-      holder.binding.imgOrderDelete.setOnClickListener(v -> {
+      holder.binding.tvOrderAddress.setText(order.getAddress());
+      holder.binding.tvOrderDate.setText(order.getDate());
+      holder.binding.tvOrderPhone.setText(order.getPhone());
+      holder.binding.tvOrderTime.setText(order.getTime());
+      holder.binding.tvOrderTotal.setText(order.getTotal() + " руб.");
+      holder.binding.ivOrderDelete.setVisibility(View.INVISIBLE);
+      holder.binding.ivOrderDelete.setOnClickListener(v -> {
          viewModel.onDeleteOrderByIdToRepository(userId);
       });
       holder.itemView.setOnClickListener(v -> {

@@ -35,13 +35,13 @@ public class NewsDetailFragment extends Fragment {
       FragmentNewsDetailBinding binding = FragmentNewsDetailBinding
           .inflate(inflater, container, false);
       
-      binding.tvNewsTitle.setText(mNewsTitle);
-      binding.tvNewsDesc.setText(mNewsDesc);
-      binding.tvDate.setText(mNewsDateTime);
+      binding.tvNewsDetailTitle.setText(mNewsTitle);
+      binding.tvNewsDetailDesc.setText(mNewsDesc);
+      binding.tvNewsDetailDate.setText(mNewsDateTime);
 
-      Glide.with(binding.image.getContext())
+      Glide.with(binding.ivNewsDetailImage.getContext())
           .load(mNewsImage)
-          .into(binding.image);
+          .into(binding.ivNewsDetailImage);
 
       return binding.getRoot();
    }

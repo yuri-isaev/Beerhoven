@@ -2,24 +2,23 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/size_layout_margin_left"
-    android:layout_marginTop="@dimen/size_layout_margin_top"
-    android:layout_marginEnd="@dimen/size_layout_margin_right"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginRight="10dp"
     app:cardBackgroundColor="@color/colorWhite"
-    app:cardCornerRadius="@dimen/size_radius_corner"
+    app:cardCornerRadius="@dimen/size_corner_radius"
     app:cardElevation="@dimen/size_card_elevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="@dimen/size_layout_padding">
+        android:padding="5dp">
 
         <LinearLayout
-            android:id="@+id/card_container"
+            android:id="@+id/llNotificationOrderContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -29,27 +28,27 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/notification_order_image"
+                    android:id="@+id/tvNotificationOrderImage"
                     android:layout_width="84dp"
                     android:layout_height="95dp"
                     android:layout_marginEnd="35dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_map_pin_active"
+                    android:src="@drawable/ic_map_beerhoven"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/notification_order_phone"
+                    android:id="@+id/tvNotificationOrderPhone"
                     android:layout_width="174dp"
                     android:layout_height="33dp"
                     android:fontFamily="@font/catorze27_style1_semibold"
                     android:text="@string/order_phone"
                     android:textColor="@color/colorMainGrey"
-                    android:textSize="@dimen/text_size_big"
+                    android:textSize="@dimen/text_size_l"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/notification_order_image"
+                    app:layout_constraintEnd_toStartOf="@+id/tvNotificationOrderImage"
                     app:layout_constraintHorizontal_bias="0.181"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

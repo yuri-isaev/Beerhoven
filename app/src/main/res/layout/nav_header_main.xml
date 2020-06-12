@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/size_176"
+    android:layout_height="176dp"
     android:background="@drawable/nav_drawer_side_round"
     android:gravity="bottom"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/size_16"
-    android:paddingTop="@dimen/size_16"
-    android:paddingRight="@dimen/size_16"
-    android:paddingBottom="@dimen/size_16">
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp">
 
     <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/logo_image"
-        android:layout_width="@dimen/size_98"
-        android:layout_height="@dimen/size_83"
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="83dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/size_24"
-        android:layout_marginTop="@dimen/size_5"
-        android:layout_marginRight="@dimen/size_24"
-        android:layout_marginBottom="@dimen/size_10"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/logo"
         app:civ_border_color="@color/colorMainYellow" />
 
     <TextView
-        android:id="@+id/nav_user_name"
-        android:layout_width="@dimen/size_379"
+        android:id="@+id/tvNavUserName"
+        android:layout_width="379dp"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/size_8"
+        android:paddingTop="8dp"
         android:text="@string/menu_user_name"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/colorMainYellow"
-        android:textSize="@dimen/text_22"
+        android:textSize="22sp"
         android:theme="@style/AppTheme"
         android:visibility="visible"
         tools:ignore="SpUsage" />

@@ -36,8 +36,8 @@ public class CartListFragment extends Fragment implements CartListAdapter.Callba
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       View view = inflater.inflate(R.layout.fragment_cart_list, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view_cart);
-      mConfirmButton = view.findViewById(R.id.btnConfirm);
-      mOrderTotal = view.findViewById(R.id.cart_total);
+      mConfirmButton = view.findViewById(R.id.btnOrderConfirm);
+      mOrderTotal = view.findViewById(R.id.tvCartTotal);
 
       // Custom layout params
       ViewGroup.LayoutParams layoutParams = mRecyclerView.getLayoutParams();

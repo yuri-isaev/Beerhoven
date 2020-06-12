@@ -37,13 +37,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
                 android:layout_marginTop="15dp"
                 android:gravity="center"
-                android:layout_margin="5dp"
                 android:text="@string/order_waiting"
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_size_m" />
         </LinearLayout>
 
         <ProgressBar

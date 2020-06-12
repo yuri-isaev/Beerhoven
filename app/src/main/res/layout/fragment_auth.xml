@@ -8,13 +8,12 @@
     tools:context=".presentation.authentication.AuthFragment">
 
     <LinearLayout
-        android:id="@+id/layout_auth"
         android:layout_width="364dp"
         android:layout_height="295dp"
         android:layout_margin="20dp"
         android:orientation="vertical"
         android:paddingTop="55dp"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar2"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,17 +27,13 @@
             android:gravity="center_horizontal"
             android:shadowColor="@color/colorMainBlack"
             android:text="@string/auth_text_confirm"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorMainYellow"
             android:textSize="75sp" />
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/progressBar2"
-        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="40dp"
-        android:indeterminateOnly="true"
+        android:id="@+id/progressBar"
+        style="@style/AppTheme.ProgressBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

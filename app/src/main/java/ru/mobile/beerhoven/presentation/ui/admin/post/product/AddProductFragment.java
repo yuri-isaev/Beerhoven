@@ -42,16 +42,16 @@ public class AddProductFragment extends PostFragment {
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       FragmentAddProductBinding binding = FragmentAddProductBinding.inflate(inflater, container, false);
       mAddDatabaseButton = binding.btnAddDatabase;
-      mCountryInput = binding.ilProductCountry;
-      mDensityInput = binding.ilProductDensity;
-      mDescriptionInput = binding.ilProductDescription;
-      mFortressInput = binding.ilProductFortress;
-      mManufactureInput = binding.ilProductManufacture;
-      mNameInput = binding.ilProductName;
-      mPriceInput = binding.ilProductPrice;
-      mStyleInput = binding.ilProductStyle;
+      mCountryInput = binding.inputProductCountry;
+      mDensityInput = binding.inputProductDensity;
+      mDescriptionInput = binding.inputProductDescription;
+      mFortressInput = binding.inputProductFortress;
+      mManufactureInput = binding.inputProductManufacture;
+      mNameInput = binding.inputProductName;
+      mPriceInput = binding.inputProductPrice;
+      mStyleInput = binding.inputProductStyle;
       mProductImage = binding.ivProductImage;
-      mCategoryInput = binding.ilProductCategory;
+      mCategoryInput = binding.inputProductCategory;
       mCategoryInputText = binding.etProductCategory;
       mAddImageSelector = binding.ivSelectorAddImage;
       return binding.getRoot();

@@ -54,9 +54,9 @@ public class OrderConfirmFragment extends Fragment {
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       FragmentOrderConfirmBinding binding = FragmentOrderConfirmBinding.inflate(inflater, container, false);
       mAddOrderButton = binding.btnAddDatabase;
-      mAddressInput = binding.ilConfirmAddress;
-      mNameInput = binding.ilConfirmName;
-      mPhoneInput = binding.ilConfirmNumber;
+      mAddressInput = binding.inputConfirmAddress;
+      mNameInput = binding.inputConfirmName;
+      mPhoneInput = binding.inputConfirmNumber;
       return binding.getRoot();
    }
 

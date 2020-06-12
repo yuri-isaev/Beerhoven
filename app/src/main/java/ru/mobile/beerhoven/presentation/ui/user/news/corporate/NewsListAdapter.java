@@ -45,14 +45,14 @@ public class NewsListAdapter extends Adapter<NewsListAdapter.NewsListViewHolder>
       String postImage = post.getImage();
       String postTitle = post.getTitle();
 
-      Glide.with(holder.binding.itemNewsImage.getContext())
+      Glide.with(holder.binding.ivNewsImage.getContext())
           .load(postImage)
-          .into(holder.binding.itemNewsImage);
+          .into(holder.binding.ivNewsImage);
 
       holder.binding.tvNewsTitle.setText(postTitle);
       String postDateTime = CurrentDateTime.parseDateTime(post.getTime());
       holder.binding.tvNewsPublishedAt.setText(postDateTime);
-      holder.binding.itemNewsContainer.setOnClickListener(v -> {
+      holder.itemView.setOnClickListener(v -> {
          NavDirections action = NewsListFragmentDirections.actionNavNewsListToNavNewsDetail()
              .setNewsDateTime(postDateTime)
              .setNewsDesc(postDescription)

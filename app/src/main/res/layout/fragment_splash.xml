@@ -21,7 +21,7 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:id="@+id/app_logo"
+            android:id="@+id/ivAppLogo"
             android:layout_width="230dp"
             android:layout_height="230dp"
             android:background="@drawable/rectangle_splash"
@@ -29,7 +29,7 @@
             tools:ignore="ContentDescription" />
 
         <TextView
-            android:id="@+id/app_text"
+            android:id="@+id/tvAppText"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginTop="44dp"
@@ -37,25 +37,23 @@
             android:gravity="center"
             android:text="@string/app"
             android:textColor="@color/colorMainYellow"
-            android:textSize="@dimen/text_size_ex" />
+            android:textSize="@dimen/text_size_xl" />
 
         <TextView
-            android:id="@+id/app_about"
+            android:id="@+id/tvAppAbout"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:gravity="center"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/catorze27_style1_semibold"
+            android:gravity="center"
             android:text="@string/app_about"
             android:textColor="@color/colorMainYellow"
-            android:textSize="23sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="20dp"
+        style="@style/AppTheme.ProgressBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

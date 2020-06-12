@@ -38,7 +38,7 @@ public class NotificationListAdapter extends Adapter<NotificationListAdapter.Not
       Order order = mAdapterList.get(position);
       String userPhoneNumber = order.getId();
 
-      holder.binding.notificationOrderPhone.setText(userPhoneNumber);
+      holder.binding.tvNotificationOrderPhone.setText(userPhoneNumber);
       holder.itemView.setOnClickListener(v -> {
          NavDirections action = NotificationListFragmentDirections.actionNavNotificationsToNavOrders()
              .setOrderId(userPhoneNumber);

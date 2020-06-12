@@ -36,8 +36,8 @@ public class AddNewsFragment extends PostFragment {
       FragmentAddNewsBinding binding = FragmentAddNewsBinding.inflate(inflater, container, false);
       mAddDatabaseButton = binding.btnAddDatabase;
       mAddImageSelector = binding.ivSelectorAddImage;
-      mTitleInput = binding.ilNewsTitle;
-      mDescriptionInput = binding.ilNewsDescription;
+      mTitleInput = binding.inputNewsTitle;
+      mDescriptionInput = binding.inputNewsDescription;
       mNewsImage = binding.ivNewsImage;
       return binding.getRoot();
    }

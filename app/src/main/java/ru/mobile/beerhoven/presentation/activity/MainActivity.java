@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
    public void onSetNavHeaderUserName() {
       View headerView = mNavigationView.getHeaderView(0);
-      TextView navUserName = headerView.findViewById(R.id.nav_user_name);
+      TextView navUserName = headerView.findViewById(R.id.tvNavUserName);
       AuthViewModel model = new AuthViewModel(getApplicationContext());
       String userName = model.getUserNameToStorage();
       navUserName.setText(String.format(" Hello,  %s", userName));
@@ -169,8 +169,8 @@ public class MainActivity extends AppCompatActivity {
    private void initCounterMenu(@NonNull Menu menu) {
       MenuItem menuItem = menu.findItem(R.id.nav_cart);
       View counter = menuItem.getActionView();
-      mCartBadgeIcon = counter.findViewById(R.id.badge_cart);
-      mCartBadgeCounter = counter.findViewById(R.id.badge_counter_cart);
+      mCartBadgeIcon = counter.findViewById(R.id.ivBadgeCart);
+      mCartBadgeCounter = counter.findViewById(R.id.tvBadgeCounterCart);
 
       counter.setOnClickListener(v -> onOptionsItemSelected(menuItem));
       updateCartCounter(mCartCounterValue);
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
    private void initCartCountDrawer() {
       mCartView.setBackground(getDrawable(R.drawable.circle_violet));
       mCartView.setGravity(Gravity.CENTER);
-      mCartView.setTextColor(getResources().getColor(R.color.colorAccent));
+      mCartView.setTextColor(getResources().getColor(R.color.colorMainYellow));
       mCartView.setTypeface(null, Typeface.BOLD);
       mCartView.setTextSize(24);
    }
@@ -256,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
    private void initNewsCountDrawer() {
       mNewsView.setBackground(getDrawable(R.drawable.circle_violet));
       mNewsView.setGravity(Gravity.CENTER);
-      mNewsView.setTextColor(getResources().getColor(R.color.colorAccent));
+      mNewsView.setTextColor(getResources().getColor(R.color.colorMainYellow));
       mNewsView.setTextSize(24);
       mNewsView.setTypeface(null, Typeface.BOLD);
    }
@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
    private void initNotificationCountDrawer() {
       mNotificationView.setBackground(getDrawable(R.drawable.circle_violet));
       mNotificationView.setGravity(Gravity.CENTER);
-      mNotificationView.setTextColor(getResources().getColor(R.color.colorAccent));
+      mNotificationView.setTextColor(getResources().getColor(R.color.colorMainYellow));
       mNotificationView.setTextSize(24);
       mNotificationView.setTypeface(null, Typeface.BOLD);
    }

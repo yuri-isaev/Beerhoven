@@ -64,30 +64,30 @@ public class ProductDetailFragment extends Fragment {
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       mBinding = FragmentProductDetailBinding.inflate(inflater, container, false);
-      mBinding.tvProductCountry.setText(mProductCountry);
-      mBinding.tvProductDensity.setText(mProductDensity + "%");
-      mBinding.tvProductDescription.setText(mProductDescription);
-      mBinding.tvProductFortress.setText(mProductFortress + "%");
-      mBinding.tvProductName.setText(mProductName);
-      mBinding.tvProductManufacture.setText(mProductManufacture);
-      mBinding.tvProductPrice.setText(String.valueOf(mProductPrice));
-      mBinding.tvProductStyle.setText(mProductStyle);
-      mBinding.tvProductTotal.setText(String.valueOf(mTotalPrice));
+      mBinding.tvProductDetailCountry.setText(mProductCountry);
+      mBinding.tvProductDetailDensity.setText(mProductDensity + "%");
+      mBinding.tvProductDetailDescription.setText(mProductDescription);
+      mBinding.tvProductDetailFortress.setText(mProductFortress + "%");
+      mBinding.tvProductDetailName.setText(mProductName);
+      mBinding.tvProductDetailManufacture.setText(mProductManufacture);
+      mBinding.tvProductDetailPrice.setText(String.valueOf(mProductPrice));
+      mBinding.tvProductDetailStyle.setText(mProductStyle);
+      mBinding.tvProductDetailTotal.setText(String.valueOf(mTotalPrice));
 
-      Glide.with(mBinding.tvProductImage.getContext())
+      Glide.with(mBinding.tvProductDetailImage.getContext())
           .load(mProductImage)
-          .into(mBinding.tvProductImage);
+          .into(mBinding.tvProductDetailImage);
 
       switch (mVisible) {
          case Constants.OBJECT_VISIBLE:
-            mBinding.btnContainer.setVisibility(View.VISIBLE);
+            mBinding.productTotalContainer.setVisibility(View.VISIBLE);
             break;
          case Constants.OBJECT_RENAME:
             mBinding.btnAddProductToCart.setVisibility(View.VISIBLE);
             mBinding.btnAddProductToCart.setText(R.string.product_info_update);
             break;
          case Constants.OBJECT_INVISIBLE:
-            mBinding.btnContainer.setVisibility(View.INVISIBLE);
+            mBinding.productTotalContainer.setVisibility(View.INVISIBLE);
             break;
       }
       return mBinding.getRoot();
@@ -133,14 +133,14 @@ public class ProductDetailFragment extends Fragment {
 
    // Product count constrains
    private void onCountListener() {
-      mBinding.includeFragmentCounter.iCounterPlus.setOnClickListener(v -> {
+      mBinding.includeFragmentCounter.tvCounterPlus.setOnClickListener(v -> {
          if (mValue != 15) {
             mValue++;
          }
          onCalculateValue();
       });
 
-      mBinding.includeFragmentCounter.iCounterMinus.setOnClickListener(v -> {
+      mBinding.includeFragmentCounter.tvCounterMinus.setOnClickListener(v -> {
          if (mValue <= 1) {
             mValue = 1;
          } else {
@@ -152,9 +152,9 @@ public class ProductDetailFragment extends Fragment {
 
    // Calculate product total
    private void onCalculateValue() {
-      mBinding.includeFragmentCounter.iCounterValue.setText(String.valueOf(mValue));
+      mBinding.includeFragmentCounter.tvCounterValue.setText(String.valueOf(mValue));
       double cost = (Double.parseDouble(mProductPrice) * mValue);
       mTotalPrice = Math.round(cost * 100.0) / 100.0;
-      mBinding.tvProductTotal.setText(String.valueOf(mTotalPrice));
+      mBinding.tvProductDetailTotal.setText(String.valueOf(mTotalPrice));
    }
 }

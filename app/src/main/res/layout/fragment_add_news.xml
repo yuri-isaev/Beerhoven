@@ -117,7 +117,7 @@
                         android:textSize="@dimen/text_size_m" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/ilNewsTitle"
+                        android:id="@+id/inputNewsTitle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
@@ -166,7 +166,7 @@
                         android:textSize="@dimen/text_size_m" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/ilNewsDescription"
+                        android:id="@+id/inputNewsDescription"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
@@ -192,14 +192,7 @@
             <Button
                 android:id="@+id/btnAddDatabase"
                 style="@style/AppTheme.Button"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="20dp"
-                android:text="@string/news_post_public"
-                android:textColor="@color/colorGreyDark"
-                app:cornerRadius="20dp" />
+                android:text="@string/news_post_public" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

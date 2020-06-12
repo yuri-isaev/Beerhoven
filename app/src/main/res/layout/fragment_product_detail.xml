@@ -21,7 +21,7 @@
             tools:ignore="ScrollViewSize">
 
             <TextView
-                android:id="@+id/tvProductName"
+                android:id="@+id/tvProductDetailName"
                 android:layout_width="316dp"
                 android:layout_height="35dp"
                 android:fontFamily="@font/catorze27_style1_bold"
@@ -33,7 +33,7 @@
                 tools:ignore="HardcodedText,MissingConstraints,TextContrastCheck" />
 
             <TextView
-                android:id="@+id/tvProductCountry"
+                android:id="@+id/tvProductDetailCountry"
                 android:layout_width="225dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="24dp"
@@ -41,12 +41,12 @@
                 android:fontFamily="@font/catorze27_style1_semibold"
                 android:text="@string/product_country"
                 android:textSize="@dimen/text_size_l"
-                app:layout_constraintStart_toEndOf="@+id/tvProductImage"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductName"
+                app:layout_constraintStart_toEndOf="@+id/tvProductDetailImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvProductDetailName"
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/tvProductPrice"
+                android:id="@+id/tvProductDetailPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -54,12 +54,12 @@
                 android:fontFamily="@font/catorze27_style1_bold"
                 android:text="15.00"
                 android:textSize="@dimen/text_size_l"
-                app:layout_constraintStart_toEndOf="@+id/tvProductImage"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductManufacture"
+                app:layout_constraintStart_toEndOf="@+id/tvProductDetailImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvProductDetailManufacture"
                 tools:ignore="HardcodedText,MissingConstraints,RtlHardcoded" />
 
             <TextView
-                android:id="@+id/tvProductUnit"
+                android:id="@+id/tvProductDetailUnit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
@@ -67,23 +67,23 @@
                 android:fontFamily="@font/catorze27_style1_semibold"
                 android:text="  рублей"
                 android:textSize="@dimen/text_size_s"
-                app:layout_constraintLeft_toRightOf="@+id/tvProductPrice"
-                app:layout_constraintTop_toTopOf="@+id/tvProductPrice"
+                app:layout_constraintLeft_toRightOf="@+id/tvProductDetailPrice"
+                app:layout_constraintTop_toTopOf="@+id/tvProductDetailPrice"
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
             <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/tvProductImage"
+                android:id="@+id/tvProductDetailImage"
                 android:layout_width="101dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:elevation="5mm"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductName"
+                app:layout_constraintTop_toBottomOf="@+id/tvProductDetailName"
                 tools:ignore="InOrMmUsage,MissingConstraints,UnusedAttribute,ImageContrastCheck" />
 
             <TextView
-                android:id="@+id/tvProductManufacture"
+                android:id="@+id/tvProductDetailManufacture"
                 android:layout_width="122dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="24dp"
@@ -91,8 +91,8 @@
                 android:fontFamily="@font/catorze27_style1_semibold"
                 android:text="@string/product_manufacture"
                 android:textSize="@dimen/text_size_l"
-                app:layout_constraintStart_toEndOf="@+id/tvProductImage"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductCountry"
+                app:layout_constraintStart_toEndOf="@+id/tvProductDetailImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvProductDetailCountry"
                 tools:ignore="MissingConstraints,RtlHardcoded" />
 
             <View
@@ -101,7 +101,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
                 android:background="@color/colorMainGrey"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductImage"
+                app:layout_constraintTop_toBottomOf="@+id/tvProductDetailImage"
                 tools:ignore="MissingConstraints" />
 
             <LinearLayout
@@ -127,7 +127,7 @@
                     tools:ignore="MissingConstraints">
 
                     <TextView
-                        android:id="@+id/tvStyle"
+                        android:id="@+id/tvProductStyle"
                         android:layout_width="119dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/catorze27_style1_semibold"
@@ -138,7 +138,7 @@
                         tools:layout_editor_absoluteY="241dp" />
 
                     <TextView
-                        android:id="@+id/tvProductStyle"
+                        android:id="@+id/tvProductDetailStyle"
                         android:layout_width="216dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/roboto_regular"
@@ -161,7 +161,7 @@
                     tools:ignore="MissingConstraints">
 
                     <TextView
-                        android:id="@+id/tvFortress"
+                        android:id="@+id/tvProductFortress"
                         android:layout_width="118dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/catorze27_style1_semibold"
@@ -169,7 +169,7 @@
                         android:textSize="@dimen/text_size_l" />
 
                     <TextView
-                        android:id="@+id/tvProductFortress"
+                        android:id="@+id/tvProductDetailFortress"
                         android:layout_width="216dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/roboto_regular"
@@ -192,7 +192,7 @@
                     tools:ignore="MissingConstraints">
 
                     <TextView
-                        android:id="@+id/tvDensity"
+                        android:id="@+id/tvProductDensity"
                         android:layout_width="119dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/catorze27_style1_semibold"
@@ -201,7 +201,7 @@
                         tools:ignore="HardcodedText,SpUsage" />
 
                     <TextView
-                        android:id="@+id/tvProductDensity"
+                        android:id="@+id/tvProductDetailDensity"
                         android:layout_width="216dp"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/roboto_regular"
@@ -218,7 +218,7 @@
                     tools:ignore="MissingConstraints">
 
                     <TextView
-                        android:id="@+id/tvProductDescription"
+                        android:id="@+id/tvProductDetailDescription"
                         android:layout_width="match_parent"
                         android:layout_height="68dp"
                         android:fontFamily="@font/catorze27_style1_semibold"
@@ -230,52 +230,50 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/btn_container"
-                android:layout_width="367dp"
-                android:layout_height="265dp"
+                android:id="@+id/productTotalContainer"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
-                app:layout_constraintVertical_bias="0.138"
+                app:layout_constraintVertical_bias="0.054"
                 tools:ignore="MissingConstraints">
 
                 <include
-                    android:id="@+id/include_fragment_counter"
+                    android:id="@+id/includeFragmentCounter"
                     layout="@layout/fragment_counter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toTopOf="@+id/linearLayout5" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
                     android:orientation="vertical"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="26dp">
+                    tools:ignore="MissingConstraints">
 
                     <LinearLayout
                         android:id="@+id/linearLayout6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="243dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:fontFamily="@font/catorze27_style1_bold"
-                            android:paddingEnd="10dp"
+                            android:padding="5dp"
                             android:text="@string/product_price_line"
                             android:textAlignment="textEnd"
                             tools:ignore="RtlSymmetry" />
 
                         <TextView
-                            android:id="@+id/tvProductTotal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/tvProductDetailTotal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:paddingRight="15dp"
                             android:text="15.00"
                             android:textSize="@dimen/text_size_l"
@@ -285,13 +283,9 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/btn_add_product_to_cart"
+                    android:id="@+id/btnAddProductToCart"
                     style="@style/AppTheme.Button"
-                    android:layout_width="334dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="18dp"
-                    android:text="@string/cart_add"
-                    tools:ignore="TextContrastCheck" />
+                    android:text="@string/cart_add" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
