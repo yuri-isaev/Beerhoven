@@ -4,7 +4,7 @@
     android:id="@+id/container_catalog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.user.store.catalog.CatalogFragment">
+    tools:context=".presentation.ui.customer.store.catalog.CatalogFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_catalog"

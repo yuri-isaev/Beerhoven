@@ -4,7 +4,7 @@
     style="@style/AppTheme.CardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".presentation.ui.user.news.corporate.NewsListFragment">
+    tools:context=".presentation.ui.customer.news.corporate.NewsListFragment">
 
     <RelativeLayout
         android:id="@+id/rlNewsContainer"

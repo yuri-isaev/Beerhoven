@@ -31,8 +31,8 @@ import ru.mobile.beerhoven.data.remote.NewsRepository;
 import ru.mobile.beerhoven.data.remote.NotificationRepository;
 import ru.mobile.beerhoven.presentation.authentication.AuthViewModel;
 import ru.mobile.beerhoven.presentation.ui.admin.notifications.NotificationListViewModel;
-import ru.mobile.beerhoven.presentation.ui.user.cart.CartListViewModel;
-import ru.mobile.beerhoven.presentation.ui.user.news.corporate.NewsListViewModel;
+import ru.mobile.beerhoven.presentation.ui.customer.cart.CartListViewModel;
+import ru.mobile.beerhoven.presentation.ui.customer.news.corporate.NewsListViewModel;
 import ru.mobile.beerhoven.utils.TypeFaceSpan;
 
 public class MainActivity extends AppCompatActivity {

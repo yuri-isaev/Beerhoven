@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_products"
-        android:name="ru.mobile.beerhoven.presentation.ui.user.store.sections.StoreFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.customer.store.sections.StoreFragment"
         android:label="@string/menu_store"
         tools:layout="@layout/fragment_catalog">
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_product_details"
-        android:name="ru.mobile.beerhoven.presentation.ui.user.store.details.ProductDetailFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.customer.store.details.ProductDetailFragment"
         android:label="@string/menu_details"
         tools:layout="@layout/fragment_product_detail">
         <argument
@@ -68,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_cart"
-        android:name="ru.mobile.beerhoven.presentation.ui.user.cart.CartListFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.customer.cart.CartListFragment"
         android:label="@string/menu_cart"
         tools:layout="@layout/fragment_cart_list">
         <action
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_orders"
-        android:name="ru.mobile.beerhoven.presentation.ui.user.orders.OrderListFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.customer.orders.OrderListFragment"
         android:label="@string/menu_order"
         tools:layout="@layout/fragment_order_list">
         <argument
@@ -107,7 +107,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_order_details"
-        android:name="ru.mobile.beerhoven.presentation.ui.user.orders.details.OrderDetailListFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.customer.orders.details.OrderDetailListFragment"
         android:label="@string/order_details"
         tools:layout="@layout/fragment_order_detail_list">
         <argument
@@ -132,7 +132,7 @@
         tools:layout="@layout/fragment_add_product" />
     <fragment
         android:id="@+id/nav_order_confirm"
-        android:name="ru.mobile.beerhoven.presentation.ui.user.orders.confirm.OrderConfirmFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.customer.orders.confirm.OrderConfirmFragment"
         android:label="@string/nav_order_confirm"
         tools:layout="@layout/fragment_order_confirm">
         <argument
@@ -148,7 +148,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_order_notify"
-        android:name="ru.mobile.beerhoven.presentation.ui.user.orders.notify.OrderNotifyFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.customer.orders.notify.OrderNotifyFragment"
         android:label="@string/nav_order_notify"
         tools:layout="@layout/fragment_order_notify">
         <action
@@ -174,7 +174,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_map"
-        android:name="ru.mobile.beerhoven.presentation.ui.user.map.CustomerMapFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.customer.map.CustomerMapFragment"
         android:label="@string/menu_map"
         tools:layout="@layout/fragment_customer_map" >
 
@@ -189,7 +189,7 @@
         tools:layout="@layout/fragment_add_news" />
     <fragment
         android:id="@+id/nav_news"
-        android:name="ru.mobile.beerhoven.presentation.ui.user.news.corporate.NewsListFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.customer.news.corporate.NewsListFragment"
         android:label="@string/menu_news"
         tools:layout="@layout/fragment_news_list">
         <action
@@ -201,7 +201,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_news_detail"
-        android:name="ru.mobile.beerhoven.presentation.ui.user.news.details.NewsDetailFragment"
+        android:name="ru.mobile.beerhoven.presentation.ui.customer.news.details.NewsDetailFragment"
         android:label="@string/menu_details"
         tools:layout="@layout/fragment_news_detail">
         <argument

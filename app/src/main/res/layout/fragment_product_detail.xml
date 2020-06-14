@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    tools:context=".presentation.ui.user.store.details.ProductDetailFragment">
+    tools:context=".presentation.ui.customer.store.details.ProductDetailFragment">
 
     <ScrollView
         android:layout_width="match_parent"

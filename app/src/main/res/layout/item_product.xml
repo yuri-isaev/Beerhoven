@@ -10,7 +10,7 @@
     android:layout_marginRight="10dp"
     app:cardCornerRadius="17dp"
     app:cardElevation="10dp"
-    tools:context=".presentation.ui.user.store.catalog.CatalogFragment">
+    tools:context=".presentation.ui.customer.store.catalog.CatalogFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -159,7 +159,8 @@
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/ic_cross_add"
+                    app:srcCompat="@drawable/ic_nav_shopping_cart"
+                    app:tint="@color/colorViolet"
                     tools:ignore="ContentDescription" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

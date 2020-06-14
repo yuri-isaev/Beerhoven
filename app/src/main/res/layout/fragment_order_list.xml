@@ -4,7 +4,7 @@
     android:id="@+id/container_order"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.user.orders.OrderListFragment">
+    tools:context=".presentation.ui.customer.orders.OrderListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_order"

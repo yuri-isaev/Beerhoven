@@ -16,7 +16,7 @@
             android:title="@string/menu_store" />
         <item
             android:id="@+id/nav_orders"
-            android:icon="@drawable/ic_baseline_checklist_24"
+            android:icon="@drawable/ic_nav_checklist"
             android:title="@string/menu_order"
             app:actionViewClass="android.widget.TextView" />
         <item

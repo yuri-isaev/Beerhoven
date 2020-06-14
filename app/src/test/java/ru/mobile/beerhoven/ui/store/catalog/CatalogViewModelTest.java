@@ -18,7 +18,7 @@ import java.util.List;
 import ru.mobile.beerhoven.common.FakeContent;
 import ru.mobile.beerhoven.domain.repository.IProductRepository;
 import ru.mobile.beerhoven.domain.model.Product;
-import ru.mobile.beerhoven.presentation.ui.user.store.catalog.ProductListViewModel;
+import ru.mobile.beerhoven.presentation.ui.customer.store.catalog.ProductListViewModel;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
