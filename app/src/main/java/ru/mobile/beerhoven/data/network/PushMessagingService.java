@@ -78,7 +78,7 @@ public class PushMessagingService extends FirebaseMessagingService implements IP
       Builder notificationBuilder = new Builder(this, Constants.ADMIN_CHANNEL_ID)
           .setContentTitle(title)
           .setContentText(body)
-          .setSmallIcon(R.drawable.logo)
+          .setSmallIcon(R.drawable.ic_logo)
           .setLargeIcon(bitmap)
           .setAutoCancel(true)
           .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})

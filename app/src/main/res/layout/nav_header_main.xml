@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="@drawable/nav_drawer_side_round"
+    android:background="@drawable/rectangle_nav_drawer"
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="16dp"
@@ -21,7 +21,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="10dp"
-        android:background="@drawable/logo"
+        android:background="@drawable/ic_logo"
         app:civ_border_color="@color/colorMainYellow" />
 
     <TextView

@@ -37,7 +37,7 @@
                     android:layout_height="95dp"
                     android:layout_marginEnd="35dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/local"
+                    android:src="@drawable/ic_local"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

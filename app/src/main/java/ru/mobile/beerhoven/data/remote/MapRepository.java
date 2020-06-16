@@ -203,7 +203,7 @@ public class MapRepository implements IMapRepository, FirebaseFailedListener, Fi
           .position(new LatLng(driver.getGeoLocation().latitude, driver.getGeoLocation().longitude))
           .title(driver.getDriverInfoModel().getName())
           .snippet(driver.getDriverInfoModel().getPhone())
-          .icon(BitmapDescriptorFactory.fromResource(R.drawable.redcar))
+          .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_redcar))
           .flat(true);
       mGoogleMap.addMarker(orderOptions);
    }

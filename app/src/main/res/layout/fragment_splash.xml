@@ -25,7 +25,7 @@
             android:layout_width="230dp"
             android:layout_height="230dp"
             android:background="@drawable/rectangle_splash"
-            app:srcCompat="@drawable/logo"
+            app:srcCompat="@drawable/ic_logo"
             tools:ignore="ContentDescription" />
 
         <TextView
