@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.presentation.ui.customer.orders;
+package ru.mobile.beerhoven.presentation.ui.admin.orders;
 
 import static java.util.Objects.requireNonNull;
 
@@ -19,6 +19,7 @@ import ru.mobile.beerhoven.data.remote.OrderRepository;
 import ru.mobile.beerhoven.databinding.ItemOrderBinding;
 import ru.mobile.beerhoven.domain.model.Order;
 
+
 public class OrderListAdapter extends Adapter<OrderListAdapter.OrderViewHolder> {
    private final List<Order> mOrderList;
 
@@ -29,7 +30,8 @@ public class OrderListAdapter extends Adapter<OrderListAdapter.OrderViewHolder> 
    @NonNull
    @Override
    public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      ItemOrderBinding binding = ItemOrderBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+      ItemOrderBinding binding = ItemOrderBinding
+          .inflate(LayoutInflater.from(parent.getContext()), parent, false);
       return new OrderViewHolder(binding);
    }
 
@@ -46,11 +48,12 @@ public class OrderListAdapter extends Adapter<OrderListAdapter.OrderViewHolder> 
       holder.binding.tvOrderPhone.setText(order.getPhone());
       holder.binding.tvOrderTime.setText(order.getTime());
       holder.binding.tvOrderTotal.setText(order.getTotal() + " руб.");
-      holder.binding.ivOrderDelete.setVisibility(View.INVISIBLE);
-      holder.binding.ivOrderDelete.setOnClickListener(v -> viewModel.onDeleteOrderByIdToRepository(userId));
+      holder.binding.ivOrderDelete.setVisibility(View.VISIBLE);
+      holder.binding.ivOrderDelete.setOnClickListener(v ->
+          viewModel.onDeleteOrderByIdToRepository(orderId));
 
       holder.itemView.setOnClickListener(v -> {
-         NavDirections action = OrderListFragmentDirections.actionNavOrdersToNavOrderDetails()
+         NavDirections action = OrderListFragmentDirections.actionNavAdminOrdersToNavAdminOrderDetails()
              .setUserId(requireNonNull(userId))
              .setOrderKey(requireNonNull(orderId));
          Navigation.findNavController(v).navigate(action);

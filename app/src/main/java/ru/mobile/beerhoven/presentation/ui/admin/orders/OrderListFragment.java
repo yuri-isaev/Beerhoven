@@ -1,4 +1,4 @@
-package ru.mobile.beerhoven.presentation.ui.customer.orders;
+package ru.mobile.beerhoven.presentation.ui.admin.orders;
 
 import static java.util.Objects.requireNonNull;
 
@@ -24,11 +24,11 @@ public class OrderListFragment extends Fragment {
    private OrderListAdapter mOrderListAdapter;
    private RecyclerView mRecyclerView;
 
-   @SuppressLint("NotifyDataSetChanged")
+   @SuppressLint({"NotifyDataSetChanged", "MissingInflatedId"})
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      View view = inflater.inflate(R.layout.fragment_order_list, container, false);
-      mRecyclerView = view.findViewById(R.id.recycler_view_order);
+      View view = inflater.inflate(R.layout.fragment_admin_order_list, container, false);
+      mRecyclerView = view.findViewById(R.id.recycler_view_order_list);
       return view;
    }
 
@@ -37,7 +37,8 @@ public class OrderListFragment extends Fragment {
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
       OrderListViewModel viewModel = new OrderListViewModel(new OrderRepository());
-      viewModel.getOrderListFromRepository().observe(getViewLifecycleOwner(), list -> mOrderListAdapter.notifyDataSetChanged());
+      viewModel.getOrderListFromRepository().observe(getViewLifecycleOwner(), list ->
+          mOrderListAdapter.notifyDataSetChanged());
       List<Order> list = requireNonNull(viewModel.getOrderListFromRepository().getValue());
       onInitRecyclerView(list);
    }
