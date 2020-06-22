@@ -27,7 +27,7 @@ public class NotificationListFragment extends Fragment {
    @SuppressLint("NotifyDataSetChanged")
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      View view = inflater.inflate(R.layout.fragment_notification_list, container, false);
+      View view = inflater.inflate(R.layout.fragment_admin_notification_list, container, false);
       mRecyclerView = view.findViewById(R.id.recycler_view_notification);
       return view;
    }

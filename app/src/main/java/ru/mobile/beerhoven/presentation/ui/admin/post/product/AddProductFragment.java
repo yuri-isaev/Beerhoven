@@ -33,7 +33,7 @@ public class AddProductFragment extends PostFragment {
    private TextInputLayout mDensityInput;
    private TextInputLayout mDescriptionInput;
    private TextInputLayout mFortressInput;
-   private TextInputLayout mManufactureInput;
+   private TextInputLayout mCapacityInput;
    private TextInputLayout mNameInput;
    private TextInputLayout mPriceInput;
    private TextInputLayout mStyleInput;
@@ -42,11 +42,11 @@ public class AddProductFragment extends PostFragment {
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       FragmentAddProductBinding binding = FragmentAddProductBinding.inflate(inflater, container, false);
       mAddDatabaseButton = binding.btnAddDatabase;
+      mCapacityInput = binding.inputProductCapacity;
       mCountryInput = binding.inputProductCountry;
       mDensityInput = binding.inputProductDensity;
       mDescriptionInput = binding.inputProductDescription;
       mFortressInput = binding.inputProductFortress;
-      mManufactureInput = binding.inputProductManufacture;
       mNameInput = binding.inputProductName;
       mPriceInput = binding.inputProductPrice;
       mStyleInput = binding.inputProductStyle;
@@ -71,12 +71,10 @@ public class AddProductFragment extends PostFragment {
           .observe(getViewLifecycleOwner(), s -> mCategoryInputText.setText(s)));
 
       mAddDatabaseButton.setOnClickListener(v -> {
-         if (  !Validation.isValidTextField(mCategoryInput)
+         if (  !Validation.isValidTextField(mCapacityInput)
+             | !Validation.isValidTextField(mCategoryInput)
              | !Validation.isValidTextField(mCountryInput)
-             | !Validation.isValidTextField(mDensityInput)
              | !Validation.isValidTextField(mDescriptionInput)
-             | !Validation.isValidTextField(mFortressInput)
-             | !Validation.isValidTextField(mManufactureInput)
              | !Validation.isValidTextField(mNameInput)
              | !Validation.isValidTextField(mPriceInput)
              | !Validation.isValidTextField(mStyleInput)) {
@@ -84,31 +82,30 @@ public class AddProductFragment extends PostFragment {
          } else if (super.mUriImage == null) {
             Toasty.error(requireActivity(), R.string.add_image);
          } else {
+            String capacity = requireNonNull(mCapacityInput.getEditText()).getText().toString();
             String category = requireNonNull(mCategoryInput.getEditText()).getText().toString();
             String country = requireNonNull(mCountryInput.getEditText()).getText().toString();
             String density = requireNonNull(mDensityInput.getEditText()).getText().toString();
             String description = requireNonNull(mDescriptionInput.getEditText()).getText().toString();
             String fortress = requireNonNull(mFortressInput.getEditText()).getText().toString();
-            String manufacture = requireNonNull(mManufactureInput.getEditText()).getText().toString();
             String name = requireNonNull(mNameInput.getEditText()).getText().toString();
             String price = requireNonNull(mPriceInput.getEditText()).getText().toString();
             String style = requireNonNull(mStyleInput.getEditText()).getText().toString();
 
             Product product = new Product();
+            product.setCapacity(capacity);
             product.setCategory(category);
             product.setCountry(country);
             product.setDensity(density);
             product.setDescription(description);
             product.setFortress(fortress);
-            product.setId("null");
-            product.setManufacture(manufacture);
             product.setName(name);
             product.setPrice(Double.parseDouble(price));
             product.setStyle(style);
             product.setImage(String.valueOf(super.mUriImage));
 
-            viewModel.onAddProductToRepository(product).observe(getViewLifecycleOwner(),
-                b -> Toasty.success(requireActivity(), R.string.product_add_database));
+            viewModel.onAddProductToRepository(product).observe(getViewLifecycleOwner(), b ->
+                Toasty.success(requireActivity(), R.string.product_add_database));
          }
       });
    }

@@ -40,7 +40,7 @@ public class NotificationListAdapter extends Adapter<NotificationListAdapter.Not
 
       holder.binding.tvNotificationOrderPhone.setText(userPhoneNumber);
       holder.itemView.setOnClickListener(v -> {
-         NavDirections action = NotificationListFragmentDirections.actionNavNotificationsToNavOrders()
+         NavDirections action = NotificationListFragmentDirections.actionNavAdminNotificationsToNavAdminOrders()
              .setOrderId(userPhoneNumber);
          Navigation.findNavController(v).navigate(action);
          ((MainActivity) mActivity).onDecreaseNotificationCounter();

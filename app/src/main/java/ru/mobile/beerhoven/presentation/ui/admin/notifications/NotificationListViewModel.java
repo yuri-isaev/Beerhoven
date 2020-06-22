@@ -13,27 +13,27 @@ import ru.mobile.beerhoven.domain.repository.INotificationRepository;
 import ru.mobile.beerhoven.domain.repository.IPreferencesStorage;
 
 public class NotificationListViewModel extends ViewModel {
-   private final INotificationRepository iRepository;
-   private IPreferencesStorage iStorage;
+   private final INotificationRepository mRepository;
+   private IPreferencesStorage mStorage;
 
    public NotificationListViewModel(INotificationRepository repo) {
-      this.iRepository = repo;
+      this.mRepository = repo;
    }
 
    public NotificationListViewModel(Context ctx, INotificationRepository repo) {
-      this.iRepository = repo;
-      this.iStorage = new PreferencesStorage(ctx);
+      this.mRepository = repo;
+      this.mStorage = new PreferencesStorage(ctx);
    }
 
    public LiveData<List<Order>> getNotificationListFromRepository() {
-      return iRepository.getNotificationListFromDatabase();
+      return mRepository.getNotificationListFromDatabase();
    }
 
    public void onSaveNotificationCounterToStorage(int counterValue) {
-      iStorage.onSaveNotificationCountValue(counterValue);
+      mStorage.onSaveNotificationCountValue(counterValue);
    }
 
    public int getNotificationCountFromStorage() {
-      return iStorage.onGetNotificationCountValue();
+      return mStorage.onGetNotificationCountValue();
    }
 }
