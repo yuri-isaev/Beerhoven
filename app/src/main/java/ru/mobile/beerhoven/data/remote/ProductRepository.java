@@ -2,7 +2,6 @@ package ru.mobile.beerhoven.data.remote;
 
 import static java.util.Objects.requireNonNull;
 
-import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.util.Log;
 
@@ -58,7 +57,6 @@ public class ProductRepository implements IProductRepository {
 
    private void onGetProductList() {
       mFirebaseRef.child(Constants.NODE_PRODUCTS).addChildEventListener(new ChildEventListener() {
-         @SuppressLint("NewApi")
          @Override
          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
             Product product = snapshot.getValue(Product.class);
@@ -92,12 +90,10 @@ public class ProductRepository implements IProductRepository {
          }
 
          @Override
-         public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-         }
+         public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
 
          @Override
-         public void onCancelled(@NonNull DatabaseError error) {
-         }
+         public void onCancelled(@NonNull DatabaseError error) {}
       });
    }
 
@@ -115,16 +111,14 @@ public class ProductRepository implements IProductRepository {
          @Override
          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-
                Product product = noteDataSnapshot.getValue(Product.class);
                   assert product != null;
                   if (!mProductList.contains(product)) {
-                     if(product.getCategory().equals(category)) {
+                     if (product.getCategory().equals(category)) {
                      mProductList.add(product);
                      }
                   }
                   mMutableList.postValue(mProductList);
-
             }
          }
 
@@ -158,6 +152,7 @@ public class ProductRepository implements IProductRepository {
    }
 
    public MutableLiveData<Boolean> onAddProductToDatabase(@NonNull Product product) {
+     // product.setId(mFirebaseRef.getKey());
       mStorageRef.child(Constants.FOLDER_PRODUCT_IMG)
           .child(new Date().toString())
           .putFile(Uri.parse(product.getImage()))
@@ -171,7 +166,16 @@ public class ProductRepository implements IProductRepository {
                 Uri downloadUri = uriTask.getResult();
                 product.setImage(downloadUri.toString());
 
-                mFirebaseRef.child(Constants.NODE_PRODUCTS).push().setValue(product)
+                // mFirebaseRef.child(Constants.FOLDER_PRODUCT_IMG);
+
+                // sample extracting id key and writing to data node
+                DatabaseReference nodeRef = mFirebaseRef
+                    .child(Constants.NODE_PRODUCTS)
+                    .push();
+
+                String key = nodeRef.getKey();
+                product.setId(key);
+                nodeRef.setValue(product)
                     .addOnSuccessListener(unused -> Log.i(TAG, "Product data added to database"))
                     .addOnFailureListener(e -> Log.i(TAG, e.getMessage()));
 
@@ -179,6 +183,7 @@ public class ProductRepository implements IProductRepository {
                 Log.i(TAG, "Product image added to database storage");
              });
           });
+
       return mMutableResponse;
    }
 }

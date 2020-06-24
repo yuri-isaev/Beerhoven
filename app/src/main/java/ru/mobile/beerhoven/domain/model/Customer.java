@@ -10,8 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 public class Customer extends User {
-   private String email;
    private String id;
+   private String email;
    private String name;
    private String phone;
 }

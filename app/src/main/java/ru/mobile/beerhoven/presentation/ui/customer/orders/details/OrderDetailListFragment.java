@@ -22,7 +22,6 @@ import ru.mobile.beerhoven.domain.model.Product;
 
 public class OrderDetailListFragment extends Fragment {
    private OrderDetailListAdapter mOrderDetailsAdapter;
-   private OrderDetailListViewModel mViewModel;
    private RecyclerView mRecyclerView;
    private String mOrderKey;
 
@@ -47,7 +46,7 @@ public class OrderDetailListFragment extends Fragment {
    @Override
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-      mViewModel = new OrderDetailListViewModel(new OrderDetailRepository());
+      OrderDetailListViewModel mViewModel = new OrderDetailListViewModel(new OrderDetailRepository());
       mViewModel.getOrderDetailListFromRepository(mOrderKey).observe(getViewLifecycleOwner(), list ->
          mOrderDetailsAdapter.notifyDataSetChanged());
       List<Product> list = requireNonNull(mViewModel.getOrderDetailListFromRepository(mOrderKey).getValue());

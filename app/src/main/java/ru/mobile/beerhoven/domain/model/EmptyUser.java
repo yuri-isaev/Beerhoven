@@ -1,10 +1,8 @@
 package ru.mobile.beerhoven.domain.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class EmptyUser extends User {
    private String id    = "null";
    private String email = "null";

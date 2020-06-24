@@ -46,8 +46,8 @@ public class CatalogFragment extends Fragment implements MenuProvider {
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
       mViewModel = new CatalogViewModel(new ProductRepository());
-      mViewModel.getProductListToRepository().observe(getViewLifecycleOwner(),
-          list -> mAdapter.notifyDataSetChanged());
+      mViewModel.getProductListToRepository().observe(getViewLifecycleOwner(), list ->
+          mAdapter.notifyDataSetChanged());
       onInitRecyclerView();
    }
 

@@ -19,7 +19,7 @@ import ru.mobile.beerhoven.databinding.ItemProductBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.presentation.listeners.AdapterPositionListener;
-import ru.mobile.beerhoven.presentation.ui.customer.cart.CartSet;
+import ru.mobile.beerhoven.presentation.ui.customer.cart.Cart;
 import ru.mobile.beerhoven.presentation.ui.customer.store.sections.StoreFragmentDirections;
 import ru.mobile.beerhoven.utils.Constants;
 
@@ -56,12 +56,12 @@ public class CatalogAdapter extends Adapter<CatalogAdapter.CatalogViewHolder> {
       holder.binding.tvProductName.setText(product.getName());
       holder.binding.tvProductPrice.setText((product.getPrice() + " руб."));
       holder.binding.tvProductStyle.setText(product.getStyle());
-      holder.binding.tvProductFortress.setText((product.getFortress() + "%"));
+      //holder.binding.tvProductFortress.setText((product.getFortress() + "%"));
       holder.binding.llProductContainer.setOnClickListener(v -> {
          NavDirections action = StoreFragmentDirections.actionNavProductListToNavProductDetails()
              .setProductId(productId)
+             .setCapacity(product.getCapacity())
              .setCountry(product.getCountry())
-             .setManufacture(product.getManufacture())
              .setName(product.getName())
              .setPrice(String.valueOf(product.getPrice()))
              .setStyle(product.getStyle())
@@ -78,8 +78,8 @@ public class CatalogAdapter extends Adapter<CatalogAdapter.CatalogViewHolder> {
          int productQuantity = 1;
 
          // Counter value control
-         if (mContext instanceof MainActivity && !CartSet.cartProducts.contains(productId)) {
-            CartSet.cartProducts.add(productId);
+         if (mContext instanceof MainActivity && !Cart.productSet.contains(productId)) {
+            Cart.productSet.add(productId);
             ((MainActivity) mContext).onIncreaseCartCounter();
          } 
          

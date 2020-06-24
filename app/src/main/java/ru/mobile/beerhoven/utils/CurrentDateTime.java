@@ -14,14 +14,14 @@ import java.util.Date;
 
 @SuppressLint({"SimpleDateFormat", "NewApi"})
 public final class CurrentDateTime {
-   static Calendar calForDate = Calendar.getInstance();
+   static Calendar calendar = Calendar.getInstance();
 
    public static String getCurrentDate() {
-      return new SimpleDateFormat(CURRENT_DATA).format(calForDate.getTime());
+      return new SimpleDateFormat(CURRENT_DATA).format(calendar.getTime());
    }
 
    public static String getCurrentTime() {
-      return new SimpleDateFormat(CURRENT_TIME).format(calForDate.getTime());
+      return new SimpleDateFormat(CURRENT_TIME).format(calendar.getTime());
    }
 
    @NonNull

@@ -85,7 +85,11 @@ public class OrderRepository implements IOrderRepository {
    }
 
    @Override
-   public void onDeleteOrderByIdToDatabase(String keyId) {
-      mFirebaseRef.child(Constants.NODE_CONFIRMS).child(mUserPhoneNumber).child(keyId).removeValue();
+   public void onDeleteOrderByIdToDatabase(String orderId) {
+      mFirebaseRef
+          .child(Constants.NODE_CONFIRMS)
+          .child(mUserPhoneNumber)
+          .child(orderId)
+          .removeValue();
    }
 }

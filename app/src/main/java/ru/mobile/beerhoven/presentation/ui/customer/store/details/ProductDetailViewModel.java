@@ -6,13 +6,13 @@ import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IProductRepository;
 
 public class ProductDetailViewModel extends ViewModel {
-   private final IProductRepository iRepository;
+   private final IProductRepository mRepository;
 
    public ProductDetailViewModel(IProductRepository repo) {
-      this.iRepository = repo;
+      this.mRepository = repo;
    }
 
    public void onAddCartProductToRepository(Product product) {
-      iRepository.onAddProductToCartDatabase(product);
+      mRepository.onAddProductToCartDatabase(product);
    }
 }

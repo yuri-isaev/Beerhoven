@@ -9,13 +9,13 @@ import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IOrderDetailRepository;
 
 public class OrderDetailListViewModel extends ViewModel {
-   private final IOrderDetailRepository iRepository;
+   private final IOrderDetailRepository mRepository;
 
    public OrderDetailListViewModel(IOrderDetailRepository repo) {
-      this.iRepository = repo;
+      this.mRepository = repo;
    }
 
    public LiveData<List<Product>> getOrderDetailListFromRepository(String orderKey) {
-      return iRepository.getOrderDetailListFromDatabase(orderKey);
+      return mRepository.getOrderDetailListFromDatabase(orderKey);
    }
 }

@@ -55,7 +55,6 @@ public class CartListAdapter extends Adapter<CartListAdapter.CartListViewHolder>
       String productId = product.getId();
       holder.binding.tvCartItemName.setText(product.getName());
       holder.binding.tvCartItemStyle.setText(product.getStyle());
-      holder.binding.tvCartItemFortress.setText(product.getFortress() + "%");
       holder.binding.tvCartItemQuantity.setText(product.getQuantity());
       holder.binding.tvCartItemPrice.setText(product.getPrice() + " руб.");
       holder.binding.tvCartItemTotal.setText(product.getTotal() + " руб.");
@@ -72,8 +71,8 @@ public class CartListAdapter extends Adapter<CartListAdapter.CartListViewHolder>
 
       holder.binding.ivCartItemDelete.setOnClickListener(v -> {
          // Delete product from database
-         CartListViewModel mViewModel = new CartListViewModel(new CartRepository());
-         mViewModel.onDeleteCartItemFromRepository(productId);
+         CartListViewModel viewModel = new CartListViewModel(new CartRepository());
+         viewModel.onDeleteCartItemFromRepository(productId);
 
          // Decrease counter when delete product from cart
          ((MainActivity) mContext).onDecreaseCartDrawerCounter();
@@ -83,18 +82,18 @@ public class CartListAdapter extends Adapter<CartListAdapter.CartListViewHolder>
          mCallback.onPassData(String.valueOf(mOverTotalPrice));
 
          // Delete product from cart set
-         CartSet.cartProducts.remove(productId);
+         Cart.productSet.remove(productId);
       });
 
       holder.binding.llCartItemContainer.setOnClickListener(v -> {
          NavDirections action = CartListFragmentDirections.actionNavCartToNavDetails()
+             .setCapacity(product.getCapacity())
              .setCountry(product.getCountry())
              .setDensity(product.getDensity())
              .setDescription(product.getDescription())
              .setFortress(product.getFortress())
              .setImage(product.getImage())
              .setName(product.getName())
-             .setManufacture(product.getManufacture())
              .setProductId(productId)
              .setPrice(String.valueOf(product.getPrice()))
              .setStyle(product.getStyle())

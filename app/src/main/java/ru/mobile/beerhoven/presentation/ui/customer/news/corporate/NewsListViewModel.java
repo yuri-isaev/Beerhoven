@@ -13,27 +13,27 @@ import ru.mobile.beerhoven.domain.repository.INewsRepository;
 import ru.mobile.beerhoven.domain.repository.IPreferencesStorage;
 
 public class NewsListViewModel extends ViewModel {
-   private final INewsRepository iRepository;
-   private final IPreferencesStorage iStorage;
+   private final INewsRepository mRepository;
+   private final IPreferencesStorage mStorage;
 
    public NewsListViewModel(Context ctx, INewsRepository repo) {
-      this.iRepository = repo;
-      this.iStorage = new PreferencesStorage(ctx);
+      this.mRepository = repo;
+      this.mStorage = new PreferencesStorage(ctx);
    }
 
    public LiveData<List<News>> getNewsListFromRepository() {
-      return iRepository.getNewsListFromDatabase();
+      return mRepository.getNewsListFromDatabase();
    }
 
    public int getNewsCountFromStorage() {
-      return iStorage.onGetNewsCountValue();
+      return mStorage.onGetNewsCountValue();
    }
 
    public void onSaveNewsCounterToStorage(int counterValue) {
-      iStorage.onSaveNewsCountValue(counterValue);
+      mStorage.onSaveNewsCountValue(counterValue);
    }
 
    public void onDeleteNewsCounterToStorage() {
-      iStorage.onDeleteNewsCountValue();
+      mStorage.onDeleteNewsCountValue();
    }
 }

@@ -17,7 +17,7 @@ import ru.mobile.beerhoven.data.remote.ProductRepository;
 import ru.mobile.beerhoven.databinding.FragmentProductDetailBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
-import ru.mobile.beerhoven.presentation.ui.customer.cart.CartSet;
+import ru.mobile.beerhoven.presentation.ui.customer.cart.Cart;
 import ru.mobile.beerhoven.utils.Constants;
 import ru.mobile.beerhoven.utils.Toasty;
 
@@ -25,13 +25,13 @@ public class ProductDetailFragment extends Fragment {
    private double mTotalPrice;
    private FragmentProductDetailBinding mBinding;
    private int mValue = 1;
+   private String mProductCapacity;
    private String mProductCountry;
    private String mProductDensity;
    private String mProductDescription;
    private String mProductFortress;
    private String mProductId;
    private String mProductImage;
-   private String mProductManufacture;
    private String mProductName;
    private String mProductPrice;
    private String mProductQuantity;
@@ -45,13 +45,13 @@ public class ProductDetailFragment extends Fragment {
       if (getActivity() != null) {
          assert getArguments() != null;
          ProductDetailFragmentArgs args = ProductDetailFragmentArgs.fromBundle(getArguments());
+         mProductCapacity = args.getCapacity();
          mProductCountry = args.getCountry();
          mProductDensity = args.getDensity();
          mProductDescription = args.getDescription();
          mProductFortress = args.getFortress();
          mProductId = args.getProductId();
          mProductImage = args.getImage();
-         mProductManufacture = args.getManufacture();
          mProductName = args.getName();
          mProductPrice = args.getPrice();
          mProductStyle = args.getStyle();
@@ -69,7 +69,7 @@ public class ProductDetailFragment extends Fragment {
       mBinding.tvProductDetailDescription.setText(mProductDescription);
       mBinding.tvProductDetailFortress.setText(mProductFortress + "%");
       mBinding.tvProductDetailName.setText(mProductName);
-      mBinding.tvProductDetailManufacture.setText(mProductManufacture);
+      mBinding.tvProductCapacity.setText(mProductCapacity);
       mBinding.tvProductDetailPrice.setText(String.valueOf(mProductPrice));
       mBinding.tvProductDetailStyle.setText(mProductStyle);
       mBinding.tvProductDetailTotal.setText(String.valueOf(mTotalPrice));
@@ -103,8 +103,8 @@ public class ProductDetailFragment extends Fragment {
 
    public void onAddProductToCart() {
       mBinding.btnAddProductToCart.setOnClickListener(v -> {
-         if (!CartSet.cartProducts.contains(mProductId)) {
-            CartSet.cartProducts.add(mProductId);
+         if (!Cart.productSet.contains(mProductId)) {
+            Cart.productSet.add(mProductId);
             ((MainActivity) requireActivity()).onIncreaseCartCounter();
             Toasty.success(requireActivity(), R.string.cart_add_success);
          }
@@ -112,19 +112,19 @@ public class ProductDetailFragment extends Fragment {
          mProductQuantity = String.valueOf(mValue);
 
          Product product = new Product();
+         product.setCapacity(mProductCapacity);
          product.setCategory("null");
          product.setCountry(mProductCountry);
          product.setDescription(mProductDescription);
          product.setDensity(mProductDensity);
          product.setFortress(mProductFortress);
          product.setId(mProductId);
-         product.setManufacture(mProductManufacture);
+         product.setImage(mProductImage);
          product.setName(mProductName);
          product.setPrice(cartPrice);
          product.setQuantity(mProductQuantity);
          product.setStyle(mProductStyle);
          product.setTotal(mTotalPrice);
-         product.setImage(mProductImage);
 
          mViewModel.onAddCartProductToRepository(product);
          v.setClickable(false);

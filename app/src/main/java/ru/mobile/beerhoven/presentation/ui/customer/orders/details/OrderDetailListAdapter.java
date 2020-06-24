@@ -55,12 +55,12 @@ public class OrderDetailListAdapter extends Adapter<OrderDetailListAdapter.Order
       holder.binding.llCartItemContainer.setOnClickListener(v -> {
          assert productId != null;
          NavDirections action = OrderDetailListFragmentDirections.actionNavOrderDetailsToNavProductDetails()
+             .setCapacity(product.getCapacity())
              .setCountry(product.getCountry())
              .setDensity(product.getDensity())
              .setDescription(product.getDescription())
              .setFortress(product.getFortress())
              .setImage(product.getImage())
-             .setManufacture(product.getManufacture())
              .setName(product.getName())
              .setProductId(productId)
              .setPrice(String.valueOf(product.getPrice()))

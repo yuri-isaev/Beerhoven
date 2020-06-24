@@ -9,17 +9,13 @@ import ru.mobile.beerhoven.domain.model.Order;
 import ru.mobile.beerhoven.domain.repository.IOrderRepository;
 
 public class OrderListViewModel extends ViewModel {
-   private final IOrderRepository iRepository;
+   private final IOrderRepository mRepository;
 
    public OrderListViewModel(IOrderRepository repo) {
-      this.iRepository = repo;
+      this.mRepository = repo;
    }
 
    public LiveData<List<Order>> getOrderListFromRepository() {
-      return iRepository.getOrderListFromDatabase();
-   }
-
-   public void onDeleteOrderByIdToRepository(String key) {
-      iRepository.onDeleteOrderByIdToDatabase(key);
+      return mRepository.getOrderListFromDatabase();
    }
 }

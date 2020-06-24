@@ -9,24 +9,25 @@ import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.domain.repository.IProductRepository;
 
 public class CatalogViewModel extends ViewModel {
-   private final IProductRepository iRepository;
+   private final IProductRepository mRepository;
+
    public CatalogViewModel(IProductRepository repo) {
-      this.iRepository = repo;
+      this.mRepository = repo;
    }
 
    public LiveData<List<Product>> getProductListToRepository() {
-      return iRepository.getProductListFromDatabase();
+      return mRepository.getProductListFromDatabase();
    }
 
    public LiveData<List<Product>> getProductListByCategory(String category) {
-      return iRepository.getProductListByCategoryFromDatabase(category);
+      return mRepository.getProductListByCategoryFromDatabase(category);
    }
 
    public void onAddProductToCartRepository(Product product) {
-      iRepository.onAddProductToCartDatabase(product);
+      mRepository.onAddProductToCartDatabase(product);
    }
 
    public void onDeleteProductFromRepository(Product product) {
-      iRepository.onDeleteProductFromDatabase(product);
+      mRepository.onDeleteProductFromDatabase(product);
    }
 }

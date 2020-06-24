@@ -36,7 +36,6 @@ public class OrderListAdapter extends Adapter<OrderListAdapter.OrderViewHolder> 
    @SuppressLint("SetTextI18n")
    @Override
    public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
-      OrderListViewModel viewModel = new OrderListViewModel(new OrderRepository());
       Order order = mOrderList.get(position);
       String orderId = order.getId();
       String userId = order.getPhone();
@@ -47,7 +46,6 @@ public class OrderListAdapter extends Adapter<OrderListAdapter.OrderViewHolder> 
       holder.binding.tvOrderTime.setText(order.getTime());
       holder.binding.tvOrderTotal.setText(order.getTotal() + " руб.");
       holder.binding.ivOrderDelete.setVisibility(View.INVISIBLE);
-      holder.binding.ivOrderDelete.setOnClickListener(v -> viewModel.onDeleteOrderByIdToRepository(userId));
 
       holder.itemView.setOnClickListener(v -> {
          NavDirections action = OrderListFragmentDirections.actionNavOrdersToNavOrderDetails()

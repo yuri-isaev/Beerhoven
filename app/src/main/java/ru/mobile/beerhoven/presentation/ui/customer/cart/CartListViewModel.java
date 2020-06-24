@@ -13,39 +13,39 @@ import ru.mobile.beerhoven.domain.repository.ICartRepository;
 import ru.mobile.beerhoven.domain.repository.IPreferencesStorage;
 
 public class CartListViewModel extends ViewModel {
-   private final ICartRepository iRepository;
-   private IPreferencesStorage iStorage;
+   private final ICartRepository mRepository;
+   private IPreferencesStorage mStorage;
 
    public CartListViewModel(ICartRepository repo) {
-      this.iRepository = repo;
+      this.mRepository = repo;
    }
 
    public CartListViewModel(Context ctx, ICartRepository repo) {
-      this.iRepository = repo;
-      this.iStorage = new PreferencesStorage(ctx);
+      this.mRepository = repo;
+      this.mStorage = new PreferencesStorage(ctx);
    }
 
    public LiveData<List<Product>> getCartListFromRepository() {
-      return iRepository.getCartListFromDatabase();
+      return mRepository.getCartListFromDatabase();
    }
 
    public void onDeleteCartItemFromRepository(String item) {
-      iRepository.onDeleteCartItemFromDatabase(item);
+      mRepository.onDeleteCartItemFromDatabase(item);
    }
 
    public void onDeleteCartListToRepository() {
-      iRepository.onDeleteUserCartListFromDatabase();
+      mRepository.onDeleteUserCartListFromDatabase();
    }
 
    public int getCartCountFromStorage() {
-      return iStorage.onGetCartCountValue();
+      return mStorage.onGetCartCountValue();
    }
 
    public void onSaveCartCounterToStorage(int counterValue) {
-      iStorage.onSaveCartCountValue(counterValue);
+      mStorage.onSaveCartCountValue(counterValue);
    }
 
    public void onDeleteCartCounterToStorage() {
-      iStorage.onDeleteCartCountValue();
+      mStorage.onDeleteCartCountValue();
    }
 }

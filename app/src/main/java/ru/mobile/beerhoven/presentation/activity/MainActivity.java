@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
           R.id.nav_map,
           R.id.nav_add_product,
           R.id.nav_add_news,
-          R.id.nav_notifications)
+          R.id.nav_admin_notifications)
           .setDrawerLayout(mDrawerLayout).build();
 
       mNewsView = (TextView) mNavigationView.getMenu()
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
           .getActionView();
 
       mNotificationView = (TextView) mNavigationView.getMenu()
-          .findItem(R.id.nav_notifications)
+          .findItem(R.id.nav_admin_notifications)
           .getActionView();
 
       mCartViewModel = new CartListViewModel(getApplicationContext(),

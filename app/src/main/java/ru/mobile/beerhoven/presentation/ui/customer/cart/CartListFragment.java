@@ -51,8 +51,7 @@ public class CartListFragment extends Fragment implements CartListAdapter.Callba
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
       CartListViewModel viewModel = new CartListViewModel(new CartRepository());
-      viewModel.getCartListFromRepository().observe(getViewLifecycleOwner(), list ->
-          mAdapter.notifyDataSetChanged());
+      viewModel.getCartListFromRepository().observe(getViewLifecycleOwner(), list -> mAdapter.notifyDataSetChanged());
       List<Product> list = viewModel.getCartListFromRepository().getValue();
       initRecyclerView(list);
    }

@@ -30,7 +30,8 @@ public class Permission {
    }
 
    public boolean checkLocationPermission() {
-      return checkSelfPermission(mActivity, ACCESS_FINE_LOCATION) != PERMISSION_GRANTED &&
+      return
+          checkSelfPermission(mActivity, ACCESS_FINE_LOCATION) != PERMISSION_GRANTED &&
           checkSelfPermission(mActivity, ACCESS_COARSE_LOCATION) != PERMISSION_GRANTED;
    }
 
@@ -48,10 +49,9 @@ public class Permission {
    }
 
    public boolean checkCameraPermission() {
-      return checkSelfPermission(mActivity,
-          permission.CAMERA) == (PackageManager.PERMISSION_GRANTED) &&
-          checkSelfPermission(mActivity,
-              permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
+      return
+          checkSelfPermission(mActivity, permission.CAMERA) == (PackageManager.PERMISSION_GRANTED) &&
+          checkSelfPermission(mActivity, permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
    }
 
    public void requestCameraPermission() {

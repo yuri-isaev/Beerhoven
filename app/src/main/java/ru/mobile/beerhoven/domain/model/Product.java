@@ -1,23 +1,17 @@
 package ru.mobile.beerhoven.domain.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@EqualsAndHashCode
-@Getter
-@NoArgsConstructor
-@Setter
+@Data
 public class Product {
+   private String id;
+   private String capacity;
    private String category;
    private String country;
    private String density;
    private String description;
    private String fortress;
-   private String id;
    private String image;
-   private String manufacture;
    private String name;
    private double price;
    private String quantity;

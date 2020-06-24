@@ -28,7 +28,7 @@ public final class Constants {
 
    // Data time
    public static final String CURRENT_DATA = "MMM dd, yyyy";
-   public static final String CURRENT_TIME = "HH:mm:ss a";
+   public static final String CURRENT_TIME = "HH:mm:ss";
 
    // Change state objects
    public static final String OBJECT_VISIBLE = "Visible";

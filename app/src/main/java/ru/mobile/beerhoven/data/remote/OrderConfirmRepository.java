@@ -30,6 +30,7 @@ public class OrderConfirmRepository implements IOrderConfirmRepository {
           .child(Constants.NODE_CONFIRMS)
           .child(mUserPhoneNumber)
           .push();
+
       String confirmKey = confirmRef.getKey();
       order.setId(confirmKey);
       confirmRef.setValue(order);
