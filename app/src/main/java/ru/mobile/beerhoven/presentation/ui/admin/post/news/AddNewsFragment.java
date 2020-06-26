@@ -18,7 +18,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Date;
 
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.databinding.FragmentAddNewsBinding;
+import ru.mobile.beerhoven.databinding.FragmentAdminAddNewsBinding;
 import ru.mobile.beerhoven.domain.model.News;
 import ru.mobile.beerhoven.presentation.activity.MainActivity;
 import ru.mobile.beerhoven.presentation.ui.admin.post.PostFragment;
@@ -33,7 +33,7 @@ public class AddNewsFragment extends PostFragment {
 
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      FragmentAddNewsBinding binding = FragmentAddNewsBinding.inflate(inflater, container, false);
+      FragmentAdminAddNewsBinding binding = FragmentAdminAddNewsBinding.inflate(inflater, container, false);
       mAddDatabaseButton = binding.btnAddDatabase;
       mAddImageSelector = binding.ivSelectorAddImage;
       mTitleInput = binding.inputNewsTitle;

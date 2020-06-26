@@ -49,8 +49,7 @@ public class OrderListAdapter extends Adapter<OrderListAdapter.OrderViewHolder> 
       holder.binding.tvOrderTime.setText(order.getTime());
       holder.binding.tvOrderTotal.setText(order.getTotal() + " руб.");
       holder.binding.ivOrderDelete.setVisibility(View.VISIBLE);
-      holder.binding.ivOrderDelete.setOnClickListener(v ->
-          viewModel.onDeleteOrderByIdToRepository(orderId));
+      holder.binding.ivOrderDelete.setOnClickListener(v -> viewModel.onDeleteOrderByIdToRepository(orderId));
 
       holder.itemView.setOnClickListener(v -> {
          NavDirections action = OrderListFragmentDirections.actionNavAdminOrdersToNavAdminOrderDetails()

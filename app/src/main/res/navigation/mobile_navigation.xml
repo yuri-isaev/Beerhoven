@@ -17,6 +17,7 @@
             app:exitAnim="@anim/fade_out"
             app:popExitAnim="@anim/fade_out" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_product_details"
         android:name="ru.mobile.beerhoven.presentation.ui.customer.store.details.ProductDetailFragment"
@@ -35,7 +36,7 @@
             android:defaultValue="default"
             app:argType="string" />
         <argument
-            android:name="manufacture"
+            android:name="capacity"
             android:defaultValue="default"
             app:argType="string" />
         <argument
@@ -66,6 +67,7 @@
             android:defaultValue="default"
             app:argType="string" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_cart"
         android:name="ru.mobile.beerhoven.presentation.ui.customer.cart.CartListFragment"
@@ -85,6 +87,7 @@
             app:popExitAnim="@anim/fade_out"
             app:popUpToInclusive="true" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_orders"
         android:name="ru.mobile.beerhoven.presentation.ui.customer.orders.OrderListFragment"
@@ -105,6 +108,7 @@
             app:exitAnim="@anim/fade_out"
             app:popExitAnim="@anim/fade_out" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_order_details"
         android:name="ru.mobile.beerhoven.presentation.ui.customer.orders.details.OrderDetailListFragment"
@@ -125,11 +129,13 @@
             app:exitAnim="@anim/fade_out"
             app:popExitAnim="@anim/fade_out" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_add_product"
         android:name="ru.mobile.beerhoven.presentation.ui.admin.post.product.AddProductFragment"
         android:label="@string/menu_add_product"
-        tools:layout="@layout/fragment_add_product" />
+        tools:layout="@layout/fragment_admin_add_product" />
+
     <fragment
         android:id="@+id/nav_order_confirm"
         android:name="ru.mobile.beerhoven.presentation.ui.customer.orders.confirm.OrderConfirmFragment"
@@ -146,6 +152,7 @@
             app:exitAnim="@anim/fade_out"
             app:popExitAnim="@anim/fade_out" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_order_notify"
         android:name="ru.mobile.beerhoven.presentation.ui.customer.orders.notify.OrderNotifyFragment"
@@ -160,33 +167,23 @@
             app:popUpTo="@id/nav_order_confirm"
             app:popUpToInclusive="true" />
     </fragment>
-    <fragment
-        android:id="@+id/nav_notifications"
-        android:name="ru.mobile.beerhoven.presentation.ui.admin.notifications.NotificationListFragment"
-        android:label="@string/menu_notifications"
-        tools:layout="@layout/fragment_notification_list">
-        <action
-            android:id="@+id/action_nav_notifications_to_nav_orders"
-            app:destination="@id/nav_orders"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popExitAnim="@anim/fade_out" />
-    </fragment>
+
     <fragment
         android:id="@+id/nav_map"
         android:name="ru.mobile.beerhoven.presentation.ui.customer.map.CustomerMapFragment"
         android:label="@string/menu_map"
         tools:layout="@layout/fragment_customer_map" >
-
         <action
             android:id="@+id/action_nav_map_to_nav_order_details"
             app:destination="@id/nav_order_details" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_add_news"
         android:name="ru.mobile.beerhoven.presentation.ui.admin.post.news.AddNewsFragment"
         android:label="@string/menu_add_news"
-        tools:layout="@layout/fragment_add_news" />
+        tools:layout="@layout/fragment_admin_add_news" />
+
     <fragment
         android:id="@+id/nav_news"
         android:name="ru.mobile.beerhoven.presentation.ui.customer.news.corporate.NewsListFragment"
@@ -199,10 +196,11 @@
             app:exitAnim="@anim/fade_out"
             app:popExitAnim="@anim/fade_out" />
     </fragment>
+
     <fragment
         android:id="@+id/nav_news_detail"
         android:name="ru.mobile.beerhoven.presentation.ui.customer.news.details.NewsDetailFragment"
-        android:label="@string/menu_details"
+        android:label="@string/menu_news_details"
         tools:layout="@layout/fragment_news_detail">
         <argument
             android:name="newsDateTime"
@@ -224,5 +222,60 @@
             android:name="newsTitle"
             android:defaultValue="default"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_admin_notifications"
+        android:name="ru.mobile.beerhoven.presentation.ui.admin.notifications.NotificationListFragment"
+        android:label="@string/menu_notifications"
+        tools:layout="@layout/fragment_admin_notification_list">
+        <action
+            android:id="@+id/action_nav_admin_notifications_to_nav_admin_orders"
+            app:destination="@id/nav_admin_orders"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_admin_orders"
+        android:name="ru.mobile.beerhoven.presentation.ui.admin.orders.OrderListFragment"
+        android:label="@string/menu_client_orders"
+        tools:layout="@layout/fragment_admin_order_list">
+    <argument
+        android:name="orderId"
+        android:defaultValue="default"
+        app:argType="string" />
+    <argument
+        android:name="orderKey"
+        android:defaultValue="default"
+        app:argType="string" />
+    <action
+        android:id="@+id/action_nav_admin_orders_to_nav_admin_order_details"
+        app:destination="@id/nav_admin_order_details"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popExitAnim="@anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_admin_order_details"
+        android:name="ru.mobile.beerhoven.presentation.ui.admin.orders.details.OrderDetailListFragment"
+        android:label="@string/menu_client_order_details"
+        tools:layout="@layout/fragment_admin_order_detail_list">
+        <argument
+            android:name="userId"
+            android:defaultValue="default"
+            app:argType="string" />
+        <argument
+            android:name="orderKey"
+            android:defaultValue="default"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_nav_admin_order_details_to_nav_product_details"
+            app:destination="@id/nav_product_details"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 </navigation>

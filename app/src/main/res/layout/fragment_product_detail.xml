@@ -55,7 +55,7 @@
                 android:text="15.00"
                 android:textSize="@dimen/text_size_l"
                 app:layout_constraintStart_toEndOf="@+id/tvProductDetailImage"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductDetailManufacture"
+                app:layout_constraintTop_toBottomOf="@+id/tvProductCapacity"
                 tools:ignore="HardcodedText,MissingConstraints,RtlHardcoded" />
 
             <TextView
@@ -83,13 +83,13 @@
                 tools:ignore="InOrMmUsage,MissingConstraints,UnusedAttribute,ImageContrastCheck" />
 
             <TextView
-                android:id="@+id/tvProductDetailManufacture"
+                android:id="@+id/tvProductCapacity"
                 android:layout_width="122dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/catorze27_style1_semibold"
-                android:text="@string/product_manufacture"
+                android:text="@string/product_capacity"
                 android:textSize="@dimen/text_size_l"
                 app:layout_constraintStart_toEndOf="@+id/tvProductDetailImage"
                 app:layout_constraintTop_toBottomOf="@+id/tvProductDetailCountry"
@@ -220,7 +220,7 @@
                     <TextView
                         android:id="@+id/tvProductDetailDescription"
                         android:layout_width="match_parent"
-                        android:layout_height="68dp"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/catorze27_style1_semibold"
                         android:text="@string/product_description"
                         android:textColor="@color/colorMainBlack"

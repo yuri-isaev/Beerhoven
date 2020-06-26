@@ -28,11 +28,13 @@
     <string name="menu_add_news">Добавление новостей</string>
     <string name="menu_add_product">Добавление товара</string>
     <string name="menu_cart">Корзина заказа</string>
+    <string name="menu_client_orders">Заказа клиента</string>
     <string name="menu_close">Закрыть меню</string>
     <string name="menu_details">Детали товара</string>
+    <string name="menu_client_order_details">Детали заказа клиента</string>
     <string name="menu_map">Карта</string>
     <string name="menu_news">Новости и акции</string>
-    <string name="menu_news_details">Детали</string>
+    <string name="menu_news_details">Детали акции</string>
     <string name="menu_notifications">Уведомления</string>
     <string name="menu_order">Мои заказы</string>
     <string name="menu_user_name">Имя пользователя</string>
@@ -88,9 +90,10 @@
     <string name="order_waiting">Ваш заказ получен, ожидайте доставки…</string>
 
     <!-- Product -->
-    <string name="product_add">Добавить товара</string>
+    <string name="product_add">Добавить товар</string>
     <string name="product_add_cart">Товар добавлен в корзину</string>
     <string name="product_add_database">Товар добавлен в базу данных</string>
+    <string name="product_capacity">Объём/масса</string>
     <string name="product_category">Категория товара</string>
     <string name="product_category_select">Выберите категорию товара</string>
     <string name="product_country">Страна производитель</string>
@@ -102,7 +105,6 @@
     <string name="product_image">Загрузить изображение товара</string>
     <string name="product_info_update">Обновить данные товара</string>
     <string name="product_name">Название товара</string>
-    <string name="product_manufacture">Мануфактура</string>
     <string name="product_price">Цена товара</string>
     <string name="product_price_line">Цена товара: </string>
     <string name="product_special">Специализация</string>

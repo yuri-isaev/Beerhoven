@@ -70,13 +70,13 @@
                         android:text="@string/product_style"
                         android:textColor="@color/colorMainGrey" />
 
-                    <TextView
-                        android:id="@+id/tvProductFortress"
-                        android:layout_width="182dp"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/catorze27_style1_semibold"
-                        android:text="@string/product_fortress"
-                        tools:ignore="SpUsage,UnusedAttribute,TextContrastCheck" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvProductFortress"-->
+<!--                        android:layout_width="182dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:fontFamily="@font/catorze27_style1_semibold"-->
+<!--                        android:text="@string/product_fortress"-->
+<!--                        tools:ignore="SpUsage,UnusedAttribute,TextContrastCheck" />-->
                 </LinearLayout>
 
                 <LinearLayout
@@ -160,7 +160,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:srcCompat="@drawable/ic_nav_shopping_cart"
-                    app:tint="@color/colorViolet"
+                    app:tint="@color/colorMainDark"
                     tools:ignore="ContentDescription" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

@@ -17,7 +17,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.ProductRepository;
-import ru.mobile.beerhoven.databinding.FragmentAddProductBinding;
+import ru.mobile.beerhoven.databinding.FragmentAdminAddProductBinding;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.presentation.ui.admin.post.PostFragment;
 import ru.mobile.beerhoven.utils.Toasty;
@@ -40,7 +40,7 @@ public class AddProductFragment extends PostFragment {
 
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      FragmentAddProductBinding binding = FragmentAddProductBinding.inflate(inflater, container, false);
+      FragmentAdminAddProductBinding binding = FragmentAdminAddProductBinding.inflate(inflater, container, false);
       mAddDatabaseButton = binding.btnAddDatabase;
       mCapacityInput = binding.inputProductCapacity;
       mCountryInput = binding.inputProductCountry;

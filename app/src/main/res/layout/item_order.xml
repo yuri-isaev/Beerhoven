@@ -92,11 +92,11 @@
                         <TextView
                             android:id="@+id/tvOrderAddress"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:fontFamily="@font/catorze27_style1_semibold"
                             android:text="@string/order_address"
                             android:textColor="@color/colorMainGrey"
-                            android:textSize="@dimen/text_size_l" />
+                            android:textSize="@dimen/text_size_s" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

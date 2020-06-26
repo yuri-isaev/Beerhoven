@@ -259,12 +259,12 @@
                         android:paddingLeft="10dp"
                         android:paddingTop="10dp"
                         android:paddingRight="10dp"
-                        android:text="@string/product_manufacture"
+                        android:text="@string/product_capacity"
                         android:textColor="@color/colorVioletBlue"
                         android:textSize="@dimen/text_size_m" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputProductManufacture"
+                        android:id="@+id/inputProductCapacity"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
