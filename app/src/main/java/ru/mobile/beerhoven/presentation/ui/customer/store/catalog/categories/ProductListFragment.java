@@ -16,7 +16,7 @@ import java.util.List;
 
 import ru.mobile.beerhoven.R;
 import ru.mobile.beerhoven.data.remote.ProductRepository;
-import ru.mobile.beerhoven.domain.enums.Category;
+import ru.mobile.beerhoven.domain.model.Category;
 import ru.mobile.beerhoven.domain.model.Product;
 import ru.mobile.beerhoven.presentation.listeners.AdapterPositionListener;
 import ru.mobile.beerhoven.presentation.ui.customer.store.catalog.CatalogAdapter;

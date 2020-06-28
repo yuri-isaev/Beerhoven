@@ -29,7 +29,7 @@ import java.io.File;
 import java.io.IOException;
 
 import ru.mobile.beerhoven.R;
-import ru.mobile.beerhoven.domain.enums.Category;
+import ru.mobile.beerhoven.domain.model.Category;
 import ru.mobile.beerhoven.utils.Permission;
 
 public class PostFragment extends Fragment {

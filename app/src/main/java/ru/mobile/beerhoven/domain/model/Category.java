@@ -1,22 +1,20 @@
-package ru.mobile.beerhoven.domain.enums;
+package ru.mobile.beerhoven.domain.model;
 
 import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Contract;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
 public enum Category {
+   ALL("Все товары"),
    ALCOHOL("Алкоголь"),
    PRODUCTS("Продукты");
 
    private final String value;
-
-   Category(String value) {
-      this.value = value;
-   }
-
-   public String getValue() {
-      return value;
-   }
 
    @NonNull
    @Contract(" -> new")
