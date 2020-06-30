@@ -1,8 +1,12 @@
 package ru.mobile.beerhoven.domain.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
+@AllArgsConstructor
 @Data
+@RequiredArgsConstructor
 public class Product {
    private String id;
    private String capacity;
@@ -13,8 +17,8 @@ public class Product {
    private String fortress;
    private String image;
    private String name;
-   private double price;
    private String quantity;
    private String style;
+   private double price;
    private double total;
 }

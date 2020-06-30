@@ -1,5 +1,12 @@
 package ru.mobile.beerhoven.ui.store.catalog;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -16,20 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.mobile.beerhoven.common.FakeContent;
-import ru.mobile.beerhoven.domain.repository.IProductRepository;
 import ru.mobile.beerhoven.domain.model.Product;
-import ru.mobile.beerhoven.presentation.ui.customer.store.catalog.ProductListViewModel;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import ru.mobile.beerhoven.domain.repository.IProductRepository;
+import ru.mobile.beerhoven.presentation.ui.customer.store.catalog.CatalogViewModel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CatalogViewModelTest {
-   private ProductListViewModel mViewModel;
+   private CatalogViewModel mViewModel;
    private MutableLiveData mMutableList;
 
    @Mock
@@ -45,14 +45,14 @@ public class CatalogViewModelTest {
    public void setUp() {
       mMutableList = new MutableLiveData<>();
       mMockRepo = mock(IProductRepository.class);
-      mViewModel = new ProductListViewModel(mMockRepo);
-      Mockito.when(mMockRepo.getProductList()).thenReturn(mMutableList);
+      mViewModel = new CatalogViewModel(mMockRepo);
+      Mockito.when(mMockRepo.getProductListFromDatabase()).thenReturn(mMutableList);
       setFakeItems();
    }
 
    private void setFakeItems() {
       List<Product> productList = new ArrayList<>();
-      productList.add(FakeContent.fakePost);
+      productList.add(FakeContent.product);
       mMutableList.setValue(productList);
    }
 
@@ -66,26 +66,26 @@ public class CatalogViewModelTest {
    }
 
    @Test
-   public void viewModel_getCatalogList_returns_what_not_null() {
+   public void viewModel_getProductListToRepository_should_returns_what_not_null() {
       // Act
-      LiveData<List<Product>> result = mViewModel.getCatalogList();
+      LiveData<List<Product>> result = mViewModel.getProductListToRepository();
       // Assert
       assertNotNull(result);
    }
 
    @Test
-   public void viewModel_getCatalogList_returns_what_repository_readList() {
+   public void viewModel_getProductListToRepository_should_returns_what_repository_value() {
       // Act
-      LiveData<List<Product>> result = mViewModel.getCatalogList();
+      LiveData<List<Product>> result = mViewModel.getProductListToRepository();
       // Assert
       assertEquals(mMutableList, result);
    }
 
    @Test
-   public void viewModel_getCatalogList_should_calls_method_readProductList() {
+   public void viewModel_getProductListToRepository_should_calls_method() {
       // Act
-      mViewModel.getCatalogList();
+      mViewModel.getProductListToRepository();
       // Assert
-      verify(mMockRepo, times(1)).getProductList();
+      verify(mMockRepo, times(1)).getProductListFromDatabase();
    }
 }

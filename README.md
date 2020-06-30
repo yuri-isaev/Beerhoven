@@ -49,8 +49,6 @@
 </a>
 <img src='http://img.shields.io/badge/Status-support-blue.svg'/>
 </a>
-<img src='http://img.shields.io/badge/Coverage-none-red.svg'/>
-</a>
 </p>
 <br/>
 </div>
